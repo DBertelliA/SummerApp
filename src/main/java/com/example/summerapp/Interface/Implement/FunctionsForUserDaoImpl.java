@@ -1,6 +1,7 @@
 package com.example.summerapp.Interface.Implement;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
+import com.example.summerapp.Helper.Finder;
 import com.example.summerapp.Interface.UserFunctionsInterface;
 import com.example.summerapp.Models.User;
 import com.example.summerapp.Window.Warnings;
@@ -59,8 +60,22 @@ public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
     }
 
     @Override
-    public boolean deleteUser(User user) {
-        return false;
+    public boolean deleteUser(String name) {
+        User userVerif = Finder.findUser(name);
+        if(userVerif != null){
+        sql = "DELETE FROM dataCatcherUser WHERE Username = ?";
+
+        try (PreparedStatement pSt = connect.prepareStatement(sql)){
+            pSt.setString(1, name);
+
+            pSt.executeUpdate();
+            System.out.println("Se ha eliminado");
+            return true;
+        }catch (SQLException e){
+            Warnings.warningJump(4);
+            return false;
+            }
+        } else {return false;}
     }
 
     @Override
@@ -84,7 +99,8 @@ public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
         //System.out.println(encoder.matches("c",""));
 
         //------Mostrar-------
-        System.out.println(i.showData());
-        //------------
+        //System.out.println(i.showData());
+        //-----eliminar-------
+        System.out.println(i.deleteUser("b"));
     }
 }
