@@ -6,9 +6,9 @@ import com.example.summerapp.Models.User;
 import com.example.summerapp.Window.Warnings;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
     static Connection connect = ConnectionMySQL.getInstance();
@@ -34,7 +34,28 @@ public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
 
     @Override
     public String showData() {
-        return "";
+        List<User> listUser = new ArrayList<>();
+        sql = "SELECT * FROM dataCatcherUser";
+        try (Statement st = connect.createStatement()){
+            ResultSet resultSt = st.executeQuery(sql);
+            while (resultSt.next()){
+                listUser.add(new User(
+                        resultSt.getString(1),
+                        resultSt.getString(2)
+                ));
+            }
+
+            if(listUser.isEmpty()){
+                throw new RuntimeException();
+            }
+
+            return listUser.toString().replaceAll("[ \\[\\],]", "");
+        }catch (SQLException e){
+            Warnings.warningJump(2);
+        }catch (RuntimeException e){
+            Warnings.warningJump(3);
+        }
+        return null;
     }
 
     @Override
@@ -60,6 +81,10 @@ public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
     public static void main(String[] args) throws SQLException {
         FunctionsForUserDaoImpl i = new FunctionsForUserDaoImpl();
         //System.out.println(i.addUser(new User("d", "c")));
-        System.out.println(encoder.matches("c",""));
+        //System.out.println(encoder.matches("c",""));
+
+        //------Mostrar-------
+        System.out.println(i.showData());
+        //------------
     }
 }
