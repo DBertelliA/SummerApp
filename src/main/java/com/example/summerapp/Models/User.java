@@ -42,7 +42,7 @@ public class User {
     @Override
     public String toString() {
         StringBuilder sB = new StringBuilder();
-        sB.append("Usuario: ").append(nameSystem).append(":").append("Contraseña: ").append(passwordSystem).append("\n");
+        sB.append("Usuario: ").append(nameSystem).append(":").append(" Contraseña: ").append(passwordSystem).append("\n");
         return sB.toString();
     }
 }
