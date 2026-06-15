@@ -80,6 +80,26 @@ public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
 
     @Override
     public User editUser(User user) {
+        User userVerif = Finder.findUser(user.getNameSystem());
+        if(userVerif != null){
+            sql = """
+                    UPDATE dataCatcherUser 
+                    set UserPassword = ?
+                    WHERE Username = ?;
+                    """;
+            try (PreparedStatement pSt = connect.prepareStatement(sql)){
+                pSt.setString(1,encoder.encode(user.getPasswordSystem()));
+                pSt.setString(2, user.getNameSystem());
+                pSt.executeUpdate();
+                System.out.println("Editado");
+                return user;
+            }catch (SQLException e){
+                System.err.println(e);
+            }
+        }else {
+            Warnings.warningJump(5);
+        }
+
         return null;
     }
 
@@ -101,6 +121,8 @@ public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
         //------Mostrar-------
         //System.out.println(i.showData());
         //-----eliminar-------
-        System.out.println(i.deleteUser("b"));
+        //System.out.println(i.deleteUser("b"));
+        //------Editar-------
+        System.out.println(i.editUser(new User("a", "b")));
     }
 }
