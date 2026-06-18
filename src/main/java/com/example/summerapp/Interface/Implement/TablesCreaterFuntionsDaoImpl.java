@@ -35,44 +35,15 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
     public void insertData(String titleTable){
         int j = numberDataLines(titleTable);
         String dataName;
-        StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO " + titleTable).append(" VALUES (");
+        StringBuilder sb = sbForInsertData(titleTable, j);
 
-            try (Statement st = conect.createStatement()){
-                sql = "DESCRIBE " + titleTable +" ;";
-                    ResultSet rst = st.executeQuery(sql);
-                    int i = 0;
-                        while (rst.next()) {
-                            if(rst.getString(2).equalsIgnoreCase("text")) {
-                                sb.append("\"");
-                                dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser (Comillas no importan): " + rst.getString(2));
-                                sb.append(dataName);
-                                sb.append("\"");
-                            }else {
-                                dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser: " + rst.getString(2));
-                                sb.append(dataName);
-                            }
-
-                            i++;
-                            if (i > j-1){
-                                System.out.println("Sigo");
-                            }else{
-                                sb.append(", ");
-                            }
-                        }
-                System.out.println(i);
-                        sb.append(" );");
-                }catch (SQLException e){
-                    System.err.println(e);
-                }
-
-            try (Statement st = conect.createStatement()){
+        try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
                 System.out.println("Introducido");
-            }catch (SQLException e){
+        }catch (SQLException e){
                 System.err.println(e);
                 System.err.println(sb.toString());
-            }
+        }
     }
 
     @Override
@@ -82,11 +53,41 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
 
     @Override
     public void showAllTables() {
+        try (Statement st = conect.createStatement()){
+            ResultSet rst = st.executeQuery("SHOW TABLES;");
+            System.out.println("========================================");
+            while (rst.next()){
+                int j = numberDataLines(rst.getString(1));
+                System.out.println("Numero de columnas de " +  rst.getString(1) + " es: " + j);
+                try (Statement st2 = conect.createStatement()){
+                    ResultSet rst2 = st2.executeQuery("SELECT * FROM " + (rst.getString(1)));
+                    while(rst2.next()) {
+                        for (int i = 1; i <= j; i++) {
+                            System.out.println(rst2.getObject(i));
+                        }
+                    }
+                }catch (SQLException e){
+                    System.err.println(e);
+                }
+                System.out.println("========================================");
+            }
+        }catch (SQLException e){
+            System.err.println(e);
+            System.err.println(sql);
+        }
 
     }
 
     @Override
-    public void deleteTables() {
+    public void deleteTables(String tableName) {
+        sql = "DROP TABLE " + tableName + ";";
+        try (Statement st = conect.createStatement()){
+            st.executeUpdate(sql);
+            System.out.println("Eliminado");
+        }catch (SQLException e){
+            System.err.println(e);
+            System.err.println(sql);
+        }
 
     }
 
@@ -162,6 +163,41 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
         sb.append(");");
         return sb;
     }
+
+    private static @NonNull StringBuilder sbForInsertData(String titleTable, int j) {
+        String dataName;
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO " + titleTable).append(" VALUES (");
+
+        try (Statement st = conect.createStatement()){
+            sql = "DESCRIBE " + titleTable +" ;";
+            ResultSet rst = st.executeQuery(sql);
+            int i = 0;
+            while (rst.next()) {
+                if(rst.getString(2).equalsIgnoreCase("text")) {
+                    sb.append("\"");
+                    dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser (Comillas no importan): " + rst.getString(2));
+                    sb.append(dataName);
+                    sb.append("\"");
+                }else {
+                    dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser: " + rst.getString(2));
+                    sb.append(dataName);
+                }
+
+                i++;
+                if (i > j -1){
+                    System.out.println("Sigo");
+                }else{
+                    sb.append(", ");
+                }
+            }
+            System.out.println(i);
+            sb.append(" );");
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+        return sb;
+    }
     public int numberDataLines(String tableName){
         int dataNumber = 0;
         try (Statement st = conect.createStatement()){
@@ -208,8 +244,14 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
 //            System.err.println(e);
 //        }
 
-        tb.insertData("tabla4");
+        //--Insertar data--
+        // tb.insertData("tabla4");
 
+        //Eliminar
+
+        //tb.deleteTables("data1");
+
+        tb.showAllTables();
 
     }
 }

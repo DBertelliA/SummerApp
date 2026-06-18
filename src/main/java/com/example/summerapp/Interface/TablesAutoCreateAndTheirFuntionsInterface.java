@@ -5,6 +5,6 @@ public interface TablesAutoCreateAndTheirFuntionsInterface { //Too loong
     public void insertData(String titleTable);
     public void dataSearch();
     public void showAllTables();
-    public void deleteTables();
+    public void deleteTables(String tableName);
     public void promptExexuter();
 }
