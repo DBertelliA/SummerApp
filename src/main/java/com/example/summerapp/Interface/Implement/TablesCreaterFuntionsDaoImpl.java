@@ -7,9 +7,7 @@ import com.example.summerapp.Interface.TablesAutoCreateAndTheirFuntionsInterface
 import org.jspecify.annotations.NonNull;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFuntionsInterface {
     static Connection conect = ConnectionMySQL.getInstance();
@@ -33,6 +31,49 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
         }
     }
 
+    @Override
+    public void insertData(String titleTable){
+        int j = numberDataLines(titleTable);
+        String dataName;
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO " + titleTable).append(" VALUES (");
+
+            try (Statement st = conect.createStatement()){
+                sql = "DESCRIBE " + titleTable +" ;";
+                    ResultSet rst = st.executeQuery(sql);
+                    int i = 0;
+                        while (rst.next()) {
+                            if(rst.getString(2).equalsIgnoreCase("text")) {
+                                sb.append("\"");
+                                dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser (Comillas no importan): " + rst.getString(2));
+                                sb.append(dataName);
+                                sb.append("\"");
+                            }else {
+                                dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser: " + rst.getString(2));
+                                sb.append(dataName);
+                            }
+
+                            i++;
+                            if (i > j-1){
+                                System.out.println("Sigo");
+                            }else{
+                                sb.append(", ");
+                            }
+                        }
+                System.out.println(i);
+                        sb.append(" );");
+                }catch (SQLException e){
+                    System.err.println(e);
+                }
+
+            try (Statement st = conect.createStatement()){
+                st.executeUpdate(sb.toString());
+                System.out.println("Introducido");
+            }catch (SQLException e){
+                System.err.println(e);
+                System.err.println(sb.toString());
+            }
+    }
 
     @Override
     public void dataSearch() {
@@ -102,16 +143,16 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
             if (j >= 1){
                 dataName = JOptionPane.showInputDialog("Introduce el nombre de la data");
             }
-            try {
-                sb.append(dataName).append(" ").append(dataSelect(Integer.parseInt(JOptionPane.showInputDialog("Del 1 al 6 pal dato"))));
-            }catch (NumberFormatException e){
-                sb.append("BOOLEAN ");
-            }
-            try {
-                sb.append(" ").append(sentenceSelectSql(Integer.parseInt(JOptionPane.showInputDialog("del 1 al 2 para el tipo, el 3 no"))));
-            }catch (NumberFormatException e) {
-                sb.append(" ");
-            }
+                try {
+                    sb.append(dataName).append(" ").append(dataSelect(Integer.parseInt(JOptionPane.showInputDialog("Del 1 al 6 pal dato"))));
+                }catch (NumberFormatException e){
+                    sb.append("BOOLEAN ");
+                }
+                try {
+                    sb.append(" ").append(sentenceSelectSql(Integer.parseInt(JOptionPane.showInputDialog("del 1 al 2 para el tipo, el 3 no"))));
+                }catch (NumberFormatException e) {
+                    sb.append(" ");
+                }
             if(j == valuesNumber -1){
                 sb.append(" ");
             }else {
@@ -121,13 +162,53 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
         sb.append(");");
         return sb;
     }
+    public int numberDataLines(String tableName){
+        int dataNumber = 0;
+        try (Statement st = conect.createStatement()){
+            sql = "DESCRIBE " + tableName +" ;";
+            ResultSet rst = st.executeQuery(sql);
+                while (rst.next()) {
+                    dataNumber++;
+                }
+            return dataNumber;
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+        return 0;
+    }
+    public String contentTypeGiver(String titleTable){
+        try (Statement st = conect.createStatement()){
+            sql = "DESCRIBE " + titleTable +" ;";
+            ResultSet rst = st.executeQuery(sql);
+            while (rst.next()) {
+                rst.getString(2);
+            }
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+        return " ";
+    }
 
     public static void main(String[] args) {
         TablesAutoCreateAndTheirFuntionsInterface tb = new TablesCreaterFuntionsDaoImpl();
 
         //----Agregacion de tablas----//
-        //tb.addTable("tabla3", "data1", 1);
+        //tb.addTable("tabla4", "data1", 3);
+//        int a = 0;
+//        try (Statement st = conect.createStatement()){
+//            sql = "DESCRIBE tabla4;";
+//            ResultSet rst = st.executeQuery(sql);
+//            //Primer elemento el nombre de la fila, segundo elemento, el tipo de dato
+//            while (rst.next()) {
+//                a++;
+//                System.out.println(rst.getString(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(4) + " " + rst.getString(5));
+//            }
+//            System.out.println(a);
+//        }catch (SQLException e){
+//            System.err.println(e);
+//        }
 
+        tb.insertData("tabla4");
 
 
     }
