@@ -91,9 +91,28 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
 
     }
 
+    //Crear una version muy limitada para luego expandirla de acuerdo a los datos que se dispongan
     @Override
-    public void promptExexuter() {
+    public void promptExexuter(String prompt) {
+        String[] pata = prompt.split("FROM");
 
+        try (Statement spT = conect.createStatement()){
+            ResultSet rst = spT.executeQuery(prompt);
+            int j = numberDataLines(pata[1]);
+            if(prompt.contains("SELECT")) {
+                while (rst.next()) {
+                    for (int i = 1; i <= j; i++) {
+                        System.out.println(rst.getObject(i));
+                    }
+                }
+            }else {
+                spT.executeUpdate(prompt);
+            }
+            System.out.println("Se ha ejecutado el comando");
+        }catch (SQLException e){
+            System.err.println(e);
+            System.err.println(prompt);
+        }
     }
 
 
@@ -251,7 +270,9 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
 
         //tb.deleteTables("data1");
 
-        tb.showAllTables();
+        //tb.showAllTables();
+
+        tb.promptExexuter("SELECT * FROM tabla3");
 
     }
 }
