@@ -34,7 +34,6 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
     @Override
     public void insertData(String titleTable){
         int j = numberDataLines(titleTable);
-        String dataName;
         StringBuilder sb = sbForInsertData(titleTable, j);
 
         try (Statement st = conect.createStatement()){
@@ -47,7 +46,43 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
     }
 
     @Override
-    public void dataSearch() {
+    public void dataSearch(String tableName, String dataName,String dataParam, String param) {
+        boolean userWants = false;
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT ").append(dataName).append(" FROM ").append(tableName);
+
+
+        userWants = isUserWants(userWants);
+        if (userWants){
+            sb.append(" WHERE ").append(dataParam).append(" = ").append(param);
+            userWants = isUserWants(userWants);
+        }
+        if(!userWants){
+            sb.append(";");
+        }
+
+        if(userWants) {
+            sb.append(paramExtensions());
+        }
+
+        try (Statement st = conect.createStatement()) {
+            int j = numberDataLines(tableName);
+            ResultSet rst = st.executeQuery(sb.toString());
+            while (rst.next()) {
+                for (int i = 1; i <= j; i++) {
+                    System.out.println(rst.getObject(i));
+                }
+            }
+            System.out.println(sb.toString());
+        }
+        catch (SQLException e){
+            if(e.getMessage().contains("Column Index out of range")){
+                System.err.println("No se si es normal el out of range, pero no deberia ser un problema");
+            }else {
+                System.err.println(e);
+                System.err.println(sb.toString());
+            }
+        }
 
     }
 
@@ -113,6 +148,33 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
             System.err.println(e);
             System.err.println(prompt);
         }
+    }
+
+    private static boolean isUserWants(boolean userWants) {
+        int a = JOptionPane.showConfirmDialog(
+                null,
+                "¿Quieres continuar añadiendo?",
+                "Mas o no",
+                JOptionPane.YES_NO_OPTION
+        );
+        if(a == 0){
+            userWants = true;
+        } else if (a == 1 || a == -1) {
+            userWants = false;
+        }
+        return userWants;
+    }
+
+    //Este metodo está destinado a tener mas parametros, pero por ahora esto solo es una prueba
+    public String paramExtensions(){
+        StringBuilder sb = new StringBuilder();
+        //while (userWants) {
+        sb.append(" AND ").append("data1").append(" = ").append("\"T\"");
+        //if (!userWants) {
+        sb.append(";");
+        //}
+        //}
+        return sb.toString();
     }
 
 
@@ -272,7 +334,9 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
 
         //tb.showAllTables();
 
-        tb.promptExexuter("SELECT * FROM tabla3");
+        //tb.promptExexuter("SELECT * FROM tabla3");
+
+       tb.dataSearch("tabla4","data2","data2", "1");
 
     }
 }
