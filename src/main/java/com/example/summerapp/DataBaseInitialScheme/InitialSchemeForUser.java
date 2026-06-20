@@ -1,4 +1,4 @@
-package com.example.summerapp.Tables;
+package com.example.summerapp.DataBaseInitialScheme;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
 
@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserTables {
+public class InitialSchemeForUser {
     static String sql;
     static Connection connect = ConnectionMySQL.getInstance();
 

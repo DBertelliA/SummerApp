@@ -1,4 +1,4 @@
-package com.example.summerapp;
+package com.example.summerapp.WindowAndView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

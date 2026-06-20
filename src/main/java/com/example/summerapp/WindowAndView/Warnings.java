@@ -1,4 +1,4 @@
-package com.example.summerapp.Window;
+package com.example.summerapp.WindowAndView;
 
 import javax.swing.*;
 

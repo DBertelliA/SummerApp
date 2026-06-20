@@ -1,19 +1,18 @@
-package com.example.summerapp.Interface.Implement;
+package com.example.summerapp.Interface.Functions;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
 import com.example.summerapp.Helper.FinderAll;
 import com.example.summerapp.Interface.UserFunctionsInterface;
 import com.example.summerapp.Models.User;
-import com.example.summerapp.Window.Warnings;
+import com.example.summerapp.WindowAndView.Warnings;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
+public class UserFunctions implements UserFunctionsInterface {
     static Connection connect = ConnectionMySQL.getInstance();
     static String sql;
     static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -137,7 +136,7 @@ public class FunctionsForUserDaoImpl implements UserFunctionsInterface {
     }
 
     public static void main(String[] args) throws SQLException {
-        FunctionsForUserDaoImpl i = new FunctionsForUserDaoImpl();
+        UserFunctions i = new UserFunctions();
         //System.out.println(i.addUser(new User("d", "c")));
         //System.out.println(encoder.matches("c",""));
 

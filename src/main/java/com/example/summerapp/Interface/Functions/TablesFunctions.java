@@ -1,15 +1,15 @@
-package com.example.summerapp.Interface.Implement;
+package com.example.summerapp.Interface.Functions;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
 import com.example.summerapp.DataTypesSQL.SqlDataTypes;
 import com.example.summerapp.DataTypesSQL.SqlSentencesType;
-import com.example.summerapp.Interface.TablesAutoCreateAndTheirFuntionsInterface;
+import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import org.jspecify.annotations.NonNull;
 
 import javax.swing.*;
 import java.sql.*;
 
-public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFuntionsInterface {
+public class TablesFunctions implements TablesAutoCreateAndFuntions {
     static Connection conect = ConnectionMySQL.getInstance();
     static String sql;
 
@@ -17,36 +17,38 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
     //Intuyo que debo de usar la combinacion de variables introducidos por consola u meterlos en la sentencia
 
     @Override
-    public void addTable(String titleTable, String dataName, int valuesNumber) {
+    public boolean addTable(String titleTable, String dataName, int valuesNumber) {
         StringBuilder sb = getSentenceForSql(titleTable, dataName, valuesNumber);
 
-        sql = sb.toString();
-
         try (Statement pST = conect.createStatement()){
-            pST.executeUpdate(sql);
+            pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
+            return true;
         }catch (SQLException e){
             System.err.println(sb.toString());
             System.err.println(e);
         }
+        return false;
     }
 
     @Override
-    public void insertData(String titleTable){
-        int j = numberDataLines(titleTable);
-        StringBuilder sb = sbForInsertData(titleTable, j);
+    public boolean insertData(String titleTable){
+
+        StringBuilder sb = sbForInsertData(titleTable);
 
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
                 System.out.println("Introducido");
+                return true;
         }catch (SQLException e){
                 System.err.println(e);
                 System.err.println(sb.toString());
         }
+        return false;
     }
 
     @Override
-    public void dataSearch(String tableName, String dataName,String dataParam, String param) {
+    public String dataSearch(String tableName, String dataName,String dataParam, String param) {
         boolean userWants = false;
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT ").append(dataName).append(" FROM ").append(tableName);
@@ -73,7 +75,7 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
                     System.out.println(rst.getObject(i));
                 }
             }
-            System.out.println(sb.toString());
+            return sb.toString();
         }
         catch (SQLException e){
             if(e.getMessage().contains("Column Index out of range")){
@@ -83,11 +85,12 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
                 System.err.println(sb.toString());
             }
         }
+        return "Something bad happened";
 
     }
 
     @Override
-    public void showAllTables() {
+    public boolean showAllTables() {
         try (Statement st = conect.createStatement()){
             ResultSet rst = st.executeQuery("SHOW TABLES;");
             System.out.println("========================================");
@@ -101,34 +104,35 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
                             System.out.println(rst2.getObject(i));
                         }
                     }
-                }catch (SQLException e){
-                    System.err.println(e);
                 }
                 System.out.println("========================================");
             }
+            return true;
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sql);
+            return false;
         }
 
     }
 
     @Override
-    public void deleteTables(String tableName) {
+    public boolean deleteTables(String tableName) {
         sql = "DROP TABLE " + tableName + ";";
         try (Statement st = conect.createStatement()){
             st.executeUpdate(sql);
             System.out.println("Eliminado");
+            return true;
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sql);
         }
-
+            return false;
     }
 
     //Crear una version muy limitada para luego expandirla de acuerdo a los datos que se dispongan
     @Override
-    public void promptExexuter(String prompt) {
+    public String promptExexuter(String prompt) {
         String[] pata = prompt.split("FROM");
 
         try (Statement spT = conect.createStatement()){
@@ -144,10 +148,12 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
                 spT.executeUpdate(prompt);
             }
             System.out.println("Se ha ejecutado el comando");
+            return prompt;
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(prompt);
         }
+        return "Something bag happened";
     }
 
     private static boolean isUserWants(boolean userWants) {
@@ -245,7 +251,8 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
         return sb;
     }
 
-    private static @NonNull StringBuilder sbForInsertData(String titleTable, int j) {
+    private static @NonNull StringBuilder sbForInsertData(String titleTable) {
+        int j = numberDataLines(titleTable);
         String dataName;
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO " + titleTable).append(" VALUES (");
@@ -279,7 +286,7 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
         }
         return sb;
     }
-    public int numberDataLines(String tableName){
+    public static int numberDataLines(String tableName){
         int dataNumber = 0;
         try (Statement st = conect.createStatement()){
             sql = "DESCRIBE " + tableName +" ;";
@@ -307,7 +314,7 @@ public class TablesCreaterFuntionsDaoImpl implements TablesAutoCreateAndTheirFun
     }
 
     public static void main(String[] args) {
-        TablesAutoCreateAndTheirFuntionsInterface tb = new TablesCreaterFuntionsDaoImpl();
+        TablesAutoCreateAndFuntions tb = new TablesFunctions();
 
         //----Agregacion de tablas----//
         //tb.addTable("tabla4", "data1", 3);
