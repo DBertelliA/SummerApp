@@ -1,4 +1,4 @@
-package com.example.summerapp.WindowAndView;
+package com.example.summerapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,4 +16,5 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
 }

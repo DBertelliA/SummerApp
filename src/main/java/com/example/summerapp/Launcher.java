@@ -1,4 +1,4 @@
-package com.example.summerapp.WindowAndView;
+package com.example.summerapp;
 
 import javafx.application.Application;
 

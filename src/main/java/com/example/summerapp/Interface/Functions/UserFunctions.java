@@ -61,13 +61,13 @@ public class UserFunctions implements UserFunctionsInterface {
     }
 
     @Override
-    public boolean deleteUser(String name) {
-        User userVerif = FinderAll.findUser(name);
+    public boolean deleteUser(User user) {
+        User userVerif = FinderAll.findUser(user.getNameSystem());
         if(userVerif != null){
         sql = "DELETE FROM dataCatcherUser WHERE Username = ?";
 
         try (PreparedStatement pSt = connect.prepareStatement(sql)){
-            pSt.setString(1, name);
+            pSt.setString(1, user.getNameSystem());
 
             pSt.executeUpdate();
             System.out.println("Se ha eliminado");
@@ -80,13 +80,13 @@ public class UserFunctions implements UserFunctionsInterface {
     }
 
     @Override
-    public User editUser(String user) {
-        User userVerifUser = FinderAll.findUser(user);
+    public User updateUser(User user) {
+        User userVerifUser = FinderAll.findUser(user.getNameSystem());
         String p = JOptionPane.showInputDialog("Introduce the password");
         while (p.isEmpty()){
             p = JOptionPane.showInputDialog("Why is empty?, just introduce the password");
         }
-        User userVerifPass = FinderAll.passwordMatcher(new User(user, p));
+        User userVerifPass = FinderAll.passwordMatcher(new User(user.getNameSystem(), p));
         String pNew = JOptionPane.showInputDialog("Introduce the NEW password");
             if(userVerifUser != null){
                 while (pNew.isEmpty()){
@@ -104,10 +104,10 @@ public class UserFunctions implements UserFunctionsInterface {
                         """;
                 try (PreparedStatement pSt = connect.prepareStatement(sql)){
                     pSt.setString(1,encoder.encode(pNew));
-                    pSt.setString(2, user);
+                    pSt.setString(2, user.getNameSystem());
                     pSt.executeUpdate();
                     System.out.println("Editado:");
-                    return new User(user,pNew);
+                    return new User(user.getNameSystem(),pNew);
                 }catch (SQLException e){
                     System.err.println(e);
                 }
@@ -145,7 +145,7 @@ public class UserFunctions implements UserFunctionsInterface {
         //-----eliminar-------
         //System.out.println(i.deleteUser("b"));
         //------Editar-------
-        //System.out.println(i.editUser("a")); //nueba pass: a
+        //System.out.println(i.updateUser("a")); //nueba pass: a
 
 
 

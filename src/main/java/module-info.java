@@ -10,7 +10,7 @@ module com.example.summerapp {
 
     opens com.example.summerapp to javafx.fxml;
     opens com.example.summerapp.Controllers to javafx.fxml;
-    exports com.example.summerapp;
     exports com.example.summerapp.WindowAndView;
     opens com.example.summerapp.WindowAndView to javafx.fxml;
+    exports com.example.summerapp;
 }
