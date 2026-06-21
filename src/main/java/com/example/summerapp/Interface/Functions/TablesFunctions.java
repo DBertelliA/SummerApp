@@ -47,6 +47,48 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return false;
     }
 
+    //Tener en cuenta que se te puede cambiar toda la fila si no ponemos los limitadores, pensaré como introducirlo mediante el javafx sin necesidad de añadir nada a los metodos
+    @Override
+    public void updateData(String tableName, String data, String dataChange) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("UPDATE ").append(tableName).append(" SET ").append(data).append(" = ").append(dataChange);
+
+        try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
+            sp.executeUpdate();
+            System.out.println("Ejecutado");
+        }catch (SQLException e){
+            System.err.println(e);
+            System.err.println(sb.toString());
+        }
+
+    }
+
+    //Tengo que tener en cuenta el tipo de dato..., tener en cuenta tambien que la linea sql se ejecuta pero puede no eliminar ningun dato
+    @Override
+    public void deleteData(String tableName, String data, String dataParam) {
+        boolean moreData = false;
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("DELETE FROM ").append(tableName).append(" WHERE ").append(data).append(" = ").append(dataParam);
+
+        if(isUserWants(moreData)){
+            sb.append("AND ").append(JOptionPane.showInputDialog(null,"Añade el nombre del dato")).append(" = ").append(JOptionPane.showInputDialog(null, "dame el dato"));
+        }else{
+            sb.append(";");
+        }
+
+        try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
+            sp.executeUpdate();
+            System.out.println("Ejecutado");
+        }catch (SQLException e){
+            System.err.println(e);
+            System.err.println(sb.toString());
+        }
+
+    }
+
     @Override
     public String dataSearch(String tableName, String dataName,String dataParam, String param) {
         boolean userWants = false;
@@ -155,6 +197,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }
         return "Something bag happened";
     }
+
+
 
     private static boolean isUserWants(boolean userWants) {
         int a = JOptionPane.showConfirmDialog(
@@ -343,7 +387,9 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         //tb.promptExexuter("SELECT * FROM tabla3");
 
-       tb.dataSearch("tabla4","data2","data2", "1");
+        //tb.dataSearch("tabla4","data2","data2", "1");
+        //tb.deleteData("tabla4", "data1", "\"Testing2\"");
 
+        tb.updateData("tabla4","data1","\"t\"");
     }
 }
