@@ -51,4 +51,22 @@ public class LogInController {
             confirmText.setText("Usuario no valido");
         }
     }
+
+    @FXML
+    protected void signInButton() {
+        try {
+            FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("Signin.fxml"));
+            Scene sceneLoad = new Scene(fxmload.load(), 600, 400);
+
+            SignInController sgin = fxmload.getController();
+            sgin.confirLabel.setText("...");
+            confirmText.setText("...");
+            Stage staging = (Stage) confirmText.getScene().getWindow();
+            staging.setScene(sceneLoad);
+
+            staging.show();
+        }catch (IOException e){
+            System.err.println(e);
+        }
+    }
 }

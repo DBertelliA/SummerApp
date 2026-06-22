@@ -3,13 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.LogInController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.SignInController">
    <children>
-      <Label layoutX="256.0" layoutY="36.0" text="Create an account" />
-      <Button layoutX="276.0" layoutY="267.0" mnemonicParsing="false" text="Create" />
-      <TextField layoutX="226.0" layoutY="92.0" />
-      <PasswordField layoutX="227.0" layoutY="140.0" />
-      <Label layoutX="286.0" layoutY="213.0" />
-
+      <Label layoutX="252.0" layoutY="35.0" text="Create an account" />
+      <Button layoutX="276.0" layoutY="268.0" mnemonicParsing="false" onAction="#createAcc" text="Create" />
+      <TextField fx:id="userSg" layoutX="226.0" layoutY="91.0" />
+      <PasswordField fx:id="passwordSg" layoutX="227.0" layoutY="140.0" />
+      <Label fx:id="confirLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="214.0" prefHeight="17.0" prefWidth="161.0" text="a" />
+      <Button layoutX="278.0" layoutY="322.0" mnemonicParsing="false" onAction="#goBack" text="Atras" />
    </children>
 </AnchorPane>
