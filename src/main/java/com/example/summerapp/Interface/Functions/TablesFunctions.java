@@ -306,7 +306,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             ResultSet rst = st.executeQuery(sql);
             int i = 0;
             while (rst.next()) {
-                if(rst.getString(2).equalsIgnoreCase("text")) {
+                if(rst.getString(2).equalsIgnoreCase("text") || rst.getString(2).contains("varchar")) {
                     sb.append("\"");
                     dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser (Comillas no importan): " + rst.getString(2));
                     sb.append(dataName);
@@ -359,6 +359,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     public static void main(String[] args) {
         TablesAutoCreateAndFuntions tb = new TablesFunctions();
+        tb.insertData("datacatcheruser");
 
         //----Agregacion de tablas----//
         //tb.addTable("tabla4", "data1", 3);
@@ -390,6 +391,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         //tb.dataSearch("tabla4","data2","data2", "1");
         //tb.deleteData("tabla4", "data1", "\"Testing2\"");
 
-        tb.updateData("tabla4","data1","\"t\"");
+        //tb.updateData("tabla4","data1","\"t\"");
     }
 }

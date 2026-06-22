@@ -137,6 +137,7 @@ public class UserFunctions implements UserFunctionsInterface {
 
     public static void main(String[] args) throws SQLException {
         UserFunctions i = new UserFunctions();
+        i.addUser(new User("t","t"));
         //System.out.println(i.addUser(new User("d", "c")));
         //System.out.println(encoder.matches("c",""));
 
