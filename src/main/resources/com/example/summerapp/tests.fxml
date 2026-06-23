@@ -27,22 +27,19 @@
             <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: black;" />
          </children>
       </HBox>
-      <TabPane layoutX="135.0" layoutY="94.0" prefHeight="399.0" prefWidth="653.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="135.0" layoutY="94.0" prefHeight="399.0" prefWidth="653.0" tabClosingPolicy="UNAVAILABLE" fx:id="nameTabss">
         <tabs>
-          <Tab text="Untitled Tab 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView layoutX="22.0" layoutY="25.0" prefHeight="321.0" prefWidth="588.0" fx:id="dataClasify">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
+            <Tab text="datacatcheruser">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <TableView layoutX="22.0" layoutY="25.0" prefHeight="321.0" prefWidth="588.0"
+                               fx:id="dataClasify">
+                        <columns>
+                            <TableColumn prefWidth="75.0" text="C1"/>
+                            <TableColumn prefWidth="75.0" text="C2"/>
+                        </columns>
+                    </TableView>
+                </AnchorPane>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

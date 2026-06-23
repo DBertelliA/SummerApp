@@ -41,6 +41,7 @@ public class LogInController {
 
                 MenuController mc = fxmload.getController();
                 mc.userLoggedMenu.setText(user.getText());
+                mc.inicializateTabs();
                 mc.inicializateTable();
 
                 Stage staging = (Stage) confirmText.getScene().getWindow();

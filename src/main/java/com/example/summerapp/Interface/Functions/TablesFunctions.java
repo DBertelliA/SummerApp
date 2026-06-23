@@ -4,15 +4,20 @@ import com.example.summerapp.Connections.ConnectionMySQL;
 import com.example.summerapp.DataTypesSQL.SqlDataTypes;
 import com.example.summerapp.DataTypesSQL.SqlSentencesType;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.jspecify.annotations.NonNull;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TablesFunctions implements TablesAutoCreateAndFuntions {
     static Connection conect = ConnectionMySQL.getInstance();
@@ -352,22 +357,22 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     //Cambio en el metodo muy fuerte...
     //haber que entienda que me he pasado un par de horitas jodiendo con los atributos
     //Le pasamos tanto el nombre de la tabla como el atributo que queremos transformar
-    public static void contentTypeGiver(String titleTable,TableView<ObservableList<String>> tableView){
-
+    public static TableView<ObservableList<String>> contentTypeGiver(String titleTable,TableView<ObservableList<String>> tableView){
+        TableColumn<ObservableList<String>, String> column = null;
         try (Statement st = conect.createStatement()){
             sql = "DESCRIBE " + titleTable +" ;";
             ResultSet rst = st.executeQuery(sql);
 
             while (rst.next()) {
                 //Primero, creamos una columna, que pille solo el nombre del dato
-                TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
+                column = new TableColumn<>(rst.getString(1));
 
                 //Luego, se compruena el tamaño de la tableview en general
                 //Que para hacerse uno una idea, va aumentando a medida que el while pasa
                 //puesto que cada vez que se invoca al TableColum, se está pegando otra columna
                 int indice = tableView.getColumns().size();
 
-
+                //luego setea dependiendo de la cantidad que se agrege los calores que estén en dichas posiciones
                 column.setCellValueFactory(data ->
                         new SimpleStringProperty(
                                 data.getValue().get(indice)
@@ -375,7 +380,25 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                 );
                 tableView.getColumns().add(column);
             }
+            return column.getTableView();
 
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+        return null;
+    }
+
+    public static void titleGiver(TabPane nameTab){
+
+        try (Statement st = conect.createStatement()){
+            sql = "SHOW TABLES;";
+            ResultSet rst = st.executeQuery(sql);
+            while (rst.next()) {
+                if (!rst.getString(1).contains("datacatcheruser")) {
+                    Tab tabI = new Tab(rst.getString(1));
+                    nameTab.getTabs().add(tabI);
+                }
+            }
         }catch (SQLException e){
             System.err.println(e);
         }
@@ -401,6 +424,17 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 //        }catch (SQLException e){
 //            System.err.println(e);
 //        }
+
+        int a = 0;
+        try (Statement st = conect.createStatement()){
+            sql = "SHOW TABLES;";
+            ResultSet rst = st.executeQuery(sql);
+            while (rst.next()) {
+                if (!rst.getString(1).contains("datacatcheruser")) System.out.println(rst.getString(1));
+            }
+        }catch (SQLException e){
+            System.err.println(e);
+        }
 
         //--Insertar data--
         // tb.insertData("tabla4");
