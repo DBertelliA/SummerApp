@@ -19,7 +19,8 @@
          <children>
             <Pane prefHeight="109.0" prefWidth="209.0" style="-fx-background-color: red;">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Label" fx:id="userLoggedMenu"/>
+                  <Label fx:id="userLoggedMenu" layoutX="65.0" layoutY="14.0" text="You should not see this" />
+                  <Label layoutX="21.0" layoutY="14.0" text="Label" />
                </children></Pane>
             <Pane prefHeight="83.0" prefWidth="263.0" style="-fx-background-color: blue;" />
             <Pane prefHeight="83.0" prefWidth="278.0" style="-fx-background-color: green;" />
@@ -32,7 +33,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="22.0" layoutY="25.0" prefHeight="321.0" prefWidth="588.0">
+                        <TableView layoutX="22.0" layoutY="25.0" prefHeight="321.0" prefWidth="588.0" fx:id="dataClasify">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />

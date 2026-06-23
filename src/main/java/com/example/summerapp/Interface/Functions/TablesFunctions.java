@@ -4,6 +4,11 @@ import com.example.summerapp.Connections.ConnectionMySQL;
 import com.example.summerapp.DataTypesSQL.SqlDataTypes;
 import com.example.summerapp.DataTypesSQL.SqlSentencesType;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.jspecify.annotations.NonNull;
 
 import javax.swing.*;
@@ -344,22 +349,42 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }
         return 0;
     }
-    public String contentTypeGiver(String titleTable){
+    //Cambio en el metodo muy fuerte...
+    //haber que entienda que me he pasado un par de horitas jodiendo con los atributos
+    //Le pasamos tanto el nombre de la tabla como el atributo que queremos transformar
+    public static void contentTypeGiver(String titleTable,TableView<ObservableList<String>> tableView){
+
         try (Statement st = conect.createStatement()){
             sql = "DESCRIBE " + titleTable +" ;";
             ResultSet rst = st.executeQuery(sql);
+
             while (rst.next()) {
-                rst.getString(2);
+                //Primero, creamos una columna, que pille solo el nombre del dato
+                TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
+
+                //Luego, se compruena el tamaño de la tableview en general
+                //Que para hacerse uno una idea, va aumentando a medida que el while pasa
+                //puesto que cada vez que se invoca al TableColum, se está pegando otra columna
+                int indice = tableView.getColumns().size();
+
+
+                column.setCellValueFactory(data ->
+                        new SimpleStringProperty(
+                                data.getValue().get(indice)
+                        )
+                );
+                tableView.getColumns().add(column);
             }
+
         }catch (SQLException e){
             System.err.println(e);
         }
-        return " ";
     }
+
 
     public static void main(String[] args) {
         TablesAutoCreateAndFuntions tb = new TablesFunctions();
-        tb.insertData("datacatcheruser");
+        //tb.insertData("datacatcheruser");
 
         //----Agregacion de tablas----//
         //tb.addTable("tabla4", "data1", 3);
@@ -392,5 +417,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         //tb.deleteData("tabla4", "data1", "\"Testing2\"");
 
         //tb.updateData("tabla4","data1","\"t\"");
+
+        //System.out.println(contentTypeGiver("tabla4"));
     }
 }
