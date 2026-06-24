@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.List;
+
 public class MenuController {
     @FXML
     public Label userLoggedMenu;
@@ -16,15 +18,21 @@ public class MenuController {
     @FXML
     public TabPane nameTabss;
 
-    @FXML
-    public AnchorPane anchorPaneContent;
-
     public void inicializateTable(){
-        dataClasify.getColumns().clear();
-        TablesFunctions.contentTypeGiver(nameTabss.getTabs().get(0).getText(),dataClasify);
-        int i = nameTabss.getTabs().size();
-        System.out.println(i);
+        //Estructura para añadir
+        int j = nameTabss.getTabs().size();
+        Tab tab1 = new Tab();
+        for (int i = 0; i < j; i++) {
+            tab1.setContent(TablesFunctions.contentTypeGiver(nameTabss.getTabs().get(i).getText(), dataClasify));
 
+            TableView<ObservableList<String>> tableInfo = TablesFunctions.contentTypeGiver(nameTabss.getTabs().get(i).getText(), dataClasify);
+
+            TableColumn<String , Object> listaData;
+           //listaData.getColumns().add(i,);
+
+            nameTabss.getTabs().get(i).setContent(tab1.getContent());
+        }
+        //
     }
     public void inicializateTabs(){
         TablesFunctions.titleGiver(nameTabss);

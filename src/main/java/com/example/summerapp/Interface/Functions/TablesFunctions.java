@@ -120,7 +120,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }
 
         try (Statement st = conect.createStatement()) {
-            int j = numberDataLines(tableName);
+            int j = numberDataColumns(tableName);
             ResultSet rst = st.executeQuery(sb.toString());
             while (rst.next()) {
                 for (int i = 1; i <= j; i++) {
@@ -147,7 +147,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             ResultSet rst = st.executeQuery("SHOW TABLES;");
             System.out.println("========================================");
             while (rst.next()){
-                int j = numberDataLines(rst.getString(1));
+                int j = numberDataColumns(rst.getString(1));
                 System.out.println("Numero de columnas de " +  rst.getString(1) + " es: " + j);
                 try (Statement st2 = conect.createStatement()){
                     ResultSet rst2 = st2.executeQuery("SELECT * FROM " + (rst.getString(1)));
@@ -189,7 +189,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         try (Statement spT = conect.createStatement()){
             ResultSet rst = spT.executeQuery(prompt);
-            int j = numberDataLines(pata[1]);
+            int j = numberDataColumns(pata[1]);
             if(prompt.contains("SELECT")) {
                 while (rst.next()) {
                     for (int i = 1; i <= j; i++) {
@@ -306,7 +306,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     private static @NonNull StringBuilder sbForInsertData(String titleTable) {
-        int j = numberDataLines(titleTable);
+        int j = numberDataColumns(titleTable);
         String dataName;
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO " + titleTable).append(" VALUES (");
@@ -340,7 +340,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }
         return sb;
     }
-    public static int numberDataLines(String tableName){
+    public static int numberDataColumns(String tableName){
         int dataNumber = 0;
         try (Statement st = conect.createStatement()){
             sql = "DESCRIBE " + tableName +" ;";
@@ -356,35 +356,46 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
     //Cambio en el metodo muy fuerte...
     //haber que entienda que me he pasado un par de horitas jodiendo con los atributos
-    //Le pasamos tanto el nombre de la tabla como el atributo que queremos transformar
-    public static TableView<ObservableList<String>> contentTypeGiver(String titleTable,TableView<ObservableList<String>> tableView){
-        TableColumn<ObservableList<String>, String> column = null;
-        try (Statement st = conect.createStatement()){
-            sql = "DESCRIBE " + titleTable +" ;";
-            ResultSet rst = st.executeQuery(sql);
+    //Le pasamos tanto el nombre de la tabla como el atributo que queremos transformar, y usamos constantemente la tabla que le pasamos para dar datos y metodos...
+    public static TableView<ObservableList<String>> contentTypeGiver(String titleTable, TableView<ObservableList<String>> tableView) {
+        if (tableView == null) {
+            tableView = new TableView<>();
+        }
+
+        try (Statement st = conect.createStatement()) {
+            ResultSet rst = st.executeQuery("DESCRIBE " + titleTable);
 
             while (rst.next()) {
-                //Primero, creamos una columna, que pille solo el nombre del dato
-                column = new TableColumn<>(rst.getString(1));
 
-                //Luego, se compruena el tamaño de la tableview en general
-                //Que para hacerse uno una idea, va aumentando a medida que el while pasa
-                //puesto que cada vez que se invoca al TableColum, se está pegando otra columna
                 int indice = tableView.getColumns().size();
+                TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
+                final int posicion = indice;
 
-                //luego setea dependiendo de la cantidad que se agrege los calores que estén en dichas posiciones
-                column.setCellValueFactory(data ->
-                        new SimpleStringProperty(
-                                data.getValue().get(indice)
-                        )
-                );
+                column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(posicion)));
                 tableView.getColumns().add(column);
             }
-            return column.getTableView();
 
-        }catch (SQLException e){
+            // joder, esto es mas sencillo, en el creas el objeto, le metes lo datos y se lo añades a la tableView, es una agregacion dinamica
+            ResultSet data = st.executeQuery("SELECT * FROM " + titleTable);
+            while (data.next()) {
+                //Creas la lista constantemente, y entiendo que una vez añadida, como la base de datos ve que hay datos, se lo pasa al siguiente
+
+                ObservableList<String> fila = FXCollections.observableArrayList();
+
+                for (int i = 1; i <= tableView.getColumns().size(); i++) {
+                    fila.add(data.getString(i));
+                }
+
+                tableView.getItems().add(fila);
+            }
+
+
+            return tableView;
+
+        } catch (SQLException e) {
             System.err.println(e);
         }
+
         return null;
     }
 
@@ -394,16 +405,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             sql = "SHOW TABLES;";
             ResultSet rst = st.executeQuery(sql);
             while (rst.next()) {
-                if (!rst.getString(1).contains("datacatcheruser")) {
-                    Tab tabI = new Tab(rst.getString(1));
-                    nameTab.getTabs().add(tabI);
-                }
+                Tab tabI = new Tab(rst.getString(1));
+                nameTab.getTabs().add(tabI);
             }
         }catch (SQLException e){
             System.err.println(e);
         }
     }
-
 
     public static void main(String[] args) {
         TablesAutoCreateAndFuntions tb = new TablesFunctions();
@@ -425,17 +433,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 //            System.err.println(e);
 //        }
 
-        int a = 0;
-        try (Statement st = conect.createStatement()){
-            sql = "SHOW TABLES;";
-            ResultSet rst = st.executeQuery(sql);
-            while (rst.next()) {
-                if (!rst.getString(1).contains("datacatcheruser")) System.out.println(rst.getString(1));
-            }
-        }catch (SQLException e){
-            System.err.println(e);
-        }
-
         //--Insertar data--
         // tb.insertData("tabla4");
 
@@ -453,5 +450,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         //tb.updateData("tabla4","data1","\"t\"");
 
         //System.out.println(contentTypeGiver("tabla4"));
+        //System.out.println(dataCount("datacatcheruser"));
     }
 }
