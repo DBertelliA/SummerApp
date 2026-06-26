@@ -367,17 +367,18 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
             while (rst.next()) {
 
-                int indice = tableView.getColumns().size();
                 TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
-                final int posicion = indice;
+                final int posicion =  tableView.getColumns().size();
 
                 column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(posicion)));
                 tableView.getColumns().add(column);
             }
 
             // joder, esto es mas sencillo, en el creas el objeto, le metes lo datos y se lo añades a la tableView, es una agregacion dinamica
+
             ResultSet data = st.executeQuery("SELECT * FROM " + titleTable);
             while (data.next()) {
+
                 //Creas la lista constantemente, y entiendo que una vez añadida, como la base de datos ve que hay datos, se lo pasa al siguiente
 
                 ObservableList<String> fila = FXCollections.observableArrayList();
