@@ -1,17 +1,16 @@
 package com.example.summerapp.Controllers;
 
+import com.example.summerapp.Controllers.MenuControllers.MenuController_All;
 import com.example.summerapp.HelloApplication;
 import com.example.summerapp.Helper.FinderAll;
 import com.example.summerapp.Interface.Functions.TablesFunctions;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import com.example.summerapp.Models.User;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -39,9 +38,9 @@ public class LogInController {
 
                 Scene sceneLoad = new Scene(fxmload.load(), 910, 600);
 
-                MenuController mc = fxmload.getController();
+                MenuController_All mc = fxmload.getController();
                 mc.userLoggedMenu.setText(user.getText());
-                mc.inicializateTable();
+                mc.inicializate();
 
                 Stage staging = (Stage) confirmText.getScene().getWindow();
                 staging.setScene(sceneLoad);

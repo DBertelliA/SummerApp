@@ -13,4 +13,5 @@ module com.example.summerapp {
     exports com.example.summerapp.WindowAndView;
     opens com.example.summerapp.WindowAndView to javafx.fxml;
     exports com.example.summerapp;
+    opens com.example.summerapp.Controllers.MenuControllers to javafx.fxml;
 }
