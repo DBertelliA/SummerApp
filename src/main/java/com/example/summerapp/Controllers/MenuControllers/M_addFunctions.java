@@ -1,32 +1,37 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
 import javafx.geometry.Insets;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
+import javafx.scene.text.*;
+
 
 public class M_addFunctions {
+public int counter = 0;
+
+public String[] dialogs = {"Hi!","I'm a cat assistant"
+        , "I will try to help in you creating or adding things"};
 
     //nueva formato de textFlont y demas para el flow, está entretenido...
 
     public void initDialog(TextFlow dialogText){
         Font font = Font.font(20);
-        Text textAssign = new Text("""
-                Hi!
-                I'm your assistant, I will try to help if you need a guide on the creation of the tables
-                or inserting data
-                """);
+        Text textAssign;
+        textAssign = new Text(dialogs[counter]);
 
         textAssign.setFill(Color.WHITE);
         textAssign.setFont(font);
 
-
         dialogText.setTextAlignment(TextAlignment.LEFT);
+
         //new Insets(arriba, derecha, abajo, izquierda)
         dialogText.setPadding(new Insets(10,0,0,0));
         dialogText.getChildren().clear();
         dialogText.getChildren().add(textAssign);
+
+
+        if (counter == dialogs.length -1){counter = -1;}
+
+
     }
 }

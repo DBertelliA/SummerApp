@@ -13,6 +13,7 @@ import javafx.scene.text.TextFlow;
 
 public class MenuController_All {
     M_addFunctions m_A = new M_addFunctions();
+    FrameController assistentEmotions = new FrameController();
 
     @FXML public Label userLoggedMenu;
 
@@ -29,6 +30,9 @@ public class MenuController_All {
     @FXML public ImageView assistent;
 
     public void inicializate(){
+        anchorPaneMainMenu.setDisable(false);
+        anchorPaneMainMenu.setVisible(true);
+
         anchorPaneAddFunctions.setVisible(false);
         anchorPaneAddFunctions.setDisable(true);
 
@@ -54,6 +58,9 @@ public class MenuController_All {
 
 
     public void addButton() {
+        anchorPaneMainMenu.setDisable(true);
+        anchorPaneMainMenu.setVisible(false);
+
         nameTabss.setDisable(true);
         nameTabss.setVisible(false);
 
@@ -61,12 +68,32 @@ public class MenuController_All {
         anchorPaneAddFunctions.setDisable(false);
 
         assistent.setVisible(true);
-        Image im = new Image(("wYDqi0.jpg"));
-        assistent.setImage(im);
         assistent.setManaged(true);
-
+        assistent.setPickOnBounds(true);
 
         m_A.initDialog(dialogText);
+        Image im = new Image(("Happy-Frame.jpg"));
+        assistent.setImage(im);
+
+        assistent.setOnMouseClicked(event -> {
+            if (m_A.counter > 2) {
+                m_A.counter = 0;
+                assistentEmotions.framesView(assistent,0);
+            }
+            System.out.println("contador: " + m_A.counter);
+            if (m_A.counter < m_A.dialogs.length-1){
+                if (m_A.counter == -1) {
+                    assistentEmotions.framesView(assistent,0);
+                    m_A.counter++;
+                }else {
+                    assistentEmotions.framesView(assistent,m_A.counter);
+                    m_A.counter++;
+                }
+                m_A.initDialog(dialogText);
+            }
+        }
+        );
+       // assistent.setOnMouseClicked();
 
 
     }
