@@ -75,29 +75,26 @@ public class MenuController_All {
         Image im = new Image(("Happy-Frame.jpg"));
         assistent.setImage(im);
 
-        assistent.setOnMouseClicked(event -> {
-            if (m_A.counter > 2) {
-                m_A.counter = 0;
-                assistentEmotions.framesView(assistent,0);
-            }
-            System.out.println("contador: " + m_A.counter);
-            if (m_A.counter < m_A.dialogs.length-1){
-                if (m_A.counter == -1) {
-                    assistentEmotions.framesView(assistent,0);
-                    m_A.counter++;
-                }else {
-                    assistentEmotions.framesView(assistent,m_A.counter);
-                    m_A.counter++;
-                }
-                m_A.initDialog(dialogText);
-            }
-        }
-        );
-       // assistent.setOnMouseClicked();
-
-
+        assistent.setOnMouseClicked(event -> frameChangerMainMenu());
     }
 
+    private void frameChangerMainMenu() {
+        if (m_A.counter > 2) {
+            m_A.counter = 0;
+            assistentEmotions.framesView(assistent,0);
+        }
+        System.out.println("contador: " + m_A.counter);
+        if (m_A.counter < m_A.dialogs.length-1){
+            if (m_A.counter == -1) {
+                assistentEmotions.framesView(assistent,0);
+                m_A.counter++;
+            }else {
+                assistentEmotions.framesView(assistent,m_A.counter);
+                m_A.counter++;
+            }
+            m_A.initDialog(dialogText);
+        }
+    }
 
 
 }
