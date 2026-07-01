@@ -15,23 +15,28 @@ public String[] dialogs = {"Hi!","I'm a cat assistant"
     //nueva formato de textFlont y demas para el flow, está entretenido...
 
     public void initDialog(TextFlow dialogText){
-        Font font = Font.font(20);
-        Text textAssign;
-        textAssign = new Text(dialogs[counter]);
+        try {
+            Font font = Font.font(20);
+            Text textAssign;
+            textAssign = new Text(dialogs[counter]);
 
-        textAssign.setFill(Color.WHITE);
-        textAssign.setFont(font);
+            textAssign.setFill(Color.WHITE);
+            textAssign.setFont(font);
 
-        dialogText.setTextAlignment(TextAlignment.LEFT);
+            dialogText.setTextAlignment(TextAlignment.LEFT);
 
-        //new Insets(arriba, derecha, abajo, izquierda)
-        dialogText.setPadding(new Insets(10,0,0,0));
-        dialogText.getChildren().clear();
-        dialogText.getChildren().add(textAssign);
+            //new Insets(arriba, derecha, abajo, izquierda)
+            dialogText.setPadding(new Insets(10, 0, 0, 0));
+            dialogText.getChildren().clear();
+            dialogText.getChildren().add(textAssign);
 
 
-        if (counter == dialogs.length -1){counter = -1;}
-
+            if (counter == dialogs.length - 1) {
+                counter = -1;
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.err.println("Error en el contador, raro");
+        }
 
     }
 }

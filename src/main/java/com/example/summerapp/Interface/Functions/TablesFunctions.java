@@ -241,7 +241,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     public String dataSelect (int i){
         switch (i){
             case 1 -> {
-                return String.valueOf(SqlDataTypes.TEXT);
+                return String.valueOf(SqlDataTypes.VARCHAR);
             }
             case 2 -> {
                 return String.valueOf(SqlDataTypes.INTEGER);
@@ -286,7 +286,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                 dataName = JOptionPane.showInputDialog("Introduce el nombre de la data");
             }
                 try {
-                    sb.append(dataName).append(" ").append(dataSelect(Integer.parseInt(JOptionPane.showInputDialog("Del 1 al 6 pal dato"))));
+                    sb.append(dataName).append(" ");
+                    String holder = dataSelect(Integer.parseInt(JOptionPane.showInputDialog("Del 1 al 6 pal dato")));
+                    if (holder.contains("VARCHAR")){
+                        sb.append(holder).append("(10)");
+                    }else {
+                        sb.append(holder);
+                    }
                 }catch (NumberFormatException e){
                     sb.append("BOOLEAN ");
                 }
