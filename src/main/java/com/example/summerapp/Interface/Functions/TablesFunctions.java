@@ -8,10 +8,8 @@ import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import org.jspecify.annotations.NonNull;
 
 import javax.swing.*;
@@ -42,9 +40,41 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public boolean insertData(String titleTable){
+    public boolean insertData(String titleTable, List<String> lStr){
+        int a = 0;
+        StringBuilder sb = new StringBuilder();
+        if (a == 1) {
+            sb = sbForInsertData(titleTable);
+        }
+        if (a == 0){
+            sb.append("INSERT INTO " + titleTable).append(" VALUES (");
 
-        StringBuilder sb = sbForInsertData(titleTable);
+            try (Statement st = conect.createStatement()){
+                sql = "DESCRIBE " + titleTable +" ;";
+                ResultSet rst = st.executeQuery(sql);
+                int i = 0;
+                while (rst.next()) {
+                    if(rst.getString(2).equalsIgnoreCase("text") || rst.getString(2).contains("varchar")) {
+                        sb.append("\"");
+                        sb.append(lStr.get(i));
+                        sb.append("\"");
+                    }else {
+                        sb.append(lStr.get(i));
+                    }
+
+                    i++;
+                    if (i > lStr.size() -1){
+                        System.out.println("Sigo");
+                    }else{
+                        sb.append(", ");
+                    }
+                }
+                System.out.println(i);
+                sb.append(" );");
+            }catch (SQLException e){
+                System.err.println(e);
+            }
+        }
 
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
@@ -346,6 +376,43 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }
         return sb;
     }
+
+    public static void autoGenerateTextFields(String titleTable, AnchorPane anh){
+        TablesFunctions tbFt = new TablesFunctions();
+
+        sql = "DESCRIBE " + titleTable + ";";
+        try (Statement st = conect.createStatement()){
+            ResultSet rSt = st.executeQuery(sql);
+            int i = 80;
+            while (rSt.next()){
+                 i += 30;
+                TextField tf = new TextField();
+                tf.setLayoutX(50);
+                tf.setLayoutY(i);
+                String dataN = "Tipo data: " + rSt.getString(2);
+                tf.setPromptText(dataN);
+                anh.getChildren().add(tf);
+            }
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+    }
+
+    public static void fillerBox(ComboBox<String> cStr){
+        if (cStr != null){
+            cStr.getItems().clear();
+        }
+        try (Statement st = conect.createStatement()){
+            ResultSet rSt = st.executeQuery("SHOW TABLES");
+            while (rSt.next()){
+                cStr.getItems().add(rSt.getString(1));
+            }
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+
+    }
+
     public static int numberDataColumns(String tableName){
         int dataNumber = 0;
         try (Statement st = conect.createStatement()){
@@ -426,19 +493,19 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         //----Agregacion de tablas----//
         //tb.addTable("tabla4", "data1", 3);
-//        int a = 0;
-//        try (Statement st = conect.createStatement()){
-//            sql = "DESCRIBE tabla4;";
-//            ResultSet rst = st.executeQuery(sql);
-//            //Primer elemento el nombre de la fila, segundo elemento, el tipo de dato
-//            while (rst.next()) {
-//                a++;
-//                System.out.println(rst.getString(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(4) + " " + rst.getString(5));
-//            }
-//            System.out.println(a);
-//        }catch (SQLException e){
-//            System.err.println(e);
-//        }
+        int a = 0;
+        try (Statement st = conect.createStatement()){
+            sql = "DESCRIBE tabla4;";
+            ResultSet rst = st.executeQuery(sql);
+            //Primer elemento el nombre de la fila, segundo elemento, el tipo de dato
+            while (rst.next()) {
+                a++;
+                System.out.println(rst.getString(1) + " -2- " + rst.getString(2) + " -3- " + rst.getString(3) + " -4- " + rst.getString(4) + " -5- " + rst.getString(5));
+            }
+            System.out.println(a);
+        }catch (SQLException e){
+            System.err.println(e);
+        }
 
         //--Insertar data--
         // tb.insertData("tabla4");

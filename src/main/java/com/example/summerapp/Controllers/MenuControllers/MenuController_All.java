@@ -4,6 +4,7 @@ import com.example.summerapp.Interface.Functions.TablesFunctions;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextFlow;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MenuController_All {
@@ -58,7 +60,24 @@ public class MenuController_All {
 
     //-----------------------------//
 
+    //-------Selector-------//
+
+    @FXML public Pane paneSelector;
+
+    @FXML public ToolBar selectorOptions;
+
+    //--------Agregar datos--------//
+
+    @FXML public ComboBox<String> comboxTable;
+
+    @FXML public AnchorPane anchorPaneAddData;
+
+    @FXML public Label labelIndicate;
+
+
+
     public void inicializate(){
+        TablesFunctions.fillerBox(comboxTable);
         anchorPaneMainMenu.setDisable(false);
         anchorPaneMainMenu.setVisible(true);
 
@@ -128,19 +147,11 @@ public class MenuController_All {
     //----Funciones de agregar tabla----//
 
     public void addTable(){
+        paneSelector.setDisable(true);
+        selectorOptions.setDisable(true);
         if (anchorPaneTablesAdd.isVisible() || !anchorPaneTablesAdd.isDisable()){
-            anchorPaneTablesAdd.setVisible(false);
-            anchorPaneTablesAdd.setDisable(true);
-            paneNameData.setDisable(true);
-            paneNameData.setVisible(false);
-
-            paneNameTable.setDisable(true);
-            paneNameTable.setVisible(false);
-
-            paneNumberData.setDisable(true);
-            paneNumberData.setVisible(false);
+            DisablerOrAForAddT();
         }
-
 
         anchorPaneTablesAdd.setVisible(true);
         anchorPaneTablesAdd.setDisable(false);
@@ -160,25 +171,87 @@ public class MenuController_All {
 
                 buttonForNext3.setOnAction( c -> {
                     tACF.addTable(titleTable.getText(),dataName.getText(),numberValues.getValue());
-
-                    anchorPaneTablesAdd.setVisible(false);
-                    anchorPaneTablesAdd.setDisable(true);
-                    paneNameData.setDisable(true);
-                    paneNameData.setVisible(false);
-
-                    paneNameTable.setDisable(true);
-                    paneNameTable.setVisible(false);
-
-                    paneNumberData.setDisable(true);
-                    paneNumberData.setVisible(false);
+                    DisablerOrAForAddT();
+                    paneSelector.setDisable(false);
+                    selectorOptions.setDisable(false);
                 });
             });
         });
+    }
+    public void backButtonForTable(){
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
+        paneSelector.setDisable(false);
+        selectorOptions.setDisable(false);
+    }
 
+
+    private void DisablerOrAForAddT() {
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
+        paneNameData.setDisable(true);
+        paneNameData.setVisible(false);
+
+        paneNameTable.setDisable(true);
+        paneNameTable.setVisible(false);
+
+        paneNumberData.setDisable(true);
+        paneNumberData.setVisible(false);
     }
 
     public void backButton(){
         addTable();
     }
 
+
+    //-------------Funciones de añadir datos a tablas-------------//
+
+    public void addData(){
+        paneSelector.setDisable(true);
+        selectorOptions.setDisable(true);
+        anchorPaneAddData.getChildren().removeIf( e -> e instanceof TextField);
+        //o puedo reusar el metodo de la autocreacion de campos
+        //para que me devuelva una lista que recoja esos campos y que remueva toda esa lista que le pasé
+        //lo primero es lo mas sencillo y muy util para todo
+        anchorPaneAddData.setDisable(false);
+        anchorPaneAddData.setVisible(true);
+        comboxTable.setVisible(true);
+        comboxTable.setDisable(false);
+        comboxTable.setOnAction(i -> {
+            anchorPaneAddData.getChildren().removeIf(e -> e instanceof TextField);
+            updateForAdd();
+        });
+    }
+    public void updateForAdd(){
+        labelIndicate.setText("Estas usando la tabla: " + comboxTable.getValue());
+        TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData);
+    }
+    public void buttonForAddData(){
+        List<String> lStr = new ArrayList<>();
+        for (Node n : anchorPaneAddData.getChildren()){
+            if (n instanceof TextField) {
+                TextField tf = (TextField) n;
+                lStr.add(tf.getText());
+            }
+        }
+        boolean che = tACF.insertData(comboxTable.getValue(),lStr);
+        if (che) {
+            TablesFunctions.autoGenerateTextFields(comboxTable.getValue(), anchorPaneAddData);
+            selectorOptions.setDisable(false);
+            paneSelector.setDisable(false);
+            anchorPaneAddData.setDisable(true);
+            anchorPaneAddData.setVisible(false);
+            comboxTable.setVisible(false);
+            comboxTable.setDisable(true);
+            labelIndicate.setText("...");
+        }
+    }
+    public void backButtonInAddData(){
+        selectorOptions.setDisable(false);
+        paneSelector.setDisable(false);
+        anchorPaneAddData.setDisable(true);
+        anchorPaneAddData.setVisible(false);
+        comboxTable.setVisible(false);
+        comboxTable.setDisable(true);
+    }
 }
