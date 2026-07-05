@@ -7,11 +7,25 @@
 
 <AnchorPane prefHeight="576.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
    <children>
+      <AnchorPane fx:id="anchorPaneForEditValues" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0">
+         <children>
+            <ComboBox layoutX="26.0" layoutY="15.0" prefHeight="27.0" prefWidth="221.0" promptText="Selecciona" />
+            <Slider layoutX="22.0" layoutY="279.0" prefHeight="17.0" prefWidth="221.0" />
+            <TableView layoutX="23.0" layoutY="56.0" prefHeight="224.0" prefWidth="221.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Slider layoutX="242.0" layoutY="55.0" orientation="VERTICAL" prefHeight="224.0" prefWidth="19.0" />
+            <Pane layoutX="268.0" prefHeight="302.0" prefWidth="558.0" />
+         </children>
+      </AnchorPane>
       <ToolBar fx:id="selectorOptions" layoutX="310.0" layoutY="500.0" prefHeight="49.0" prefWidth="290.0">
         <items>
             <Button mnemonicParsing="false" onAction="#inicializate" text="Inicio" />
             <Button mnemonicParsing="false" onAction="#addButton" text="Agregar" />
-            <Button mnemonicParsing="false" text="Editar" />
+            <Button mnemonicParsing="false" onAction="#editButton" text="Editar" />
             <Button mnemonicParsing="false" text="Buscar" />
             <Button mnemonicParsing="false" text="Eliminar" />
         </items>
@@ -28,7 +42,7 @@
             <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: black;" />
          </children>
       </HBox>
-      <AnchorPane fx:id="anchorPaneAddFunctions" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0">
+      <AnchorPane fx:id="anchorPaneAddFunctions" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0" visible="false">
          <children>
 
 
@@ -38,7 +52,7 @@
                      <children>
                         <TextField fx:id="titleTable" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="298.0" promptText="nombreTabla" />
                         <Button fx:id="buttonForNext1" layoutX="187.0" layoutY="74.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="Siguiente" />
-                        <Button layoutX="37.0" layoutY="76.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Atras" onAction="#backButtonForTable" />
+                        <Button layoutX="37.0" layoutY="76.0" mnemonicParsing="false" onAction="#backButtonForTable" prefHeight="25.0" prefWidth="120.0" text="Atras" />
                      </children>
                   </Pane>
                   <Pane fx:id="paneNameData" disable="true" layoutY="101.0" prefHeight="101.0" prefWidth="334.0" style="-fx-border-color: red;" visible="false">
@@ -57,13 +71,6 @@
                   </Pane>
                </children>
             </AnchorPane>
-
-
-
-            <ImageView fx:id="assistent" fitHeight="122.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-
-            </ImageView>
-            <TextFlow fx:id="dialogText" layoutX="198.0" prefHeight="122.0" prefWidth="613.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
             <Pane fx:id="paneSelector" layoutX="19.0" layoutY="122.0" prefHeight="296.0" prefWidth="458.0" style="-fx-border-color: green;">
                <children>
                   <Button layoutX="125.0" layoutY="129.0" mnemonicParsing="false" onAction="#addTable" prefHeight="27.0" prefWidth="200.0" text="Tabla" />
@@ -94,5 +101,12 @@
         </tabs>
       </TabPane>
        </AnchorPane>
+
+
+
+      <ImageView fx:id="assistent" fitHeight="110.0" fitWidth="185.0" layoutX="101.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" visible="false">
+
+            </ImageView>
+      <TextFlow fx:id="dialogText" layoutX="286.0" layoutY="73.0" prefHeight="122.0" prefWidth="607.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
    </children>
 </AnchorPane>

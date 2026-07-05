@@ -14,6 +14,7 @@ import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class MenuController_All {
@@ -30,6 +31,8 @@ public class MenuController_All {
     @FXML public AnchorPane anchorPaneMainMenu;
 
     @FXML public AnchorPane anchorPaneAddFunctions;
+
+    //------Asistente-----//
 
     @FXML public TextFlow dialogText;
 
@@ -74,9 +77,31 @@ public class MenuController_All {
 
     @FXML public Label labelIndicate;
 
+    //--------Editar datos----------//
+
+    @FXML public AnchorPane anchorPaneForEditValues;
+
+    @FXML public ComboBox<String> comboBoxForEdit = comboxTable;
+
+    @FXML public Slider sliderX;
+
+    @FXML public Slider sliderY;
+
+    @FXML public TableView<ObservableList<String>> singleTableEdit;
+
+    @FXML public Pane paneForEditFields;
 
 
     public void inicializate(){
+        anchorPaneForEditValues.setDisable(true);
+        anchorPaneForEditValues.setVisible(false);
+
+        dialogText.setDisable(true);
+        dialogText.setVisible(false);
+
+        assistent.setVisible(false);
+        assistent.setDisable(true);
+
         TablesFunctions.fillerBox(comboxTable);
         anchorPaneMainMenu.setDisable(false);
         anchorPaneMainMenu.setVisible(true);
@@ -106,6 +131,12 @@ public class MenuController_All {
 
 
     public void addButton() {
+        anchorPaneForEditValues.setDisable(true);
+        anchorPaneForEditValues.setVisible(false);
+
+        dialogText.setDisable(false);
+        dialogText.setVisible(true);
+
         anchorPaneMainMenu.setDisable(true);
         anchorPaneMainMenu.setVisible(false);
 
@@ -116,11 +147,12 @@ public class MenuController_All {
         anchorPaneAddFunctions.setDisable(false);
 
         assistent.setVisible(true);
+        assistent.setDisable(false);
         assistent.setManaged(true);
         assistent.setPickOnBounds(true);
 
         m_A.initDialog(dialogText);
-        Image im = new Image(("Happy-Frame.jpg"));
+        Image im = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Happy-Frame.jpg"))));
         assistent.setImage(im);
 
         assistent.setOnMouseClicked(event -> frameChangerMainMenu());
@@ -204,7 +236,7 @@ public class MenuController_All {
     }
 
 
-    //-------------Funciones de añadir datos a tablas-------------//
+    //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
 
     public void addData(){
         paneSelector.setDisable(true);
@@ -222,10 +254,12 @@ public class MenuController_All {
             updateForAdd();
         });
     }
-    public void updateForAdd(){
-        labelIndicate.setText("Estas usando la tabla: " + comboxTable.getValue());
-        TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData);
-    }
+            public void updateForAdd(){
+                labelIndicate.setText("Estas usando la tabla: " + comboxTable.getValue());
+                TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData);
+            }
+
+
     public void buttonForAddData(){
         List<String> lStr = new ArrayList<>();
         for (Node n : anchorPaneAddData.getChildren()){
@@ -254,4 +288,39 @@ public class MenuController_All {
         comboxTable.setVisible(false);
         comboxTable.setDisable(true);
     }
+
+    //----------Funciones para editar------------//
+
+    public void editButton(){
+        dialogText.setVisible(true);
+        dialogText.setDisable(false);
+        assistent.setVisible(true);
+        assistent.setDisable(false);
+
+        anchorPaneMainMenu.setDisable(true);
+        anchorPaneMainMenu.setVisible(false);
+        anchorPaneAddFunctions.setVisible(false);
+        anchorPaneAddFunctions.setDisable(true);
+//        comboBoxForEdit.setDisable(false);
+//        comboBoxForEdit.setVisible(true);
+//
+//
+//        sliderX.setDisable(false);
+//        sliderX.setVisible(true);
+//
+//
+//        sliderY.setDisable(false);
+//        sliderY.setVisible(true);
+//
+//        singleTableEdit.setDisable(false);
+//        singleTableEdit.setVisible(true);
+//
+//        paneForEditFields.setDisable(false);
+//        paneForEditFields.setVisible(true);
+
+        anchorPaneForEditValues.setDisable(false);
+        anchorPaneForEditValues.setVisible(true);
+
+    }
+
 }
