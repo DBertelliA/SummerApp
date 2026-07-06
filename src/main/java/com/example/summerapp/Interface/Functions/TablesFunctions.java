@@ -402,17 +402,18 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         if (cStr != null){
             cStr.getItems().clear();
         }
+        ObservableList<String> listObs = FXCollections.observableArrayList();
         try (Statement st = conect.createStatement()){
             ResultSet rSt = st.executeQuery("SHOW TABLES");
             while (rSt.next()){
-                cStr.getItems().add(rSt.getString(1));
+                listObs.add(rSt.getString(1));
             }
+            cStr.setItems(listObs);
         }catch (SQLException e){
             System.err.println(e);
         }
 
     }
-
     public static int numberDataColumns(String tableName){
         int dataNumber = 0;
         try (Statement st = conect.createStatement()){
@@ -430,9 +431,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     //Cambio en el metodo muy fuerte...
     //haber que entienda que me he pasado un par de horitas jodiendo con los atributos
     //Le pasamos tanto el nombre de la tabla como el atributo que queremos transformar, y usamos constantemente la tabla que le pasamos para dar datos y metodos...
-    public static TableView<ObservableList<String>> contentTypeGiver(String titleTable, TableView<ObservableList<String>> tableView) {
-        if (tableView == null) {
-            tableView = new TableView<>();
+    public static TableView<ObservableList<String>> contentTypeGiver(String titleTable, TableView<ObservableList<String>> tbW) {
+        if (tbW != null){
+            tbW.getColumns().clear();
+            tbW.getItems().clear();
+        }
+        if (tbW == null) {
+            tbW = new TableView<>();
         }
 
         try (Statement st = conect.createStatement()) {
@@ -441,10 +446,10 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             while (rst.next()) {
 
                 TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
-                final int posicion =  tableView.getColumns().size();
+                final int position =  tbW.getColumns().size();
 
-                column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(posicion)));
-                tableView.getColumns().add(column);
+                column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(position)));
+                tbW.getColumns().add(column);
             }
 
             // joder, esto es mas sencillo, en el creas el objeto, le metes lo datos y se lo añades a la tableView, es una agregacion dinamica
@@ -456,15 +461,15 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
                 ObservableList<String> fila = FXCollections.observableArrayList();
 
-                for (int i = 1; i <= tableView.getColumns().size(); i++) {
+                for (int i = 1; i <= tbW.getColumns().size(); i++) {
                     fila.add(data.getString(i));
                 }
 
-                tableView.getItems().add(fila);
+                tbW.getItems().add(fila);
             }
 
 
-            return tableView;
+            return tbW;
 
         } catch (SQLException e) {
             System.err.println(e);

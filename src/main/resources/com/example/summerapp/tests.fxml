@@ -9,13 +9,9 @@
    <children>
       <AnchorPane fx:id="anchorPaneForEditValues" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0">
          <children>
-            <ComboBox layoutX="26.0" layoutY="15.0" prefHeight="27.0" prefWidth="221.0" promptText="Selecciona" />
+            <ComboBox fx:id="comboBoxForEdit" layoutX="26.0" layoutY="15.0" prefHeight="27.0" prefWidth="221.0" promptText="Selecciona" />
             <Slider layoutX="22.0" layoutY="279.0" prefHeight="17.0" prefWidth="221.0" />
-            <TableView layoutX="23.0" layoutY="56.0" prefHeight="224.0" prefWidth="221.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
+            <TableView fx:id="singleTableEdit" layoutX="23.0" layoutY="56.0" prefHeight="224.0" prefWidth="221.0">
             </TableView>
             <Slider layoutX="242.0" layoutY="55.0" orientation="VERTICAL" prefHeight="224.0" prefWidth="19.0" />
             <Pane layoutX="268.0" prefHeight="302.0" prefWidth="558.0" />

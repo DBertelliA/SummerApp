@@ -81,7 +81,7 @@ public class MenuController_All {
 
     @FXML public AnchorPane anchorPaneForEditValues;
 
-    @FXML public ComboBox<String> comboBoxForEdit = comboxTable;
+    @FXML public ComboBox<String> comboBoxForEdit;
 
     @FXML public Slider sliderX;
 
@@ -152,7 +152,7 @@ public class MenuController_All {
         assistent.setPickOnBounds(true);
 
         m_A.initDialog(dialogText);
-        Image im = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Happy-Frame.jpg"))));
+        Image im = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Happy-new.jpg"))));
         assistent.setImage(im);
 
         assistent.setOnMouseClicked(event -> frameChangerMainMenu());
@@ -292,6 +292,15 @@ public class MenuController_All {
     //----------Funciones para editar------------//
 
     public void editButton(){
+        TablesFunctions.fillerBox(comboBoxForEdit);
+        comboBoxForEdit.setOnAction( e -> {
+                    TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
+                    System.out.println("Hola");
+                }
+        );
+
+
+
         dialogText.setVisible(true);
         dialogText.setDisable(false);
         assistent.setVisible(true);
@@ -322,5 +331,7 @@ public class MenuController_All {
         anchorPaneForEditValues.setVisible(true);
 
     }
+
+
 
 }

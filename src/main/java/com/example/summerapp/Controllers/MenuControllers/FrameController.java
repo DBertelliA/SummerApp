@@ -9,10 +9,10 @@ public class FrameController {
     public void framesView(ImageView imgW, int i) {
         switch (i) {
             case 0 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Happy-Frame.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Happy-new.jpg"))));
             }
             case 1 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Neutral.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Neutral-new.jpg"))));
             }
             default -> {
                 imgW.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Error.jpg"))));
