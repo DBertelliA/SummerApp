@@ -83,13 +83,21 @@ public class MenuController_All {
 
     @FXML public ComboBox<String> comboBoxForEdit;
 
-    @FXML public Slider sliderX;
-
-    @FXML public Slider sliderY;
-
     @FXML public TableView<ObservableList<String>> singleTableEdit;
 
     @FXML public Pane paneForEditFields;
+
+    @FXML public Pane paneForDeleteFields;
+
+    @FXML public Button buttonForEdit;
+
+    @FXML public CheckBox checkEdit;
+
+    @FXML public CheckBox checkDelete;
+
+    @FXML public Label labelText;
+
+    private List<String> valuesForMe;
 
 
     public void inicializate(){
@@ -256,7 +264,7 @@ public class MenuController_All {
     }
             public void updateForAdd(){
                 labelIndicate.setText("Estas usando la tabla: " + comboxTable.getValue());
-                TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData);
+                TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData,null);
             }
 
 
@@ -270,7 +278,7 @@ public class MenuController_All {
         }
         boolean che = tACF.insertData(comboxTable.getValue(),lStr);
         if (che) {
-            TablesFunctions.autoGenerateTextFields(comboxTable.getValue(), anchorPaneAddData);
+            TablesFunctions.autoGenerateTextFields(comboxTable.getValue(), anchorPaneAddData, null);
             selectorOptions.setDisable(false);
             paneSelector.setDisable(false);
             anchorPaneAddData.setDisable(true);
@@ -289,17 +297,10 @@ public class MenuController_All {
         comboxTable.setDisable(true);
     }
 
-    //----------Funciones para editar------------//
+    //----------Funciones para editar y eliminar------------//
 
-    public void editButton(){
-        TablesFunctions.fillerBox(comboBoxForEdit);
-        comboBoxForEdit.setOnAction( e -> {
-                    TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
-                    System.out.println("Hola");
-                }
-        );
-
-
+    public void editPane(){
+        singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
 
         dialogText.setVisible(true);
         dialogText.setDisable(false);
@@ -310,6 +311,81 @@ public class MenuController_All {
         anchorPaneMainMenu.setVisible(false);
         anchorPaneAddFunctions.setVisible(false);
         anchorPaneAddFunctions.setDisable(true);
+
+        TablesFunctions.fillerBox(comboBoxForEdit);
+        comboBoxForEdit.setOnAction( e -> {
+                    TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
+                    paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
+                    TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
+
+                    for (Node n : paneForEditFields.getChildren()){
+                    if (n instanceof TextField){
+                    buttonForEdit.setDisable(false);
+                        }
+                    }
+                }
+        );
+
+        checkEdit.setSelected(true);
+        checkDelete.setSelected(false);
+        paneForDeleteFields.setDisable(true);
+        paneForEditFields.setDisable(false);
+        buttonForEdit.setDisable(true);
+
+
+        checkEdit.setOnAction( e -> {
+            if(checkDelete.isPressed()){checkDelete.setSelected(false);}
+            checkDelete.setSelected(false);
+            paneForDeleteFields.setDisable(true);
+            paneForEditFields.setDisable(false);
+        });
+
+        checkDelete.setOnAction( e -> {
+            if (checkEdit.isPressed()){checkEdit.setSelected(false);}
+            checkEdit.setSelected(false);
+            paneForEditFields.setDisable(true);
+            paneForDeleteFields.setDisable(false);
+        });
+
+        buttonForEdit.setOnAction( e -> {
+            List<String> stringsList = new ArrayList<>();
+            for (Node i : paneForEditFields.getChildren()){
+                if (i instanceof TextField){
+                    TextField tf = (TextField) i;
+                    stringsList.add(tf.getText());
+                }
+            }
+            tACF.updateData(comboBoxForEdit.getValue(),stringsList, valuesForMe);
+
+        });
+
+        singleTableEdit.setOnMouseClicked(e -> {
+            //Esto devuelve una lista de objetos de esa fila, siendo primero necesitamos setear, que se debe de obtener del modelo la fila seccionada
+            //Lo que devuelve un valor
+            TablePosition<ObservableList<String>,String> position = singleTableEdit.getSelectionModel().getSelectedCells().get(0);
+
+            //Luego, usamos ese valor para llamar a los items de la posicion seleccionada
+            valuesForMe = singleTableEdit.getItems().get(position.getRow());
+            List<String> listNombres = TablesFunctions.giverName(comboBoxForEdit.getValue());
+            StringBuilder sb = new StringBuilder();
+            System.out.println(valuesForMe);
+            int i = 0;
+
+            for (Node p : paneForEditFields.getChildren()) {
+                if (p instanceof TextField){
+                    TextField tf = (TextField) p;
+                    tf.setText(valuesForMe.get(i));
+                    sb.append(listNombres.get(i)).append(" : ").append(valuesForMe.get(i)).append("\n");
+                    labelText.setText(sb.toString());
+                    i++;
+
+                }
+            }
+            System.out.println(sb.toString());
+
+        });
+
+
 //        comboBoxForEdit.setDisable(false);
 //        comboBoxForEdit.setVisible(true);
 //

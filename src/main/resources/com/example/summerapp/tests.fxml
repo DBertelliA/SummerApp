@@ -10,18 +10,27 @@
       <AnchorPane fx:id="anchorPaneForEditValues" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0">
          <children>
             <ComboBox fx:id="comboBoxForEdit" layoutX="26.0" layoutY="15.0" prefHeight="27.0" prefWidth="221.0" promptText="Selecciona" />
-            <Slider layoutX="22.0" layoutY="279.0" prefHeight="17.0" prefWidth="221.0" />
-            <TableView fx:id="singleTableEdit" layoutX="23.0" layoutY="56.0" prefHeight="224.0" prefWidth="221.0">
+            <TableView fx:id="singleTableEdit" layoutX="23.0" layoutY="56.0" prefHeight="225.0" prefWidth="228.0">
             </TableView>
-            <Slider layoutX="242.0" layoutY="55.0" orientation="VERTICAL" prefHeight="224.0" prefWidth="19.0" />
-            <Pane layoutX="268.0" prefHeight="302.0" prefWidth="558.0" />
+            <Pane fx:id="paneForEditFields" layoutX="268.0" prefHeight="302.0" prefWidth="290.0" style="-fx-border-color: green;">
+               <children>
+                  <Button fx:id="buttonForEdit" layoutX="38.0" layoutY="272.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Edit" />
+                  <Label fx:id="labelText" alignment="TOP_CENTER" layoutX="12.0" layoutY="42.0" prefHeight="49.0" prefWidth="258.0" text="..." textAlignment="CENTER" />
+               </children></Pane>
+            <Pane fx:id="paneForDeleteFields" layoutX="559.0" prefHeight="302.0" prefWidth="267.0" style="-fx-border-color: red;">
+               <children>
+                  <Button layoutX="24.0" layoutY="119.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="221.0" text="Delete" />
+               </children>
+            </Pane>
+            <CheckBox fx:id="checkDelete" layoutX="682.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="74.0" text="Eliminar" />
+            <CheckBox fx:id="checkEdit" layoutX="373.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="74.0" text="Editar" />
          </children>
       </AnchorPane>
       <ToolBar fx:id="selectorOptions" layoutX="310.0" layoutY="500.0" prefHeight="49.0" prefWidth="290.0">
         <items>
             <Button mnemonicParsing="false" onAction="#inicializate" text="Inicio" />
             <Button mnemonicParsing="false" onAction="#addButton" text="Agregar" />
-            <Button mnemonicParsing="false" onAction="#editButton" text="Editar" />
+            <Button mnemonicParsing="false" onAction="#editPane" text="Editar" />
             <Button mnemonicParsing="false" text="Buscar" />
             <Button mnemonicParsing="false" text="Eliminar" />
         </items>

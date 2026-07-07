@@ -7,7 +7,7 @@ import java.util.List;
 public interface TablesAutoCreateAndFuntions { //Too loong
     public boolean addTable(String titleTable, String dataName, int valuesNumber);
     public boolean insertData(String titleTable, List<String> lStr);
-    public void updateData(String tableName, String data, String dataChange);
+    public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore);
     public void deleteData(String tableName, String data, String dataParam);
     public String dataSearch(String titleName, String dataName, String dataParam, String param);
     public boolean showAllTables();

@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import org.jspecify.annotations.NonNull;
 
 import javax.swing.*;
@@ -89,19 +90,60 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     //Tener en cuenta que se te puede cambiar toda la fila si no ponemos los limitadores, pensaré como introducirlo mediante el javafx sin necesidad de añadir nada a los metodos
     @Override
-    public void updateData(String tableName, String data, String dataChange) {
+    public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore) {
+        List<String> nameData = giverName(tableName);
+
         StringBuilder sb = new StringBuilder();
 
-        sb.append("UPDATE ").append(tableName).append(" SET ").append(data).append(" = ").append(dataChange);
+        sb.append("UPDATE ").append(tableName).append(" SET ");
+
+        for (int i = 0; i < stringChanger.size(); i++) {
+            sb.append(nameData.get(i)).append(" = ");
+            try {
+                sb.append(Double.parseDouble(stringChanger.get(i)));
+            }catch (NumberFormatException e){
+                sb.append("'").append(stringChanger.get(i)).append("'");
+            }
+
+            if (i < stringChanger.size() - 1){sb.append(", ");}
+            else sb.append("\n");
+
+        }
+        sb.append("WHERE ");
+        for (int i = 0; i < stringChanger.size(); i++) {
+            sb.append(nameData.get(i)).append(" = ");
+            try {
+                sb.append(Double.parseDouble(stringBefore.get(i)));
+            }catch (NumberFormatException e){
+                sb.append("'").append(stringBefore.get(i)).append("'");
+            }
+            if (i < stringChanger.size() - 1){sb.append(" AND ");}
+            else sb.append(";");
+        }
 
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
             System.out.println("Ejecutado");
+            System.out.println(sb.toString());
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
         }
 
+    }
+
+    public static List<String> giverName(String tableName){
+        List<String> nameData = new ArrayList<>();
+        try (Statement st = conect.createStatement()){
+            ResultSet rSt = st.executeQuery("DESCRIBE " + tableName);
+            while (rSt.next()){
+                nameData.add(rSt.getString(1));
+            }
+            return nameData;
+        }catch (SQLException e) {
+            System.err.println(e);
+        }
+        return null;
     }
 
     //Tengo que tener en cuenta el tipo de dato..., tener en cuenta tambien que la linea sql se ejecuta pero puede no eliminar ningun dato
@@ -377,24 +419,43 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return sb;
     }
 
-    public static void autoGenerateTextFields(String titleTable, AnchorPane anh){
+    public static void autoGenerateTextFields(String titleTable, AnchorPane anh, Pane pane){
         TablesFunctions tbFt = new TablesFunctions();
-
-        sql = "DESCRIBE " + titleTable + ";";
-        try (Statement st = conect.createStatement()){
-            ResultSet rSt = st.executeQuery(sql);
-            int i = 80;
-            while (rSt.next()){
-                 i += 30;
-                TextField tf = new TextField();
-                tf.setLayoutX(50);
-                tf.setLayoutY(i);
-                String dataN = "Tipo data: " + rSt.getString(2);
-                tf.setPromptText(dataN);
-                anh.getChildren().add(tf);
+        if (pane == null) {
+            sql = "DESCRIBE " + titleTable + ";";
+            try (Statement st = conect.createStatement()) {
+                ResultSet rSt = st.executeQuery(sql);
+                int i = 80;
+                while (rSt.next()) {
+                    i += 30;
+                    TextField tf = new TextField();
+                    tf.setLayoutX(50);
+                    tf.setLayoutY(i);
+                    String dataN = "Tipo data: " + rSt.getString(2);
+                    tf.setPromptText(dataN);
+                    anh.getChildren().add(tf);
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
             }
-        }catch (SQLException e){
-            System.err.println(e);
+        }else if (anh == null) {
+            sql = "DESCRIBE " + titleTable + ";";
+            try (Statement st = conect.createStatement()) {
+                ResultSet rSt = st.executeQuery(sql);
+                int i = 80;
+                while (rSt.next()) {
+                    i += 30;
+                    TextField tf = new TextField();
+                    tf.setLayoutX(50);
+                    tf.setLayoutY(i);
+                    String dataN = "Tipo data: " + rSt.getString(2);
+                    tf.setPromptText(dataN);
+                    pane.getChildren().add(tf);
+                }
+            }
+            catch (SQLException e) {
+                System.err.println(e);
+            }
         }
     }
 
