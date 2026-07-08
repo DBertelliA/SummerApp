@@ -148,22 +148,38 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     //Tengo que tener en cuenta el tipo de dato..., tener en cuenta tambien que la linea sql se ejecuta pero puede no eliminar ningun dato
     @Override
-    public void deleteData(String tableName, String data, String dataParam) {
+    public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName) {
         boolean moreData = false;
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("DELETE FROM ").append(tableName).append(" WHERE ").append(data).append(" = ").append(dataParam);
+        sb.append("DELETE FROM ").append(tableName).append(" WHERE ");
 
-        if(isUserWants(moreData)){
-            sb.append("AND ").append(JOptionPane.showInputDialog(null,"Añade el nombre del dato")).append(" = ").append(JOptionPane.showInputDialog(null, "dame el dato"));
-        }else{
-            sb.append(";");
+//        if(isUserWants(moreData)){
+//            sb.append("AND ").append(JOptionPane.showInputDialog(null,"Añade el nombre del dato")).append(" = ").append(JOptionPane.showInputDialog(null, "dame el dato"));
+//        }else{
+//            sb.append(";");
+//        }
+
+        for (int i = 0; i < valuesToDelete.size(); i++) {
+
+            sb.append(valuesName.get(i)).append(" = ");
+
+            try {
+                sb.append(Double.parseDouble(valuesToDelete.get(i)));
+            }catch (NumberFormatException e){
+                sb.append("'").append(valuesToDelete.get(i)).append("'");
+            }
+
+            if (i < valuesToDelete.size() - 1){sb.append(" AND ");}
+            else {sb.append(";");}
         }
+
+
 
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
-            System.out.println("Ejecutado");
+            System.out.println(sb.toString());
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());

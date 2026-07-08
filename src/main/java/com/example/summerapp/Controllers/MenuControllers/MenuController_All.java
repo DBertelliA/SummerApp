@@ -89,7 +89,9 @@ public class MenuController_All {
 
     @FXML public Pane paneForDeleteFields;
 
-    @FXML public Button buttonForEdit;
+    @FXML public Button buttonForEditData;
+
+    @FXML public Button buttonForDeleteData;
 
     @FXML public CheckBox checkEdit;
 
@@ -99,6 +101,7 @@ public class MenuController_All {
 
     private List<String> valuesForMe;
 
+    private List<String> nameOfData;
 
     public void inicializate(){
         anchorPaneForEditValues.setDisable(true);
@@ -320,7 +323,7 @@ public class MenuController_All {
 
                     for (Node n : paneForEditFields.getChildren()){
                     if (n instanceof TextField){
-                    buttonForEdit.setDisable(false);
+                    buttonForEditData.setDisable(false);
                         }
                     }
                 }
@@ -330,7 +333,7 @@ public class MenuController_All {
         checkDelete.setSelected(false);
         paneForDeleteFields.setDisable(true);
         paneForEditFields.setDisable(false);
-        buttonForEdit.setDisable(true);
+        buttonForEditData.setDisable(true);
 
 
         checkEdit.setOnAction( e -> {
@@ -347,7 +350,12 @@ public class MenuController_All {
             paneForDeleteFields.setDisable(false);
         });
 
-        buttonForEdit.setOnAction( e -> {
+        buttonForDeleteData.setOnAction( e -> {
+            tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData);
+            TablesFunctions.fillerBox(comboBoxForEdit);
+        });
+
+        buttonForEditData.setOnAction(e -> {
             List<String> stringsList = new ArrayList<>();
             for (Node i : paneForEditFields.getChildren()){
                 if (i instanceof TextField){
@@ -356,7 +364,7 @@ public class MenuController_All {
                 }
             }
             tACF.updateData(comboBoxForEdit.getValue(),stringsList, valuesForMe);
-
+            TablesFunctions.fillerBox(comboBoxForEdit);
         });
 
         singleTableEdit.setOnMouseClicked(e -> {
@@ -366,7 +374,8 @@ public class MenuController_All {
 
             //Luego, usamos ese valor para llamar a los items de la posicion seleccionada
             valuesForMe = singleTableEdit.getItems().get(position.getRow());
-            List<String> listNombres = TablesFunctions.giverName(comboBoxForEdit.getValue());
+            nameOfData = TablesFunctions.giverName(comboBoxForEdit.getValue());
+
             StringBuilder sb = new StringBuilder();
             System.out.println(valuesForMe);
             int i = 0;
@@ -375,7 +384,7 @@ public class MenuController_All {
                 if (p instanceof TextField){
                     TextField tf = (TextField) p;
                     tf.setText(valuesForMe.get(i));
-                    sb.append(listNombres.get(i)).append(" : ").append(valuesForMe.get(i)).append("\n");
+                    sb.append(nameOfData.get(i)).append(" : ").append(valuesForMe.get(i)).append("\n");
                     labelText.setText(sb.toString());
                     i++;
 
