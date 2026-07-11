@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
@@ -18,9 +19,8 @@ import java.util.Objects;
 
 
 public class MenuController_All {
-    M_addFunctions m_A = new M_addFunctions();
-    FrameController assistentEmotions = new FrameController();
     TablesAutoCreateAndFuntions tACF = new TablesFunctions();
+    M_addFunctions m_a = new M_addFunctions();
 
     @FXML public Label userLoggedMenu;
 
@@ -103,25 +103,74 @@ public class MenuController_All {
 
     private List<String> nameOfData;
 
+    public void inicializateTabs(){TablesFunctions.titleGiver(nameTabss);}
+    public void cleanTabs(){
+        nameTabss.getTabs().clear();
+    }
+
+    public void visibilityAssistent(boolean switchO){
+        //true: visible y funcional
+        //false: !true
+
+        dialogText.setVisible(switchO);
+        dialogText.setDisable(!switchO);
+
+        assistent.setVisible(switchO);
+        assistent.setDisable(!switchO);
+    }
+
+    public void visibilityPanesInit(boolean switch1){
+        //true: visible y funcional
+        //false: !true
+
+        anchorPaneMainMenu.setVisible(switch1);
+        anchorPaneMainMenu.setDisable(!switch1);
+
+        nameTabss.setVisible(switch1);
+        nameTabss.setDisable(!switch1);
+
+        //Contrario
+
+        anchorPaneAddFunctions.setVisible(!switch1);
+        anchorPaneAddFunctions.setDisable(switch1);
+
+        anchorPaneForEditValues.setVisible(!switch1);
+        anchorPaneForEditValues.setDisable(switch1);
+
+    }
+
+    public void backInit(boolean switch2){
+        //true solo por ahora
+        selectorOptions.setDisable(!switch2);
+        paneSelector.setDisable(!switch2);
+
+        anchorPaneAddData.setDisable(switch2);
+        anchorPaneAddData.setVisible(!switch2);
+
+        comboxTable.setVisible(!switch2);
+        comboxTable.setDisable(switch2);
+    }
+
+    private void DisablerOrAForAddT() {
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
+        paneNameData.setDisable(true);
+        paneNameData.setVisible(false);
+
+        paneNameTable.setDisable(true);
+        paneNameTable.setVisible(false);
+
+        paneNumberData.setDisable(true);
+        paneNumberData.setVisible(false);
+    }
+
     public void inicializate(){
-        anchorPaneForEditValues.setDisable(true);
-        anchorPaneForEditValues.setVisible(false);
-
-        dialogText.setDisable(true);
-        dialogText.setVisible(false);
-
-        assistent.setVisible(false);
-        assistent.setDisable(true);
+        labelText.setText("...");
+        FrameController.initAssist(dialogText, assistent);
+        visibilityAssistent(false);
+        visibilityPanesInit(true);
 
         TablesFunctions.fillerBox(comboxTable);
-        anchorPaneMainMenu.setDisable(false);
-        anchorPaneMainMenu.setVisible(true);
-
-        anchorPaneAddFunctions.setVisible(false);
-        anchorPaneAddFunctions.setDisable(true);
-
-        nameTabss.setDisable(false);
-        nameTabss.setVisible(true);
         cleanTabs();
         inicializateTabs();
         //Estructura para añadir
@@ -133,60 +182,16 @@ public class MenuController_All {
         }
 
     }
-    public void inicializateTabs(){
-        TablesFunctions.titleGiver(nameTabss);
-    }
-    public void cleanTabs(){
-        nameTabss.getTabs().clear();
-    }
-
 
     public void addButton() {
+        labelText.setText("...");
+        visibilityAssistent(true);
+        visibilityPanesInit(false);
+
         anchorPaneForEditValues.setDisable(true);
         anchorPaneForEditValues.setVisible(false);
 
-        dialogText.setDisable(false);
-        dialogText.setVisible(true);
-
-        anchorPaneMainMenu.setDisable(true);
-        anchorPaneMainMenu.setVisible(false);
-
-        nameTabss.setDisable(true);
-        nameTabss.setVisible(false);
-
-        anchorPaneAddFunctions.setVisible(true);
-        anchorPaneAddFunctions.setDisable(false);
-
-        assistent.setVisible(true);
-        assistent.setDisable(false);
-        assistent.setManaged(true);
-        assistent.setPickOnBounds(true);
-
-        m_A.initDialog(dialogText);
-        Image im = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/Sprites/Happy-new.jpg"))));
-        assistent.setImage(im);
-
-        assistent.setOnMouseClicked(event -> frameChangerMainMenu());
     }
-
-    private void frameChangerMainMenu() {
-        if (m_A.counter > 2) {
-            m_A.counter = 0;
-            assistentEmotions.framesView(assistent,0);
-        }
-        System.out.println("contador: " + m_A.counter);
-        if (m_A.counter < m_A.dialogs.length-1){
-            if (m_A.counter == -1) {
-                assistentEmotions.framesView(assistent,0);
-                m_A.counter++;
-            }else {
-                assistentEmotions.framesView(assistent,m_A.counter);
-                m_A.counter++;
-            }
-            m_A.initDialog(dialogText);
-        }
-    }
-
     //----Funciones de agregar tabla----//
 
     public void addTable(){
@@ -195,7 +200,6 @@ public class MenuController_All {
         if (anchorPaneTablesAdd.isVisible() || !anchorPaneTablesAdd.isDisable()){
             DisablerOrAForAddT();
         }
-
         anchorPaneTablesAdd.setVisible(true);
         anchorPaneTablesAdd.setDisable(false);
         paneNameTable.setDisable(false);
@@ -221,6 +225,7 @@ public class MenuController_All {
             });
         });
     }
+
     public void backButtonForTable(){
         anchorPaneTablesAdd.setVisible(false);
         anchorPaneTablesAdd.setDisable(true);
@@ -229,26 +234,12 @@ public class MenuController_All {
     }
 
 
-    private void DisablerOrAForAddT() {
-        anchorPaneTablesAdd.setVisible(false);
-        anchorPaneTablesAdd.setDisable(true);
-        paneNameData.setDisable(true);
-        paneNameData.setVisible(false);
-
-        paneNameTable.setDisable(true);
-        paneNameTable.setVisible(false);
-
-        paneNumberData.setDisable(true);
-        paneNumberData.setVisible(false);
-    }
-
     public void backButton(){
         addTable();
     }
 
 
     //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
-
     public void addData(){
         paneSelector.setDisable(true);
         selectorOptions.setDisable(true);
@@ -265,11 +256,11 @@ public class MenuController_All {
             updateForAdd();
         });
     }
-            public void updateForAdd(){
-                labelIndicate.setText("Estas usando la tabla: " + comboxTable.getValue());
-                TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData,null);
-            }
 
+    public void updateForAdd(){
+        labelIndicate.setText("Estas usando la tabla: " + comboxTable.getValue());
+        TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData,null);
+    }
 
     public void buttonForAddData(){
         List<String> lStr = new ArrayList<>();
@@ -282,33 +273,22 @@ public class MenuController_All {
         boolean che = tACF.insertData(comboxTable.getValue(),lStr);
         if (che) {
             TablesFunctions.autoGenerateTextFields(comboxTable.getValue(), anchorPaneAddData, null);
-            selectorOptions.setDisable(false);
-            paneSelector.setDisable(false);
-            anchorPaneAddData.setDisable(true);
-            anchorPaneAddData.setVisible(false);
-            comboxTable.setVisible(false);
-            comboxTable.setDisable(true);
+            backInit(true);
             labelIndicate.setText("...");
         }
     }
+
     public void backButtonInAddData(){
-        selectorOptions.setDisable(false);
-        paneSelector.setDisable(false);
-        anchorPaneAddData.setDisable(true);
-        anchorPaneAddData.setVisible(false);
-        comboxTable.setVisible(false);
-        comboxTable.setDisable(true);
+        backInit(true);
+        labelText.setText("...");
     }
 
     //----------Funciones para editar y eliminar------------//
 
     public void editPane(){
+        labelText.setText("...");
+        visibilityAssistent(true);
         singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
-
-        dialogText.setVisible(true);
-        dialogText.setDisable(false);
-        assistent.setVisible(true);
-        assistent.setDisable(false);
 
         anchorPaneMainMenu.setDisable(true);
         anchorPaneMainMenu.setVisible(false);
@@ -394,27 +374,8 @@ public class MenuController_All {
 
         });
 
-
-//        comboBoxForEdit.setDisable(false);
-//        comboBoxForEdit.setVisible(true);
-//
-//
-//        sliderX.setDisable(false);
-//        sliderX.setVisible(true);
-//
-//
-//        sliderY.setDisable(false);
-//        sliderY.setVisible(true);
-//
-//        singleTableEdit.setDisable(false);
-//        singleTableEdit.setVisible(true);
-//
-//        paneForEditFields.setDisable(false);
-//        paneForEditFields.setVisible(true);
-
         anchorPaneForEditValues.setDisable(false);
         anchorPaneForEditValues.setVisible(true);
-
     }
 
 
