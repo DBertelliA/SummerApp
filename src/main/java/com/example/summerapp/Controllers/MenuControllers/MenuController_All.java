@@ -437,5 +437,25 @@ public class MenuController_All {
         anchorPaneForSearchData.setDisable(false);
         anchorPaneForSearchData.setVisible(true);
 
+        TablesFunctions.fillerBox(tablesForSearch);
+
+        tablesForSearch.setOnAction( e -> {
+            paneForSearchFields.getChildren().removeIf( i -> i instanceof TextField);
+            tableShowDataSelected.getColumns().clear();
+            tableShowDataSelected.getItems().clear();
+            TablesFunctions.autoGenerateTextFields(tablesForSearch.getValue(),null,paneForSearchFields);
+        });
+
+        buttonForSearch.setOnAction( i -> {
+            List<String> listData = new ArrayList<>();
+            for (Node e : paneForSearchFields.getChildren()){
+             if (e instanceof TextField){
+                 TextField tf = (TextField) e;
+                     listData.add(tf.getText());
+                }
+            }
+            tACF.dataSearch(tablesForSearch.getValue(),listData,tableShowDataSelected);
+        });
+
     }
 }

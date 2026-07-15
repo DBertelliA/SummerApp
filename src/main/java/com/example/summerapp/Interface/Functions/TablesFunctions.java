@@ -188,42 +188,68 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public String dataSearch(String tableName, String dataName,String dataParam, String param) {
-        boolean userWants = false;
+    public String dataSearch(String tableName, List<String> valuesForSearch, TableView<ObservableList<String>> tableShower) {
+        List<String> nameData = giverName(tableName);
+        System.out.println(valuesForSearch);
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT ").append(dataName).append(" FROM ").append(tableName);
-
-
-        userWants = isUserWants(userWants);
-        if (userWants){
-            sb.append(" WHERE ").append(dataParam).append(" = ").append(param);
-            userWants = isUserWants(userWants);
-        }
-        if(!userWants){
-            sb.append(";");
+        sb.append("SELECT * FROM ").append(tableName);
+        for (int i = 0; i < valuesForSearch.size(); i++) {
+            if (!valuesForSearch.get(i).isEmpty()) {
+                sb.append(" WHERE ");
+                break;
+            }
         }
 
-        if(userWants) {
-            sb.append(paramExtensions());
+            for (int i = 0; i < valuesForSearch.size(); i++) {
+                if (!valuesForSearch.get(i).isEmpty()) {
+                    sb.append(nameData.get(i)).append(" = ");
+                    try {
+                        sb.append(Double.parseDouble(valuesForSearch.get(i)));
+                    } catch (NumberFormatException e) {
+                        sb.append("'").append(valuesForSearch.get(i)).append("'");
+                    }
+                    try {
+                        if (!valuesForSearch.get(i + 1).isEmpty()) {
+                            sb.append("\n").append(" AND ");
+                        }
+                    }catch (IndexOutOfBoundsException e){
+                        System.out.println("final");
+                    }
+                }
         }
+
 
         try (Statement st = conect.createStatement()) {
-            int j = numberDataColumns(tableName);
-            ResultSet rst = st.executeQuery(sb.toString());
+            if (tableShower != null){
+                tableShower.getColumns().clear();
+                tableShower.getItems().clear();
+            }
+            if (tableShower == null) {
+                tableShower = new TableView<>();
+            }
+            ResultSet rst = st.executeQuery("DESCRIBE " + tableName);
             while (rst.next()) {
-                for (int i = 1; i <= j; i++) {
-                    System.out.println(rst.getObject(i));
+                TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
+                final int pos = tableShower.getColumns().size();
+
+                column.setCellValueFactory(e -> new SimpleStringProperty( e.getValue().get(pos)));
+                tableShower.getColumns().add(column);
+            }
+            ResultSet rSt = st.executeQuery(sb.toString());
+            while (rSt.next()){
+                ObservableList<String> fila = FXCollections.observableArrayList();
+
+                for (int i = 1; i <= tableShower.getColumns().size(); i++) {
+                    fila.add(rSt.getString(i));
                 }
+
+                tableShower.getItems().add(fila);
             }
             return sb.toString();
         }
         catch (SQLException e){
-            if(e.getMessage().contains("Column Index out of range")){
-                System.err.println("No se si es normal el out of range, pero no deberia ser un problema");
-            }else {
                 System.err.println(e);
                 System.err.println(sb.toString());
-            }
         }
         return "Something bad happened";
 
