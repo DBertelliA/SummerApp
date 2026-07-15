@@ -77,7 +77,7 @@ public class MenuController_All {
 
     @FXML public Label labelIndicate;
 
-    //--------Editar datos----------//
+    //--------Editar y eliminar datos----------//
 
     @FXML public AnchorPane anchorPaneForEditValues;
 
@@ -98,6 +98,20 @@ public class MenuController_All {
     @FXML public CheckBox checkDelete;
 
     @FXML public Label labelText;
+
+    //---------------Buscar datos------------------//
+
+    @FXML public AnchorPane anchorPaneForSearchData;
+
+    @FXML public ComboBox<String> tablesForSearch;
+
+    @FXML public TableView<ObservableList<String>> tableShowDataSelected;
+
+    @FXML public Button buttonForSearch;
+
+    @FXML public Pane paneForSearchFields;
+
+    //------Metodos necesario------//
 
     private List<String> valuesForMe;
 
@@ -136,7 +150,6 @@ public class MenuController_All {
 
         anchorPaneForEditValues.setVisible(!switch1);
         anchorPaneForEditValues.setDisable(switch1);
-
     }
 
     public void backInit(boolean switch2){
@@ -149,6 +162,14 @@ public class MenuController_All {
 
         comboxTable.setVisible(!switch2);
         comboxTable.setDisable(switch2);
+    }
+
+    private void putPointsAndVisible(boolean switch3) {
+        //True: apagar
+        //False: encender
+        labelText.setDisable(switch3);
+        labelText.setVisible(!switch3);
+        labelText.setText("...");
     }
 
     private void DisablerOrAForAddT() {
@@ -164,11 +185,18 @@ public class MenuController_All {
         paneNumberData.setVisible(false);
     }
 
+    //----------------------------------------------//
+    //----------------
+    //--------
+
     public void inicializate(){
-        labelText.setText("...");
+        putPointsAndVisible(true);
         FrameController.initAssist(dialogText, assistent);
         visibilityAssistent(false);
         visibilityPanesInit(true);
+
+        anchorPaneForSearchData.setVisible(false);
+        anchorPaneForSearchData.setDisable(true);
 
         TablesFunctions.fillerBox(comboxTable);
         cleanTabs();
@@ -184,12 +212,15 @@ public class MenuController_All {
     }
 
     public void addButton() {
-        labelText.setText("...");
+        putPointsAndVisible(true);
         visibilityAssistent(true);
         visibilityPanesInit(false);
 
         anchorPaneForEditValues.setDisable(true);
         anchorPaneForEditValues.setVisible(false);
+
+        anchorPaneForSearchData.setVisible(false);
+        anchorPaneForSearchData.setDisable(true);
 
     }
     //----Funciones de agregar tabla----//
@@ -238,6 +269,10 @@ public class MenuController_All {
         addTable();
     }
 
+    //----------------------------------------------//
+    //----------------------
+    //-----------
+
 
     //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
     public void addData(){
@@ -280,33 +315,42 @@ public class MenuController_All {
 
     public void backButtonInAddData(){
         backInit(true);
-        labelText.setText("...");
+        labelIndicate.setText("...");
     }
+    //------------------------------------------------------//
+    //---------------------
+    //-----------
 
     //----------Funciones para editar y eliminar------------//
 
     public void editPane(){
-        labelText.setText("...");
-        visibilityAssistent(true);
-        singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
+    putPointsAndVisible(false);
+    visibilityAssistent(true);
+    anchorPaneForEditValues.setDisable(false);
+    anchorPaneForEditValues.setVisible(true);
 
-        anchorPaneMainMenu.setDisable(true);
-        anchorPaneMainMenu.setVisible(false);
-        anchorPaneAddFunctions.setVisible(false);
-        anchorPaneAddFunctions.setDisable(true);
+    anchorPaneForSearchData.setVisible(false);
+    anchorPaneForSearchData.setDisable(true);
 
-        TablesFunctions.fillerBox(comboBoxForEdit);
+    singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
+
+    anchorPaneMainMenu.setDisable(true);
+    anchorPaneMainMenu.setVisible(false);
+    anchorPaneAddFunctions.setVisible(false);
+    anchorPaneAddFunctions.setDisable(true);
+
+       TablesFunctions.fillerBox(comboBoxForEdit);
         comboBoxForEdit.setOnAction( e -> {
-                    TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
-                    paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
-                    TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
+            TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
+            paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
+            TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
 
-                    for (Node n : paneForEditFields.getChildren()){
+            for (Node n : paneForEditFields.getChildren()){
                     if (n instanceof TextField){
                     buttonForEditData.setDisable(false);
                         }
                     }
-                }
+            }
         );
 
         checkEdit.setSelected(true);
@@ -374,10 +418,24 @@ public class MenuController_All {
 
         });
 
-        anchorPaneForEditValues.setDisable(false);
-        anchorPaneForEditValues.setVisible(true);
+
     }
 
+    //-----------------------------------------------//
+    //-----------------------
+    //----------
 
 
+    //-------------Buscar datos de tablas------------//
+
+    public void searchPane(){
+        putPointsAndVisible(true);
+        visibilityAssistent(true);
+        visibilityPanesInit(true);
+        anchorPaneMainMenu.setDisable(true);
+        anchorPaneMainMenu.setVisible(false);
+        anchorPaneForSearchData.setDisable(false);
+        anchorPaneForSearchData.setVisible(true);
+
+    }
 }
