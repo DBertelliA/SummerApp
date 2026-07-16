@@ -284,6 +284,9 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     @Override
     public boolean deleteTables(String tableName) {
+        if (tableName.equals("datacatcheruser")){
+            return false;
+        }
         sql = "DROP TABLE " + tableName + ";";
         try (Statement st = conect.createStatement()){
             st.executeUpdate(sql);
@@ -322,22 +325,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return "Something bag happened";
     }
 
-
-
-    private static boolean isUserWants(boolean userWants) {
-        int a = JOptionPane.showConfirmDialog(
-                null,
-                "¿Quieres continuar añadiendo?",
-                "Mas o no",
-                JOptionPane.YES_NO_OPTION
-        );
-        if(a == 0){
-            userWants = true;
-        } else if (a == 1 || a == -1) {
-            userWants = false;
-        }
-        return userWants;
-    }
 
     //Este metodo está destinado a tener mas parametros, pero por ahora esto solo es una prueba
     public String paramExtensions(){

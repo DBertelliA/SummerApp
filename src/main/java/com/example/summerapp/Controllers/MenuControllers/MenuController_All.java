@@ -111,6 +111,16 @@ public class MenuController_All {
 
     @FXML public Pane paneForSearchFields;
 
+    //---------------Eliminar tablas-----------------//
+
+    @FXML public AnchorPane anchorPaneForDeleteTable;
+
+    @FXML public Button buttonForDeleteTable;
+
+    @FXML public ComboBox<String> comboxOfTablesForDelete;
+
+    @FXML public Label labelSelectedTable;
+
     //------Metodos necesario------//
 
     private List<String> valuesForMe;
@@ -190,6 +200,8 @@ public class MenuController_All {
     //--------
 
     public void inicializate(){
+        anchorPaneForDeleteTable.setVisible(false);
+        anchorPaneForDeleteTable.setDisable(true);
         putPointsAndVisible(true);
         FrameController.initAssist(dialogText, assistent);
         visibilityAssistent(false);
@@ -212,6 +224,8 @@ public class MenuController_All {
     }
 
     public void addButton() {
+        anchorPaneForDeleteTable.setVisible(false);
+        anchorPaneForDeleteTable.setDisable(true);
         putPointsAndVisible(true);
         visibilityAssistent(true);
         visibilityPanesInit(false);
@@ -226,6 +240,8 @@ public class MenuController_All {
     //----Funciones de agregar tabla----//
 
     public void addTable(){
+        anchorPaneForDeleteTable.setVisible(false);
+        anchorPaneForDeleteTable.setDisable(true);
         paneSelector.setDisable(true);
         selectorOptions.setDisable(true);
         if (anchorPaneTablesAdd.isVisible() || !anchorPaneTablesAdd.isDisable()){
@@ -276,8 +292,10 @@ public class MenuController_All {
 
     //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
     public void addData(){
+
         paneSelector.setDisable(true);
         selectorOptions.setDisable(true);
+
         anchorPaneAddData.getChildren().removeIf( e -> e instanceof TextField);
         //o puedo reusar el metodo de la autocreacion de campos
         //para que me devuelva una lista que recoja esos campos y que remueva toda esa lista que le pasé
@@ -338,6 +356,9 @@ public class MenuController_All {
     anchorPaneMainMenu.setVisible(false);
     anchorPaneAddFunctions.setVisible(false);
     anchorPaneAddFunctions.setDisable(true);
+
+    anchorPaneForDeleteTable.setVisible(false);
+    anchorPaneForDeleteTable.setDisable(true);
 
        TablesFunctions.fillerBox(comboBoxForEdit);
         comboBoxForEdit.setOnAction( e -> {
@@ -436,6 +457,8 @@ public class MenuController_All {
         anchorPaneMainMenu.setVisible(false);
         anchorPaneForSearchData.setDisable(false);
         anchorPaneForSearchData.setVisible(true);
+        anchorPaneForDeleteTable.setVisible(false);
+        anchorPaneForDeleteTable.setDisable(true);
 
         TablesFunctions.fillerBox(tablesForSearch);
 
@@ -458,4 +481,43 @@ public class MenuController_All {
         });
 
     }
+
+    //------Eliminar tablas-------//
+
+    public void deleteTables(){
+        buttonForDeleteTable.setDisable(true);
+        labelSelectedTable.setText("...");
+
+        putPointsAndVisible(true);
+        visibilityAssistent(true);
+        visibilityPanesInit(true);
+
+        anchorPaneMainMenu.setDisable(true);
+        anchorPaneMainMenu.setVisible(false);
+
+        anchorPaneForDeleteTable.setVisible(true);
+        anchorPaneForDeleteTable.setDisable(false);
+
+        anchorPaneForSearchData.setVisible(false);
+        anchorPaneForSearchData.setDisable(true);
+
+        TablesFunctions.fillerBox(comboxOfTablesForDelete);
+
+        comboxOfTablesForDelete.setOnAction(event -> {
+            labelSelectedTable.setText("you selected :" + comboxOfTablesForDelete.getValue());
+            buttonForDeleteTable.setDisable(false);
+        });
+
+        buttonForDeleteTable.setOnAction( e -> {
+            if (tACF.deleteTables(comboxOfTablesForDelete.getValue())) {
+                TablesFunctions.fillerBox(comboxOfTablesForDelete);
+                labelSelectedTable.setText("Deleted");
+                buttonForDeleteTable.setDisable(true);
+            }else {
+                labelSelectedTable.setText("For some reason, it's still there");
+            }
+        } );
+
+    }
+
 }
