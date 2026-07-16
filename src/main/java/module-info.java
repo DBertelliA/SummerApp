@@ -5,7 +5,6 @@ module com.example.summerapp {
     requires mysql.connector.j;
     requires java.desktop;
     requires spring.security.crypto;
-    requires org.jspecify;
 
 
     opens com.example.summerapp to javafx.fxml;

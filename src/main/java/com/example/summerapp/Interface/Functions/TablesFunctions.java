@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import org.jspecify.annotations.NonNull;
 
 import javax.swing.*;
 import java.sql.*;
@@ -378,7 +377,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         return " ";
     }
-    private @NonNull StringBuilder getSentenceForSql(String titleTable, String dataName, int valuesNumber) {
+    private StringBuilder getSentenceForSql(String titleTable, String dataName, int valuesNumber) {
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE " + titleTable).append(" (");
 
@@ -412,7 +411,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return sb;
     }
 
-    private static @NonNull StringBuilder sbForInsertData(String titleTable) {
+    private static StringBuilder sbForInsertData(String titleTable) {
         int j = numberDataColumns(titleTable);
         String dataName;
         StringBuilder sb = new StringBuilder();
