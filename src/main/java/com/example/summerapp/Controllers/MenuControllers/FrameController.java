@@ -14,7 +14,7 @@ public class FrameController {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Happy-new.jpg"))));
             }
             case 1 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Neutral-new.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/colored-neutral.jpg"))));
             }
             default -> {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Error.jpg"))));
