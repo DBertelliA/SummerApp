@@ -11,13 +11,13 @@ public class FrameController {
     public static void framesView(ImageView imgW, int i) {
         switch (i) {
             case 0 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Happy-new.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/colored/Happy.jpg"))));
             }
             case 1 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/colored-neutral.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/colored/Neutral.jpg"))));
             }
             default -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Error.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/betaFrames/Error.jpg"))));
             }
         }
     }
@@ -41,7 +41,7 @@ public class FrameController {
             m_A.counter = 0;
             FrameController.framesView(assistent,0);
         }
-        System.out.println("contador: " + m_A.counter);
+        //System.out.println("contador: " + m_A.counter);
         if (m_A.counter < m_A.dialogs.length-1){
             if (m_A.counter == -1) {
                 FrameController.framesView(assistent,0);

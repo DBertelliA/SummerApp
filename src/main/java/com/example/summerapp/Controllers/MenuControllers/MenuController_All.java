@@ -38,6 +38,7 @@ public class MenuController_All {
 
     @FXML public ImageView assistent;
 
+    @FXML public TextFlow dialogText2;
 
     //-----Para agregar Tablas-----//
 
@@ -138,6 +139,9 @@ public class MenuController_All {
 
         dialogText.setVisible(switchO);
         dialogText.setDisable(!switchO);
+
+        dialogText2.setVisible(switchO);
+        dialogText2.setDisable(!switchO);
 
         assistent.setVisible(switchO);
         assistent.setDisable(!switchO);

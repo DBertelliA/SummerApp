@@ -7,6 +7,7 @@
 
 <AnchorPane prefHeight="576.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
    <children>
+      <TextFlow fx:id="dialogText2" layoutX="162.0" layoutY="70.0" prefHeight="128.0" prefWidth="131.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
       <AnchorPane fx:id="anchorPaneForEditValues" disable="true" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0" visible="false">
          <children>
             <ComboBox fx:id="comboBoxForEdit" layoutX="26.0" layoutY="15.0" prefHeight="27.0" prefWidth="221.0" promptText="Selecciona" />
@@ -25,7 +26,7 @@
             <CheckBox fx:id="checkEdit" layoutX="373.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="74.0" text="Editar" />
          </children>
       </AnchorPane>
-      <ToolBar fx:id="selectorOptions" layoutX="310.0" layoutY="500.0" prefHeight="49.0" prefWidth="290.0">
+      <ToolBar fx:id="selectorOptions" layoutX="294.0" layoutY="496.0" prefHeight="49.0" prefWidth="334.0">
         <items>
             <Button mnemonicParsing="false" onAction="#inicializate" text="Inicio" />
             <Button mnemonicParsing="false" onAction="#addButton" text="Agregar" />
@@ -107,10 +108,10 @@
        </AnchorPane>
 
 
-      <ImageView fx:id="assistent" fitHeight="110.0" fitWidth="185.0" layoutX="101.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="assistent" fitHeight="91.0" fitWidth="221.0" layoutX="170.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" visible="false">
 
             </ImageView>
-      <TextFlow fx:id="dialogText" layoutX="286.0" layoutY="73.0" prefHeight="122.0" prefWidth="607.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
+      <TextFlow fx:id="dialogText" layoutX="286.0" layoutY="73.0" prefHeight="122.0" prefWidth="551.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
       <Label fx:id="labelText" alignment="TOP_CENTER" disable="true" layoutX="8.0" layoutY="480.0" prefHeight="80.0" prefWidth="290.0" text="..." textAlignment="CENTER" visible="false" />
       <AnchorPane fx:id="anchorPaneForSearchData" disable="true" layoutX="61.0" layoutY="197.0" prefHeight="296.0" prefWidth="826.0" visible="false">
          <children>
