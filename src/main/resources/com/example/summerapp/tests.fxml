@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="576.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
+<AnchorPane prefHeight="576.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
    <children>
       <TextFlow fx:id="dialogText2" layoutX="162.0" layoutY="70.0" prefHeight="128.0" prefWidth="131.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
       <AnchorPane fx:id="anchorPaneForEditValues" disable="true" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0" visible="false">
@@ -47,36 +58,38 @@
             <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: black;" />
          </children>
       </HBox>
-      <AnchorPane fx:id="anchorPaneAddFunctions" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0" visible="false">
+      <AnchorPane fx:id="anchorPaneAddFunctions" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0">
          <children>
 
 
-            <AnchorPane fx:id="anchorPaneTablesAdd" layoutX="477.0" layoutY="123.0" prefHeight="296.0" prefWidth="334.0" style="-fx-border-color: green;">
+            <AnchorPane fx:id="anchorPaneTablesAdd" layoutX="35.0" layoutY="123.0" prefHeight="296.0" prefWidth="753.0" style="-fx-border-color: green;">
                <children>
-                  <Pane fx:id="paneNameTable" disable="true" layoutY="1.0" prefHeight="101.0" prefWidth="334.0" style="-fx-border-color: blue;" visible="false">
+                  <Pane fx:id="paneNameTable" layoutY="1.0" prefHeight="80.0" prefWidth="378.0" style="-fx-border-color: blue;">
                      <children>
                         <TextField fx:id="titleTable" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="298.0" promptText="nombreTabla" />
-                        <Button fx:id="buttonForNext1" layoutX="187.0" layoutY="74.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="Siguiente" />
-                        <Button layoutX="37.0" layoutY="76.0" mnemonicParsing="false" onAction="#backButtonForTable" prefHeight="25.0" prefWidth="120.0" text="Atras" />
+                        <Button fx:id="buttonForNext1" layoutX="324.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="52.0" text="Siguiente" />
+                        <Button layoutX="327.0" layoutY="42.0" mnemonicParsing="false" onAction="#backButtonForTable" prefHeight="18.0" prefWidth="46.0" text="Atras" />
                      </children>
                   </Pane>
-                  <Pane fx:id="paneNameData" disable="true" layoutY="101.0" prefHeight="101.0" prefWidth="334.0" style="-fx-border-color: red;" visible="false">
+                  <Pane fx:id="paneNumberData" layoutX="557.0" layoutY="-2.0" prefHeight="101.0" prefWidth="120.0" style="-fx-border-color: yellow;">
                      <children>
-                        <TextField fx:id="dataName" layoutX="36.0" layoutY="41.0" prefHeight="27.0" prefWidth="258.0" promptText="nombreData" />
-                        <Button layoutX="42.0" layoutY="74.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="120.0" text="Atras" />
-                        <Button fx:id="buttonForNext2" layoutX="177.0" layoutY="74.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="Siguiente" />
+                        <Spinner fx:id="numberValues" layoutX="8.0" layoutY="29.0" prefHeight="27.0" prefWidth="107.0" />
+                        <Button layoutX="6.0" layoutY="64.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="46.0" text="Atras" />
+                        <Button fx:id="buttonForNext3" layoutX="60.0" layoutY="64.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="54.0" text="Siguiente" />
                      </children>
                   </Pane>
-                  <Pane fx:id="paneNumberData" disable="true" layoutY="203.0" prefHeight="91.0" prefWidth="334.0" style="-fx-border-color: yellow;" visible="false">
+                  <Pane fx:id="paneNameData" layoutY="101.0" prefHeight="140.0" prefWidth="336.0" style="-fx-border-color: red;">
                      <children>
-                        <Spinner fx:id="numberValues" layoutX="28.0" layoutY="29.0" prefHeight="27.0" prefWidth="290.0" />
-                        <Button layoutX="30.0" layoutY="64.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="143.0" text="Atras" />
-                        <Button fx:id="buttonForNext3" layoutX="181.0" layoutY="64.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="137.0" text="Siguiente" />
+                        <Button layoutX="42.0" layoutY="74.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="120.0" text="combox" />
+                        <Button fx:id="buttonForNext2" layoutX="177.0" layoutY="74.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="120.0" text="combox" />
+                        <Button layoutX="22.0" layoutY="106.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="137.0" text="Atras" />
+                        <Button fx:id="buttonForNext21" layoutX="176.0" layoutY="106.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="131.0" text="Siguiente" />
+                        <TextField layoutX="27.0" layoutY="19.0" prefHeight="27.0" prefWidth="290.0" />
                      </children>
                   </Pane>
                </children>
             </AnchorPane>
-            <Pane fx:id="paneSelector" layoutX="19.0" layoutY="122.0" prefHeight="296.0" prefWidth="458.0" style="-fx-border-color: green;">
+            <Pane fx:id="paneSelector" layoutX="178.0" layoutY="122.0" prefHeight="296.0" prefWidth="466.0" style="-fx-border-color: green;" visible="false">
                <children>
                   <Button layoutX="125.0" layoutY="129.0" mnemonicParsing="false" onAction="#addTable" prefHeight="27.0" prefWidth="200.0" text="Tabla" />
                   <Button layoutX="125.0" layoutY="216.0" mnemonicParsing="false" onAction="#addData" prefHeight="25.0" prefWidth="200.0" text="Datos" />
