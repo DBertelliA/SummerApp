@@ -10,7 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import javax.swing.*;
 import java.sql.*;
@@ -25,8 +27,24 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     //Intuyo que debo de usar la combinacion de variables introducidos por consola u meterlos en la sentencia
 
     @Override
-    public boolean addTable(String titleTable, String dataName, int valuesNumber) {
-        StringBuilder sb = getSentenceForSql(titleTable, dataName, valuesNumber);
+    public boolean addTable(List<String> dataName, List<String> tipeForEach) {
+        StringBuilder sb = new StringBuilder();
+
+        //En tipeForEach: Lista unica con dos valores diferentes, impar, tipo de dato, par tipo de llave
+
+        sb.append("CREATE TABLE ").append(dataName.get(0)).append("( \n");
+        int j = 0;
+        for (int i = 1; i < dataName.size(); i++) {
+            sb.append(dataName.get(i)).append(" ");
+            for (int p = 0; p < 2; p++) {
+                sb.append(tipeForEach.get(j)).append(" ");
+                j++;
+            }
+            if (i < dataName.size() -1){
+                sb.append(", \n");
+            }
+        }
+        sb.append(");");
 
         try (Statement pST = conect.createStatement()){
             pST.executeUpdate(sb.toString());
@@ -324,6 +342,60 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return "Something bag happened";
     }
 
+    public static void panesAdder(AnchorPane anchorPaneForAddTables, int valueSpin, int fish){
+        Pane pane = new Pane();
+        ObservableList<String> listType = FXCollections.observableArrayList("VARCHAR(50)","INTEGER","DOUBLE","TIME","BOOLEAN");
+        ObservableList<String> keyType = FXCollections.observableArrayList("NOT NULL","PRIMARY KEY","FOREIGN_KEY (Don't use)");
+
+        double anchWith = anchorPaneForAddTables.getWidth();
+        double anchResult = anchWith/(valueSpin);
+        System.out.println(pane.getPrefWidth());
+
+        double x = Math.min(
+                fish * anchResult,
+                anchorPaneForAddTables.getWidth() - pane.getPrefWidth()
+        );
+        double ancho = anchorPaneForAddTables.getWidth() / valueSpin;
+        System.out.println(valueSpin-fish);
+        System.out.println(anchResult);
+
+        Label labelTextForThis = new Label("Data name");
+        TextField dataNameField = new TextField();
+        dataNameField.promptTextProperty().set("Data Name");
+
+        labelTextForThis.setLayoutX(50);
+        labelTextForThis.setLayoutY(10);
+
+        dataNameField.setLayoutX(50);
+        dataNameField.setLayoutY(25);
+
+        ComboBox<String> comboxForTDataType = new ComboBox<>(listType);
+        ComboBox<String> keyForData = new ComboBox<>(keyType);
+
+        comboxForTDataType.setLayoutX(0);
+        comboxForTDataType.setLayoutY(55);
+
+        keyForData.setLayoutX(70);
+        keyForData.setLayoutY(55);
+
+        comboxForTDataType.setPrefWidth(ancho/2);
+        keyForData.setPrefWidth(ancho/2);
+
+        pane.getChildren().add(labelTextForThis);
+        pane.getChildren().add(dataNameField);
+        pane.getChildren().add(comboxForTDataType);
+        pane.getChildren().add(keyForData);
+
+        pane.setBorder(Border.stroke(Color.color(1,0,0)));
+        pane.setLayoutX(x);
+        pane.setLayoutY(100);
+        pane.setPrefWidth(ancho);
+        pane.setMaxHeight(100);
+
+        anchorPaneForAddTables.getChildren().add(pane);
+
+    }
+
 
     //Este metodo está destinado a tener mas parametros, pero por ahora esto solo es una prueba
     public String paramExtensions(){
@@ -376,39 +448,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }
 
         return " ";
-    }
-    private StringBuilder getSentenceForSql(String titleTable, String dataName, int valuesNumber) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("CREATE TABLE " + titleTable).append(" (");
-
-        for (int j = 0; j < valuesNumber; j++) {
-            if (j >= 1){
-                dataName = JOptionPane.showInputDialog("Introduce el nombre de la data");
-            }
-                try {
-                    sb.append(dataName).append(" ");
-                    String holder = dataSelect(Integer.parseInt(JOptionPane.showInputDialog("Del 1 al 6 pal dato")));
-                    if (holder.contains("VARCHAR")){
-                        sb.append(holder).append("(10)");
-                    }else {
-                        sb.append(holder);
-                    }
-                }catch (NumberFormatException e){
-                    sb.append("BOOLEAN ");
-                }
-                try {
-                    sb.append(" ").append(sentenceSelectSql(Integer.parseInt(JOptionPane.showInputDialog("del 1 al 2 para el tipo, el 3 no"))));
-                }catch (NumberFormatException e) {
-                    sb.append(" ");
-                }
-            if(j == valuesNumber -1){
-                sb.append(" ");
-            }else {
-                sb.append(",\n");
-            }
-        }
-        sb.append(");");
-        return sb;
     }
 
     private static StringBuilder sbForInsertData(String titleTable) {

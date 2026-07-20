@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import java.util.List;
 
 public interface TablesAutoCreateAndFuntions { //Too loong
-    public boolean addTable(String titleTable, String dataName, int valuesNumber);
+    public boolean addTable(List<String> dataName, List<String> tipeForEach);
     public boolean insertData(String titleTable, List<String> lStr);
     public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore);
     public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName);

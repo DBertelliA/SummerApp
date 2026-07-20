@@ -6,16 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MenuController_All {
@@ -42,19 +40,17 @@ public class MenuController_All {
 
     //-----Para agregar Tablas-----//
 
-    @FXML public Button buttonForNext1;
-
-    @FXML public Button buttonForNext2;
-
-    @FXML public Button buttonForNext3;
-
     @FXML public AnchorPane anchorPaneTablesAdd;
 
     @FXML public Pane paneNameTable;
 
-    @FXML public Pane paneNameData;
-
     @FXML public Pane paneNumberData;
+
+    @FXML public Button buttonForNext1;
+
+    @FXML public Button buttonForNext2;
+
+    @FXML public Button buttonForBack;
 
     @FXML public TextField titleTable;
 
@@ -176,6 +172,14 @@ public class MenuController_All {
 
         comboxTable.setVisible(!switch2);
         comboxTable.setDisable(switch2);
+
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
+
+        paneSelector.setDisable(false);
+        paneSelector.setVisible(true);
+        selectorOptions.setDisable(false);
+
     }
 
     private void putPointsAndVisible(boolean switch3) {
@@ -189,8 +193,8 @@ public class MenuController_All {
     private void DisablerOrAForAddT() {
         anchorPaneTablesAdd.setVisible(false);
         anchorPaneTablesAdd.setDisable(true);
-        paneNameData.setDisable(true);
-        paneNameData.setVisible(false);
+        //paneNameData.setDisable(true);
+        //paneNameData.setVisible(false);
 
         paneNameTable.setDisable(true);
         paneNameTable.setVisible(false);
@@ -244,10 +248,16 @@ public class MenuController_All {
     //----Funciones de agregar tabla----//
 
     public void addTable(){
+        buttonForNext2.setDisable(true);
+        AtomicInteger fish = new AtomicInteger();
+        fish.set(0);
         anchorPaneForDeleteTable.setVisible(false);
         anchorPaneForDeleteTable.setDisable(true);
         paneSelector.setDisable(true);
+        paneSelector.setVisible(false);
         selectorOptions.setDisable(true);
+        numberValues.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,10));
+
         if (anchorPaneTablesAdd.isVisible() || !anchorPaneTablesAdd.isDisable()){
             DisablerOrAForAddT();
         }
@@ -256,25 +266,62 @@ public class MenuController_All {
         paneNameTable.setDisable(false);
         paneNameTable.setVisible(true);
 
-        buttonForNext1.setOnAction(a -> {
-            paneNameTable.setDisable(true);
-            paneNameData.setVisible(true);
-            paneNameData.setDisable(false);
+        buttonForNext1.setOnAction( e -> {
+            numberValues.setDisable(true);
+            if (fish.get() <= numberValues.getValue()) {
+                if (fish.get() >= 1 && fish.get() < numberValues.getValue()){
+                    anchorPaneTablesAdd.getChildren().forEach(i -> {
+                       if (i instanceof Pane){
+                           Pane pane = (Pane) i;
+                           pane.setDisable(true);
+                       }
+                   });
+                }
+                if (!(numberValues.getValue() - fish.get() <= 0)) {
+                    TablesFunctions.panesAdder(anchorPaneTablesAdd, numberValues.getValue(), fish.get());
+                }
+                fish.getAndIncrement();
+                if (fish.get() == numberValues.getValue()){
+                    buttonForNext2.setDisable(false);
+                }
+            }else{
+                System.out.println("no");
+            }
 
-            buttonForNext2.setOnAction(b -> {
-                numberValues.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100,1));
-                paneNameData.setDisable(true);
-                paneNumberData.setVisible(true);
-                paneNumberData.setDisable(false);
-
-                buttonForNext3.setOnAction( c -> {
-                    tACF.addTable(titleTable.getText(),dataName.getText(),numberValues.getValue());
-                    DisablerOrAForAddT();
-                    paneSelector.setDisable(false);
-                    selectorOptions.setDisable(false);
-                });
-            });
         });
+        buttonForNext2.setOnAction(e -> {
+            List<String> listDataToForm = new ArrayList<>();
+            for (Node p : anchorPaneTablesAdd.getChildren()){
+                if (p instanceof Pane pane) {
+                    for (Node childText : pane.getChildren()) {
+                        if (childText instanceof TextField tf) {
+                            listDataToForm.add(tf.getText());
+                        }
+                    }
+                }
+            }
+            List<String> listOfTypes = new ArrayList<>();
+            for (Node p : anchorPaneTablesAdd.getChildren()){
+                if (p instanceof Pane pane){
+                    for (Node panel : pane.getChildren()) {
+                        if (panel instanceof ComboBox<?> combo) {
+                            listOfTypes.add((String) combo.getValue());
+                        }
+                    }
+                }
+            }
+            tACF.addTable(listDataToForm,listOfTypes);
+        });
+        buttonForBack.setOnAction( e -> {
+            addButton();
+            anchorPaneTablesAdd.setVisible(false);
+            anchorPaneTablesAdd.setDisable(true);
+
+            paneSelector.setDisable(false);
+            paneSelector.setVisible(true);
+            selectorOptions.setDisable(false);
+        });
+
     }
 
     public void backButtonForTable(){
@@ -298,6 +345,7 @@ public class MenuController_All {
     public void addData(){
 
         paneSelector.setDisable(true);
+        paneSelector.setVisible(false);
         selectorOptions.setDisable(true);
 
         anchorPaneAddData.getChildren().removeIf( e -> e instanceof TextField);
