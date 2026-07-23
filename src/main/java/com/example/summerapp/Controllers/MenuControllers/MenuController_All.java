@@ -18,23 +18,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MenuController_All {
     TablesAutoCreateAndFuntions tACF = new TablesFunctions();
-    M_addFunctions m_a = new M_addFunctions();
+
+    @FXML public AnchorPane anchorPaneMainMenu;
+
+    @FXML public TabPane nameTabss;
 
     @FXML public Label userLoggedMenu;
 
     @FXML public TableView<ObservableList<String>> dataClasify;
 
-    @FXML public TabPane nameTabss;
-
-    @FXML public AnchorPane anchorPaneMainMenu;
-
-    @FXML public AnchorPane anchorPaneAddFunctions;
-
     //------Asistente-----//
 
-    @FXML public TextFlow dialogText;
-
     @FXML public ImageView assistent;
+
+    @FXML public TextFlow dialogText;
 
     @FXML public TextFlow dialogText2;
 
@@ -54,8 +51,6 @@ public class MenuController_All {
 
     @FXML public TextField titleTable;
 
-    @FXML public TextField dataName;
-
     @FXML public Spinner<Integer> numberValues;
 
     //-----------------------------//
@@ -68,23 +63,25 @@ public class MenuController_All {
 
     //--------Agregar datos--------//
 
-    @FXML public ComboBox<String> comboxTable;
-
     @FXML public AnchorPane anchorPaneAddData;
+
+    @FXML public ComboBox<String> comboxTable;
 
     @FXML public Label labelIndicate;
 
     //--------Editar y eliminar datos----------//
 
+    @FXML public AnchorPane anchorPaneAddFunctions;
+
     @FXML public AnchorPane anchorPaneForEditValues;
-
-    @FXML public ComboBox<String> comboBoxForEdit;
-
-    @FXML public TableView<ObservableList<String>> singleTableEdit;
 
     @FXML public Pane paneForEditFields;
 
     @FXML public Pane paneForDeleteFields;
+
+    @FXML public ComboBox<String> comboBoxForEdit;
+
+    @FXML public TableView<ObservableList<String>> singleTableEdit;
 
     @FXML public Button buttonForEditData;
 
@@ -100,21 +97,21 @@ public class MenuController_All {
 
     @FXML public AnchorPane anchorPaneForSearchData;
 
+    @FXML public Pane paneForSearchFields;
+
     @FXML public ComboBox<String> tablesForSearch;
 
     @FXML public TableView<ObservableList<String>> tableShowDataSelected;
 
     @FXML public Button buttonForSearch;
 
-    @FXML public Pane paneForSearchFields;
-
     //---------------Eliminar tablas-----------------//
 
     @FXML public AnchorPane anchorPaneForDeleteTable;
 
-    @FXML public Button buttonForDeleteTable;
-
     @FXML public ComboBox<String> comboxOfTablesForDelete;
+
+    @FXML public Button buttonForDeleteTable;
 
     @FXML public Label labelSelectedTable;
 
@@ -123,6 +120,84 @@ public class MenuController_All {
     private List<String> valuesForMe;
 
     private List<String> nameOfData;
+
+    private void visualizerMethod(int place){
+        //True: para ver y habilitar
+        //False: para ocultar y deshabilitar
+        turnerOff();
+        switch (place){
+            case 1 -> {
+                //inicio
+                anchorPaneMainMenu.setVisible(true);
+                anchorPaneMainMenu.setDisable(false);
+            }
+            case 2 -> {
+                //Agregar tablas y datos
+                anchorPaneTablesAdd.setVisible(true);
+                anchorPaneTablesAdd.setDisable(false);
+            }
+            case 3 ->{
+                //Editar y eliminar datos
+                anchorPaneAddFunctions.setVisible(true);
+                anchorPaneAddFunctions.setDisable(false);
+            }
+            case 4 -> {
+                //Buscar datos
+                anchorPaneForSearchData.setVisible(true);
+                anchorPaneForSearchData.setDisable(false);
+            }
+            case 5 -> {
+                //Eliminar tablas
+                anchorPaneForDeleteTable.setVisible(true);
+                anchorPaneForDeleteTable.setDisable(false);
+            }
+            default -> System.exit(0);
+        }
+    }
+
+    private void turnerOff(){
+        //inicio
+        anchorPaneMainMenu.setVisible(false);
+        anchorPaneMainMenu.setDisable(true);
+
+        //Agregar tablas y datos
+        anchorPaneTablesAdd.setVisible(true);
+        anchorPaneTablesAdd.setDisable(false);
+        //-----//
+        paneNameTable.setVisible(false);
+        paneNameTable.setDisable(true);
+        //-----//
+        paneNumberData.setVisible(false);
+        paneNumberData.setDisable(true);
+        //-----//
+
+        //Editar y eliminar datos
+        anchorPaneAddFunctions.setVisible(false);
+        anchorPaneAddFunctions.setDisable(true);
+
+        anchorPaneForEditValues.setVisible(false);
+        anchorPaneForEditValues.setDisable(true);
+        //-----//
+        paneForEditFields.setVisible(false);
+        paneForEditFields.setDisable(true);
+        //-----//
+        paneForDeleteFields.setVisible(false);
+        paneForDeleteFields.setDisable(true);
+
+        //Buscar datos
+        anchorPaneForSearchData.setVisible(true);
+        anchorPaneForSearchData.setDisable(false);
+        //-----//
+        paneForSearchFields.setVisible(false);
+        paneForSearchFields.setDisable(true);
+
+
+        //Eliminar tablas
+        anchorPaneForDeleteTable.setVisible(true);
+        anchorPaneForDeleteTable.setDisable(false);
+
+    }
+
 
     public void inicializateTabs(){TablesFunctions.titleGiver(nameTabss);}
     public void cleanTabs(){
