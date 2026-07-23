@@ -23,9 +23,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     static Connection conect = ConnectionMySQL.getInstance();
     static String sql;
 
-    //necesito crear un sistema en el que se creen tablas mediante la introduccion de valores
-    //Intuyo que debo de usar la combinacion de variables introducidos por consola u meterlos en la sentencia
-
     @Override
     public boolean addTable(List<String> dataName, List<String> tipeForEach) {
         StringBuilder sb = new StringBuilder();
@@ -163,20 +160,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return null;
     }
 
-    //Tengo que tener en cuenta el tipo de dato..., tener en cuenta tambien que la linea sql se ejecuta pero puede no eliminar ningun dato
     @Override
     public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName) {
-        boolean moreData = false;
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("DELETE FROM ").append(tableName).append(" WHERE ");
 
-//        if(isUserWants(moreData)){
-//            sb.append("AND ").append(JOptionPane.showInputDialog(null,"Añade el nombre del dato")).append(" = ").append(JOptionPane.showInputDialog(null, "dame el dato"));
-//        }else{
-//            sb.append(";");
-//        }
 
         for (int i = 0; i < valuesToDelete.size(); i++) {
 
@@ -395,61 +385,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         anchorPaneForAddTables.getChildren().add(pane);
 
     }
-
-
-    //Este metodo está destinado a tener mas parametros, pero por ahora esto solo es una prueba
-    public String paramExtensions(){
-        StringBuilder sb = new StringBuilder();
-        //while (userWants) {
-        sb.append(" AND ").append("data1").append(" = ").append("\"T\"");
-        //if (!userWants) {
-        sb.append(";");
-        //}
-        //}
-        return sb.toString();
-    }
-
-
-    public String dataSelect (int i){
-        switch (i){
-            case 1 -> {
-                return String.valueOf(SqlDataTypes.VARCHAR);
-            }
-            case 2 -> {
-                return String.valueOf(SqlDataTypes.INTEGER);
-            }
-            case 3 -> {
-                return String.valueOf(SqlDataTypes.DOUBLE);
-            }
-            case 4 -> {
-                return String.valueOf(SqlDataTypes.BOOLEAN);
-            }
-            case 5 -> {
-                return String.valueOf(SqlDataTypes.TIME);
-            }
-            case 6 -> {
-                return String.valueOf(SqlDataTypes.DATE);
-            }
-        }
-        return String.valueOf(SqlDataTypes.BOOLEAN);
-    }
-    //necesito remodelar el foreign key, que necesita un valor de referencia de otra tabla
-    public String sentenceSelectSql (int i){
-        switch (i){
-            case 1 -> {
-                return String.valueOf(SqlSentencesType.NOT_NULL).replace("_"," ");
-            }
-            case 2 -> {
-                return String.valueOf(SqlSentencesType.PRIMARY_KEY).replace("_"," ");
-            }
-            case 3 -> {
-                return String.valueOf(SqlSentencesType.FOREIGN_KEY + "REFERENCES ...").replace("_"," ");
-            }
-        }
-
-        return " ";
-    }
-
     private static StringBuilder sbForInsertData(String titleTable) {
         int j = numberDataColumns(titleTable);
         String dataName;
