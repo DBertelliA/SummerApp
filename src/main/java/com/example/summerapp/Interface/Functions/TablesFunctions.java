@@ -1,10 +1,7 @@
 package com.example.summerapp.Interface.Functions;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
-import com.example.summerapp.DataTypesSQL.SqlDataTypes;
-import com.example.summerapp.DataTypesSQL.SqlSentencesType;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,12 +53,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     @Override
     public boolean insertData(String titleTable, List<String> lStr){
-        int a = 0;
         StringBuilder sb = new StringBuilder();
-        if (a == 1) {
-            sb = sbForInsertData(titleTable);
-        }
-        if (a == 0){
             sb.append("INSERT INTO " + titleTable).append(" VALUES (");
 
             try (Statement st = conect.createStatement()){
@@ -89,8 +81,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             }catch (SQLException e){
                 System.err.println(e);
             }
-        }
-
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
                 System.out.println("Introducido");
@@ -421,9 +411,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return sb;
     }
 
-    public static void autoGenerateTextFields(String titleTable, AnchorPane anh, Pane pane){
-        TablesFunctions tbFt = new TablesFunctions();
-        if (pane == null) {
+    public static void autoGenerateTextFields(String titleTable, AnchorPane anh, Pane pane){if (pane == null) {
             sql = "DESCRIBE " + titleTable + ";";
             try (Statement st = conect.createStatement()) {
                 ResultSet rSt = st.executeQuery(sql);
@@ -556,11 +544,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     public static void main(String[] args) {
-        TablesAutoCreateAndFuntions tb = new TablesFunctions();
-        //tb.insertData("datacatcheruser");
-
-        //----Agregacion de tablas----//
-        //tb.addTable("tabla4", "data1", 3);
         int a = 0;
         try (Statement st = conect.createStatement()){
             sql = "DESCRIBE tabla4;";
