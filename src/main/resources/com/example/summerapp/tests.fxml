@@ -47,7 +47,7 @@
             <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: black;" />
          </children>
       </HBox>
-      <AnchorPane fx:id="anchorPaneAddFunctions" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0">
+      <AnchorPane fx:id="anchorPaneAddFunctions" disable="true" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0" visible="false">
          <children>
 
 
@@ -68,6 +68,14 @@
                   <Button fx:id="buttonForBack" layoutX="526.0" layoutY="256.0" mnemonicParsing="false" onAction="#backButton" prefHeight="28.0" prefWidth="200.0" text="Atras" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="anchorPaneAddData" disable="true" layoutX="232.0" layoutY="123.0" prefHeight="296.0" prefWidth="361.0" visible="false">
+               <children>
+                  <ComboBox fx:id="comboxTable" layoutX="40.0" layoutY="22.0" prefHeight="39.0" prefWidth="200.0" style="-fx-border-color: green;" />
+                  <Button layoutX="246.0" layoutY="29.0" mnemonicParsing="false" onAction="#updateForAdd" prefHeight="27.0" prefWidth="88.0" style="-fx-border-color: green;" text="update" />
+                  <Label fx:id="labelIndicate" layoutX="52.0" layoutY="66.0" prefHeight="25.0" prefWidth="180.0" text="..." />
+                  <Button layoutX="176.0" layoutY="270.0" mnemonicParsing="false" onAction="#buttonForAddData" prefHeight="25.0" prefWidth="120.0" text="Agregar" />
+                  <Button layoutX="55.0" layoutY="269.0" mnemonicParsing="false" onAction="#backButtonInAddData" prefHeight="27.0" prefWidth="107.0" text="Atras" />
+               </children></AnchorPane>
             <Pane fx:id="paneSelector" layoutX="178.0" layoutY="122.0" prefHeight="296.0" prefWidth="466.0" style="-fx-border-color: green;">
                <children>
                   <Button layoutX="125.0" layoutY="129.0" mnemonicParsing="false" onAction="#addTable" prefHeight="27.0" prefWidth="200.0" text="Tabla" />
@@ -79,14 +87,6 @@
                   </Label>
                </children>
             </Pane>
-            <AnchorPane fx:id="anchorPaneAddData" disable="true" layoutX="232.0" layoutY="123.0" prefHeight="296.0" prefWidth="361.0" visible="false">
-               <children>
-                  <ComboBox fx:id="comboxTable" layoutX="40.0" layoutY="22.0" prefHeight="39.0" prefWidth="200.0" style="-fx-border-color: green;" />
-                  <Button layoutX="246.0" layoutY="29.0" mnemonicParsing="false" onAction="#updateForAdd" prefHeight="27.0" prefWidth="88.0" style="-fx-border-color: green;" text="update" />
-                  <Label fx:id="labelIndicate" layoutX="52.0" layoutY="66.0" prefHeight="25.0" prefWidth="180.0" text="..." />
-                  <Button layoutX="176.0" layoutY="270.0" mnemonicParsing="false" onAction="#buttonForAddData" prefHeight="25.0" prefWidth="120.0" text="Agregar" />
-                  <Button layoutX="55.0" layoutY="269.0" mnemonicParsing="false" onAction="#backButtonInAddData" prefHeight="27.0" prefWidth="107.0" text="Atras" />
-               </children></AnchorPane>
 
          </children>
       </AnchorPane>

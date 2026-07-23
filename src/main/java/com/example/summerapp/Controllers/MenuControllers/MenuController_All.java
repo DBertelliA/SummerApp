@@ -37,8 +37,6 @@ public class MenuController_All {
 
     //-----Para agregar Tablas-----//
 
-    @FXML public AnchorPane anchorPaneTablesAdd;
-
     @FXML public Pane paneNameTable;
 
     @FXML public Pane paneNumberData;
@@ -57,11 +55,14 @@ public class MenuController_All {
 
     //-------Selector-------//
 
+    @FXML public AnchorPane anchorPaneAddFunctions; //para tabala y datos agregar
     @FXML public Pane paneSelector;
 
     @FXML public ToolBar selectorOptions;
 
     //--------Agregar datos--------//
+
+    @FXML public AnchorPane anchorPaneTablesAdd;
 
     @FXML public AnchorPane anchorPaneAddData;
 
@@ -70,8 +71,6 @@ public class MenuController_All {
     @FXML public Label labelIndicate;
 
     //--------Editar y eliminar datos----------//
-
-    @FXML public AnchorPane anchorPaneAddFunctions;
 
     @FXML public AnchorPane anchorPaneForEditValues;
 
@@ -133,18 +132,31 @@ public class MenuController_All {
             }
             case 2 -> {
                 //Agregar tablas y datos
-                anchorPaneTablesAdd.setVisible(true);
-                anchorPaneTablesAdd.setDisable(false);
+                anchorPaneAddFunctions.setVisible(true);
+                anchorPaneAddFunctions.setDisable(false);
+                paneSelector.setVisible(true);
+                paneSelector.setDisable(false);
             }
             case 3 ->{
                 //Editar y eliminar datos
-                anchorPaneAddFunctions.setVisible(true);
-                anchorPaneAddFunctions.setDisable(false);
+                anchorPaneTablesAdd.setVisible(true);
+                anchorPaneTablesAdd.setDisable(false);
+                anchorPaneForEditValues.setVisible(true);
+                anchorPaneForEditValues.setDisable(false);
+
+                paneForEditFields.setVisible(true);
+                paneForEditFields.setDisable(false);
+                //-----//
+                paneForDeleteFields.setVisible(true);
+                paneForDeleteFields.setDisable(false);
             }
             case 4 -> {
                 //Buscar datos
                 anchorPaneForSearchData.setVisible(true);
                 anchorPaneForSearchData.setDisable(false);
+
+                paneForSearchFields.setVisible(true);
+                paneForSearchFields.setDisable(false);
             }
             case 5 -> {
                 //Eliminar tablas
@@ -161,8 +173,10 @@ public class MenuController_All {
         anchorPaneMainMenu.setDisable(true);
 
         //Agregar tablas y datos
-        anchorPaneTablesAdd.setVisible(true);
-        anchorPaneTablesAdd.setDisable(false);
+        anchorPaneAddFunctions.setVisible(false);
+        anchorPaneAddFunctions.setDisable(true);
+        paneSelector.setVisible(false);
+        paneSelector.setDisable(true);
         //-----//
         paneNameTable.setVisible(false);
         paneNameTable.setDisable(true);
@@ -172,8 +186,8 @@ public class MenuController_All {
         //-----//
 
         //Editar y eliminar datos
-        anchorPaneAddFunctions.setVisible(false);
-        anchorPaneAddFunctions.setDisable(true);
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
 
         anchorPaneForEditValues.setVisible(false);
         anchorPaneForEditValues.setDisable(true);
@@ -185,16 +199,16 @@ public class MenuController_All {
         paneForDeleteFields.setDisable(true);
 
         //Buscar datos
-        anchorPaneForSearchData.setVisible(true);
-        anchorPaneForSearchData.setDisable(false);
+        anchorPaneForSearchData.setVisible(false);
+        anchorPaneForSearchData.setDisable(true);
         //-----//
         paneForSearchFields.setVisible(false);
         paneForSearchFields.setDisable(true);
 
 
         //Eliminar tablas
-        anchorPaneForDeleteTable.setVisible(true);
-        anchorPaneForDeleteTable.setDisable(false);
+        anchorPaneForDeleteTable.setVisible(false);
+        anchorPaneForDeleteTable.setDisable(true);
 
     }
 
@@ -216,25 +230,6 @@ public class MenuController_All {
 
         assistent.setVisible(switchO);
         assistent.setDisable(!switchO);
-    }
-
-    public void visibilityPanesInit(boolean switch1){
-        //true: visible y funcional
-        //false: !true
-
-        anchorPaneMainMenu.setVisible(switch1);
-        anchorPaneMainMenu.setDisable(!switch1);
-
-        nameTabss.setVisible(switch1);
-        nameTabss.setDisable(!switch1);
-
-        //Contrario
-
-        anchorPaneAddFunctions.setVisible(!switch1);
-        anchorPaneAddFunctions.setDisable(switch1);
-
-        anchorPaneForEditValues.setVisible(!switch1);
-        anchorPaneForEditValues.setDisable(switch1);
     }
 
     public void backInit(boolean switch2){
@@ -283,19 +278,14 @@ public class MenuController_All {
     //--------
 
     public void inicializate(){
-        anchorPaneForDeleteTable.setVisible(false);
-        anchorPaneForDeleteTable.setDisable(true);
+        visualizerMethod(1);
         putPointsAndVisible(true);
         FrameController.initAssist(dialogText, assistent);
         visibilityAssistent(false);
-        visibilityPanesInit(true);
-
-        anchorPaneForSearchData.setVisible(false);
-        anchorPaneForSearchData.setDisable(true);
-
         TablesFunctions.fillerBox(comboxTable);
         cleanTabs();
         inicializateTabs();
+
         //Estructura para añadir
         int j = nameTabss.getTabs().size();
         Tab tab1 = new Tab();
@@ -307,19 +297,11 @@ public class MenuController_All {
     }
 
     public void addButton() {
-        anchorPaneForDeleteTable.setVisible(false);
-        anchorPaneForDeleteTable.setDisable(true);
         putPointsAndVisible(true);
         visibilityAssistent(true);
-        visibilityPanesInit(false);
-
-        anchorPaneForEditValues.setDisable(true);
-        anchorPaneForEditValues.setVisible(false);
-
-        anchorPaneForSearchData.setVisible(false);
-        anchorPaneForSearchData.setDisable(true);
-
+        visualizerMethod(2);
     }
+
     //----Funciones de agregar tabla----//
 
     public void addTable(){
@@ -399,13 +381,6 @@ public class MenuController_All {
 
     }
 
-    public void backButtonForTable(){
-        anchorPaneTablesAdd.setVisible(false);
-        anchorPaneTablesAdd.setDisable(true);
-        paneSelector.setDisable(false);
-        selectorOptions.setDisable(false);
-    }
-
 
     public void backButton(){
         addTable();
@@ -418,7 +393,6 @@ public class MenuController_All {
 
     //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
     public void addData(){
-
         paneSelector.setDisable(true);
         paneSelector.setVisible(false);
         selectorOptions.setDisable(true);
@@ -469,25 +443,13 @@ public class MenuController_All {
     //----------Funciones para editar y eliminar------------//
 
     public void editPane(){
+    singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
     putPointsAndVisible(false);
     visibilityAssistent(true);
-    anchorPaneForEditValues.setDisable(false);
-    anchorPaneForEditValues.setVisible(true);
+    visualizerMethod(3);
 
-    anchorPaneForSearchData.setVisible(false);
-    anchorPaneForSearchData.setDisable(true);
 
-    singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
-
-    anchorPaneMainMenu.setDisable(true);
-    anchorPaneMainMenu.setVisible(false);
-    anchorPaneAddFunctions.setVisible(false);
-    anchorPaneAddFunctions.setDisable(true);
-
-    anchorPaneForDeleteTable.setVisible(false);
-    anchorPaneForDeleteTable.setDisable(true);
-
-       TablesFunctions.fillerBox(comboBoxForEdit);
+    TablesFunctions.fillerBox(comboBoxForEdit);
         comboBoxForEdit.setOnAction( e -> {
             TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
             paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
@@ -498,37 +460,36 @@ public class MenuController_All {
                     buttonForEditData.setDisable(false);
                         }
                     }
-            }
-        );
+        });
 
-        checkEdit.setSelected(true);
-        checkDelete.setSelected(false);
-        paneForDeleteFields.setDisable(true);
-        paneForEditFields.setDisable(false);
-        buttonForEditData.setDisable(true);
+    checkEdit.setSelected(true);
+    checkDelete.setSelected(false);
+    paneForDeleteFields.setDisable(true);
+    paneForEditFields.setDisable(false);
+    buttonForEditData.setDisable(true);
 
 
-        checkEdit.setOnAction( e -> {
-            if(checkDelete.isPressed()){checkDelete.setSelected(false);}
+    checkEdit.setOnAction( e -> {
+        if(checkDelete.isPressed()){checkDelete.setSelected(false);}
             checkDelete.setSelected(false);
             paneForDeleteFields.setDisable(true);
             paneForEditFields.setDisable(false);
-        });
+    });
 
-        checkDelete.setOnAction( e -> {
-            if (checkEdit.isPressed()){checkEdit.setSelected(false);}
+    checkDelete.setOnAction( e -> {
+        if (checkEdit.isPressed()){checkEdit.setSelected(false);}
             checkEdit.setSelected(false);
             paneForEditFields.setDisable(true);
             paneForDeleteFields.setDisable(false);
-        });
+    });
 
-        buttonForDeleteData.setOnAction( e -> {
-            tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData);
+    buttonForDeleteData.setOnAction( e -> {
+        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData);
             TablesFunctions.fillerBox(comboBoxForEdit);
         });
 
-        buttonForEditData.setOnAction(e -> {
-            List<String> stringsList = new ArrayList<>();
+    buttonForEditData.setOnAction(e -> {
+        List<String> stringsList = new ArrayList<>();
             for (Node i : paneForEditFields.getChildren()){
                 if (i instanceof TextField){
                     TextField tf = (TextField) i;
@@ -539,11 +500,10 @@ public class MenuController_All {
             TablesFunctions.fillerBox(comboBoxForEdit);
         });
 
-        singleTableEdit.setOnMouseClicked(e -> {
+    singleTableEdit.setOnMouseClicked(e -> {
             //Esto devuelve una lista de objetos de esa fila, siendo primero necesitamos setear, que se debe de obtener del modelo la fila seccionada
             //Lo que devuelve un valor
-            TablePosition<ObservableList<String>,String> position = singleTableEdit.getSelectionModel().getSelectedCells().get(0);
-
+        TablePosition<ObservableList<String>,String> position = singleTableEdit.getSelectionModel().getSelectedCells().get(0);
             //Luego, usamos ese valor para llamar a los items de la posicion seleccionada
             valuesForMe = singleTableEdit.getItems().get(position.getRow());
             nameOfData = TablesFunctions.giverName(comboBoxForEdit.getValue());
@@ -579,13 +539,7 @@ public class MenuController_All {
     public void searchPane(){
         putPointsAndVisible(true);
         visibilityAssistent(true);
-        visibilityPanesInit(true);
-        anchorPaneMainMenu.setDisable(true);
-        anchorPaneMainMenu.setVisible(false);
-        anchorPaneForSearchData.setDisable(false);
-        anchorPaneForSearchData.setVisible(true);
-        anchorPaneForDeleteTable.setVisible(false);
-        anchorPaneForDeleteTable.setDisable(true);
+        visualizerMethod(4);
 
         TablesFunctions.fillerBox(tablesForSearch);
 
@@ -617,16 +571,7 @@ public class MenuController_All {
 
         putPointsAndVisible(true);
         visibilityAssistent(true);
-        visibilityPanesInit(true);
-
-        anchorPaneMainMenu.setDisable(true);
-        anchorPaneMainMenu.setVisible(false);
-
-        anchorPaneForDeleteTable.setVisible(true);
-        anchorPaneForDeleteTable.setDisable(false);
-
-        anchorPaneForSearchData.setVisible(false);
-        anchorPaneForSearchData.setDisable(true);
+        visualizerMethod(5);
 
         TablesFunctions.fillerBox(comboxOfTablesForDelete);
 
