@@ -1,23 +1,69 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 import java.util.Objects;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class FrameController {
-    static M_addFunctions m_A = new M_addFunctions();
     public static void framesView(ImageView imgW, int i) {
         switch (i) {
             case 0 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/colored/Happy.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/newHappy-Colored.jpg"))));
             }
             case 1 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/betaFrames/(beta)Neutral.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/new_Colored_neutral.jpg"))));
+                Timeline executionEgg = new Timeline();
+                PauseTransition pT = new PauseTransition(Duration.seconds(2));
+                KeyFrame kNew = new KeyFrame(Duration.seconds(1), e -> {
+                    Random nRandom = new Random();
+                    int r = nRandom.nextInt(10)+1;
+                    System.out.println(r);
+                    if (r == 10){
+                        System.out.println("Entré");
+                        executionEgg.stop();
+                        imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Video/sneezing.gif"))));
+                        pT.setOnFinished(p -> {
+                            framesView(imgW, 6);
+                        });
+                        pT.playFromStart();
+
+                    }
+                });
+                executionEgg.getKeyFrames().add(kNew);
+                executionEgg.setCycleCount(Animation.INDEFINITE);
+                pT.play();
+                executionEgg.play();
+            }
+            case 2 -> {
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/New-Akward.jpg"))));
+            }
+            case 3 -> {
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/What.jpg"))));
+            }
+            case 4 -> {
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/YADTOP.jpg"))));
+            }
+            case 5 -> {
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/Mad.jpg"))));
+            }
+            case 6 -> {
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/ups.jpg"))));
             }
             default -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/betaFrames/Error.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/Error.jpg"))));
             }
         }
     }
@@ -30,28 +76,30 @@ public class FrameController {
         assistent.setManaged(true);
         assistent.setPickOnBounds(true);
 
-        m_A.initDialog(dialogText);
-        framesView(assistent,0);
+        framesView(assistent,1);
 
-        assistent.setOnMouseClicked(event -> FrameController.frameChangerMainMenu(dialogText, assistent));
-    }
+        Font font = Font.font(20);
+        Text textAssign = new Text("Hi...");
 
-    private static void frameChangerMainMenu(TextFlow dialogText, ImageView assistent) {
-        if (m_A.counter > 2) {
-            m_A.counter = 0;
-            FrameController.framesView(assistent,0);
-        }
-        //System.out.println("contador: " + m_A.counter);
-        if (m_A.counter < m_A.dialogs.length-1){
-            if (m_A.counter == -1) {
-                FrameController.framesView(assistent,0);
-                m_A.counter++;
-            }else {
-                FrameController.framesView(assistent,m_A.counter);
-                m_A.counter++;
+        textAssign.setFont(font);
+        textAssign.setFill(Color.WHITE);
+
+        textAssign.setTextAlignment(TextAlignment.LEFT);
+        dialogText.getChildren().clear();
+        dialogText.getChildren().add(textAssign);
+
+        AtomicInteger i = new AtomicInteger();
+
+        assistent.setOnMouseClicked(event -> {framesView(assistent, i.getAndIncrement());
+            if(i.get() >= 8){
+                i.set(0);
             }
-            m_A.initDialog(dialogText);
-        }
+        });
+
+
+
     }
+
+
 
 }
