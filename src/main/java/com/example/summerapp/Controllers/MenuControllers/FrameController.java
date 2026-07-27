@@ -18,19 +18,37 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FrameController {
+    static Timeline executionEgg = new Timeline();
+    static PauseTransition pT = new PauseTransition(Duration.seconds(2));
+
     public static void framesView(ImageView imgW, int i) {
+        executionEgg.getKeyFrames().clear();
+        System.out.println("limpio");
+
+        if (executionEgg.getStatus() == Animation.Status.RUNNING) {
+            executionEgg.stop();
+        }
+
+        if (pT.getStatus() == Animation.Status.RUNNING) {
+            pT.stop();
+        }
+
         switch (i) {
             case 0 -> {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/newHappy-Colored.jpg"))));
             }
             case 1 -> {
+                executionEgg.stop();
+                executionEgg.getKeyFrames().clear();
+
+                pT.stop();
+
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/new_Colored_neutral.jpg"))));
-                Timeline executionEgg = new Timeline();
-                PauseTransition pT = new PauseTransition(Duration.seconds(2));
                 KeyFrame kNew = new KeyFrame(Duration.seconds(1), e -> {
                     Random nRandom = new Random();
                     int r = nRandom.nextInt(10)+1;
                     System.out.println(r);
+
                     if (r == 10){
                         System.out.println("Entré");
                         executionEgg.stop();
@@ -39,12 +57,10 @@ public class FrameController {
                             framesView(imgW, 6);
                         });
                         pT.playFromStart();
-
                     }
                 });
                 executionEgg.getKeyFrames().add(kNew);
                 executionEgg.setCycleCount(Animation.INDEFINITE);
-                pT.play();
                 executionEgg.play();
             }
             case 2 -> {

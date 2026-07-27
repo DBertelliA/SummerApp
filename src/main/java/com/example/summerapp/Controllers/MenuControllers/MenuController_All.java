@@ -276,11 +276,10 @@ public class MenuController_All {
     //----------------------------------------------//
     //----------------
     //--------
-
+    boolean inited = false;
     public void inicializate(){
         visualizerMethod(1);
         putPointsAndVisible(true);
-        FrameController.initAssist(dialogText, assistent);
         visibilityAssistent(false);
         TablesFunctions.fillerBox(comboxTable);
         cleanTabs();
@@ -297,6 +296,10 @@ public class MenuController_All {
     }
 
     public void addButton() {
+        if (!inited) {
+            FrameController.initAssist(dialogText, assistent);
+            inited = true;
+        }
         putPointsAndVisible(true);
         visibilityAssistent(true);
         visualizerMethod(2);
@@ -443,6 +446,10 @@ public class MenuController_All {
     //----------Funciones para editar y eliminar------------//
 
     public void editPane(){
+    if (!inited) {
+        FrameController.initAssist(dialogText, assistent);
+        inited = true;
+    }
     singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
     putPointsAndVisible(false);
     visibilityAssistent(true);
@@ -537,6 +544,10 @@ public class MenuController_All {
     //-------------Buscar datos de tablas------------//
 
     public void searchPane(){
+        if (!inited) {
+            FrameController.initAssist(dialogText, assistent);
+            inited = true;
+        }
         putPointsAndVisible(true);
         visibilityAssistent(true);
         visualizerMethod(4);
@@ -566,6 +577,11 @@ public class MenuController_All {
     //------Eliminar tablas-------//
 
     public void deleteTables(){
+        if (!inited) {
+            FrameController.initAssist(dialogText, assistent);
+            inited = true;
+        }
+
         buttonForDeleteTable.setDisable(true);
         labelSelectedTable.setText("...");
 
