@@ -210,6 +210,9 @@ public class MenuController_All {
         anchorPaneForDeleteTable.setVisible(false);
         anchorPaneForDeleteTable.setDisable(true);
 
+        selectorOptions.setDisable(false);
+        selectorOptions.setVisible(true);
+
     }
 
 
@@ -325,6 +328,8 @@ public class MenuController_All {
         anchorPaneTablesAdd.setDisable(false);
         paneNameTable.setDisable(false);
         paneNameTable.setVisible(true);
+        paneNumberData.setDisable(false);
+        paneNumberData.setVisible(true);
 
         buttonForNext1.setOnAction( e -> {
             numberValues.setDisable(true);
@@ -370,7 +375,9 @@ public class MenuController_All {
                     }
                 }
             }
-            tACF.addTable(listDataToForm,listOfTypes);
+            tACF.addTable(listDataToForm,listOfTypes, dialogText ,assistent);
+            addButton();
+
         });
         buttonForBack.setOnAction( e -> {
             addButton();
@@ -427,7 +434,7 @@ public class MenuController_All {
                 lStr.add(tf.getText());
             }
         }
-        boolean che = tACF.insertData(comboxTable.getValue(),lStr);
+        boolean che = tACF.insertData(comboxTable.getValue(),lStr, dialogText ,assistent);
         if (che) {
             TablesFunctions.autoGenerateTextFields(comboxTable.getValue(), anchorPaneAddData, null);
             backInit(true);
@@ -457,17 +464,12 @@ public class MenuController_All {
 
 
     TablesFunctions.fillerBox(comboBoxForEdit);
-        comboBoxForEdit.setOnAction( e -> {
-            TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
-            paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
-            TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
 
-            for (Node n : paneForEditFields.getChildren()){
-                    if (n instanceof TextField){
-                    buttonForEditData.setDisable(false);
-                        }
-                    }
-        });
+    comboBoxForEdit.setOnAction( e -> {
+        TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
+        paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
+        TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
+    });
 
     checkEdit.setSelected(true);
     checkDelete.setSelected(false);
@@ -491,7 +493,7 @@ public class MenuController_All {
     });
 
     buttonForDeleteData.setOnAction( e -> {
-        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData);
+        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData, dialogText ,assistent);
             TablesFunctions.fillerBox(comboBoxForEdit);
         });
 
@@ -503,7 +505,7 @@ public class MenuController_All {
                     stringsList.add(tf.getText());
                 }
             }
-            tACF.updateData(comboBoxForEdit.getValue(),stringsList, valuesForMe);
+            tACF.updateData(comboBoxForEdit.getValue(),stringsList, valuesForMe, dialogText ,assistent);
             TablesFunctions.fillerBox(comboBoxForEdit);
         });
 
@@ -513,14 +515,14 @@ public class MenuController_All {
         TablePosition<ObservableList<String>,String> position = singleTableEdit.getSelectionModel().getSelectedCells().get(0);
             //Luego, usamos ese valor para llamar a los items de la posicion seleccionada
             valuesForMe = singleTableEdit.getItems().get(position.getRow());
-            nameOfData = TablesFunctions.giverName(comboBoxForEdit.getValue());
+            nameOfData = TablesFunctions.giverName(comboBoxForEdit.getValue(), dialogText ,assistent);
 
             StringBuilder sb = new StringBuilder();
             System.out.println(valuesForMe);
             int i = 0;
 
             for (Node p : paneForEditFields.getChildren()) {
-                if (p instanceof TextField){
+                if (p instanceof TextField) {
                     TextField tf = (TextField) p;
                     tf.setText(valuesForMe.get(i));
                     sb.append(nameOfData.get(i)).append(" : ").append(valuesForMe.get(i)).append("\n");
@@ -529,6 +531,7 @@ public class MenuController_All {
 
                 }
             }
+            buttonForEditData.setDisable(false);
             System.out.println(sb.toString());
 
         });
@@ -569,7 +572,7 @@ public class MenuController_All {
                      listData.add(tf.getText());
                 }
             }
-            tACF.dataSearch(tablesForSearch.getValue(),listData,tableShowDataSelected);
+            tACF.dataSearch(tablesForSearch.getValue(),listData,tableShowDataSelected, dialogText ,assistent);
         });
 
     }
@@ -597,7 +600,7 @@ public class MenuController_All {
         });
 
         buttonForDeleteTable.setOnAction( e -> {
-            if (tACF.deleteTables(comboxOfTablesForDelete.getValue())) {
+            if (tACF.deleteTables(comboxOfTablesForDelete.getValue(), dialogText ,assistent)) {
                 TablesFunctions.fillerBox(comboxOfTablesForDelete);
                 labelSelectedTable.setText("Deleted");
                 buttonForDeleteTable.setDisable(true);

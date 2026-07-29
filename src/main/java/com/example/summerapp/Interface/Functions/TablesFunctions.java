@@ -1,15 +1,21 @@
 package com.example.summerapp.Interface.Functions;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
+import com.example.summerapp.Controllers.MenuControllers.FrameController;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 
 import javax.swing.*;
 import java.sql.*;
@@ -21,7 +27,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     static String sql;
 
     @Override
-    public boolean addTable(List<String> dataName, List<String> tipeForEach) {
+    public boolean addTable(List<String> dataName, List<String> tipeForEach, TextFlow dialogText, ImageView assistent) {
         StringBuilder sb = new StringBuilder();
 
         //En tipeForEach: Lista unica con dos valores diferentes, impar, tipo de dato, par tipo de llave
@@ -43,6 +49,18 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (Statement pST = conect.createStatement()){
             pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
+            FrameController.framesView(assistent, 0);
+
+            Font font = Font.font(20);
+            Text textAssign = new Text("Tabla agregada");
+
+            textAssign.setFont(font);
+            textAssign.setFill(Color.WHITE);
+
+            textAssign.setTextAlignment(TextAlignment.LEFT);
+            dialogText.getChildren().clear();
+            dialogText.getChildren().add(textAssign);
+
             return true;
         }catch (SQLException e){
             System.err.println(sb.toString());
@@ -52,7 +70,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public boolean insertData(String titleTable, List<String> lStr){
+    public boolean insertData(String titleTable, List<String> lStr, TextFlow dialogText, ImageView assistent){
         StringBuilder sb = new StringBuilder();
             sb.append("INSERT INTO " + titleTable).append(" VALUES (");
 
@@ -94,8 +112,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     //Tener en cuenta que se te puede cambiar toda la fila si no ponemos los limitadores, pensaré como introducirlo mediante el javafx sin necesidad de añadir nada a los metodos
     @Override
-    public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore) {
-        List<String> nameData = giverName(tableName);
+    public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore, TextFlow dialogText, ImageView assistent) {
+        List<String> nameData = giverName(tableName, dialogText ,assistent);
 
         StringBuilder sb = new StringBuilder();
 
@@ -136,7 +154,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     }
 
-    public static List<String> giverName(String tableName){
+    public static List<String> giverName(String tableName, TextFlow dialogText, ImageView assistent){
         List<String> nameData = new ArrayList<>();
         try (Statement st = conect.createStatement()){
             ResultSet rSt = st.executeQuery("DESCRIBE " + tableName);
@@ -151,7 +169,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName) {
+    public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName, TextFlow dialogText, ImageView assistent) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -185,8 +203,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public String dataSearch(String tableName, List<String> valuesForSearch, TableView<ObservableList<String>> tableShower) {
-        List<String> nameData = giverName(tableName);
+    public String dataSearch(String tableName, List<String> valuesForSearch, TableView<ObservableList<String>> tableShower, TextFlow dialogText, ImageView assistent) {
+        List<String> nameData = giverName(tableName, dialogText ,assistent);
         System.out.println(valuesForSearch);
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM ").append(tableName);
@@ -253,6 +271,23 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
+    public boolean deleteTables(String tableName, TextFlow dialogText, ImageView assistent) {
+        if (tableName.equals("datacatcheruser")){
+            return false;
+        }
+        sql = "DROP TABLE " + tableName + ";";
+        try (Statement st = conect.createStatement()){
+            st.executeUpdate(sql);
+            System.out.println("Eliminado");
+            return true;
+        }catch (SQLException e){
+            System.err.println(e);
+            System.err.println(sql);
+        }
+        return false;
+    }
+
+    @Override
     public boolean showAllTables() {
         try (Statement st = conect.createStatement()){
             ResultSet rst = st.executeQuery("SHOW TABLES;");
@@ -277,23 +312,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             return false;
         }
 
-    }
-
-    @Override
-    public boolean deleteTables(String tableName) {
-        if (tableName.equals("datacatcheruser")){
-            return false;
-        }
-        sql = "DROP TABLE " + tableName + ";";
-        try (Statement st = conect.createStatement()){
-            st.executeUpdate(sql);
-            System.out.println("Eliminado");
-            return true;
-        }catch (SQLException e){
-            System.err.println(e);
-            System.err.println(sql);
-        }
-            return false;
     }
 
     //Crear una version muy limitada para luego expandirla de acuerdo a los datos que se dispongan
@@ -456,8 +474,10 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         ObservableList<String> listObs = FXCollections.observableArrayList();
         try (Statement st = conect.createStatement()){
             ResultSet rSt = st.executeQuery("SHOW TABLES");
-            while (rSt.next()){
-                listObs.add(rSt.getString(1));
+            while (rSt.next()) {
+                if (rSt.getString(1).contains("dataCatcherUser")) {
+                    System.out.println("se ha saltado la tabla de users");
+                } else{listObs.add(rSt.getString(1));}
             }
             cStr.setItems(listObs);
         }catch (SQLException e){
@@ -495,19 +515,18 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             ResultSet rst = st.executeQuery("DESCRIBE " + titleTable);
 
             while (rst.next()) {
-
                 TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
-                final int position =  tbW.getColumns().size();
+                final int position = tbW.getColumns().size();
 
                 column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(position)));
                 tbW.getColumns().add(column);
+
             }
 
             // joder, esto es mas sencillo, en el creas el objeto, le metes lo datos y se lo añades a la tableView, es una agregacion dinamica
 
             ResultSet data = st.executeQuery("SELECT * FROM " + titleTable);
             while (data.next()) {
-
                 //Creas la lista constantemente, y entiendo que una vez añadida, como la base de datos ve que hay datos, se lo pasa al siguiente
 
                 ObservableList<String> fila = FXCollections.observableArrayList();
