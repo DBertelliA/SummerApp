@@ -46,10 +46,10 @@ public class FrameController {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/new_Colored_neutral.jpg"))));
                 KeyFrame kNew = new KeyFrame(Duration.seconds(1), e -> {
                     Random nRandom = new Random();
-                    int r = nRandom.nextInt(10)+1;
+                    int r = nRandom.nextInt(100)+1;
                     System.out.println(r);
 
-                    if (r == 10){
+                    if (r == 100){
                         System.out.println("Entré");
                         executionEgg.stop();
                         imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Video/sneezing.gif"))));

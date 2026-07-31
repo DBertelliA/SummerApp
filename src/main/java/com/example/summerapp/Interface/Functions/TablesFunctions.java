@@ -26,6 +26,19 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     static Connection conect = ConnectionMySQL.getInstance();
     static String sql;
 
+    public static void dialogGenerator(ImageView assistent, int i,TextFlow dialogText, String message) {
+        FrameController.framesView(assistent, i);
+        Font font = Font.font(20);
+        Text textAssign = new Text(message);
+
+        textAssign.setFont(font);
+        textAssign.setFill(Color.WHITE);
+
+        textAssign.setTextAlignment(TextAlignment.LEFT);
+        dialogText.getChildren().clear();
+        dialogText.getChildren().add(textAssign);
+    }
+
     @Override
     public boolean addTable(List<String> dataName, List<String> tipeForEach, TextFlow dialogText, ImageView assistent) {
         StringBuilder sb = new StringBuilder();
@@ -49,17 +62,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (Statement pST = conect.createStatement()){
             pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
-            FrameController.framesView(assistent, 0);
 
-            Font font = Font.font(20);
-            Text textAssign = new Text("Tabla agregada");
-
-            textAssign.setFont(font);
-            textAssign.setFill(Color.WHITE);
-
-            textAssign.setTextAlignment(TextAlignment.LEFT);
-            dialogText.getChildren().clear();
-            dialogText.getChildren().add(textAssign);
+            dialogGenerator(assistent,1,dialogText, "Has agregado la tabla");
 
             return true;
         }catch (SQLException e){
@@ -86,7 +90,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                     }else {
                         sb.append(lStr.get(i));
                     }
-
                     i++;
                     if (i > lStr.size() -1){
                         System.out.println("Sigo");
@@ -101,7 +104,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             }
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
-                System.out.println("Introducido");
+            dialogGenerator(assistent,1,dialogText, "se ha insertado la data a la tabla " + titleTable);
                 return true;
         }catch (SQLException e){
                 System.err.println(e);
@@ -145,7 +148,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
-            System.out.println("Ejecutado");
+            dialogGenerator(assistent,1,dialogText, "Se han actualizado los datos seleccionados");
+
             System.out.println(sb.toString());
         }catch (SQLException e){
             System.err.println(e);
@@ -194,7 +198,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
-            System.out.println(sb.toString());
+            dialogGenerator(assistent,1,dialogText, "Se ha eliminado la data seleccionada");
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
@@ -278,7 +282,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         sql = "DROP TABLE " + tableName + ";";
         try (Statement st = conect.createStatement()){
             st.executeUpdate(sql);
-            System.out.println("Eliminado");
+            dialogGenerator(assistent,0,dialogText, "Se ha eliminado la tabla " + tableName);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -392,41 +396,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         anchorPaneForAddTables.getChildren().add(pane);
 
-    }
-    private static StringBuilder sbForInsertData(String titleTable) {
-        int j = numberDataColumns(titleTable);
-        String dataName;
-        StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO " + titleTable).append(" VALUES (");
-
-        try (Statement st = conect.createStatement()){
-            sql = "DESCRIBE " + titleTable +" ;";
-            ResultSet rst = st.executeQuery(sql);
-            int i = 0;
-            while (rst.next()) {
-                if(rst.getString(2).equalsIgnoreCase("text") || rst.getString(2).contains("varchar")) {
-                    sb.append("\"");
-                    dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser (Comillas no importan): " + rst.getString(2));
-                    sb.append(dataName);
-                    sb.append("\"");
-                }else {
-                    dataName = JOptionPane.showInputDialog("Introduce el contenido de la data que debe de ser: " + rst.getString(2));
-                    sb.append(dataName);
-                }
-
-                i++;
-                if (i > j -1){
-                    System.out.println("Sigo");
-                }else{
-                    sb.append(", ");
-                }
-            }
-            System.out.println(i);
-            sb.append(" );");
-        }catch (SQLException e){
-            System.err.println(e);
-        }
-        return sb;
     }
 
     public static void autoGenerateTextFields(String titleTable, AnchorPane anh, Pane pane){if (pane == null) {

@@ -9,6 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
@@ -306,6 +310,8 @@ public class MenuController_All {
         putPointsAndVisible(true);
         visibilityAssistent(true);
         visualizerMethod(2);
+        TablesFunctions.dialogGenerator(assistent,1,dialogText,"Estas accediendo a agregar tablas y datos, selecciona que quieres hacer");
+
     }
 
     //----Funciones de agregar tabla----//
@@ -465,6 +471,9 @@ public class MenuController_All {
 
     TablesFunctions.fillerBox(comboBoxForEdit);
 
+    TablesFunctions.dialogGenerator(assistent,1,dialogText,"Has accedido a editar o eliminar datos");
+
+
     comboBoxForEdit.setOnAction( e -> {
         TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
         paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
@@ -512,10 +521,11 @@ public class MenuController_All {
     singleTableEdit.setOnMouseClicked(e -> {
             //Esto devuelve una lista de objetos de esa fila, siendo primero necesitamos setear, que se debe de obtener del modelo la fila seccionada
             //Lo que devuelve un valor
-        TablePosition<ObservableList<String>,String> position = singleTableEdit.getSelectionModel().getSelectedCells().get(0);
+        try {
+            TablePosition<ObservableList<String>, String> position = singleTableEdit.getSelectionModel().getSelectedCells().get(0);
             //Luego, usamos ese valor para llamar a los items de la posicion seleccionada
             valuesForMe = singleTableEdit.getItems().get(position.getRow());
-            nameOfData = TablesFunctions.giverName(comboBoxForEdit.getValue(), dialogText ,assistent);
+            nameOfData = TablesFunctions.giverName(comboBoxForEdit.getValue(), dialogText, assistent);
 
             StringBuilder sb = new StringBuilder();
             System.out.println(valuesForMe);
@@ -533,7 +543,18 @@ public class MenuController_All {
             }
             buttonForEditData.setDisable(false);
             System.out.println(sb.toString());
+        }catch (IndexOutOfBoundsException err){
+            FrameController.framesView(assistent, 3);
+            Font font = Font.font(20);
+            Text textAssign = new Text("No hay data en esa tabla amigo... que haces?");
 
+            textAssign.setFont(font);
+            textAssign.setFill(Color.WHITE);
+
+            textAssign.setTextAlignment(TextAlignment.LEFT);
+            dialogText.getChildren().clear();
+            dialogText.getChildren().add(textAssign);
+        }
         });
 
 
@@ -556,6 +577,8 @@ public class MenuController_All {
         visualizerMethod(4);
 
         TablesFunctions.fillerBox(tablesForSearch);
+
+        TablesFunctions.dialogGenerator(assistent,1,dialogText, "Estas accediendo a la busqueda de tablas. Si pones un dato en esa tabla y coincide, te mostrar el dato, si no pones nada te los mostrará todo.");
 
         tablesForSearch.setOnAction( e -> {
             paneForSearchFields.getChildren().removeIf( i -> i instanceof TextField);
@@ -594,7 +617,9 @@ public class MenuController_All {
 
         TablesFunctions.fillerBox(comboxOfTablesForDelete);
 
-        comboxOfTablesForDelete.setOnAction(event -> {
+        TablesFunctions.dialogGenerator(assistent,1,dialogText,"Estas accediendo a la funcion de eliminar tablas");
+
+                comboxOfTablesForDelete.setOnAction(event -> {
             labelSelectedTable.setText("you selected :" + comboxOfTablesForDelete.getValue());
             buttonForDeleteTable.setDisable(false);
         });
