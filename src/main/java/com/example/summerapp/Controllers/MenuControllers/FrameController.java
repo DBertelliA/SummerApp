@@ -35,7 +35,7 @@ public class FrameController {
 
         switch (i) {
             case 0 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/newHappy-Colored.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/reHappy.jpg"))));
             }
             case 1 -> {
                 executionEgg.stop();
@@ -43,7 +43,7 @@ public class FrameController {
 
                 pT.stop();
 
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/new_Colored_neutral.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/reNeutral.jpg"))));
                 KeyFrame kNew = new KeyFrame(Duration.seconds(1), e -> {
                     Random nRandom = new Random();
                     int r = nRandom.nextInt(100)+1;
@@ -76,10 +76,10 @@ public class FrameController {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/Mad.jpg"))));
             }
             case 6 -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/ups.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/reUps.jpg"))));
             }
             default -> {
-                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/Error.jpg"))));
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Colored/reError.jpg"))));
             }
         }
     }
