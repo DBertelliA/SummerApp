@@ -2,6 +2,7 @@ package com.example.summerapp.Interface.Functions;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
 import com.example.summerapp.Controllers.MenuControllers.FrameController;
+import com.example.summerapp.History.HelperStringHistory;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -63,12 +64,15 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
 
-            dialogGenerator(assistent,1,dialogText, "Has agregado la tabla");
+            dialogGenerator(assistent,1,dialogText, "Has agregado la tabla " + dataName.get(0));
+
+            HelperStringHistory.historyMaker("Se ha generado la tabla " + dataName.get(0));
 
             return true;
         }catch (SQLException e){
             System.err.println(sb.toString());
             System.err.println(e);
+            System.out.println("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + dataName.get(0) + " ... No se ha podido &&&&");
         }
         return false;
     }
@@ -104,11 +108,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             }
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
-            dialogGenerator(assistent,1,dialogText, "se ha insertado la data a la tabla " + titleTable);
+                dialogGenerator(assistent,1,dialogText, "se ha insertado la data a la tabla " + titleTable);
+                HelperStringHistory.historyMaker("Se ha insertado la datos a la tabla " + titleTable);
                 return true;
         }catch (SQLException e){
                 System.err.println(e);
                 System.err.println(sb.toString());
+            HelperStringHistory.historyMaker("&&&&& No se ha podido insertar los datos a la tabla " + titleTable + " &&&&&");
         }
         return false;
     }
@@ -149,11 +155,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
             dialogGenerator(assistent,1,dialogText, "Se han actualizado los datos seleccionados");
+            HelperStringHistory.historyMaker("Se han actualizado los datos de la tabla " + tableName);
 
             System.out.println(sb.toString());
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
+            HelperStringHistory.historyMaker("No se han podido actualizar los datos de la tabla " + tableName);
         }
 
     }
@@ -199,9 +207,11 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
             dialogGenerator(assistent,1,dialogText, "Se ha eliminado la data seleccionada");
+            HelperStringHistory.historyMaker("Se han eliminado unos datos de la tabla " + tableName);
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
+            HelperStringHistory.historyMaker("No se han podido eliminar unos datos de la tabla " + tableName);
         }
 
     }
@@ -264,6 +274,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
                 tableShower.getItems().add(fila);
             }
+            HelperStringHistory.historyMaker("Un usuario ha buscado unos datos en " + tableName);
             return sb.toString();
         }
         catch (SQLException e){
@@ -283,6 +294,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (Statement st = conect.createStatement()){
             st.executeUpdate(sql);
             dialogGenerator(assistent,0,dialogText, "Se ha eliminado la tabla " + tableName);
+            HelperStringHistory.historyMaker("Se ha eliminado la tabla " + tableName);
             return true;
         }catch (SQLException e){
             System.err.println(e);
