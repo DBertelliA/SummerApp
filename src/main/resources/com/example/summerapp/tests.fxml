@@ -51,18 +51,8 @@
          <children>
 
 
-            <AnchorPane fx:id="anchorPaneTablesAdd" disable="true" layoutX="35.0" layoutY="123.0" prefHeight="296.0" prefWidth="753.0" style="-fx-border-color: green;" visible="false">
+            <AnchorPane fx:id="anchorPaneTablesAdd" disable="true" layoutX="35.0" layoutY="121.0" prefHeight="296.0" prefWidth="729.0" style="-fx-border-color: green;" visible="false">
                <children>
-                  <Pane fx:id="paneNameTable" layoutY="1.0" prefHeight="80.0" prefWidth="378.0" style="-fx-border-color: blue;">
-                     <children>
-                        <TextField fx:id="titleTable" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="298.0" promptText="nombreTabla" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="paneNumberData" layoutX="379.0" layoutY="-2.0" prefHeight="80.0" prefWidth="372.0" style="-fx-border-color: yellow;">
-                     <children>
-                        <Spinner fx:id="numberValues" layoutX="8.0" layoutY="29.0" prefHeight="27.0" prefWidth="107.0" />
-                     </children>
-                  </Pane>
                   <Button fx:id="buttonForNext2" layoutX="289.0" layoutY="257.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="AgregarTabla" />
                   <Button fx:id="buttonForNext1" layoutX="39.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" text="Siguiente" />
                   <Button fx:id="buttonForBack" layoutX="526.0" layoutY="256.0" mnemonicParsing="false" onAction="#backButton" prefHeight="28.0" prefWidth="200.0" text="Atras" />
@@ -85,6 +75,16 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="paneNumberData" layoutX="476.0" layoutY="137.0" prefHeight="61.0" prefWidth="228.0" style="-fx-border-color: yellow;">
+               <children>
+                  <Spinner fx:id="numberValues" layoutX="8.0" layoutY="29.0" prefHeight="27.0" prefWidth="107.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="paneNameTable" layoutX="59.0" layoutY="136.0" prefHeight="61.0" prefWidth="423.0" style="-fx-border-color: blue;">
+               <children>
+                  <TextField fx:id="titleTable" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="298.0" promptText="nombreTabla" />
                </children>
             </Pane>
 

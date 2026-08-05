@@ -8,3 +8,18 @@
 [2/8/2026] - 19:0:43 - Un usuario ha buscado unos datos en bb. 
 [2/8/2026] - 19:0:43 - Un usuario ha buscado unos datos en bb. 
 [2/8/2026] - 19:0:48 - Se ha eliminado la tabla tablaTesting. 
+[5/8/2026] - 9:32:10 - Se ha generado la tabla testing2. 
+[5/8/2026] - 9:32:40 - &&&&& No se ha podido insertar los datos a la tabla testing2 &&&&&. 
+[5/8/2026] - 9:33:2 - Se ha insertado la datos a la tabla testing2. 
+[5/8/2026] - 9:34:57 - Se ha generado la tabla qqq. 
+[5/8/2026] - 9:41:25 - Se ha generado la tabla aaacv. 
+[5/8/2026] - 9:50:32 - Se ha generado la tabla vv. 
+[5/8/2026] - 9:50:40 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[5/8/2026] - 9:57:26 - Se ha generado la tabla dam. 
+[5/8/2026] - 10:2:35 - Se ha generado la tabla sda. 
+[5/8/2026] - 10:11:54 - Se ha eliminado la tabla vv. 
+[5/8/2026] - 10:11:57 - Se ha eliminado la tabla sda. 
+[5/8/2026] - 10:11:58 - Se ha eliminado la tabla qqq. 
+[5/8/2026] - 10:12:1 - Se ha eliminado la tabla aaacv. 
+[5/8/2026] - 10:12:3 - Se ha eliminado la tabla bb. 
+[5/8/2026] - 10:26:26 - Se ha generado la tabla vas. 

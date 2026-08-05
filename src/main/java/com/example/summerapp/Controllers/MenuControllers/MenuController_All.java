@@ -124,6 +124,8 @@ public class MenuController_All {
 
     private List<String> nameOfData;
 
+    private int oneOrC = 0;
+
     private void visualizerMethod(int place){
         //True: para ver y habilitar
         //False: para ocultar y deshabilitar
@@ -303,6 +305,7 @@ public class MenuController_All {
     }
 
     public void addButton() {
+
         if (!inited) {
             FrameController.initAssist(dialogText, assistent);
             inited = true;
@@ -310,14 +313,20 @@ public class MenuController_All {
         putPointsAndVisible(true);
         visibilityAssistent(true);
         visualizerMethod(2);
-        TablesFunctions.dialogGenerator(assistent,1,dialogText,"Estas accediendo a agregar tablas y datos, selecciona que quieres hacer");
-
+        if (oneOrC == 0) {
+            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "Has accedido a las funciones para añadir tablas o datos");
+        }else if (oneOrC == 1){
+            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "Se ha agregado la tabla");
+            oneOrC = 0;
+        }
     }
 
     //----Funciones de agregar tabla----//
 
     public void addTable(){
+        numberValues.setDisable(false);
         buttonForNext2.setDisable(true);
+        buttonForNext1.setDisable(false);
         AtomicInteger fish = new AtomicInteger();
         fish.set(0);
         anchorPaneForDeleteTable.setVisible(false);
@@ -352,8 +361,14 @@ public class MenuController_All {
                     TablesFunctions.panesAdder(anchorPaneTablesAdd, numberValues.getValue(), fish.get());
                 }
                 fish.getAndIncrement();
-                if (fish.get() == numberValues.getValue()){
+                if (fish.get() == numberValues.getValue()+1){
                     buttonForNext2.setDisable(false);
+                    for (Node n : anchorPaneTablesAdd.getChildren()){
+                        if (n instanceof Pane pa) {
+                            pa.setDisable(true);
+                            buttonForNext1.setDisable(true);
+                        }
+                    }
                 }
             }else{
                 System.out.println("no");
@@ -382,17 +397,23 @@ public class MenuController_All {
                 }
             }
             tACF.addTable(listDataToForm,listOfTypes, dialogText ,assistent);
+            anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
+            titleTable.clear();
+
+            oneOrC = 1;
             addButton();
 
         });
         buttonForBack.setOnAction( e -> {
-            addButton();
             anchorPaneTablesAdd.setVisible(false);
             anchorPaneTablesAdd.setDisable(true);
 
             paneSelector.setDisable(false);
             paneSelector.setVisible(true);
             selectorOptions.setDisable(false);
+            anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
+            titleTable.clear();
+            addButton();
         });
 
     }

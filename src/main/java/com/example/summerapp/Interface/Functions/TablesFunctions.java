@@ -72,7 +72,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }catch (SQLException e){
             System.err.println(sb.toString());
             System.err.println(e);
-            System.out.println("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + dataName.get(0) + " ... No se ha podido &&&&");
+            HelperStringHistory.historyMaker("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + dataName.get(0) + " ... No se ha podido &&&&");
         }
         return false;
     }
@@ -114,6 +114,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }catch (SQLException e){
                 System.err.println(e);
                 System.err.println(sb.toString());
+            dialogGenerator(assistent,1,dialogText, "No se ha insertado la data a la tabla " + titleTable);
             HelperStringHistory.historyMaker("&&&&& No se ha podido insertar los datos a la tabla " + titleTable + " &&&&&");
         }
         return false;
@@ -162,6 +163,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             System.err.println(e);
             System.err.println(sb.toString());
             HelperStringHistory.historyMaker("No se han podido actualizar los datos de la tabla " + tableName);
+            dialogGenerator(assistent,1,dialogText, "NO se han actualizado los datos seleccionados");
         }
 
     }
@@ -212,6 +214,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             System.err.println(e);
             System.err.println(sb.toString());
             HelperStringHistory.historyMaker("No se han podido eliminar unos datos de la tabla " + tableName);
+            dialogGenerator(assistent,1,dialogText, "No se ha podido eliminar la data seleccionada");
         }
 
     }
