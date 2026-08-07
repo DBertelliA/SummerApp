@@ -41,14 +41,14 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public boolean addTable(List<String> dataName, List<String> tipeForEach, TextFlow dialogText, ImageView assistent) {
+    public boolean addTable(List<String> dataName, List<String> tipeForEach, String tableName, TextFlow dialogText, ImageView assistent) {
         StringBuilder sb = new StringBuilder();
 
         //En tipeForEach: Lista unica con dos valores diferentes, impar, tipo de dato, par tipo de llave
 
-        sb.append("CREATE TABLE ").append(dataName.get(0)).append("( \n");
+        sb.append("CREATE TABLE ").append(tableName).append("( \n");
         int j = 0;
-        for (int i = 1; i < dataName.size(); i++) {
+        for (int i = 0; i < dataName.size(); i++) {
             sb.append(dataName.get(i)).append(" ");
             for (int p = 0; p < 2; p++) {
                 sb.append(tipeForEach.get(j)).append(" ");
@@ -64,9 +64,9 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
 
-            dialogGenerator(assistent,1,dialogText, "Has agregado la tabla " + dataName.get(0));
+            dialogGenerator(assistent,1,dialogText, "Has agregado la tabla " + tableName);
 
-            HelperStringHistory.historyMaker("Se ha generado la tabla " + dataName.get(0));
+            HelperStringHistory.historyMaker("Se ha generado la tabla " + tableName);
 
             return true;
         }catch (SQLException e){

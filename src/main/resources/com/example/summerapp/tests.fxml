@@ -84,7 +84,7 @@
             </Pane>
             <Pane fx:id="paneNameTable" layoutX="59.0" layoutY="136.0" prefHeight="61.0" prefWidth="423.0" style="-fx-border-color: blue;">
                <children>
-                  <TextField fx:id="titleTable" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="298.0" promptText="nombreTabla" />
+                  <TextField fx:id="titleTable" layoutX="19.0" layoutY="12.0" prefHeight="39.0" prefWidth="298.0" promptText="nombreTabla" />
                </children>
             </Pane>
 

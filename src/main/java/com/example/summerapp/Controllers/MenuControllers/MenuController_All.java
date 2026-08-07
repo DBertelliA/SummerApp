@@ -396,7 +396,7 @@ public class MenuController_All {
                     }
                 }
             }
-            tACF.addTable(listDataToForm,listOfTypes, dialogText ,assistent);
+            tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent);
             anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
             titleTable.clear();
 
@@ -593,6 +593,7 @@ public class MenuController_All {
             FrameController.initAssist(dialogText, assistent);
             inited = true;
         }
+        buttonForSearch.setDisable(true);
         putPointsAndVisible(true);
         visibilityAssistent(true);
         visualizerMethod(4);
@@ -605,6 +606,7 @@ public class MenuController_All {
             paneForSearchFields.getChildren().removeIf( i -> i instanceof TextField);
             tableShowDataSelected.getColumns().clear();
             tableShowDataSelected.getItems().clear();
+            buttonForSearch.setDisable(false);
             TablesFunctions.autoGenerateTextFields(tablesForSearch.getValue(),null,paneForSearchFields);
         });
 

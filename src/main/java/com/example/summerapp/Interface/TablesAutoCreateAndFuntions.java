@@ -9,7 +9,7 @@ import javafx.scene.text.TextFlow;
 import java.util.List;
 
 public interface TablesAutoCreateAndFuntions { //Too loong
-    public boolean addTable(List<String> dataName, List<String> tipeForEach, TextFlow dialogText, ImageView assistent);
+    public boolean addTable(List<String> dataName, List<String> tipeForEach, String tableName, TextFlow dialogText, ImageView assistent);
     public boolean insertData(String titleTable, List<String> lStr, TextFlow dialogText, ImageView assistent);
     public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore, TextFlow dialogText, ImageView assistent);
     public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName, TextFlow dialogText, ImageView assistent);
