@@ -1,6 +1,7 @@
 package com.example.summerapp.Interface.Functions;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
+import com.example.summerapp.Controllers.MenuControllers.ErrorReactionsFramesController;
 import com.example.summerapp.Controllers.MenuControllers.FrameController;
 import com.example.summerapp.History.HelperStringHistory;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
@@ -24,6 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TablesFunctions implements TablesAutoCreateAndFuntions {
+    private static ErrorReactionsFramesController err;
+    public TablesFunctions(ErrorReactionsFramesController err) {
+        TablesFunctions.err = err;
+    }
+
     static Connection conect = ConnectionMySQL.getInstance();
     static String sql;
 
@@ -72,7 +78,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         }catch (SQLException e){
             System.err.println(sb.toString());
             System.err.println(e);
-            HelperStringHistory.historyMaker("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + dataName.get(0) + " ... No se ha podido &&&&");
+            HelperStringHistory.historyMaker("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + tableName + " ... No se ha podido &&&&");
+
+            if (e.getMessage().contains("already exists")) {
+                System.out.println("Entro");
+                err.setNumberErr(1);
+                err.setWhereErr(1);
+            }
         }
         return false;
     }

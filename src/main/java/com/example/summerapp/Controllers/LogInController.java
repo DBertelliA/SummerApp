@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LogInController {
-    TablesAutoCreateAndFuntions tACAF = new TablesFunctions();
-
     @FXML
     private Label confirmText;
 

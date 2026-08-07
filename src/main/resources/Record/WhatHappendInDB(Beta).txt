@@ -40,3 +40,33 @@
 [7/8/2026] - 10:32:33 - Se ha eliminado la tabla aWSD. 
 [7/8/2026] - 10:32:36 - Se ha eliminado la tabla aws2. 
 [7/8/2026] - 10:32:38 - Se ha eliminado la tabla cc. 
+[7/8/2026] - 10:37:26 - &&&&& Se ha intentado agregar una nueva tabla con el nombrevv ... No se ha podido &&&&. 
+[7/8/2026] - 10:44:24 - &&&&& No se ha podido insertar los datos a la tabla null &&&&&. 
+[7/8/2026] - 11:53:31 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 11:54:11 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 12:9:20 - Se ha generado la tabla new. 
+[7/8/2026] - 12:10:30 - &&&&& Se ha intentado agregar una nueva tabla con el nombrenew ... No se ha podido &&&&. 
+[7/8/2026] - 12:12:10 - &&&&& Se ha intentado agregar una nueva tabla con el nombrenew ... No se ha podido &&&&. 
+[7/8/2026] - 12:12:52 - &&&&& Se ha intentado agregar una nueva tabla con el nombrenew ... No se ha podido &&&&. 
+[7/8/2026] - 12:13:36 - &&&&& Se ha intentado agregar una nueva tabla con el nombrenew ... No se ha podido &&&&. 
+[7/8/2026] - 12:14:25 - &&&&& Se ha intentado agregar una nueva tabla con el nombrenew ... No se ha podido &&&&. 
+[7/8/2026] - 12:16:51 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[7/8/2026] - 12:17:34 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[7/8/2026] - 12:18:52 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[7/8/2026] - 12:19:0 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[7/8/2026] - 12:20:42 - Se ha generado la tabla new2. 
+[7/8/2026] - 12:20:58 - Se ha eliminado la tabla new2. 
+[7/8/2026] - 12:21:0 - Se ha eliminado la tabla new. 
+[7/8/2026] - 12:22:6 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[7/8/2026] - 12:22:25 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[7/8/2026] - 12:47:58 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 12:49:17 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 12:50:28 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:10:5 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:16:48 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:18:17 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:33:56 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:33:57 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:33:59 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:37:57 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 
+[7/8/2026] - 13:38:41 - &&&&& Se ha intentado agregar una nueva tabla con el nombredam ... No se ha podido &&&&. 

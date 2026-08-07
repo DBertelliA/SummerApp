@@ -21,7 +21,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MenuController_All {
-    TablesAutoCreateAndFuntions tACF = new TablesFunctions();
+    private static ErrorReactionsFramesController err = new ErrorReactionsFramesController();
+    TablesAutoCreateAndFuntions tACF = new TablesFunctions(err);
 
     @FXML public AnchorPane anchorPaneMainMenu;
 
@@ -396,12 +397,36 @@ public class MenuController_All {
                     }
                 }
             }
-            tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent);
-            anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
-            titleTable.clear();
+            if(!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent)){
+                FrameController.framesView(assistent, 3);
+                Font font = Font.font(20);
+                Text textAssign = new Text("Error(1)");
 
-            oneOrC = 1;
-            addButton();
+                textAssign.setFont(font);
+                textAssign.setFill(Color.WHITE);
+
+                textAssign.setTextAlignment(TextAlignment.LEFT);
+                dialogText.getChildren().clear();
+                dialogText.getChildren().add(textAssign);
+
+                AtomicInteger i = new AtomicInteger();
+                assistent.setOnMouseClicked( c -> {
+                    err.errorWarning(dialogText, assistent, i.get());
+                    i.getAndIncrement();
+                    if (i.get() > 5){
+                        anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
+                        titleTable.clear();
+                        oneOrC = 0;
+                        addButton();
+                    }
+                });
+
+                }else {
+                    anchorPaneTablesAdd.getChildren().removeIf(p -> p instanceof Pane);
+                    titleTable.clear();
+                    oneOrC = 1;
+                    addButton();
+                }
 
         });
         buttonForBack.setOnAction( e -> {
