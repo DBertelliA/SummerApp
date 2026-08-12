@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +18,7 @@ import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -35,6 +37,8 @@ public class MenuController_All {
     //------Asistente-----//
 
     @FXML public ImageView assistent;
+
+    @FXML public ImageView assistentErrorF;
 
     @FXML public TextFlow dialogText;
 
@@ -128,8 +132,8 @@ public class MenuController_All {
     private int oneOrC = 0;
 
     private void visualizerMethod(int place){
-        //True: para ver y habilitar
-        //False: para ocultar y deshabilitar
+        assistentErrorF.setDisable(true);
+        assistentErrorF.setVisible(false);
         turnerOff();
         switch (place){
             case 1 -> {
@@ -397,10 +401,13 @@ public class MenuController_All {
                     }
                 }
             }
-            if(!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent)){
+            if
+            (!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent, numberValues))
+            {
                 FrameController.framesView(assistent, 3);
                 Font font = Font.font(20);
                 Text textAssign = new Text("Error(1)");
+                assistent.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/Mad.jpg"))));
 
                 textAssign.setFont(font);
                 textAssign.setFill(Color.WHITE);
@@ -410,18 +417,24 @@ public class MenuController_All {
                 dialogText.getChildren().add(textAssign);
 
                 AtomicInteger i = new AtomicInteger();
-                assistent.setOnMouseClicked( c -> {
-                    err.errorWarning(dialogText, assistent, i.get());
+
+                assistentErrorF.setDisable(false);
+                assistentErrorF.setVisible(true);
+                assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
+                    assistent.setDisable(true);
+                    assistent.setVisible(false);
+                    err.errorWarning(dialogText, assistentErrorF, i.get());
                     i.getAndIncrement();
                     if (i.get() > 5){
                         anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
                         titleTable.clear();
                         oneOrC = 0;
+                        assistent.setDisable(false);
+                        assistent.setVisible(true);
                         addButton();
                     }
-                });
-
-                }else {
+                });}
+                else {
                     anchorPaneTablesAdd.getChildren().removeIf(p -> p instanceof Pane);
                     titleTable.clear();
                     oneOrC = 1;

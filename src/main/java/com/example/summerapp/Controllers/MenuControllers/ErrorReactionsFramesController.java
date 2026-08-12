@@ -1,11 +1,14 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.scene.image.ImageView;
+
+import java.util.Objects;
 
 public class ErrorReactionsFramesController {
     public int whereErr = 1;
@@ -33,6 +36,7 @@ public class ErrorReactionsFramesController {
             case 1 ->{ //AddTable or data
                 switch (getNumberErr()){
                     case 1 -> {
+                        assistant.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/EasterEggs/KatSmoking.jpg"))));
                         //Same name as other table
                         String[] dialogs = new String[]{"Hey...",
                                 "There is other table with the same name, so...",
@@ -50,7 +54,7 @@ public class ErrorReactionsFramesController {
                         textTalk.setTextAlignment(TextAlignment.LEFT);
                         text.getChildren().clear();
                         text.getChildren().add(textTalk);
-
+                        break;
 
                     }
                     case 2 -> {
@@ -69,6 +73,7 @@ public class ErrorReactionsFramesController {
 
 
                     } default -> {
+                        assistant.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/EasterEggs/KatSmoking.jpg"))));
                         Text textTalk = new Text("Generic error");
 
                         textTalk.setFont(new Font(20));
@@ -77,6 +82,7 @@ public class ErrorReactionsFramesController {
                         textTalk.setTextAlignment(TextAlignment.LEFT);
                         text.getChildren().clear();
                         text.getChildren().add(textTalk);
+                        break;
                     }
                 }
             }

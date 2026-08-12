@@ -47,7 +47,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public boolean addTable(List<String> dataName, List<String> tipeForEach, String tableName, TextFlow dialogText, ImageView assistent) {
+    public boolean addTable(List<String> dataName, List<String> tipeForEach, String tableName, TextFlow dialogText, ImageView assistent, Spinner<Integer> numberValues) {
         StringBuilder sb = new StringBuilder();
 
         //En tipeForEach: Lista unica con dos valores diferentes, impar, tipo de dato, par tipo de llave
@@ -76,14 +76,41 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
             return true;
         }catch (SQLException e){
+            boolean switcher = false;
             System.err.println(sb.toString());
             System.err.println(e);
             HelperStringHistory.historyMaker("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + tableName + " ... No se ha podido &&&&");
 
-            if (e.getMessage().contains("already exists")) {
-                System.out.println("Entro");
+            if(tableName.isEmpty()){
+                System.out.println("Entró al no title");
+                err.setNumberErr(4);
+                err.setWhereErr(4);
+                switcher = true;
+            }
+
+            if (e.getMessage().contains("already exists") && !switcher) {
+                System.out.println("Entro al del nombre de la tabla");
                 err.setNumberErr(1);
                 err.setWhereErr(1);
+                switcher = true;
+            }
+
+            if (!switcher) {
+                for (int i = 0; i < dataName.size(); i++) {
+                    if (dataName.get(i).isEmpty()) {
+                        System.out.println("Entró al diferencial");
+                        err.setNumberErr(2);
+                        err.setWhereErr(2);
+                        switcher = true;
+                        break;
+                    }
+                }
+            }
+            if(!switcher) {
+                System.out.println("Entró al del combox");
+                err.setNumberErr(3);
+                err.setWhereErr(3);
+                switcher = true;
             }
         }
         return false;
