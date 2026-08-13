@@ -420,17 +420,19 @@ public class MenuController_All {
 
                 assistentErrorF.setDisable(false);
                 assistentErrorF.setVisible(true);
+                buttonForNext2.setDisable(true);
                 assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
                     assistent.setDisable(true);
                     assistent.setVisible(false);
                     err.errorWarning(dialogText, assistentErrorF, i.get());
                     i.getAndIncrement();
-                    if (i.get() > 5){
+                    if (i.get() > err.getCount()){
                         anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
                         titleTable.clear();
                         oneOrC = 0;
                         assistent.setDisable(false);
                         assistent.setVisible(true);
+                        buttonForNext2.setDisable(false);
                         addButton();
                     }
                 });}

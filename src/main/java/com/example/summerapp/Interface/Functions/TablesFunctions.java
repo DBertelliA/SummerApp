@@ -67,6 +67,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         sb.append(");");
 
         try (Statement pST = conect.createStatement()){
+            if (tableName.isEmpty()){throw new SQLException("bruh");}
+            if (sb.toString().contains("null")){throw new SQLException("a");}
             pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
 
@@ -81,10 +83,12 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             System.err.println(e);
             HelperStringHistory.historyMaker("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + tableName + " ... No se ha podido &&&&");
 
+            //err count es el numero de dialogos de cada error y debe coincidir con la cantidad de la lista con la cantidad impuesta -1 (el ultimo dialogo suelen ser puntos suspensivos)
             if(tableName.isEmpty()){
                 System.out.println("Entró al no title");
                 err.setNumberErr(4);
-                err.setWhereErr(4);
+                err.setWhereErr(1);
+                err.setCount(4);
                 switcher = true;
             }
 
@@ -92,6 +96,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                 System.out.println("Entro al del nombre de la tabla");
                 err.setNumberErr(1);
                 err.setWhereErr(1);
+                err.setCount(5);
                 switcher = true;
             }
 
@@ -100,7 +105,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                     if (dataName.get(i).isEmpty()) {
                         System.out.println("Entró al diferencial");
                         err.setNumberErr(2);
-                        err.setWhereErr(2);
+                        err.setWhereErr(1);
+                        err.setCount(11);
                         switcher = true;
                         break;
                     }
@@ -109,7 +115,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             if(!switcher) {
                 System.out.println("Entró al del combox");
                 err.setNumberErr(3);
-                err.setWhereErr(3);
+                err.setWhereErr(1);
+                err.setCount(5);
                 switcher = true;
             }
         }
