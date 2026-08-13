@@ -19,6 +19,7 @@ import javafx.scene.text.TextFlow;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -78,6 +79,8 @@ public class MenuController_All {
     @FXML public ComboBox<String> comboxTable;
 
     @FXML public Label labelIndicate;
+
+    @FXML public Button buttonForAddData;
 
     //--------Editar y eliminar datos----------//
 
@@ -470,21 +473,49 @@ public class MenuController_All {
 
     //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
     public void addData(){
+        buttonForAddData.setDisable(true);
         paneSelector.setDisable(true);
         paneSelector.setVisible(false);
         selectorOptions.setDisable(true);
 
         anchorPaneAddData.getChildren().removeIf( e -> e instanceof TextField);
-        //o puedo reusar el metodo de la autocreacion de campos
-        //para que me devuelva una lista que recoja esos campos y que remueva toda esa lista que le pasé
-        //lo primero es lo mas sencillo y muy util para todo
+
         anchorPaneAddData.setDisable(false);
         anchorPaneAddData.setVisible(true);
         comboxTable.setVisible(true);
         comboxTable.setDisable(false);
-        comboxTable.setOnAction(i -> {
+
+        comboxTable.setOnAction(p -> {
             anchorPaneAddData.getChildren().removeIf(e -> e instanceof TextField);
             updateForAdd();
+            buttonForAddData.setDisable(true);
+            for (Node n : anchorPaneAddData.getChildren()) {
+                if (n instanceof TextField t) {
+
+
+                    t.textProperty().addListener((obs,oldText, newText) -> {
+
+                        AtomicBoolean allFilled = new AtomicBoolean(false);
+
+                        for (Node i : anchorPaneAddData.getChildren()) {
+                            if (i instanceof TextField tf) {
+                                if (tf.getText().isEmpty()){
+                                    allFilled.set(false);
+                                }else {
+                                    allFilled.set(true);
+                                }
+                                System.out.println("El filled es " + allFilled.toString());
+                                if (allFilled.get()) {
+                                    buttonForAddData.setDisable(false);
+                                } else {
+                                    buttonForAddData.setDisable(true);
+                                }
+                            }
+
+                        }
+                    });
+                }
+            }
         });
     }
 
@@ -504,14 +535,15 @@ public class MenuController_All {
         boolean che = tACF.insertData(comboxTable.getValue(),lStr, dialogText ,assistent);
         if (che) {
             TablesFunctions.autoGenerateTextFields(comboxTable.getValue(), anchorPaneAddData, null);
-            backInit(true);
             labelIndicate.setText("...");
+            buttonForAddData.setDisable(true);
+            backInit(true);
         }
     }
 
     public void backButtonInAddData(){
-        backInit(true);
         labelIndicate.setText("...");
+        backInit(true);
     }
     //------------------------------------------------------//
     //---------------------

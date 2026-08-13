@@ -113,3 +113,7 @@
 [13/8/2026] - 10:14:28 - &&&&& Se ha intentado agregar una nueva tabla con el nombresasa ... No se ha podido &&&&. 
 [13/8/2026] - 10:15:2 - Se ha generado la tabla aaassx. 
 [13/8/2026] - 10:24:10 - &&&&& Se ha intentado agregar una nueva tabla con el nombre ... No se ha podido &&&&. 
+[13/8/2026] - 18:2:29 - Se ha insertado la datos a la tabla tt. 
+[13/8/2026] - 18:3:8 - &&&&& No se ha podido insertar los datos a la tabla null &&&&&. 
+[13/8/2026] - 18:11:38 - Se ha insertado la datos a la tabla tt. 
+[13/8/2026] - 18:46:47 - Se ha insertado la datos a la tabla holaTesting1. 

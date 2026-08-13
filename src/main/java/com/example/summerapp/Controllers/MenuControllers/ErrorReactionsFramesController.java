@@ -146,8 +146,12 @@ public class ErrorReactionsFramesController {
                 }
             }
             case 2 ->{ //Edit data
+                switch (getNumberErr()){
+                 case 1 -> {
+                     //data no correct
 
-
+                 }
+                }
             }
             case 3 ->{ //Search data
 
