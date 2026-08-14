@@ -15,7 +15,7 @@ public class ErrorReactionsFramesController {
 
     public int numberErr;
 
-    public int count;
+    public int count = 1;
 
     public int getCount() {return count;}
 
@@ -50,16 +50,9 @@ public class ErrorReactionsFramesController {
                                 "I didn't spend hours making a place where you can see all the tables for nothing...",
                                 "..."};
                         FrameController.framesView(assistant, 999);
+                        setCount(dialogs.length);
 
-                        Text textTalk = new Text(dialogs[count]);
-
-                        textTalk.setFont(new Font(20));
-                        textTalk.setFill(Color.WHITE);
-
-                        textTalk.setTextAlignment(TextAlignment.LEFT);
-                        text.getChildren().clear();
-                        text.getChildren().add(textTalk);
-                        break;
+                        dialogFormat(text, dialogs[count]);
 
                     }
                     case 2 -> {
@@ -77,15 +70,9 @@ public class ErrorReactionsFramesController {
                                 "...right?",
                                 "..."};
                         FrameController.framesView(assistant, 999);
+                        setCount(dialogs.length);
 
-                        Text textTalk = new Text(dialogs[count]);
-
-                        textTalk.setFont(new Font(20));
-                        textTalk.setFill(Color.WHITE);
-
-                        textTalk.setTextAlignment(TextAlignment.LEFT);
-                        text.getChildren().clear();
-                        text.getChildren().add(textTalk);
+                        dialogFormat(text, dialogs[count]);
                         break;
 
                     }
@@ -99,15 +86,9 @@ public class ErrorReactionsFramesController {
                                 "we can create create tables the null...",
                                 "..."};
                         FrameController.framesView(assistant, 999);
+                        setCount(dialogs.length);
 
-                        Text textTalk = new Text(dialogs[count]);
-
-                        textTalk.setFont(new Font(20));
-                        textTalk.setFill(Color.WHITE);
-
-                        textTalk.setTextAlignment(TextAlignment.LEFT);
-                        text.getChildren().clear();
-                        text.getChildren().add(textTalk);
+                        dialogFormat(text, dialogs[count]);
                         break;
                     }
 
@@ -119,28 +100,15 @@ public class ErrorReactionsFramesController {
                                 "You know exactly what is the problem",
                                 "..."};
                         FrameController.framesView(assistant, 5);
+                        setCount(dialogs.length);
 
-                        Text textTalk = new Text(dialogs[count]);
-
-                        textTalk.setFont(new Font(20));
-                        textTalk.setFill(Color.WHITE);
-
-                        textTalk.setTextAlignment(TextAlignment.LEFT);
-                        text.getChildren().clear();
-                        text.getChildren().add(textTalk);
+                        dialogFormat(text, dialogs[count]);
                         break;
 
 
                     } default -> {
                         assistant.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/EasterEggs/KatSmoking.jpg"))));
-                        Text textTalk = new Text("Generic error of addTables");
-
-                        textTalk.setFont(new Font(20));
-                        textTalk.setFill(Color.WHITE);
-
-                        textTalk.setTextAlignment(TextAlignment.LEFT);
-                        text.getChildren().clear();
-                        text.getChildren().add(textTalk);
+                        dialogFormat(text, "Generic error of addTables");
                         break;
                     }
                 }
@@ -149,6 +117,18 @@ public class ErrorReactionsFramesController {
                 switch (getNumberErr()){
                  case 1 -> {
                      //data no correct
+                     String[] dialogs = new String[]{"...mmmm...",
+                             "I think, you just didn't put the correct format of the data",
+                             "I mean...",
+                             "In the fields, i specify the type of data you need...",
+                             "so",
+                             "What are you doing?",
+                             "..."};
+                     FrameController.framesView(assistant, 5);
+                     setCount(dialogs.length);
+
+                     dialogFormat(text, dialogs[count]);
+                     break;
 
                  }
                 }
@@ -162,18 +142,22 @@ public class ErrorReactionsFramesController {
 
             } default -> {
                 assistant.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/EasterEggs/KatSmoking.jpg"))));
-                Text textTalk = new Text("Generic error");
-
-                textTalk.setFont(new Font(20));
-                textTalk.setFill(Color.WHITE);
-
-                textTalk.setTextAlignment(TextAlignment.LEFT);
-                text.getChildren().clear();
-                text.getChildren().add(textTalk);
+                dialogFormat(text, "Generic error");
                 break;
             }
         }
 
+    }
+
+    public static void dialogFormat(TextFlow text, String dialogs) {
+        Text textTalk = new Text(dialogs);
+
+        textTalk.setFont(new Font(20));
+        textTalk.setFill(Color.WHITE);
+
+        textTalk.setTextAlignment(TextAlignment.LEFT);
+        text.getChildren().clear();
+        text.getChildren().add(textTalk);
     }
 
 }

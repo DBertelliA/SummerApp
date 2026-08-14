@@ -408,16 +408,9 @@ public class MenuController_All {
             (!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent, numberValues))
             {
                 FrameController.framesView(assistent, 3);
-                Font font = Font.font(20);
-                Text textAssign = new Text("Error(1)");
                 assistent.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/Mad.jpg"))));
 
-                textAssign.setFont(font);
-                textAssign.setFill(Color.WHITE);
-
-                textAssign.setTextAlignment(TextAlignment.LEFT);
-                dialogText.getChildren().clear();
-                dialogText.getChildren().add(textAssign);
+                ErrorReactionsFramesController.dialogFormat(dialogText,"Error(1)");
 
                 AtomicInteger i = new AtomicInteger();
 
@@ -425,11 +418,15 @@ public class MenuController_All {
                 assistentErrorF.setVisible(true);
                 buttonForNext2.setDisable(true);
                 assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
+
                     assistent.setDisable(true);
                     assistent.setVisible(false);
+
                     err.errorWarning(dialogText, assistentErrorF, i.get());
+
                     i.getAndIncrement();
-                    if (i.get() > err.getCount()){
+                    System.out.println(err.getCount());
+                    if (i.get() > err.getCount() - 1){
                         anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
                         titleTable.clear();
                         oneOrC = 0;
@@ -473,6 +470,8 @@ public class MenuController_All {
 
     //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
     public void addData(){
+        labelIndicate.setText("...");
+        TablesFunctions.fillerBox(comboxTable);
         buttonForAddData.setDisable(true);
         paneSelector.setDisable(true);
         paneSelector.setVisible(false);
@@ -486,13 +485,14 @@ public class MenuController_All {
         comboxTable.setDisable(false);
 
         comboxTable.setOnAction(p -> {
+            if (comboxTable.getValue() == null){return;}
             anchorPaneAddData.getChildren().removeIf(e -> e instanceof TextField);
             updateForAdd();
             buttonForAddData.setDisable(true);
             for (Node n : anchorPaneAddData.getChildren()) {
                 if (n instanceof TextField t) {
 
-
+                    //We could use set on action, but the problem is that you need to press enter every time so the check can run
                     t.textProperty().addListener((obs,oldText, newText) -> {
 
                         AtomicBoolean allFilled = new AtomicBoolean(false);
@@ -534,10 +534,37 @@ public class MenuController_All {
         }
         boolean che = tACF.insertData(comboxTable.getValue(),lStr, dialogText ,assistent);
         if (che) {
-            TablesFunctions.autoGenerateTextFields(comboxTable.getValue(), anchorPaneAddData, null);
             labelIndicate.setText("...");
             buttonForAddData.setDisable(true);
             backInit(true);
+        }else {
+            FrameController.framesView(assistent, 3);
+            ErrorReactionsFramesController.dialogFormat(dialogText,"Error(2)");
+
+            AtomicInteger i = new AtomicInteger();
+
+            assistentErrorF.setDisable(false);
+            assistentErrorF.setVisible(true);
+            assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
+                assistent.setDisable(true);
+                assistent.setVisible(false);
+
+                err.errorWarning(dialogText, assistentErrorF, i.get());
+
+                i.getAndIncrement();
+
+                System.out.println(err.getCount());
+                if (i.get() > err.getCount() - 1){
+                    assistent.setDisable(false);
+                    assistent.setVisible(true);
+                    assistentErrorF.setDisable(true);
+                    assistentErrorF.setVisible(false);
+
+                    FrameController.framesView(assistent, 1);
+                    addData();
+                }
+            });
+
         }
     }
 

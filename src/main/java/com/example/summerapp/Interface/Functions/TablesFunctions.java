@@ -88,7 +88,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                 System.out.println("Entró al no title");
                 err.setNumberErr(4);
                 err.setWhereErr(1);
-                err.setCount(4);
                 switcher = true;
             }
 
@@ -96,7 +95,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                 System.out.println("Entro al del nombre de la tabla");
                 err.setNumberErr(1);
                 err.setWhereErr(1);
-                err.setCount(5);
                 switcher = true;
             }
 
@@ -106,7 +104,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                         System.out.println("Entró al diferencial");
                         err.setNumberErr(2);
                         err.setWhereErr(1);
-                        err.setCount(11);
                         switcher = true;
                         break;
                     }
@@ -116,7 +113,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                 System.out.println("Entró al del combox");
                 err.setNumberErr(3);
                 err.setWhereErr(1);
-                err.setCount(5);
                 switcher = true;
             }
         }
@@ -162,6 +158,10 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                 System.err.println(sb.toString());
             dialogGenerator(assistent,1,dialogText, "No se ha insertado la data a la tabla " + titleTable);
             HelperStringHistory.historyMaker("&&&&& No se ha podido insertar los datos a la tabla " + titleTable + " &&&&&");
+
+            err.setWhereErr(2);
+            err.setNumberErr(1);
+
         }
         return false;
     }
@@ -407,8 +407,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     public static void panesAdder(AnchorPane anchorPaneForAddTables, int valueSpin, int fish){
         Pane pane = new Pane();
-        ObservableList<String> listType = FXCollections.observableArrayList("VARCHAR(50)","INTEGER","DOUBLE","TIME","BOOLEAN");
-        ObservableList<String> keyType = FXCollections.observableArrayList("NOT NULL","PRIMARY KEY","FOREIGN_KEY (Don't use)");
+        ObservableList<String> listType = FXCollections.observableArrayList("VARCHAR(50)","INTEGER","DOUBLE","BOOLEAN");
+        ObservableList<String> keyType = FXCollections.observableArrayList("NOT NULL","PRIMARY KEY");
 
         double anchWith = anchorPaneForAddTables.getWidth();
         double anchResult = anchWith/(valueSpin);
@@ -459,7 +459,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     }
 
-    public static void autoGenerateTextFields(String titleTable, AnchorPane anh, Pane pane){if (pane == null) {
+    public static void autoGenerateTextFields(String titleTable, AnchorPane anh, Pane pane){
+        if (pane == null) {
             sql = "DESCRIBE " + titleTable + ";";
             try (Statement st = conect.createStatement()) {
                 ResultSet rSt = st.executeQuery(sql);
