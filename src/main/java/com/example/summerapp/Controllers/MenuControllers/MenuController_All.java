@@ -19,7 +19,6 @@ import javafx.scene.text.TextFlow;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -133,6 +132,9 @@ public class MenuController_All {
     private List<String> nameOfData;
 
     private int oneOrC = 0;
+
+    private boolean checkerForEdit;
+
 
     private void visualizerMethod(int place){
         assistentErrorF.setDisable(true);
@@ -489,34 +491,37 @@ public class MenuController_All {
             anchorPaneAddData.getChildren().removeIf(e -> e instanceof TextField);
             updateForAdd();
             buttonForAddData.setDisable(true);
+
             for (Node n : anchorPaneAddData.getChildren()) {
                 if (n instanceof TextField t) {
 
                     //We could use set on action, but the problem is that you need to press enter every time so the check can run
                     t.textProperty().addListener((obs,oldText, newText) -> {
+                        ArrayList<Boolean> listR = new ArrayList<>();
 
-                        AtomicBoolean allFilled = new AtomicBoolean(false);
-
-                        for (Node i : anchorPaneAddData.getChildren()) {
-                            if (i instanceof TextField tf) {
-                                if (tf.getText().isEmpty()){
-                                    allFilled.set(false);
+                        for (Node n2 : anchorPaneAddData.getChildren()){
+                            if(n2 instanceof TextField tf2){
+                                if (tf2.getText().isEmpty()){
+                                    listR.add(false);
                                 }else {
-                                    allFilled.set(true);
-                                }
-                                System.out.println("El filled es " + allFilled.toString());
-                                if (allFilled.get()) {
-                                    buttonForAddData.setDisable(false);
-                                } else {
-                                    buttonForAddData.setDisable(true);
+                                    listR.add(true);
                                 }
                             }
-
                         }
+
+                        for (int i = 0; i < listR.size(); i++) {
+                            buttonForAddData.setDisable(false);
+                            if (listR.get(i) == false){
+                                buttonForAddData.setDisable(true);
+                                break;
+                            }
+                        }
+
                     });
                 }
             }
         });
+
     }
 
     public void updateForAdd(){
@@ -595,9 +600,57 @@ public class MenuController_All {
 
 
     comboBoxForEdit.setOnAction( e -> {
+        buttonForEditData.setDisable(true);
+        checkerForEdit = false;
         TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
         paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
         TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
+
+        for(Node n : paneForEditFields.getChildren()){
+            if (n instanceof TextField tf){
+                tf.textProperty().addListener((event, oldText, newText) -> {
+                    ArrayList<Boolean> listR = new ArrayList<>();
+                    ArrayList<String> listDataCompare = new ArrayList<>();
+
+                    for (Node n2 : paneForEditFields.getChildren()){
+                        if(n2 instanceof TextField tf2){
+                            if (tf2.getText().isEmpty() || !checkerForEdit){
+                                listR.add(false);
+                            }else {
+                                listR.add(true);
+                                listDataCompare.add(tf2.getText());
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < listR.size(); i++) {
+                        buttonForEditData.setDisable(false);
+                        if (listR.get(i) == false){
+                            buttonForEditData.setDisable(true);
+                            break;
+                        }
+                    }
+
+
+
+                    if (valuesForMe != null && listDataCompare.size() == valuesForMe.size()) {
+                        System.out.println("lista golbal = " + valuesForMe.toString());
+                        System.out.println("List local = " + listDataCompare.toString());
+
+                        for (int i = 0; i < listDataCompare.size(); i++) {
+                            buttonForEditData.setDisable(true);
+                            System.out.println("desactivado el boton");
+                            if (!Objects.equals(valuesForMe.get(i), listDataCompare.get(i))) {
+                                buttonForEditData.setDisable(false);
+                                System.out.println("activar el boton");
+                                break;
+                            }
+                        }
+                    }
+
+                });
+            }
+        }
     });
 
     checkEdit.setSelected(true);
@@ -661,8 +714,9 @@ public class MenuController_All {
 
                 }
             }
-            buttonForEditData.setDisable(false);
             System.out.println(sb.toString());
+            checkerForEdit = true;
+
         }catch (IndexOutOfBoundsException err){
             FrameController.framesView(assistent, 3);
             Font font = Font.font(20);

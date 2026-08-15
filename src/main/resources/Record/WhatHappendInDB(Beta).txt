@@ -19,3 +19,10 @@
 [14/8/2026] - 12:34:42 - &&&&& No se ha podido insertar los datos a la tabla dam &&&&&. 
 [14/8/2026] - 12:35:39 - &&&&& No se ha podido insertar los datos a la tabla dam &&&&&. 
 [14/8/2026] - 12:37:47 - &&&&& No se ha podido insertar los datos a la tabla dam &&&&&. 
+[15/8/2026] - 12:37:41 - No se han podido actualizar los datos de la tabla holaTesting1. 
+[15/8/2026] - 13:25:35 - No se han podido actualizar los datos de la tabla holaTesting1. 
+[15/8/2026] - 13:25:54 - Se han actualizado los datos de la tabla holaTesting1. 
+[15/8/2026] - 13:43:45 - Se han actualizado los datos de la tabla holaTesting1. 
+[15/8/2026] - 13:47:3 - No se han podido actualizar los datos de la tabla holaTesting1. 
+[15/8/2026] - 13:48:12 - Se han actualizado los datos de la tabla holaTesting1. 
+[15/8/2026] - 14:10:58 - Se ha insertado la datos a la tabla testing2. 
