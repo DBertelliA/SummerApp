@@ -135,6 +135,8 @@ public class MenuController_All {
 
     private boolean checkerForEdit;
 
+    private boolean checkerToDeleteData;
+
 
     private void visualizerMethod(int place){
         assistentErrorF.setDisable(true);
@@ -601,7 +603,11 @@ public class MenuController_All {
 
     comboBoxForEdit.setOnAction( e -> {
         buttonForEditData.setDisable(true);
+        buttonForDeleteData.setDisable(true);
+
+        checkerToDeleteData = false;
         checkerForEdit = false;
+
         TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
         paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
         TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
@@ -639,10 +645,8 @@ public class MenuController_All {
 
                         for (int i = 0; i < listDataCompare.size(); i++) {
                             buttonForEditData.setDisable(true);
-                            System.out.println("desactivado el boton");
                             if (!Objects.equals(valuesForMe.get(i), listDataCompare.get(i))) {
                                 buttonForEditData.setDisable(false);
-                                System.out.println("activar el boton");
                                 break;
                             }
                         }
@@ -662,6 +666,8 @@ public class MenuController_All {
 
     checkEdit.setOnAction( e -> {
         if(checkDelete.isPressed()){checkDelete.setSelected(false);}
+        if (!checkEdit.isPressed()){checkEdit.setSelected(true);}
+
             checkDelete.setSelected(false);
             paneForDeleteFields.setDisable(true);
             paneForEditFields.setDisable(false);
@@ -669,15 +675,19 @@ public class MenuController_All {
 
     checkDelete.setOnAction( e -> {
         if (checkEdit.isPressed()){checkEdit.setSelected(false);}
+        if (!checkDelete.isPressed()){checkDelete.setSelected(true);}
+
             checkEdit.setSelected(false);
             paneForEditFields.setDisable(true);
             paneForDeleteFields.setDisable(false);
+
+            buttonForDeleteData.setDisable(!checkerToDeleteData);
     });
 
     buttonForDeleteData.setOnAction( e -> {
-        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData, dialogText ,assistent);
-            TablesFunctions.fillerBox(comboBoxForEdit);
-        });
+        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData, dialogText, assistent);
+        TablesFunctions.fillerBox(comboBoxForEdit);
+    });
 
     buttonForEditData.setOnAction(e -> {
         List<String> stringsList = new ArrayList<>();
@@ -692,6 +702,7 @@ public class MenuController_All {
         });
 
     singleTableEdit.setOnMouseClicked(e -> {
+
             //Esto devuelve una lista de objetos de esa fila, siendo primero necesitamos setear, que se debe de obtener del modelo la fila seccionada
             //Lo que devuelve un valor
         try {
@@ -715,7 +726,10 @@ public class MenuController_All {
                 }
             }
             System.out.println(sb.toString());
+            checkerToDeleteData = true;
             checkerForEdit = true;
+
+            buttonForDeleteData.setDisable(false);
 
         }catch (IndexOutOfBoundsException err){
             FrameController.framesView(assistent, 3);
