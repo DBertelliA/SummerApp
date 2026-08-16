@@ -28,3 +28,5 @@
 [15/8/2026] - 14:10:58 - Se ha insertado la datos a la tabla testing2. 
 [16/8/2026] - 20:8:44 - No se han podido actualizar los datos de la tabla dam. 
 [16/8/2026] - 20:9:2 - No se han podido eliminar unos datos de la tabla null. 
+[16/8/2026] - 20:56:59 - Se ha eliminado la tabla tt. 
+[16/8/2026] - 20:57:11 - Un usuario ha buscado unos datos en holaTesting1. 

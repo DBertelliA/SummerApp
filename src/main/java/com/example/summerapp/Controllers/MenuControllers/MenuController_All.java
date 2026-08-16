@@ -774,7 +774,9 @@ public class MenuController_All {
             tableShowDataSelected.getColumns().clear();
             tableShowDataSelected.getItems().clear();
             buttonForSearch.setDisable(false);
-            TablesFunctions.autoGenerateTextFields(tablesForSearch.getValue(),null,paneForSearchFields);
+            if (!(tablesForSearch.getValue() == null)){
+                TablesFunctions.autoGenerateTextFields(tablesForSearch.getValue(), null, paneForSearchFields);
+            }
         });
 
         buttonForSearch.setOnAction( i -> {
@@ -809,9 +811,11 @@ public class MenuController_All {
 
         TablesFunctions.dialogGenerator(assistent,1,dialogText,"Estas accediendo a la funcion de eliminar tablas");
 
-                comboxOfTablesForDelete.setOnAction(event -> {
-            labelSelectedTable.setText("you selected :" + comboxOfTablesForDelete.getValue());
-            buttonForDeleteTable.setDisable(false);
+        comboxOfTablesForDelete.setOnAction(event -> {
+            if (!(comboxOfTablesForDelete.getValue() == null)) {
+                labelSelectedTable.setText("you selected :" + comboxOfTablesForDelete.getValue());
+                buttonForDeleteTable.setDisable(false);
+            }
         });
 
         buttonForDeleteTable.setOnAction( e -> {
