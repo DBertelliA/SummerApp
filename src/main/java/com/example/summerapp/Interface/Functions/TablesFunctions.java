@@ -534,15 +534,16 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     //haber que entienda que me he pasado un par de horitas jodiendo con los atributos
     //Le pasamos tanto el nombre de la tabla como el atributo que queremos transformar, y usamos constantemente la tabla que le pasamos para dar datos y metodos...
     public static TableView<ObservableList<String>> contentTypeGiver(String titleTable, TableView<ObservableList<String>> tbW) {
-        if (tbW != null){
+        if (tbW != null) {
             tbW.getColumns().clear();
             tbW.getItems().clear();
         }
         if (tbW == null) {
             tbW = new TableView<>();
         }
-
+        if (!titleTable.equalsIgnoreCase("datacatcheruser")) {
         try (Statement st = conect.createStatement()) {
+
             ResultSet rst = st.executeQuery("DESCRIBE " + titleTable);
 
             while (rst.next()) {
@@ -551,8 +552,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
                 column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(position)));
                 tbW.getColumns().add(column);
-
             }
+
 
             // joder, esto es mas sencillo, en el creas el objeto, le metes lo datos y se lo añades a la tableView, es una agregacion dinamica
 
@@ -575,7 +576,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         } catch (SQLException e) {
             System.err.println(e);
         }
-
+    }
         return null;
     }
 
@@ -585,8 +586,10 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             sql = "SHOW TABLES;";
             ResultSet rst = st.executeQuery(sql);
             while (rst.next()) {
-                Tab tabI = new Tab(rst.getString(1));
-                nameTab.getTabs().add(tabI);
+                if (!rst.getString(1).equalsIgnoreCase("datacatcheruser")) {
+                    Tab tabI = new Tab(rst.getString(1));
+                    nameTab.getTabs().add(tabI);
+                }
             }
         }catch (SQLException e){
             System.err.println(e);

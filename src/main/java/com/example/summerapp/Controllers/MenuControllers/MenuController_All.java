@@ -1,5 +1,6 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
+import com.example.summerapp.Interface.Functions.MusicReproduction;
 import com.example.summerapp.Interface.Functions.TablesFunctions;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import javafx.collections.ObservableList;
@@ -310,10 +311,11 @@ public class MenuController_All {
         int j = nameTabss.getTabs().size();
         Tab tab1 = new Tab();
         for (int i = 0; i < j; i++) {
-            tab1.setContent(TablesFunctions.contentTypeGiver(nameTabss.getTabs().get(i).getText(), dataClasify));
-            nameTabss.getTabs().get(i).setContent(tab1.getContent());
+            if (!nameTabss.getTabs().get(i).getText().equalsIgnoreCase("datacatcheruser")) {
+                tab1.setContent(TablesFunctions.contentTypeGiver(nameTabss.getTabs().get(i).getText(), dataClasify));
+                nameTabss.getTabs().get(i).setContent(tab1.getContent());
+            }
         }
-
     }
 
     public void addButton() {
@@ -830,4 +832,21 @@ public class MenuController_All {
 
     }
 
+    //--------------Musica-----------------//
+
+    public void musicReproON(){
+        MusicReproduction.reproduction();
+    }
+    public void musicReproOff(){
+        MusicReproduction.stopReproduction();
+    }
+    public void musicReproPause(){
+        MusicReproduction.pauseReproduction();
+    }
+    public void forwardRepro(){
+        MusicReproduction.changeSongForward();
+    }
+    public void backwardRepro(){
+        MusicReproduction.changeSongBackward();
+    }
 }

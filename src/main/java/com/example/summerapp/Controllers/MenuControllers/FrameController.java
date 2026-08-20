@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class FrameController {
     static Timeline executionEgg = new Timeline();
-    static PauseTransition pT = new PauseTransition(Duration.seconds(2));
+    static PauseTransition pT = new PauseTransition(Duration.seconds(1.35));
 
     public static void framesView(ImageView imgW, int i) {
         executionEgg.getKeyFrames().clear();
@@ -46,13 +46,13 @@ public class FrameController {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/reNeutral.jpg"))));
                 KeyFrame kNew = new KeyFrame(Duration.seconds(1), e -> {
                     Random nRandom = new Random();
-                    int r = nRandom.nextInt(100)+1;
+                    int r = nRandom.nextInt(1000)+1;
                     System.out.println(r);
 
-                    if (r == 100){
+                    if (r == 1000){
                         System.out.println("Entré");
                         executionEgg.stop();
-                        imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Video/sneezing.gif"))));
+                        imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Video/sneezingRemake.gif"))));
                         pT.setOnFinished(p -> {
                             framesView(imgW, 6);
                         });

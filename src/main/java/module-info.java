@@ -5,8 +5,10 @@ module com.example.summerapp {
     requires mysql.connector.j;
     requires java.desktop;
     requires spring.security.crypto;
+    requires javafx.media;
 
 
+    opens com.example.summerapp.Interface.Functions to javafx.media;
     opens com.example.summerapp to javafx.fxml;
     opens com.example.summerapp.Controllers to javafx.fxml;
     exports com.example.summerapp.WindowAndView;

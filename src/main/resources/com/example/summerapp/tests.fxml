@@ -124,5 +124,10 @@
          </children>
       </AnchorPane>
       <ImageView fx:id="assistentErrorF" fitHeight="91.0" fitWidth="113.0" layoutX="170.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Button layoutX="201.0" layoutY="11.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="28.0" prefWidth="44.0" text="Play" />
+      <Button layoutX="254.0" layoutY="11.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="28.0" prefWidth="52.0" text="Stop" />
+      <Button layoutX="313.0" layoutY="11.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="28.0" prefWidth="60.0" text="Pause" />
+      <Button layoutX="206.0" layoutY="43.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="26.0" prefWidth="52.0" text="atra" />
+      <Button layoutX="259.0" layoutY="43.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="25.0" prefWidth="60.0" text="alant" />
    </children>
 </AnchorPane>

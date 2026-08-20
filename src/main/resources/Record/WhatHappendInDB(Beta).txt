@@ -30,3 +30,6 @@
 [16/8/2026] - 20:9:2 - No se han podido eliminar unos datos de la tabla null. 
 [16/8/2026] - 20:56:59 - Se ha eliminado la tabla tt. 
 [16/8/2026] - 20:57:11 - Un usuario ha buscado unos datos en holaTesting1. 
+[20/8/2026] - 9:22:54 - Se ha insertado la datos a la tabla aaassx. 
+[20/8/2026] - 9:23:39 - Se han actualizado los datos de la tabla aaassx. 
+[20/8/2026] - 9:23:56 - Se han actualizado los datos de la tabla aaassx. 
