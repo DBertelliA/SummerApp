@@ -1,5 +1,6 @@
 package com.example.summerapp.Interface.Functions;
 
+import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
@@ -8,11 +9,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class MusicReproduction {
+    static boolean firstTime = true;
     static int position = 0;
-    public static String mediaLine = "src/main/resources/SMResources/TestM1.wav";
+    static List<String> songList = songs();
+    public static String mediaLine = getSongList().get(position);
     public static Media sound = new Media(new File(mediaLine).toURI().toString());
     static MediaPlayer mediaPlayer = new MediaPlayer(sound);
-    static List<String> songList = songs();
 
 
     public static String getMediaLine() {
@@ -46,7 +48,14 @@ public class MusicReproduction {
     public static void setSongList(List<String> songList) {
         MusicReproduction.songList = songList;
     }
-    
+
+    public static boolean isFirstTime() {
+        return firstTime;
+    }
+
+    public static void setFirstTime(boolean firstTime) {
+        MusicReproduction.firstTime = firstTime;
+    }
 
     public static void changeSongForward(){
         System.out.println(getSongList());
@@ -81,10 +90,15 @@ public class MusicReproduction {
     }
 
     public static void reproduction(){
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
+
     }
     public static void stopReproduction(){
         mediaPlayer.stop();
+//        if (mediaPlayer != null){
+//            mediaPlayer.dispose();
+//        }
     }
     public static void pauseReproduction(){
         mediaPlayer.pause();
@@ -105,15 +119,24 @@ public class MusicReproduction {
 
     private static void asignator(int positionOf) {
         if (mediaPlayer != null) {
+            mediaPlayer.setAutoPlay(false);
             mediaPlayer.stop();
             mediaPlayer.dispose();
         }
 
         setMediaLine(getSongList().get(positionOf));
-
         setSound(new Media(new File(getMediaLine()).toURI().toString()));
-
         setMediaPlayer(new MediaPlayer(getSound()));
+    }
+
+    public static void volumeChanger(Slider slider){
+        if (isFirstTime()){
+            slider.setValue(50);
+            setFirstTime(false);
+        }
+        System.out.println("Volumen: " + slider.getValue());
+        getMediaPlayer().setVolume(slider.getValue() / 100);
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
+import com.example.summerapp.Interface.Functions.FileSaver;
 import com.example.summerapp.Interface.Functions.MusicReproduction;
 import com.example.summerapp.Interface.Functions.TablesFunctions;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
@@ -126,7 +127,7 @@ public class MenuController_All {
 
     @FXML public Label labelSelectedTable;
 
-    //------Metodos necesario------//
+    //------Cosas necesarias------//
 
     private List<String> valuesForMe;
 
@@ -137,6 +138,10 @@ public class MenuController_All {
     private boolean checkerForEdit;
 
     private boolean checkerToDeleteData;
+
+    @FXML public Slider sliderVolume;
+
+    @FXML public Button buttonForAddMusic;
 
 
     private void visualizerMethod(int place){
@@ -306,6 +311,14 @@ public class MenuController_All {
         TablesFunctions.fillerBox(comboxTable);
         cleanTabs();
         inicializateTabs();
+
+        sliderVolume.setOnMousePressed(e -> {
+            musicVolumeChanger();
+        });
+
+        buttonForAddMusic.setOnAction(e -> {
+            FileSaver.chooser();
+        });
 
         //Estructura para añadir
         int j = nameTabss.getTabs().size();
@@ -835,18 +848,27 @@ public class MenuController_All {
     //--------------Musica-----------------//
 
     public void musicReproON(){
+        musicVolumeChanger();
         MusicReproduction.reproduction();
     }
     public void musicReproOff(){
+        musicVolumeChanger();
         MusicReproduction.stopReproduction();
     }
     public void musicReproPause(){
+        musicVolumeChanger();
         MusicReproduction.pauseReproduction();
     }
     public void forwardRepro(){
+        musicVolumeChanger();
         MusicReproduction.changeSongForward();
     }
-    public void backwardRepro(){
+    public void backwardRepro() {
+        musicVolumeChanger();
         MusicReproduction.changeSongBackward();
     }
+    public void musicVolumeChanger(){
+        MusicReproduction.volumeChanger(sliderVolume);
+    }
+
 }
