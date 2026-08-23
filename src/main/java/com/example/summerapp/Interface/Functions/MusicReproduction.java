@@ -11,11 +11,19 @@ import java.util.Objects;
 public class MusicReproduction {
     static boolean firstTime = true;
     static int position = 0;
+    static boolean oneHit = false;
+    static boolean secHit = false;
     static List<String> songList = songs();
-    public static String mediaLine = getSongList().get(position);
+    public static String mediaLine = getSongList().get(position++);
     public static Media sound = new Media(new File(mediaLine).toURI().toString());
     static MediaPlayer mediaPlayer = new MediaPlayer(sound);
 
+    public static int getPosition() {
+        return position;
+    }
+    public static void setPosition(int position) {
+        MusicReproduction.position = position;
+    }
 
     public static String getMediaLine() {
         return mediaLine;
@@ -28,7 +36,6 @@ public class MusicReproduction {
     public static Media getSound() {
         return sound;
     }
-
     public static void setSound(Media sound) {
         MusicReproduction.sound = sound;
     }
@@ -52,24 +59,31 @@ public class MusicReproduction {
     public static boolean isFirstTime() {
         return firstTime;
     }
-
     public static void setFirstTime(boolean firstTime) {
         MusicReproduction.firstTime = firstTime;
     }
 
     public static void changeSongForward(){
+        if (secHit) {
+            position++;
+            secHit = false;
+        }
         System.out.println(getSongList());
-        if (!(position == getSongList().size())) {
+        if (!(position >= getSongList().size())) {
+            oneHit = true;
             System.out.println("Entro");
 
             asignator(position++);
 
             System.out.println("cancion : " + songList.get(position-1));
+            System.out.println(getPosition());
             System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
         }else {
             position = 0;
 
             asignator(position++);
+            System.out.println(getPosition());
+
 
             System.out.println("cancion : " + songList.get(0));
             System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
@@ -79,12 +93,22 @@ public class MusicReproduction {
 
 
     public static void changeSongBackward(){
-        if (!(position == 0)) {
+        if (oneHit) {
+            position--;
+            oneHit = false;
+        }
+        if (!(position <= 0)) {
             asignator(--position);
-
+            secHit = true;
+            System.out.println("cancion : " + songList.get(position));
+            System.out.println(getPosition());
+            System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
         }else {
-            position = songList.size()-1;
-            asignator(position);
+            position = songList.size();
+            asignator(--position);
+            System.out.println(getPosition());
+            System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
+
 
         }
     }
@@ -104,6 +128,18 @@ public class MusicReproduction {
         mediaPlayer.pause();
     }
 
+    public static void asignator(int positionOf) {
+        if (mediaPlayer != null) {
+            mediaPlayer.setAutoPlay(false);
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+        }
+
+        setMediaLine(getSongList().get(positionOf));
+        setSound(new Media(new File(getMediaLine()).toURI().toString()));
+        setMediaPlayer(new MediaPlayer(getSound()));
+    }
+
     public static List<String> songs(){
         List<String> songInFiles = new ArrayList<>();
         File folders = new File("src/main/resources/SMResources");
@@ -114,19 +150,8 @@ public class MusicReproduction {
                 songInFiles.add(folderEntry.getAbsolutePath());
             }
         }
+        setSongList(songInFiles);
         return songInFiles;
-    }
-
-    private static void asignator(int positionOf) {
-        if (mediaPlayer != null) {
-            mediaPlayer.setAutoPlay(false);
-            mediaPlayer.stop();
-            mediaPlayer.dispose();
-        }
-
-        setMediaLine(getSongList().get(positionOf));
-        setSound(new Media(new File(getMediaLine()).toURI().toString()));
-        setMediaPlayer(new MediaPlayer(getSound()));
     }
 
     public static void volumeChanger(Slider slider){

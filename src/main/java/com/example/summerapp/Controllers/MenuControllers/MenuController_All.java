@@ -847,6 +847,8 @@ public class MenuController_All {
 
     //--------------Musica-----------------//
 
+    boolean onOrBack;
+
     public void musicReproON(){
         musicVolumeChanger();
         MusicReproduction.reproduction();
