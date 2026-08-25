@@ -1,12 +1,18 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
+import com.example.summerapp.Controllers.LogInController;
+import com.example.summerapp.HelloApplication;
 import com.example.summerapp.Interface.Functions.FileSaver;
 import com.example.summerapp.Interface.Functions.MusicReproduction;
 import com.example.summerapp.Interface.Functions.TablesFunctions;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,7 +23,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -143,6 +153,8 @@ public class MenuController_All {
 
     @FXML public Button buttonForAddMusic;
 
+    @FXML public Label timerShower;
+
 
     private void visualizerMethod(int place){
         assistentErrorF.setDisable(true);
@@ -240,9 +252,26 @@ public class MenuController_All {
     }
 
 
-    public void inicializateTabs(){TablesFunctions.titleGiver(nameTabss);}
+    public void initializeTabs(){TablesFunctions.titleGiver(nameTabss);}
     public void cleanTabs(){
         nameTabss.getTabs().clear();
+    }
+    public void initializeTimer(){
+        Timeline tLTimer = new Timeline(
+                new KeyFrame(Duration.seconds(1), e -> {
+                    StringBuilder sB = new StringBuilder();
+                    LocalTime lT = LocalTime.now();
+                    sB.append(lT.getHour()).append(":").append(lT.getMinute()).append(":");
+                    if (lT.getSecond() < 10) {
+                        sB.append("0").append(lT.getSecond());
+                    }else {
+                        sB.append(lT.getSecond());
+                    }
+                    timerShower.setText(sB.toString());
+                })
+        );
+        tLTimer.setCycleCount(Timeline.INDEFINITE);
+        tLTimer.play();
     }
 
     public void visibilityAssistent(boolean switchO){
@@ -310,7 +339,8 @@ public class MenuController_All {
         visibilityAssistent(false);
         TablesFunctions.fillerBox(comboxTable);
         cleanTabs();
-        inicializateTabs();
+        initializeTabs();
+        initializeTimer();
 
         sliderVolume.setOnMousePressed(e -> {
             musicVolumeChanger();
@@ -847,8 +877,6 @@ public class MenuController_All {
 
     //--------------Musica-----------------//
 
-    boolean onOrBack;
-
     public void musicReproON(){
         musicVolumeChanger();
         MusicReproduction.reproduction();
@@ -871,6 +899,27 @@ public class MenuController_All {
     }
     public void musicVolumeChanger(){
         MusicReproduction.volumeChanger(sliderVolume);
+    }
+
+    //------------Buttons for exit the program and log out-----------------//
+
+    public void exitButton(){
+        System.exit(0);
+    }
+
+    public void logOutButton(){
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+
+            Stage stage = (Stage) userLoggedMenu.getScene().getWindow();
+            stage.setTitle("Log in");
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error");
+        }
     }
 
 }

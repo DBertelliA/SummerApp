@@ -39,7 +39,7 @@
          <children>
             <Pane prefHeight="109.0" prefWidth="209.0" style="-fx-background-color: red;">
                <children>
-                  <Label fx:id="userLoggedMenu" layoutX="52.0" layoutY="14.0" prefHeight="17.0" prefWidth="137.0" text="You should not see this" />
+                  <Label fx:id="userLoggedMenu" layoutX="52.0" layoutY="14.0" prefHeight="17.0" prefWidth="137.0" text=" You should not see this" />
                   <Label layoutX="21.0" layoutY="14.0" text="User:" />
                </children></Pane>
             <Pane prefHeight="83.0" prefWidth="263.0" style="-fx-background-color: blue;" />
@@ -95,36 +95,6 @@
 
         </tabs>
       </TabPane>
-         <Button layoutX="243.0" layoutY="11.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="26.0" prefWidth="40.0" style="-fx-background-color: red; -fx-border-color: black;" text="Stop" textFill="WHITE">
-            <font>
-               <Font size="10.0" />
-            </font></Button>
-         <Button layoutX="289.0" layoutY="11.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: grey; -fx-border-color: black;" text="Pause">
-            <font>
-               <Font size="10.0" />
-            </font>
-         </Button>
-         <Button layoutX="240.0" layoutY="43.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="9.0" prefWidth="32.0" style="-fx-background-color: orange;" text="&gt;&gt;" textFill="WHITE">
-            <font>
-               <Font size="10.0" />
-            </font>
-         </Button>
-         <Slider fx:id="sliderVolume" layoutX="283.0" layoutY="46.0" onDragDetected="#musicVolumeChanger" />
-         <Button fx:id="buttonForAddMusic" layoutX="366.0" layoutY="11.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: green; -fx-border-color: black;" text="Add" textFill="WHITE">
-            <font>
-               <Font size="10.0" />
-            </font>
-         </Button>
-         <Button layoutX="208.0" layoutY="43.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="9.0" prefWidth="32.0" style="-fx-background-color: orange;" text="&lt;&lt;" textFill="WHITE">
-            <font>
-               <Font size="10.0" />
-            </font>
-         </Button>
-         <Button layoutX="200.0" layoutY="11.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="26.0" prefWidth="40.0" style="-fx-background-color: blue; -fx-border-color: black;" text="Play" textFill="WHITE">
-            <font>
-               <Font size="10.0" />
-            </font>
-         </Button>
        </AnchorPane>
 
 
@@ -154,5 +124,41 @@
          </children>
       </AnchorPane>
       <ImageView fx:id="assistentErrorF" fitHeight="91.0" fitWidth="113.0" layoutX="170.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Button layoutX="496.0" layoutY="7.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="27.0" prefWidth="52.0" style="-fx-background-color: red; -fx-border-color: black;" text="Stop" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button layoutX="556.0" layoutY="7.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: grey; -fx-border-color: black;" text="Pause">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button layoutX="447.0" layoutY="7.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="26.0" prefWidth="52.0" style="-fx-background-color: blue; -fx-border-color: black;" text="Play" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonForAddMusic" layoutX="627.0" layoutY="7.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: green; -fx-border-color: black;" text="Add" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button layoutX="498.0" layoutY="40.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="21.0" prefWidth="54.0" style="-fx-background-color: orange;" text="&gt;&gt;" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button layoutX="446.0" layoutY="40.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: orange;" text="&lt;&lt;" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Slider fx:id="sliderVolume" layoutX="563.0" layoutY="40.0" onDragDetected="#musicVolumeChanger" prefHeight="18.0" prefWidth="120.0" />
+      <Label fx:id="timerShower" layoutX="18.0" layoutY="33.0" prefHeight="18.0" prefWidth="113.0" text="Loading..." />
+      <Button layoutX="700.0" layoutY="5.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="200.0" onAction="#logOutButton" text="Log out" />
+      <Button layoutX="701.0" layoutY="38.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" onAction="#exitButton" text="Close" />
+      <Label layoutX="199.0" layoutY="7.0" prefHeight="18.0" prefWidth="211.0" text="Music on:" textFill="WHITE" />
+      <Label layoutX="199.0" layoutY="27.0" prefHeight="28.0" prefWidth="221.0" text="PlaceHolder" textFill="WHITE" />
    </children>
 </AnchorPane>

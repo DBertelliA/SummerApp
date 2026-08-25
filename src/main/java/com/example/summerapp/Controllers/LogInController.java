@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class LogInController {
     @FXML
-    private Label confirmText;
+    public Label confirmText;
 
     @FXML
     private TextField user;
@@ -32,7 +32,7 @@ public class LogInController {
         if(FinderAll.passwordMatcher(new User(user.getText(), password.getText())) != null){
             confirmText.setText("Usuario correcto");
             try {
-                FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("tests.fxml"));
+                FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("Menu.fxml"));
 
                 Scene sceneLoad = new Scene(fxmload.load(), 910, 600);
 
@@ -51,7 +51,7 @@ public class LogInController {
 
         }
         else {
-            confirmText.setText("Usuario no valido");
+            confirmText.setText("Usuario o contraseña no valido");
         }
     }
 
