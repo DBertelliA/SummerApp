@@ -19,7 +19,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     static String sql;
 
     public static void dialogGenerator(ImageView assistent, int i,TextFlow dialogText, String message) {
-        FrameController.framesView(assistent, i);
+        FrameController.framesView(assistent, i, false);
         Font font = Font.font(20);
         Text textAssign = new Text(message);
 

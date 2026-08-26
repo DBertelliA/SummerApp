@@ -21,7 +21,7 @@ public class FrameController {
     static Timeline executionEgg = new Timeline();
     static PauseTransition pT = new PauseTransition(Duration.seconds(1.35));
 
-    public static void framesView(ImageView imgW, int i) {
+    public static void framesView(ImageView imgW, int i, boolean disable) {
         executionEgg.getKeyFrames().clear();
         System.out.println("limpio");
 
@@ -45,18 +45,29 @@ public class FrameController {
 
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/reNeutral.jpg"))));
                 KeyFrame kNew = new KeyFrame(Duration.seconds(1), e -> {
-                    Random nRandom = new Random();
-                    int r = nRandom.nextInt(1000)+1;
-                    System.out.println(r);
+                    if (disable) {
+                        if (executionEgg != null && pT != null) {
 
-                    if (r == 1000){
-                        System.out.println("Entré");
-                        executionEgg.stop();
-                        imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Video/sneezingRemake.gif"))));
-                        pT.setOnFinished(p -> {
-                            framesView(imgW, 6);
-                        });
-                        pT.playFromStart();
+                            executionEgg.stop();
+                            executionEgg.getKeyFrames().clear();
+                            pT.stop();
+
+                        }
+                    } else {
+
+                        Random nRandom = new Random();
+                        int r = nRandom.nextInt(1000) + 1;
+                        System.out.println(r);
+
+                        if (r == 1000) {
+                            System.out.println("Entré");
+                            executionEgg.stop();
+                            imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Video/sneezingRemake.gif"))));
+                            pT.setOnFinished(p -> {
+                                framesView(imgW, 6, false);
+                            });
+                            pT.playFromStart();
+                        }
                     }
                 });
                 executionEgg.getKeyFrames().add(kNew);
@@ -92,7 +103,7 @@ public class FrameController {
         assistent.setManaged(true);
         assistent.setPickOnBounds(true);
 
-        framesView(assistent,1);
+        framesView(assistent,1, false);
 
         Font font = Font.font(20);
         Text textAssign = new Text("Hi...");
@@ -106,7 +117,7 @@ public class FrameController {
 
         AtomicInteger i = new AtomicInteger();
 
-        assistent.setOnMouseClicked(event -> {framesView(assistent, i.getAndIncrement());
+        assistent.setOnMouseClicked(event -> {framesView(assistent, i.getAndIncrement(), false);
             if(i.get() >= 8){
                 i.set(0);
             }

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="576.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
+<AnchorPane fx:id="firstAnchor" prefHeight="576.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
    <children>
       <TextFlow fx:id="dialogText2" layoutX="162.0" layoutY="70.0" prefHeight="128.0" prefWidth="131.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
       <AnchorPane fx:id="anchorPaneForEditValues" disable="true" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0" visible="false">
@@ -28,7 +28,7 @@
       </AnchorPane>
       <ToolBar fx:id="selectorOptions" layoutX="294.0" layoutY="496.0" prefHeight="49.0" prefWidth="334.0">
         <items>
-            <Button mnemonicParsing="false" onAction="#inicializate" text="Inicio" />
+            <Button fx:id="initButton" mnemonicParsing="false" onAction="#inicializate" text="Inicio" />
             <Button mnemonicParsing="false" onAction="#addButton" text="Agregar" />
             <Button mnemonicParsing="false" onAction="#editPane" text="Editar" />
             <Button mnemonicParsing="false" onAction="#searchPane" text="Buscar" />
@@ -156,9 +156,10 @@
       </Button>
       <Slider fx:id="sliderVolume" layoutX="563.0" layoutY="40.0" onDragDetected="#musicVolumeChanger" prefHeight="18.0" prefWidth="120.0" />
       <Label fx:id="timerShower" layoutX="18.0" layoutY="33.0" prefHeight="18.0" prefWidth="113.0" text="Loading..." />
-      <Button layoutX="700.0" layoutY="5.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="200.0" onAction="#logOutButton" text="Log out" />
-      <Button layoutX="701.0" layoutY="38.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" onAction="#exitButton" text="Close" />
+      <Button fx:id="buttonLogOut" layoutX="700.0" layoutY="5.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="28.0" prefWidth="200.0" text="Log out" />
+      <Button fx:id="buttonExit" layoutX="701.0" layoutY="38.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="26.0" prefWidth="200.0" text="Close" />
       <Label layoutX="199.0" layoutY="7.0" prefHeight="18.0" prefWidth="211.0" text="Music on:" textFill="WHITE" />
-      <Label layoutX="199.0" layoutY="27.0" prefHeight="28.0" prefWidth="221.0" text="PlaceHolder" textFill="WHITE" />
+      <Label fx:id="musicSelected" layoutX="199.0" layoutY="27.0" prefHeight="28.0" prefWidth="221.0" text="PlaceHolder" textFill="WHITE" />
+      <Button layoutX="8.0" layoutY="70.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="26.0" prefWidth="52.0" text="Records" />
    </children>
 </AnchorPane>

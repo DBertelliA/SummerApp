@@ -49,7 +49,7 @@ public class ErrorReactionsFramesController {
                                 "You know...",
                                 "I didn't spend hours making a place where you can see all the tables for nothing...",
                                 "..."};
-                        FrameController.framesView(assistant, 999);
+                        FrameController.framesView(assistant, 999, false);
                         setCount(dialogs.length);
 
                         dialogFormat(text, dialogs[count]);
@@ -69,7 +69,7 @@ public class ErrorReactionsFramesController {
                                 "no one can be that dumb...",
                                 "...right?",
                                 "..."};
-                        FrameController.framesView(assistant, 999);
+                        FrameController.framesView(assistant, 999, false);
                         setCount(dialogs.length);
 
                         dialogFormat(text, dialogs[count]);
@@ -85,7 +85,7 @@ public class ErrorReactionsFramesController {
                                 "also... sometimes, even if you didn't fill the field or fields you just jumped",
                                 "we can create create tables the null...",
                                 "..."};
-                        FrameController.framesView(assistant, 999);
+                        FrameController.framesView(assistant, 999, false);
                         setCount(dialogs.length);
 
                         dialogFormat(text, dialogs[count]);
@@ -99,7 +99,7 @@ public class ErrorReactionsFramesController {
                                 "You know what you did, don't spect me to tell you what is wrong",
                                 "You know exactly what is the problem",
                                 "..."};
-                        FrameController.framesView(assistant, 5);
+                        FrameController.framesView(assistant, 5, false);
                         setCount(dialogs.length);
 
                         dialogFormat(text, dialogs[count]);
@@ -124,7 +124,7 @@ public class ErrorReactionsFramesController {
                              "so",
                              "What are you doing?",
                              "..."};
-                     FrameController.framesView(assistant, 5);
+                     FrameController.framesView(assistant, 5, false);
                      setCount(dialogs.length);
 
                      dialogFormat(text, dialogs[count]);
@@ -133,14 +133,30 @@ public class ErrorReactionsFramesController {
                  }
                 }
             }
-            case 3 ->{ //Search data
+            case 3 ->{ //Search data !Not found
 
 
             }
-            case 4 -> { //Delete data
+            case 4 -> { //Delete data !Not found
 
 
-            } default -> {
+            }
+            case 5 -> { //You have records already open
+                switch (getNumberErr()){
+                    case 1 ->{
+                        String[] dialogs = new String[]{"You already have that open.",
+                                "Don't click on the button again until it's closed",
+                        "..."};
+                        FrameController.framesView(assistant, 4, false);
+
+                        setCount(dialogs.length);
+                        dialogFormat(text, dialogs[count]);
+                        break;
+
+                    }
+                }
+            }
+            default -> {
                 assistant.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/EasterEggs/KatSmoking.jpg"))));
                 dialogFormat(text, "Generic error");
                 break;

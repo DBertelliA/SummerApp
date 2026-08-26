@@ -1,6 +1,5 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
-import com.example.summerapp.Controllers.LogInController;
 import com.example.summerapp.HelloApplication;
 import com.example.summerapp.Interface.Functions.FileSaver;
 import com.example.summerapp.Interface.Functions.MusicReproduction;
@@ -37,6 +36,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MenuController_All {
     private static ErrorReactionsFramesController err = new ErrorReactionsFramesController();
     TablesAutoCreateAndFuntions tACF = new TablesFunctions(err);
+
+    @FXML public AnchorPane firstAnchor;
 
     @FXML public AnchorPane anchorPaneMainMenu;
 
@@ -154,6 +155,14 @@ public class MenuController_All {
     @FXML public Button buttonForAddMusic;
 
     @FXML public Label timerShower;
+
+    @FXML public Label musicSelected;
+
+    @FXML public Button buttonLogOut;
+
+    @FXML public Button buttonExit;
+
+    @FXML public Button initButton;
 
 
     private void visualizerMethod(int place){
@@ -329,6 +338,11 @@ public class MenuController_All {
         paneNumberData.setVisible(false);
     }
 
+    private void selectedMusic() {
+        String[] mus = MusicReproduction.getMediaPlayer().getMedia().getSource().split("[/ .wav]");
+        musicSelected.setText(mus[mus.length - 1]);
+    }
+
     //----------------------------------------------//
     //----------------
     //--------
@@ -341,6 +355,9 @@ public class MenuController_All {
         cleanTabs();
         initializeTabs();
         initializeTimer();
+        selectedMusic();
+
+        FrameController.framesView(assistent,1, true);
 
         sliderVolume.setOnMousePressed(e -> {
             musicVolumeChanger();
@@ -456,7 +473,7 @@ public class MenuController_All {
             if
             (!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent, numberValues))
             {
-                FrameController.framesView(assistent, 3);
+                FrameController.framesView(assistent, 3, false);
                 assistent.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/Mad.jpg"))));
 
                 ErrorReactionsFramesController.dialogFormat(dialogText,"Error(1)");
@@ -590,7 +607,7 @@ public class MenuController_All {
             buttonForAddData.setDisable(true);
             backInit(true);
         }else {
-            FrameController.framesView(assistent, 3);
+            FrameController.framesView(assistent, 3, false);
             ErrorReactionsFramesController.dialogFormat(dialogText,"Error(2)");
 
             AtomicInteger i = new AtomicInteger();
@@ -612,7 +629,7 @@ public class MenuController_All {
                     assistentErrorF.setDisable(true);
                     assistentErrorF.setVisible(false);
 
-                    FrameController.framesView(assistent, 1);
+                    FrameController.framesView(assistent, 1, false);
                     addData();
                 }
             });
@@ -777,7 +794,7 @@ public class MenuController_All {
             buttonForDeleteData.setDisable(false);
 
         }catch (IndexOutOfBoundsException err){
-            FrameController.framesView(assistent, 3);
+            FrameController.framesView(assistent, 3, false);
             Font font = Font.font(20);
             Text textAssign = new Text("No hay data en esa tabla amigo... que haces?");
 
@@ -892,10 +909,12 @@ public class MenuController_All {
     public void forwardRepro(){
         musicVolumeChanger();
         MusicReproduction.changeSongForward();
+        selectedMusic();
     }
-    public void backwardRepro() {
+    public void backwardRepro(){
         musicVolumeChanger();
         MusicReproduction.changeSongBackward();
+        selectedMusic();
     }
     public void musicVolumeChanger(){
         MusicReproduction.volumeChanger(sliderVolume);
@@ -908,6 +927,7 @@ public class MenuController_All {
     }
 
     public void logOutButton(){
+        FrameController.framesView(assistent,999, true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
@@ -920,6 +940,47 @@ public class MenuController_All {
         } catch (IOException e) {
             System.err.println("Error");
         }
+    }
+
+    //-----------Button for records------------//
+
+    public void recordEntry(){
+        if (!RecordController.stage.isShowing()) {
+            RecordController.inRecord();
+        }else {
+            err.setWhereErr(5);
+            err.setNumberErr(1);
+            AtomicInteger i = new AtomicInteger();
+
+            assistentErrorF.setDisable(false);
+            assistentErrorF.setVisible(true);
+            ErrorReactionsFramesController.dialogFormat(dialogText,"Hey!");
+            FrameController.framesView(assistentErrorF,4,false);
+            assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
+                assistent.setDisable(true);
+                assistent.setVisible(false);
+
+                err.errorWarning(dialogText, assistentErrorF, i.get());
+
+                i.getAndIncrement();
+
+                System.out.println(err.getCount());
+                if (i.get() > err.getCount() - 1) {
+                    assistent.setDisable(false);
+                    assistent.setVisible(true);
+                    assistentErrorF.setDisable(true);
+                    assistentErrorF.setVisible(false);
+
+                    FrameController.framesView(assistent, 1, false);
+                    ErrorReactionsFramesController.dialogFormat(dialogText,"...");
+                }
+            });
+
+        }
+    }
+
+    public void backRecords(){
+        RecordController.closeWin();
     }
 
 }

@@ -5,11 +5,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.LogInController">
    <children>
-      <Label fx:id="confirmText" alignment="CENTER" contentDisplay="CENTER" layoutX="236.0" layoutY="200.0" prefHeight="17.0" prefWidth="128.0" />
-      <Button layoutX="276.0" layoutY="267.0" mnemonicParsing="false" onAction="#loginButton" text="Log in" />
-      <TextField fx:id="user" layoutX="226.0" layoutY="92.0" />
-      <PasswordField fx:id="password" layoutX="227.0" layoutY="142.0" />
-      <Label layoutX="286.0" layoutY="36.0" text="Login" />
-      <Button layoutX="274.0" layoutY="314.0" mnemonicParsing="false" text="Sign in" onAction="#signInButton"/>
+      <Label fx:id="confirmText" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="200.0" prefHeight="18.0" prefWidth="210.0" textAlignment="CENTER" />
+      <Button layoutX="272.0" layoutY="262.0" mnemonicParsing="false" onAction="#loginButton" text="Log in" />
+      <TextField fx:id="user" layoutX="219.0" layoutY="93.0" />
+      <PasswordField fx:id="password" layoutX="219.0" layoutY="145.0" />
+      <Label layoutX="283.0" layoutY="36.0" text="Login" />
+      <Button layoutX="270.0" layoutY="314.0" mnemonicParsing="false" onAction="#signInButton" text="Sign in" />
    </children>
 </AnchorPane>
