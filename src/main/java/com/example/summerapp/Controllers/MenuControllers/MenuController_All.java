@@ -943,10 +943,11 @@ public class MenuController_All {
     }
 
     //-----------Button for records------------//
+    RecordController rc = new RecordController();
 
     public void recordEntry(){
         if (!RecordController.stage.isShowing()) {
-            RecordController.inRecord();
+            rc.inRecord();
         }else {
             err.setWhereErr(5);
             err.setNumberErr(1);
@@ -956,7 +957,7 @@ public class MenuController_All {
             assistentErrorF.setVisible(true);
             ErrorReactionsFramesController.dialogFormat(dialogText,"Hey!");
             FrameController.framesView(assistentErrorF,4,false);
-            assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
+            assistentErrorF.setOnMouseClicked( c -> {
                 assistent.setDisable(true);
                 assistent.setVisible(false);
 
@@ -977,10 +978,6 @@ public class MenuController_All {
             });
 
         }
-    }
-
-    public void backRecords(){
-        RecordController.closeWin();
     }
 
 }
