@@ -351,59 +351,6 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         return false;
     }
 
-    @Override
-    public boolean showAllTables() {
-        try (Statement st = conect.createStatement()){
-            ResultSet rst = st.executeQuery("SHOW TABLES;");
-            System.out.println("========================================");
-            while (rst.next()){
-                int j = numberDataColumns(rst.getString(1));
-                System.out.println("Numero de columnas de " +  rst.getString(1) + " es: " + j);
-                try (Statement st2 = conect.createStatement()){
-                    ResultSet rst2 = st2.executeQuery("SELECT * FROM " + (rst.getString(1)));
-                    while(rst2.next()) {
-                        for (int i = 1; i <= j; i++) {
-                            System.out.println(rst2.getObject(i));
-                        }
-                    }
-                }
-                System.out.println("========================================");
-            }
-            return true;
-        }catch (SQLException e){
-            System.err.println(e);
-            System.err.println(sql);
-            return false;
-        }
-
-    }
-
-    //Crear una version muy limitada para luego expandirla de acuerdo a los datos que se dispongan
-    @Override
-    public String promptExexuter(String prompt) {
-        String[] pata = prompt.split("FROM");
-
-        try (Statement spT = conect.createStatement()){
-            ResultSet rst = spT.executeQuery(prompt);
-            int j = numberDataColumns(pata[1]);
-            if(prompt.contains("SELECT")) {
-                while (rst.next()) {
-                    for (int i = 1; i <= j; i++) {
-                        System.out.println(rst.getObject(i));
-                    }
-                }
-            }else {
-                spT.executeUpdate(prompt);
-            }
-            System.out.println("Se ha ejecutado el comando");
-            return prompt;
-        }catch (SQLException e){
-            System.err.println(e);
-            System.err.println(prompt);
-        }
-        return "Something bag happened";
-    }
-
     public static void panesAdder(AnchorPane anchorPaneForAddTables, int valueSpin, int fish){
         Pane pane = new Pane();
         ObservableList<String> listType = FXCollections.observableArrayList("VARCHAR(50)","INTEGER","DOUBLE","BOOLEAN");

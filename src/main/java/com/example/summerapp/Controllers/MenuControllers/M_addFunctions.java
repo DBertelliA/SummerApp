@@ -1,7 +1,6 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
 import javafx.geometry.Insets;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 

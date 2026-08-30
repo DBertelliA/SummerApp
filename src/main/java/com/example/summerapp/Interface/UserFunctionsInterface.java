@@ -7,6 +7,4 @@ public interface UserFunctionsInterface {
     public String showData();
     public boolean deleteUser(User name);
     public User updateUser(User user);
-    public boolean limitsForUsers();
-    public boolean tutorialValue(boolean tutorial);
 }

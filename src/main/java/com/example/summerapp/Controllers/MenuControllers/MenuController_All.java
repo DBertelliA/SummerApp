@@ -164,6 +164,8 @@ public class MenuController_All {
 
     @FXML public Button initButton;
 
+    @FXML public Button historyButton;
+
 
     private void visualizerMethod(int place){
         assistentErrorF.setDisable(true);
@@ -356,6 +358,15 @@ public class MenuController_All {
         initializeTabs();
         initializeTimer();
         selectedMusic();
+
+        assistent.visibleProperty().addListener(e -> {
+            historyButton.setDisable(!assistent.isVisible());
+        });
+
+        historyButton.pressedProperty().addListener(e -> {
+            historyButton.setDisable(!assistent.isVisible());
+        });
+
 
         FrameController.framesView(assistent,1, true);
 
@@ -949,6 +960,8 @@ public class MenuController_All {
         if (!RecordController.stage.isShowing()) {
             rc.inRecord();
         }else {
+            turnerOff();
+            labelText.setVisible(false);
             err.setWhereErr(5);
             err.setNumberErr(1);
             AtomicInteger i = new AtomicInteger();
@@ -974,6 +987,8 @@ public class MenuController_All {
 
                     FrameController.framesView(assistent, 1, false);
                     ErrorReactionsFramesController.dialogFormat(dialogText,"...");
+                    visualizerMethod(2);
+
                 }
             });
 

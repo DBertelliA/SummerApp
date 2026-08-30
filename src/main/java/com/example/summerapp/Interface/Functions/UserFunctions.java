@@ -7,6 +7,7 @@ import com.example.summerapp.Models.User;
 import com.example.summerapp.WindowAndView.Warnings;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.crypto.IllegalBlockSizeException;
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,14 +23,27 @@ public class UserFunctions implements UserFunctionsInterface {
         sql = "INSERT INTO dataCatcherUser VALUES (?,?)";
 
         try (PreparedStatement pSt = connect.prepareStatement(sql)){
+            if (user.getNameSystem().isEmpty() || user.getPasswordSystem().isEmpty()){
+                throw new IllegalArgumentException();
+            }
+            if (user.getNameSystem().matches(".*[\\[\\],._!*\"#·$%&/()=?¿'¡+\\-ç´;:].*")) {
+                throw new RuntimeException();
+            }
+            if (user.getNameSystem().length() < 8 || user.getPasswordSystem().length() < 8){
+                throw new IllegalBlockSizeException();
+            }
 
             pSt.setString(1, user.getNameSystem());
             pSt.setString(2, encoder.encode(user.getPasswordSystem()));
-                pSt.executeUpdate();
-            System.out.println("Se ha introducido");
-                    return user;
-        }catch (SQLException e){
+            pSt.executeUpdate();
+
+            return user;
+        }catch (SQLException | IllegalArgumentException e){
             Warnings.warningJump(1);
+        } catch (RuntimeException e) {
+            Warnings.warningJump(0);
+        } catch (IllegalBlockSizeException e) {
+            Warnings.warningJump(7);
         }
         return null;
     }
@@ -42,8 +56,8 @@ public class UserFunctions implements UserFunctionsInterface {
             ResultSet resultSt = st.executeQuery(sql);
             while (resultSt.next()){
                 listUser.add(new User(
-                        resultSt.getString(1),
-                        resultSt.getString(2)
+                    resultSt.getString(1),
+                    resultSt.getString(2)
                 ));
             }
 
@@ -103,13 +117,26 @@ public class UserFunctions implements UserFunctionsInterface {
                         WHERE Username = ?;
                         """;
                 try (PreparedStatement pSt = connect.prepareStatement(sql)){
+                    if (user.getNameSystem().isEmpty() || user.getPasswordSystem().isEmpty()){
+                        throw new IllegalArgumentException();
+                    }
+                    if (user.getNameSystem().matches(".*[\\[\\],._!*\"#·$%&/()=?¿'¡+\\-ç´;:].*")) {
+                        throw new RuntimeException();
+                    }
+                    if (user.getNameSystem().length() < 8 || user.getPasswordSystem().length() < 8){
+                        throw new IllegalBlockSizeException();
+                    }
                     pSt.setString(1,encoder.encode(pNew));
                     pSt.setString(2, user.getNameSystem());
                     pSt.executeUpdate();
                     System.out.println("Editado:");
                     return new User(user.getNameSystem(),pNew);
-                }catch (SQLException e){
-                    System.err.println(e);
+                }catch (SQLException | IllegalArgumentException e){
+                    Warnings.warningJump(1);
+                } catch (RuntimeException e) {
+                    Warnings.warningJump(0);
+                } catch (IllegalBlockSizeException e) {
+                    Warnings.warningJump(7);
                 }
                 }else {
                     Warnings.warningJump(5);
@@ -120,19 +147,6 @@ public class UserFunctions implements UserFunctionsInterface {
 
         return null;
 
-    }
-
-    //Creo que a la hora de hacer las tablas, deberia hacerles una columna extra obligatoria, que al ser comparado en este metodo, lea ciertos valores
-    //los cuales los usuarios... o podria meter a los usuarios en una lista interna, la cual, si la lista interna coincide con las lista permitida en la que está dicha tabla...
-    //tengo que pensarlo (Por ahora, grupos de trabajo)
-    @Override
-    public boolean limitsForUsers() {
-        return false;
-    }
-
-    @Override
-    public boolean tutorialValue(boolean tutorial) {
-        return !tutorial;
     }
 
     public static void main(String[] args) throws SQLException {

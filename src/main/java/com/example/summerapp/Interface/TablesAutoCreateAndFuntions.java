@@ -16,6 +16,4 @@ public interface TablesAutoCreateAndFuntions { //Too loong
     public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName, TextFlow dialogText, ImageView assistent);
     public String dataSearch(String titleName, List<String> valuesForSearch, TableView<ObservableList<String>> tableShower, TextFlow dialogText, ImageView assistent);
     public boolean deleteTables(String tableName, TextFlow dialogText, ImageView assistent);
-    public boolean showAllTables();
-    public String promptExexuter(String prompt);
 }

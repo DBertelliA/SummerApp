@@ -160,6 +160,6 @@
       <Button fx:id="buttonExit" layoutX="701.0" layoutY="38.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="26.0" prefWidth="200.0" text="Close" />
       <Label layoutX="199.0" layoutY="7.0" prefHeight="18.0" prefWidth="211.0" text="Music on:" textFill="WHITE" />
       <Label fx:id="musicSelected" layoutX="199.0" layoutY="27.0" prefHeight="28.0" prefWidth="221.0" text="PlaceHolder" textFill="WHITE" />
-      <Button layoutX="8.0" layoutY="70.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="26.0" prefWidth="52.0" text="Records" />
+      <Button fx:id="historyButton" disable="true" layoutX="8.0" layoutY="70.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="26.0" prefWidth="52.0" text="Records" />
    </children>
 </AnchorPane>

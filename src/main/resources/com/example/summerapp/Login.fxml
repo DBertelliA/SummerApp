@@ -6,10 +6,11 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.LogInController">
    <children>
       <Label fx:id="confirmText" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="200.0" prefHeight="18.0" prefWidth="210.0" textAlignment="CENTER" />
-      <Button layoutX="272.0" layoutY="262.0" mnemonicParsing="false" onAction="#loginButton" text="Log in" />
+      <Button layoutX="272.0" layoutY="231.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="26.0" prefWidth="56.0" text="Log in" />
       <TextField fx:id="user" layoutX="219.0" layoutY="93.0" />
       <PasswordField fx:id="password" layoutX="219.0" layoutY="145.0" />
       <Label layoutX="283.0" layoutY="36.0" text="Login" />
-      <Button layoutX="270.0" layoutY="314.0" mnemonicParsing="false" onAction="#signInButton" text="Sign in" />
+      <Button layoutX="270.0" layoutY="277.0" mnemonicParsing="false" onAction="#signInButton" prefHeight="26.0" prefWidth="60.0" text="Create" />
+      <Button layoutX="272.0" layoutY="325.0" mnemonicParsing="false" text="Admin" />
    </children>
 </AnchorPane>
