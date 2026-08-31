@@ -78,6 +78,7 @@ public class MenuController_All {
     //-------Selector-------//
 
     @FXML public AnchorPane anchorPaneAddFunctions; //para tabala y datos agregar
+
     @FXML public Pane paneSelector;
 
     @FXML public ToolBar selectorOptions;

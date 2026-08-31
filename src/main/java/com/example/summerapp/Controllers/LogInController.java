@@ -1,5 +1,6 @@
 package com.example.summerapp.Controllers;
 
+import com.example.summerapp.Controllers.MenuControllers.AdminController;
 import com.example.summerapp.Controllers.MenuControllers.MenuController_All;
 import com.example.summerapp.HelloApplication;
 import com.example.summerapp.Helper.FinderAll;
@@ -64,6 +65,26 @@ public class LogInController {
             SignInController sgin = fxmload.getController();
             sgin.confirLabel.setText("...");
             confirmText.setText("...");
+            Stage staging = (Stage) confirmText.getScene().getWindow();
+            staging.setScene(sceneLoad);
+
+            staging.show();
+        }catch (IOException e){
+            System.err.println(e);
+        }
+    }
+
+    @FXML
+    protected void adminButton() {
+        try {
+            FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("Admin.fxml"));
+            Scene sceneLoad = new Scene(fxmload.load(), 600, 400);
+
+            AdminController admin = fxmload.getController();
+            admin.welcomeAdmin.setText("Welcome administrator... it should be");
+            admin.selectedData.setText("...");
+            confirmText.setText("...");
+            admin.listUsersSetter();
             Stage staging = (Stage) confirmText.getScene().getWindow();
             staging.setScene(sceneLoad);
 
