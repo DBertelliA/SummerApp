@@ -1,8 +1,9 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
 import com.example.summerapp.Connections.ConnectionMySQL;
-import com.example.summerapp.Controllers.LogInController;
 import com.example.summerapp.HelloApplication;
+import com.example.summerapp.Interface.Functions.UserFunctions;
+import com.example.summerapp.Interface.UserFunctionsInterface;
 import com.example.summerapp.Models.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminController {
+    UserFunctionsInterface uFI = new UserFunctions();
     @FXML public Label welcomeAdmin;
 
     @FXML
@@ -46,6 +48,9 @@ public class AdminController {
     static String userPassword;
 
     public void listUsersSetter(){
+        deleteUser.setDisable(true);
+        editUserPassword.setDisable(true);
+
         try (PreparedStatement sPT = connect.prepareStatement("SELECT * FROM dataCatcherUser;")){
             ResultSet rST = sPT.executeQuery();
             List<String> userList = new ArrayList<>();
@@ -64,11 +69,16 @@ public class AdminController {
 
             listUsers.setOnMouseClicked( e -> {
                 String spt = listUsers.getSelectionModel().getSelectedItem();
-                if (!spt.isEmpty()) {
+                if (spt != null) {
                     String[] doub = spt.split("\\|///&///\\|");
                     userName = doub[0];
                     userPassword = doub[1];
-                    selectedData.setText("You have selected: " + "Name: " + userName + "PW: " + userPassword);
+                    selectedData.setText("You have selected: " + "Name: " + userName + "PW: Is hardcoded for something");
+                    deleteUser.setDisable(false);
+                    editUserPassword.setDisable(false);
+                }else{
+                    deleteUser.setDisable(true);
+                    editUserPassword.setDisable(true);
                 }
             });
         }catch (SQLException e){
@@ -84,6 +94,14 @@ public class AdminController {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void deleteFunction(){
+        uFI.deleteUser(new User(userName,userPassword));
+    }
+
+    public void updateFunction(){
+        uFI.updateUser(new User(userName,userPassword));
     }
 
 }

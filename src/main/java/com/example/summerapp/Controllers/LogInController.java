@@ -15,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class LogInController {
@@ -76,21 +77,30 @@ public class LogInController {
 
     @FXML
     protected void adminButton() {
-        try {
-            FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("Admin.fxml"));
-            Scene sceneLoad = new Scene(fxmload.load(), 600, 400);
+        String sp1 = JOptionPane.showInputDialog("Introduce the password \"Mr admin\" ");
+        if (sp1 != null) {
+            if (sp1.equals("data1")) {
+                JOptionPane.showMessageDialog(null, "My bad pall");
+                try {
+                    FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("Admin.fxml"));
+                    Scene sceneLoad = new Scene(fxmload.load(), 600, 400);
 
-            AdminController admin = fxmload.getController();
-            admin.welcomeAdmin.setText("Welcome administrator... it should be");
-            admin.selectedData.setText("...");
-            confirmText.setText("...");
-            admin.listUsersSetter();
-            Stage staging = (Stage) confirmText.getScene().getWindow();
-            staging.setScene(sceneLoad);
+                    AdminController admin = fxmload.getController();
+                    admin.welcomeAdmin.setText("Welcome administrator... it should be");
+                    admin.selectedData.setText("...");
+                    confirmText.setText("...");
+                    admin.listUsersSetter();
+                    Stage staging = (Stage) confirmText.getScene().getWindow();
+                    staging.setScene(sceneLoad);
 
-            staging.show();
-        }catch (IOException e){
-            System.err.println(e);
+                    staging.show();
+                } catch (IOException e) {
+                    System.err.println(e);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "no, try again (If you are the admin, of course)");
+            }
         }
     }
 

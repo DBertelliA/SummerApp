@@ -5,8 +5,8 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.AdminController">
    <children>
-      <Button fx:id="deleteUser" layoutX="65.0" layoutY="98.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="135.0" text="Eliminar" />
-      <Button fx:id="editUserPassword" layoutX="65.0" layoutY="163.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="135.0" text="Editar" />
+      <Button fx:id="deleteUser" layoutX="65.0" layoutY="98.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="135.0" onAction="#deleteFunction" text="Eliminar" />
+      <Button fx:id="editUserPassword" layoutX="65.0" layoutY="163.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="135.0" onAction="#updateFunction" text="Editar" />
       <ListView fx:id="listUsers" layoutX="253.0" layoutY="32.0" prefHeight="313.0" prefWidth="303.0" />
       <Label fx:id="welcomeAdmin" contentDisplay="TOP" layoutX="14.0" layoutY="32.0" text="..." />
       <Label fx:id="selectedData" layoutX="14.0" layoutY="353.0" text="..." />

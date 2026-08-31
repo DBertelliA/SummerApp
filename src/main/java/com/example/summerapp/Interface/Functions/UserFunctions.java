@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.crypto.IllegalBlockSizeException;
 import javax.swing.*;
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,11 +98,13 @@ public class UserFunctions implements UserFunctionsInterface {
     public User updateUser(User user) {
         User userVerifUser = FinderAll.findUser(user.getNameSystem());
         String p = JOptionPane.showInputDialog("Introduce the password");
-        while (p.isEmpty()){
-            p = JOptionPane.showInputDialog("Why is empty?, just introduce the password");
-        }
-        User userVerifPass = FinderAll.passwordMatcher(new User(user.getNameSystem(), p));
-        String pNew = JOptionPane.showInputDialog("Introduce the NEW password");
+
+        try {
+            while (p.isEmpty()){
+                p = JOptionPane.showInputDialog("Why is empty?, just introduce the password");
+            }
+            User userVerifPass = FinderAll.passwordMatcher(new User(user.getNameSystem(), p));
+            String pNew = JOptionPane.showInputDialog("Introduce the NEW password");
             if(userVerifUser != null){
                 while (pNew.isEmpty()){
                     pNew = JOptionPane.showInputDialog("No an empty field pls (Just introduce the new password)");
@@ -144,6 +147,9 @@ public class UserFunctions implements UserFunctionsInterface {
             }else{
                 Warnings.warningJump(5);
             }
+        } catch (NullPointerException e) {
+            System.err.println("Aborted");
+        }
 
         return null;
 
