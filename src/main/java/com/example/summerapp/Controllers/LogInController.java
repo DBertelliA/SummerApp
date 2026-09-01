@@ -5,8 +5,6 @@ import com.example.summerapp.Controllers.MenuControllers.MenuController_All;
 import com.example.summerapp.HelloApplication;
 import com.example.summerapp.Helper.FinderAll;
 import com.example.summerapp.History.HelperStringHistory;
-import com.example.summerapp.Interface.Functions.TablesFunctions;
-import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import com.example.summerapp.Models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,12 +30,9 @@ public class LogInController {
     private PasswordField password;
 
     @FXML
-    private Button changerTest;
-
-    @FXML
     protected void loginButton() {
-        String privateAdminName = aIC.getNameAdmin();
-        String privateAdminPassword = aIC.getPassAdmin();
+        String privateAdminName = aIC.lectureCredential()[0];
+        String privateAdminPassword = aIC.lectureCredential()[1];
             if (user.getText().equals(privateAdminName) && password.getText().equals(privateAdminPassword)){
                 adminButton();
             }else {
@@ -90,9 +85,10 @@ public class LogInController {
 
     @FXML
     protected void adminButton() {
+        String mgW = aIC.lectureCredential()[2];
         String sp1 = JOptionPane.showInputDialog("Introduce the password \"Mr admin\" ");
         if (sp1 != null) {
-            if (sp1.equals("data1")) {
+            if (sp1.equals(mgW)) {
                 JOptionPane.showMessageDialog(null, "My bad pall");
                 HelperStringHistory.historyMaker("El administrador ha aparecido! Deberia serlo...");
                 try {
@@ -114,12 +110,14 @@ public class LogInController {
 
             } else {
                 JOptionPane.showMessageDialog(null, "no, try again (If you are the admin, of course)");
+                user.clear();
+                password.clear();
             }
         }
     }
 
     public void test1(){
-        aIC.credentialChanger();
+        aIC.credentialSetter();
     }
 
 }
