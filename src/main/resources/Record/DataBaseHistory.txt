@@ -31,3 +31,7 @@
 [1/9/2026]-10:16:58-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla dam. 
 [1/9/2026]-10:18:18-El usuario: IIIIIIII ha accedido a la database. 
 [1/9/2026]-10:18:22-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla daa. 
+[1/9/2026]-11:42:01-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-12:07:09-El usuario: t ha accedido a la database. 
+[1/9/2026]-12:07:15-El usuario: t ha salido de la data base. 
+[1/9/2026]-12:28:45-El administrador ha aparecido! Deberia serlo.... 

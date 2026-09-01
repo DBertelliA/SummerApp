@@ -11,6 +11,7 @@ import com.example.summerapp.Models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -20,6 +21,7 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class LogInController {
+    AdminIntroductionController aIC = new AdminIntroductionController();
     @FXML
     public Label confirmText;
 
@@ -29,13 +31,17 @@ public class LogInController {
     @FXML
     private PasswordField password;
 
+    @FXML
+    private Button changerTest;
 
     @FXML
     protected void loginButton() {
-        if(FinderAll.passwordMatcher(new User(user.getText(), password.getText())) != null){
-            if (user.getText().equals("t") && password.getText().equals("t")){
+        String privateAdminName = aIC.getNameAdmin();
+        String privateAdminPassword = aIC.getPassAdmin();
+            if (user.getText().equals(privateAdminName) && password.getText().equals(privateAdminPassword)){
                 adminButton();
             }else {
+                if(FinderAll.passwordMatcher(new User(user.getText(), password.getText())) != null){
                 confirmText.setText("Usuario correcto");
                 HelperStringHistory.historyMaker("El usuario: " + user.getText() + " ha accedido a la database");
                 try {
@@ -55,14 +61,13 @@ public class LogInController {
                 } catch (IOException e) {
                     System.err.println(e);
                 }
+                }else {
+                    confirmText.setText("Usuario o contraseña no valido");
+                    user.clear();
+                    password.clear();
+                }
             }
 
-        }
-        else {
-            confirmText.setText("Usuario o contraseña no valido");
-            user.clear();
-            password.clear();
-        }
     }
 
     @FXML
@@ -111,6 +116,10 @@ public class LogInController {
                 JOptionPane.showMessageDialog(null, "no, try again (If you are the admin, of course)");
             }
         }
+    }
+
+    public void test1(){
+        aIC.credentialChanger();
     }
 
 }
