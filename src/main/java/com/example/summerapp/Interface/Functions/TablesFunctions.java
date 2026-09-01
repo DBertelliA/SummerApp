@@ -3,6 +3,7 @@ package com.example.summerapp.Interface.Functions;
 import com.example.summerapp.Connections.ConnectionMySQL;
 import com.example.summerapp.Controllers.MenuControllers.ErrorReactionsFramesController;
 import com.example.summerapp.Controllers.MenuControllers.FrameController;
+import com.example.summerapp.Controllers.MenuControllers.MenuController_All;
 import com.example.summerapp.History.HelperStringHistory;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import javafx.beans.property.SimpleStringProperty;
@@ -46,7 +47,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public boolean addTable(List<String> dataName, List<String> tipeForEach, String tableName, TextFlow dialogText, ImageView assistent, Spinner<Integer> numberValues) {
+    public boolean addTable(List<String> dataName, List<String> tipeForEach, String tableName, TextFlow dialogText, ImageView assistent, Spinner<Integer> numberValues, String user) {
         StringBuilder sb = new StringBuilder();
 
         //En tipeForEach: Lista unica con dos valores diferentes, impar, tipo de dato, par tipo de llave
@@ -73,14 +74,14 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
             dialogGenerator(assistent,1,dialogText, "Has agregado la tabla " + tableName);
 
-            HelperStringHistory.historyMaker("Se ha generado la tabla " + tableName);
+            HelperStringHistory.historyMaker("El usuario" + user + " ha generado la tabla " + tableName);
 
             return true;
         }catch (SQLException e){
             boolean switcher = false;
             System.err.println(sb.toString());
             System.err.println(e);
-            HelperStringHistory.historyMaker("&&&&& Se ha intentado agregar una nueva tabla con el nombre" + tableName + " ... No se ha podido &&&&");
+            HelperStringHistory.historyMaker("Errrr/// El usuario " + user + " ha intentado agregar una nueva tabla con el nombre" + tableName + " ... No se ha podido");
 
             //err count es el numero de dialogos de cada error y debe coincidir con la cantidad de la lista con la cantidad impuesta -1 (el ultimo dialogo suelen ser puntos suspensivos)
             if(tableName.isEmpty()){
@@ -119,7 +120,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public boolean insertData(String titleTable, List<String> lStr, TextFlow dialogText, ImageView assistent){
+    public boolean insertData(String titleTable, List<String> lStr, TextFlow dialogText, ImageView assistent,String user){
         StringBuilder sb = new StringBuilder();
             sb.append("INSERT INTO " + titleTable).append(" VALUES (");
 
@@ -150,13 +151,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
                 dialogGenerator(assistent,1,dialogText, "se ha insertado la data a la tabla " + titleTable);
-                HelperStringHistory.historyMaker("Se ha insertado la datos a la tabla " + titleTable);
+                HelperStringHistory.historyMaker( "El usuario " + user + " ha insertado la datos a la tabla " + titleTable);
                 return true;
         }catch (SQLException e){
                 System.err.println(e);
                 System.err.println(sb.toString());
             dialogGenerator(assistent,1,dialogText, "No se ha insertado la data a la tabla " + titleTable);
-            HelperStringHistory.historyMaker("&&&&& No se ha podido insertar los datos a la tabla " + titleTable + " &&&&&");
+            HelperStringHistory.historyMaker("Errrr/// El usuario " + user + " no ha podido insertar los datos a la tabla " + titleTable);
 
             err.setWhereErr(2);
             err.setNumberErr(1);
@@ -167,7 +168,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     //Tener en cuenta que se te puede cambiar toda la fila si no ponemos los limitadores, pensaré como introducirlo mediante el javafx sin necesidad de añadir nada a los metodos
     @Override
-    public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore, TextFlow dialogText, ImageView assistent) {
+    public void updateData(String tableName, List<String> stringChanger, List<String> stringBefore, TextFlow dialogText, ImageView assistent,String user) {
         List<String> nameData = giverName(tableName, dialogText ,assistent);
 
         StringBuilder sb = new StringBuilder();
@@ -201,13 +202,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
             dialogGenerator(assistent,1,dialogText, "Se han actualizado los datos seleccionados");
-            HelperStringHistory.historyMaker("Se han actualizado los datos de la tabla " + tableName);
+            HelperStringHistory.historyMaker("El usuario " + user + " ha actualizado los datos de la tabla " + tableName);
 
             System.out.println(sb.toString());
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
-            HelperStringHistory.historyMaker("No se han podido actualizar los datos de la tabla " + tableName);
+            HelperStringHistory.historyMaker("Errr/// El usuario " + user + " no ha podido actualizar los datos de la tabla " + tableName);
             dialogGenerator(assistent,1,dialogText, "NO se han actualizado los datos seleccionados");
         }
 
@@ -228,7 +229,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName, TextFlow dialogText, ImageView assistent) {
+    public void deleteData(String tableName, List<String> valuesToDelete, List<String> valuesName, TextFlow dialogText, ImageView assistent,String user) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -254,18 +255,18 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
             dialogGenerator(assistent,1,dialogText, "Se ha eliminado la data seleccionada");
-            HelperStringHistory.historyMaker("Se han eliminado unos datos de la tabla " + tableName);
+            HelperStringHistory.historyMaker("El usuario " + user + " ha eliminado unos datos de la tabla " + tableName);
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
-            HelperStringHistory.historyMaker("No se han podido eliminar unos datos de la tabla " + tableName);
+            HelperStringHistory.historyMaker("Errr//// El usuario " + user + "no ha podido eliminar unos datos de la tabla " + tableName);
             dialogGenerator(assistent,1,dialogText, "No se ha podido eliminar la data seleccionada");
         }
 
     }
 
     @Override
-    public String dataSearch(String tableName, List<String> valuesForSearch, TableView<ObservableList<String>> tableShower, TextFlow dialogText, ImageView assistent) {
+    public String dataSearch(String tableName, List<String> valuesForSearch, TableView<ObservableList<String>> tableShower, TextFlow dialogText, ImageView assistent,String user) {
         List<String> nameData = giverName(tableName, dialogText ,assistent);
         System.out.println(valuesForSearch);
         StringBuilder sb = new StringBuilder();
@@ -322,7 +323,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
                 tableShower.getItems().add(fila);
             }
-            HelperStringHistory.historyMaker("Un usuario ha buscado unos datos en " + tableName);
+            HelperStringHistory.historyMaker("El usuario " + user + " ha buscado unos datos en " + tableName);
             return sb.toString();
         }
         catch (SQLException e){
@@ -334,7 +335,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     }
 
     @Override
-    public boolean deleteTables(String tableName, TextFlow dialogText, ImageView assistent) {
+    public boolean deleteTables(String tableName, TextFlow dialogText, ImageView assistent,String user) {
         if (tableName.equals("datacatcheruser")){
             return false;
         }
@@ -342,7 +343,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (Statement st = conect.createStatement()){
             st.executeUpdate(sql);
             dialogGenerator(assistent,0,dialogText, "Se ha eliminado la tabla " + tableName);
-            HelperStringHistory.historyMaker("Se ha eliminado la tabla " + tableName);
+            HelperStringHistory.historyMaker("El usuario " + user + " ha eliminado la tabla " + tableName);
             return true;
         }catch (SQLException e){
             System.err.println(e);

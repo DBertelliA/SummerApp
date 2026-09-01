@@ -1,12 +1,14 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
 import com.example.summerapp.HelloApplication;
+import com.example.summerapp.History.HelperStringHistory;
 import com.example.summerapp.Interface.Functions.FileSaver;
 import com.example.summerapp.Interface.Functions.MusicReproduction;
 import com.example.summerapp.Interface.Functions.TablesFunctions;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -271,15 +273,19 @@ public class MenuController_All {
     public void initializeTimer(){
         Timeline tLTimer = new Timeline(
                 new KeyFrame(Duration.seconds(1), e -> {
-                    StringBuilder sB = new StringBuilder();
+                    StringBuilder sb = new StringBuilder();
                     LocalTime lT = LocalTime.now();
-                    sB.append(lT.getHour()).append(":").append(lT.getMinute()).append(":");
-                    if (lT.getSecond() < 10) {
-                        sB.append("0").append(lT.getSecond());
-                    }else {
-                        sB.append(lT.getSecond());
-                    }
-                    timerShower.setText(sB.toString());
+
+                    if (lT.getHour() < 10) {sb.append("0").append(lT.getHour());}
+                    else {sb.append(lT.getHour());}
+
+                    if (lT.getMinute() < 10) {sb.append(":0").append(lT.getMinute());}
+                    else {sb.append(":").append(lT.getMinute());}
+
+                    if (lT.getSecond() < 10) {sb.append(":0").append(lT.getSecond());}
+                    else {sb.append(":").append(lT.getSecond());}
+
+                    timerShower.setText(sb.toString());
                 })
         );
         tLTimer.setCycleCount(Timeline.INDEFINITE);
@@ -483,7 +489,7 @@ public class MenuController_All {
                 }
             }
             if
-            (!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent, numberValues))
+            (!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent, numberValues, userLoggedMenu.getText()))
             {
                 FrameController.framesView(assistent, 3, false);
                 assistent.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/Mad.jpg"))));
@@ -613,12 +619,15 @@ public class MenuController_All {
                 lStr.add(tf.getText());
             }
         }
-        boolean che = tACF.insertData(comboxTable.getValue(),lStr, dialogText ,assistent);
+        boolean che = tACF.insertData(comboxTable.getValue(),lStr, dialogText ,assistent,userLoggedMenu.getText());
         if (che) {
             labelIndicate.setText("...");
             buttonForAddData.setDisable(true);
             backInit(true);
         }else {
+            turnerOff();
+            selectorOptions.setDisable(true);
+
             FrameController.framesView(assistent, 3, false);
             ErrorReactionsFramesController.dialogFormat(dialogText,"Error(2)");
 
@@ -642,6 +651,7 @@ public class MenuController_All {
                     assistentErrorF.setVisible(false);
 
                     FrameController.framesView(assistent, 1, false);
+                    visualizerMethod(2);
                     addData();
                 }
             });
@@ -759,7 +769,7 @@ public class MenuController_All {
     });
 
     buttonForDeleteData.setOnAction( e -> {
-        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData, dialogText, assistent);
+        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData, dialogText, assistent,userLoggedMenu.getText());
         TablesFunctions.fillerBox(comboBoxForEdit);
     });
 
@@ -771,7 +781,7 @@ public class MenuController_All {
                     stringsList.add(tf.getText());
                 }
             }
-            tACF.updateData(comboBoxForEdit.getValue(),stringsList, valuesForMe, dialogText ,assistent);
+            tACF.updateData(comboBoxForEdit.getValue(),stringsList, valuesForMe, dialogText ,assistent,userLoggedMenu.getText());
             TablesFunctions.fillerBox(comboBoxForEdit);
         });
 
@@ -861,7 +871,7 @@ public class MenuController_All {
                      listData.add(tf.getText());
                 }
             }
-            tACF.dataSearch(tablesForSearch.getValue(),listData,tableShowDataSelected, dialogText ,assistent);
+            tACF.dataSearch(tablesForSearch.getValue(),listData,tableShowDataSelected, dialogText ,assistent,userLoggedMenu.getText());
         });
 
     }
@@ -893,7 +903,7 @@ public class MenuController_All {
         });
 
         buttonForDeleteTable.setOnAction( e -> {
-            if (tACF.deleteTables(comboxOfTablesForDelete.getValue(), dialogText ,assistent)) {
+            if (tACF.deleteTables(comboxOfTablesForDelete.getValue(), dialogText ,assistent,userLoggedMenu.getText())) {
                 TablesFunctions.fillerBox(comboxOfTablesForDelete);
                 labelSelectedTable.setText("Deleted");
                 buttonForDeleteTable.setDisable(true);
@@ -935,12 +945,14 @@ public class MenuController_All {
     //------------Buttons for exit the program and log out-----------------//
 
     public void exitButton(){
-        System.exit(0);
+        HelperStringHistory.historyMaker("El usuario: " + userLoggedMenu.getText() + " ha salido de la data base");
+        Platform.exit();
     }
 
     public void logOutButton(){
         FrameController.framesView(assistent,999, true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
+        HelperStringHistory.historyMaker("El usuario: " + userLoggedMenu.getText() + " ha salido de la data base");
         try {
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
 

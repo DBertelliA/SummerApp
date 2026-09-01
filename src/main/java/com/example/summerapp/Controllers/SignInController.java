@@ -2,6 +2,7 @@ package com.example.summerapp.Controllers;
 
 import com.example.summerapp.HelloApplication;
 import com.example.summerapp.Helper.FinderAll;
+import com.example.summerapp.History.HelperStringHistory;
 import com.example.summerapp.Interface.Functions.UserFunctions;
 import com.example.summerapp.Models.User;
 import javafx.fxml.FXML;
@@ -30,6 +31,9 @@ public class SignInController {
         if(FinderAll.findUser(userSg.getText()) == null){
             functionsU.addUser(new User(userSg.getText(), passwordSg.getText()));
             confirLabel.setText("Usuario añadido");
+            HelperStringHistory.historyMaker("Se ha creado el usuario: " + userSg.getText());
+            userSg.clear();
+            passwordSg.clear();
         }else {
             confirLabel.setText("Usuario no añadido");
         }

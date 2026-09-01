@@ -16,7 +16,7 @@ public class HelperStringHistory {
             sb.append("[").append(lD.getDayOfMonth()).append("/").append(lD.getMonthValue()).append("/").append(lD.getYear()).append("]")
                             .append("-");
 
-            if (lT.getHour() < 10) {sb.append(":0").append(lT.getHour());}
+            if (lT.getHour() < 10) {sb.append("0").append(lT.getHour());}
             else {sb.append(lT.getHour());}
 
             if (lT.getMinute() < 10) {sb.append(":0").append(lT.getMinute());}

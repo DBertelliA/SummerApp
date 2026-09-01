@@ -1,0 +1,33 @@
+[1/9/2026]-09:11:23-Un usuario ha buscado unos datos en dam.
+[1/9/2026]-09:12:20-Un usuario ha buscado unos datos en dam. 
+[1/9/2026]-09:27:59-El administrador ha aparecido! Deberia serlo.... 
+[1/9/2026]-09:28:13-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-09:32:20-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-09:32:23-El usuario: IIIIIIII ha salido de la data base. 
+[1/9/2026]-09:32:37-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-09:33:05-El usuario: IIIIIIII ha salido de la data base. 
+[1/9/2026]-09:33:18-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-09:33:53-El usuario: IIIIIIII ha salido de la data base. 
+[1/9/2026]-09:34:01-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-09:34:41-Un usuario ha buscado unos datos en dam. 
+[1/9/2026]-09:48:04-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-09:48:22-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla dam. 
+[1/9/2026]-09:48:47-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla dam. 
+[1/9/2026]-09:48:50-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla dam. 
+[1/9/2026]-09:49:51-Errr/// El usuario IIIIIIIINo ha podido actualizar los datos de la tabla testing2. 
+[1/9/2026]-09:52:38-El administrador ha aparecido! Deberia serlo.... 
+[1/9/2026]-09:53:36-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-09:55:04-El usuarioIIIIIIII ha generado la tabla daa. 
+[1/9/2026]-09:55:21-Errrr/// El usuario IIIIIIII ha intentado agregar una nueva tabla con el nombre ... No se ha podido. 
+[1/9/2026]-09:55:44-Errrr/// El usuario IIIIIIII ha intentado agregar una nueva tabla con el nombre ... No se ha podido. 
+[1/9/2026]-09:56:35-El usuario IIIIIIII ha buscado unos datos en dam. 
+[1/9/2026]-09:56:56-El usuarioIIIIIIII ha generado la tabla ss. 
+[1/9/2026]-09:56:59-El usuario IIIIIIII ha eliminado la tabla ss. 
+[1/9/2026]-09:57:47-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla daa. 
+[1/9/2026]-09:59:39-El usuario IIIIIIII ha buscado unos datos en daa. 
+[1/9/2026]-10:02:00-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-10:02:13-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla daa. 
+[1/9/2026]-10:16:52-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-10:16:58-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla dam. 
+[1/9/2026]-10:18:18-El usuario: IIIIIIII ha accedido a la database. 
+[1/9/2026]-10:18:22-Errrr/// El usuario IIIIIIII no ha podido insertar los datos a la tabla daa. 
