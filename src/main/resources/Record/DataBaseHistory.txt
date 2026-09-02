@@ -42,3 +42,20 @@
 [1/9/2026]-18:03:00-El administrador ha aparecido! Deberia serlo.... 
 [1/9/2026]-18:48:53-El usuario: IIIIIIII ha accedido a la database. 
 [2/9/2026]-10:06:07-El administrador ha aparecido! Deberia serlo.... 
+[2/9/2026]-11:34:41-El usuario: t ha accedido a la database. 
+[2/9/2026]-16:35:16-Se ha creado el usuario: IOIOIOIO. 
+[2/9/2026]-16:35:25-El usuario: IOIOIOIO ha accedido a la database. 
+[2/9/2026]-16:35:58-El usuarioIOIOIOIO ha generado la tabla testFields. 
+[2/9/2026]-16:36:19-El usuario: IOIOIOIO ha salido de la data base. 
+[2/9/2026]-16:40:55-Se ha creado el usuario: IIIIIIII. 
+[2/9/2026]-16:54:11-El administrador ha aparecido! Deberia serlo.... 
+[2/9/2026]-16:54:27-Se ha creado el usuario: IIIIIIII. 
+[2/9/2026]-16:54:35-El usuario: IIIIIIII ha accedido a la database. 
+[2/9/2026]-16:55:06-El usuarioIIIIIIII ha generado la tabla dada. 
+[2/9/2026]-16:55:19-El usuario: IIIIIIII ha salido de la data base. 
+[2/9/2026]-16:55:31-El usuario: IIIIIIII ha accedido a la database. 
+[2/9/2026]-16:56:04-El usuario: IIIIIIII ha salido de la data base. 
+[2/9/2026]-16:59:09-El usuario: IIIIIIII ha accedido a la database. 
+[2/9/2026]-16:59:15-El usuario IIIIIIII ha eliminado la tabla dada. 
+[2/9/2026]-16:59:31-El usuarioIIIIIIII ha generado la tabla test. 
+[2/9/2026]-16:59:41-El usuario: IIIIIIII ha salido de la data base. 

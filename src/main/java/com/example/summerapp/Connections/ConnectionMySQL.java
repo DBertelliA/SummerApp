@@ -1,13 +1,34 @@
 package com.example.summerapp.Connections;
 
+import com.example.summerapp.Controllers.WelcomeController;
+import com.example.summerapp.DataBaseInitialScheme.InitialSchemeForUser;
+import com.example.summerapp.HelloApplication;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionMySQL {
-    private static String url = "jdbc:mysql://localhost:3306/tableForUser?serverTimezone=UTC";
+    static WelcomeController wC = new WelcomeController();
+    private static final String url;
+
+    static {
+        try {
+            JSONObject js1 = wC.jsonLecture("DataBaseStatus");
+            url = (String) js1.get("DataBaseString");
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static Connection conect = null;
 
     private static String user = "root";

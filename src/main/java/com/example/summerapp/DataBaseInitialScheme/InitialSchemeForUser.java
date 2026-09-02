@@ -10,11 +10,11 @@ public class InitialSchemeForUser {
     static String sql;
     static Connection connect = ConnectionMySQL.getInstance();
 
-    public static void main(String[] args) {
+    public static void initDataCatch() {
 
         sql = """
               CREATE TABLE IF NOT EXISTS dataCatcherUser(
-                Username VARCHAR(20) PRIMARY KEY,
+                Username VARCHAR(255) PRIMARY KEY,
                 UserPassword VARCHAR(255) NOT NULL
               );
               """;

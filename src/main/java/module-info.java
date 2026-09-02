@@ -7,6 +7,7 @@ module com.example.summerapp {
     requires spring.security.crypto;
     requires javafx.media;
     requires json.simple;
+    requires jdk.jsobject;
 
 
     opens com.example.summerapp.Interface.Functions to javafx.media;
