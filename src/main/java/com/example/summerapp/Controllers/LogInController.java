@@ -14,12 +14,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.swing.*;
 import java.io.IOException;
 
 public class LogInController {
     AdminIntroductionController aIC = new AdminIntroductionController();
+    static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     @FXML
     public Label confirmText;
 
@@ -31,9 +33,10 @@ public class LogInController {
 
     @FXML
     protected void loginButton() {
+
         String privateAdminName = aIC.lectureCredential()[0];
         String privateAdminPassword = aIC.lectureCredential()[1];
-            if (user.getText().equals(privateAdminName) && password.getText().equals(privateAdminPassword)){
+            if (encoder.matches(user.getText(),privateAdminName) && encoder.matches(password.getText(),privateAdminPassword)){
                 adminButton();
             }else {
                 if(FinderAll.passwordMatcher(new User(user.getText(), password.getText())) != null){
@@ -88,7 +91,7 @@ public class LogInController {
         String mgW = aIC.lectureCredential()[2];
         String sp1 = JOptionPane.showInputDialog("Introduce the password \"Mr admin\" ");
         if (sp1 != null) {
-            if (sp1.equals(mgW)) {
+            if (encoder.matches(sp1,mgW)) {
                 JOptionPane.showMessageDialog(null, "My bad pall");
                 HelperStringHistory.historyMaker("El administrador ha aparecido! Deberia serlo...");
                 try {

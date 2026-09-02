@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.swing.*;
 import java.io.FileReader;
@@ -11,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class AdminIntroductionController{
+    static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     //Hardcode needed ----------------------------------------------------------
     String nameAdmin;
     String passAdmin;
@@ -68,9 +70,10 @@ public class AdminIntroductionController{
 
             JSONObject jObj = (JSONObject) jArray.get(0);
 
-            jObj.put("nameAdmin", getNameAdmin());
-            jObj.put("passAdmin", getPassAdmin());
-            jObj.put("magicWord", getMagicWordClass());
+
+            jObj.put("nameAdmin", encoder.encode(getNameAdmin()));
+            jObj.put("passAdmin", encoder.encode(getPassAdmin()));
+            jObj.put("magicWord", encoder.encode(getMagicWordClass()));
 
             try (FileWriter writer = new FileWriter("src/main/resources/AdminKey/keyKepper.json")) {
                 writer.write(jObject.toJSONString());
