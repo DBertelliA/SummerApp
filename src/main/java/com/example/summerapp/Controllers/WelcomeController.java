@@ -42,7 +42,7 @@ public class WelcomeController {
 
 
     static Connection connect = null;
-    @FXML private Button initDataBase;
+    @FXML public Button initDataBase;
     @FXML private Label welcomeLabel;
 
     public String startButton(){
