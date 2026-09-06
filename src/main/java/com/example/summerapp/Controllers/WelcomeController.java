@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -45,22 +46,37 @@ public class WelcomeController {
     @FXML public Button initDataBase;
     @FXML private Label welcomeLabel;
 
-    public String startButton(){
+    public String startButton() {
         try {
             JSONObject json1 = jsonLecture("DataBaseStatus");
 
 
-            if(!(boolean) json1.get("started")){
+            if (!(boolean) json1.get("started")) {
                 connectSequenceNewString();
                 JOptionPane.showMessageDialog(null, "Press again the start button so, we can start");
                 return (String) json1.get("DataBaseString");
             }
 
             connect = ConnectionMySQL.getInstance();
-            InitialSchemeForUser.initDataCatch();
+            if (connect == null) {
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Closed.fxml"));
+                for(Window w : Window.getWindows()){
+                    if (w instanceof Stage st && st.isShowing()){
+                        st.close();
+                        break;
+                    }
+                }
+                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
-            Scene scene = null;
+                Stage stage = new Stage();
+                stage.setTitle("Log in");
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                InitialSchemeForUser.initDataCatch();
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
+                Scene scene = null;
 
                 try {
                     scene = new Scene(fxmlLoader.load(), 600, 400);
@@ -69,13 +85,15 @@ public class WelcomeController {
                 }
 
                 LogInController lg = fxmlLoader.getController();
-            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
-            stage.setTitle("Log in");
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
+                Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+                stage.setTitle("Log in");
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.show();
 
-            return (String) json1.get("DataBaseString");
+                return (String) json1.get("DataBaseString");
+            }
+            return null;
         } catch (IOException | ParseException e) {
             System.err.println(e);
         }
