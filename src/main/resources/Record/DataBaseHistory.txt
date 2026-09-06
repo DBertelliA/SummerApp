@@ -59,3 +59,4 @@
 [2/9/2026]-16:59:15-El usuario IIIIIIII ha eliminado la tabla dada. 
 [2/9/2026]-16:59:31-El usuarioIIIIIIII ha generado la tabla test. 
 [2/9/2026]-16:59:41-El usuario: IIIIIIII ha salido de la data base. 
+[6/9/2026]-13:40:18-El administrador ha aparecido! Deberia serlo.... 
