@@ -20,7 +20,7 @@ public class UserFunctions implements UserFunctionsInterface {
     static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
-    public User addUser(User user) {
+    public boolean addUser(User user) {
         sql = "INSERT INTO dataCatcherUser VALUES (?,?)";
 
         try (PreparedStatement pSt = connect.prepareStatement(sql)){
@@ -38,7 +38,7 @@ public class UserFunctions implements UserFunctionsInterface {
             pSt.setString(2, encoder.encode(user.getPasswordSystem()));
             pSt.executeUpdate();
 
-            return user;
+            return true;
         }catch (SQLException | IllegalArgumentException e){
             Warnings.warningJump(1);
         } catch (RuntimeException e) {
@@ -46,7 +46,7 @@ public class UserFunctions implements UserFunctionsInterface {
         } catch (IllegalBlockSizeException e) {
             Warnings.warningJump(7);
         }
-        return null;
+        return false;
     }
 
     @Override

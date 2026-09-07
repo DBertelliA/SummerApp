@@ -29,14 +29,18 @@ public class SignInController {
     @FXML
     protected void createAcc(){
         if(FinderAll.findUser(userSg.getText()) == null){
-            functionsU.addUser(new User(userSg.getText(), passwordSg.getText()));
-            confirLabel.setText("Usuario añadido");
-            HelperStringHistory.historyMaker("Se ha creado el usuario: " + userSg.getText());
+            if (functionsU.addUser(new User(userSg.getText(), passwordSg.getText()))) {
+                confirLabel.setText("Usuario añadido");
+                HelperStringHistory.historyMaker("Se ha creado el usuario: " + userSg.getText());
+            }else {
+                confirLabel.setText("Usuario no añadido");
+            }
             userSg.clear();
             passwordSg.clear();
         }else {
-            confirLabel.setText("Usuario no añadido");
+            confirLabel.setText("El usuario no se ha podido añadir");
         }
+
     }
     @FXML
     protected void goBack(){
@@ -44,7 +48,7 @@ public class SignInController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage stage = (Stage) confirLabel.getScene().getWindow();
-        stage.setTitle("Hello!");
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
         }catch (IOException e){

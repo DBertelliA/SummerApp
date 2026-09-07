@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane fx:id="firstAnchor" prefHeight="576.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
+<AnchorPane id="anchorM" fx:id="firstAnchor" prefHeight="576.0" prefWidth="887.0" stylesheets="@../../example/css/menuCss.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
    <children>
       <TextFlow fx:id="dialogText2" layoutX="162.0" layoutY="70.0" prefHeight="128.0" prefWidth="131.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
       <AnchorPane fx:id="anchorPaneForEditValues" disable="true" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0" visible="false">
@@ -38,25 +38,83 @@
             <CheckBox fx:id="checkEdit" layoutX="373.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="74.0" text="Editar" />
          </children>
       </AnchorPane>
-      <ToolBar fx:id="selectorOptions" layoutX="294.0" layoutY="496.0" prefHeight="49.0" prefWidth="334.0">
+      <ToolBar fx:id="selectorOptions" layoutX="95.0" layoutY="541.0" prefHeight="39.0" prefWidth="720.0">
         <items>
-            <Button fx:id="initButton" mnemonicParsing="false" onAction="#inicializate" text="Inicio" />
-            <Button mnemonicParsing="false" onAction="#addButton" text="Agregar" />
-            <Button mnemonicParsing="false" onAction="#editPane" text="Editar" />
-            <Button mnemonicParsing="false" onAction="#searchPane" text="Buscar" />
-            <Button mnemonicParsing="false" onAction="#deleteTables" text="Eliminar" />
+            <Button fx:id="initButton" mnemonicParsing="false" onAction="#inicializate" prefHeight="26.0" prefWidth="126.0" text="Inicio" />
+            <Button mnemonicParsing="false" onAction="#addButton" prefHeight="26.0" prefWidth="128.0" text="Agregar" />
+            <Button mnemonicParsing="false" onAction="#editPane" prefHeight="26.0" prefWidth="127.0" text="Editar" />
+            <Button mnemonicParsing="false" onAction="#searchPane" prefHeight="26.0" prefWidth="143.0" text="Buscar" />
+            <Button mnemonicParsing="false" onAction="#deleteTables" prefHeight="26.0" prefWidth="143.0" text="Eliminar" />
         </items>
       </ToolBar>
       <HBox layoutX="-1.0" prefHeight="68.0" prefWidth="911.0">
          <children>
-            <Pane prefHeight="109.0" prefWidth="209.0" style="-fx-background-color: red;">
+            <Pane prefHeight="109.0" prefWidth="209.0" style="-fx-background-color: transparent;">
                <children>
-                  <Label fx:id="userLoggedMenu" layoutX="52.0" layoutY="14.0" prefHeight="17.0" prefWidth="137.0" text=" You should not see this" />
-                  <Label layoutX="21.0" layoutY="14.0" text="User:" />
+                  <Label fx:id="userLoggedMenu" layoutX="61.0" layoutY="14.0" prefHeight="17.0" prefWidth="128.0" text=" You should not see this">
+                     <font>
+                        <Font name="Liberation Sans" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="21.0" layoutY="14.0" text="User:">
+                     <font>
+                        <Font name="FreeMono" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="timerShower" layoutX="9.0" layoutY="51.0" prefHeight="28.0" prefWidth="172.0" text="Loading...">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="15.0" />
+                     </font></Label>
                </children></Pane>
-            <Pane prefHeight="83.0" prefWidth="263.0" style="-fx-background-color: blue;" />
-            <Pane prefHeight="83.0" prefWidth="278.0" style="-fx-background-color: green;" />
-            <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: black;" />
+            <Pane prefHeight="83.0" prefWidth="263.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Label fx:id="musicSelected" layoutX="27.0" layoutY="27.0" prefHeight="28.0" prefWidth="206.0" text="PlaceHolder">
+                     <font>
+                        <Font name="Liberation Mono" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="27.0" layoutY="-3.0" prefHeight="28.0" prefWidth="200.0" text="Music on:">
+                     <font>
+                        <Font name="DejaVu Serif Bold" size="13.0" />
+                     </font></Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="83.0" prefWidth="278.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Button layoutX="47.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: red; -fx-border-color: black;" text="Stop" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="155.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: grey; -fx-border-color: black;" text="Pause">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="109.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="26.0" prefWidth="43.0" style="-fx-background-color: blue; -fx-border-color: black;" text="Play" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="buttonForAddMusic" layoutX="205.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" style="-fx-background-color: green; -fx-border-color: black;" text="Add" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="96.0" layoutY="40.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: orange;" text="&gt;&gt;" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="60.0" layoutY="40.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: orange;" text="&lt;&lt;" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Slider fx:id="sliderVolume" layoutX="162.0" layoutY="29.0" onDragDetected="#musicVolumeChanger" prefHeight="49.0" prefWidth="93.0" />
+               </children></Pane>
+            <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Button fx:id="buttonExit" layoutX="61.0" layoutY="56.0" mnemonicParsing="false" onAction="#exitButton" opacity="0.45" prefHeight="39.0" prefWidth="93.0" text="Close" />
+                  <Button fx:id="buttonLogOut" layoutX="31.0" layoutY="6.0" mnemonicParsing="false" onAction="#logOutButton" opacity="0.36" prefHeight="26.0" prefWidth="172.0" text="Out" />
+               </children></Pane>
          </children>
       </HBox>
       <AnchorPane fx:id="anchorPaneAddFunctions" disable="true" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0" visible="false">
@@ -141,42 +199,6 @@
          </children>
       </AnchorPane>
       <ImageView fx:id="assistentErrorF" fitHeight="91.0" fitWidth="113.0" layoutX="170.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <Button layoutX="496.0" layoutY="7.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="27.0" prefWidth="52.0" style="-fx-background-color: red; -fx-border-color: black;" text="Stop" textFill="WHITE">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Button layoutX="556.0" layoutY="7.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: grey; -fx-border-color: black;" text="Pause">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Button layoutX="447.0" layoutY="7.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="26.0" prefWidth="52.0" style="-fx-background-color: blue; -fx-border-color: black;" text="Play" textFill="WHITE">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonForAddMusic" layoutX="627.0" layoutY="7.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: green; -fx-border-color: black;" text="Add" textFill="WHITE">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Button layoutX="498.0" layoutY="40.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="21.0" prefWidth="54.0" style="-fx-background-color: orange;" text="&gt;&gt;" textFill="WHITE">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Button layoutX="446.0" layoutY="40.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: orange;" text="&lt;&lt;" textFill="WHITE">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Slider fx:id="sliderVolume" layoutX="563.0" layoutY="40.0" onDragDetected="#musicVolumeChanger" prefHeight="18.0" prefWidth="120.0" />
-      <Label fx:id="timerShower" layoutX="18.0" layoutY="33.0" prefHeight="18.0" prefWidth="113.0" text="Loading..." />
-      <Button fx:id="buttonLogOut" layoutX="700.0" layoutY="5.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="28.0" prefWidth="200.0" text="Log out" />
-      <Button fx:id="buttonExit" layoutX="701.0" layoutY="38.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="26.0" prefWidth="200.0" text="Close" />
-      <Label layoutX="199.0" layoutY="7.0" prefHeight="18.0" prefWidth="211.0" text="Music on:" textFill="WHITE" />
-      <Label fx:id="musicSelected" layoutX="199.0" layoutY="27.0" prefHeight="28.0" prefWidth="221.0" text="PlaceHolder" textFill="WHITE" />
-      <Button fx:id="historyButton" disable="true" layoutX="8.0" layoutY="70.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="26.0" prefWidth="52.0" text="Records" />
+      <Button fx:id="historyButton" disable="true" layoutX="46.0" layoutY="93.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="80.0" prefWidth="43.0" />
    </children>
 </AnchorPane>
