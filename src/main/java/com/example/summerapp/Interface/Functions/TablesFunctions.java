@@ -488,42 +488,44 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         if (tbW == null) {
             tbW = new TableView<>();
         }
-        if (!titleTable.equalsIgnoreCase("datacatcheruser")) {
-        try (Statement st = conect.createStatement()) {
+        if (titleTable != null) {
+            if (!titleTable.equalsIgnoreCase("datacatcheruser")) {
+                try (Statement st = conect.createStatement()) {
 
-            ResultSet rst = st.executeQuery("DESCRIBE " + titleTable);
+                    ResultSet rst = st.executeQuery("DESCRIBE " + titleTable);
 
-            while (rst.next()) {
-                TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
-                final int position = tbW.getColumns().size();
+                    while (rst.next()) {
+                        TableColumn<ObservableList<String>, String> column = new TableColumn<>(rst.getString(1));
+                        final int position = tbW.getColumns().size();
 
-                column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(position)));
-                tbW.getColumns().add(column);
-            }
+                        column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(position)));
+                        tbW.getColumns().add(column);
+                    }
 
 
-            // joder, esto es mas sencillo, en el creas el objeto, le metes lo datos y se lo añades a la tableView, es una agregacion dinamica
+                    // joder, esto es mas sencillo, en el creas el objeto, le metes lo datos y se lo añades a la tableView, es una agregacion dinamica
 
-            ResultSet data = st.executeQuery("SELECT * FROM " + titleTable);
-            while (data.next()) {
-                //Creas la lista constantemente, y entiendo que una vez añadida, como la base de datos ve que hay datos, se lo pasa al siguiente
+                    ResultSet data = st.executeQuery("SELECT * FROM " + titleTable);
+                    while (data.next()) {
+                        //Creas la lista constantemente, y entiendo que una vez añadida, como la base de datos ve que hay datos, se lo pasa al siguiente
 
-                ObservableList<String> fila = FXCollections.observableArrayList();
+                        ObservableList<String> fila = FXCollections.observableArrayList();
 
-                for (int i = 1; i <= tbW.getColumns().size(); i++) {
-                    fila.add(data.getString(i));
+                        for (int i = 1; i <= tbW.getColumns().size(); i++) {
+                            fila.add(data.getString(i));
+                        }
+
+                        tbW.getItems().add(fila);
+                    }
+
+
+                    return tbW;
+
+                } catch (SQLException e) {
+                    System.err.println(e);
                 }
-
-                tbW.getItems().add(fila);
             }
-
-
-            return tbW;
-
-        } catch (SQLException e) {
-            System.err.println(e);
         }
-    }
         return null;
     }
 

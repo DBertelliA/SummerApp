@@ -694,7 +694,10 @@ public class MenuController_All {
 
         TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
         paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
-        TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(),null, paneForEditFields);
+
+        if(comboBoxForEdit.getValue() != null) {
+            TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(), null, paneForEditFields);
+        }
 
         for(Node n : paneForEditFields.getChildren()){
             if (n instanceof TextField tf){
