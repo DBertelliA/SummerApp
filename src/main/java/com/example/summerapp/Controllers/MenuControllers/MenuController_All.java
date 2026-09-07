@@ -141,6 +141,8 @@ public class MenuController_All {
 
     @FXML public Label labelSelectedTable;
 
+    @FXML public TableView<ObservableList<String>> tableDel;
+
     //------Cosas necesarias------//
 
     private List<String> valuesForMe;
@@ -886,6 +888,8 @@ public class MenuController_All {
             FrameController.initAssist(dialogText, assistent);
             inited = true;
         }
+        tableDel.getColumns().clear();
+        tableDel.getItems().clear();
 
         buttonForDeleteTable.setDisable(true);
         labelSelectedTable.setText("...");
@@ -902,6 +906,7 @@ public class MenuController_All {
             if (!(comboxOfTablesForDelete.getValue() == null)) {
                 labelSelectedTable.setText("you selected :" + comboxOfTablesForDelete.getValue());
                 buttonForDeleteTable.setDisable(false);
+                TablesFunctions.contentTypeGiver(comboxOfTablesForDelete.getValue(), tableDel);
             }
         });
 
@@ -910,6 +915,8 @@ public class MenuController_All {
                 TablesFunctions.fillerBox(comboxOfTablesForDelete);
                 labelSelectedTable.setText("Deleted");
                 buttonForDeleteTable.setDisable(true);
+                TablesFunctions.fillerBox(comboxOfTablesForDelete);
+                TablesFunctions.contentTypeGiver(comboxOfTablesForDelete.getValue(), tableDel);
             }else {
                 labelSelectedTable.setText("For some reason, it's still there");
             }

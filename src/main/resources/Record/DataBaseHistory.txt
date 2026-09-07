@@ -41,3 +41,16 @@
 [7/9/2026]-15:48:57-El usuario: diablo01 ha accedido a la database. 
 [7/9/2026]-15:49:28-El usuario: diablo01 ha accedido a la database. 
 [7/9/2026]-15:51:02-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-15:57:45-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:01:24-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:02:37-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:31:04-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:31:20-El usuario diablo01 ha eliminado la tabla test1. 
+[7/9/2026]-16:32:08-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:32:56-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:34:57-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:35:01-El usuario diablo01 ha buscado unos datos en test2. 
+[7/9/2026]-16:35:28-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:36:40-El usuario: diablo01 ha accedido a la database. 
+[7/9/2026]-16:37:01-El usuariodiablo01 ha generado la tabla aa. 
+[7/9/2026]-16:37:05-El usuario diablo01 ha eliminado la tabla aa. 
