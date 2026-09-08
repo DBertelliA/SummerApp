@@ -2,14 +2,18 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="anchorS" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/createCss.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.SignInController">
    <children>
       <Label layoutX="245.0" layoutY="31.0" />
-      <Button layoutX="261.0" layoutY="237.0" mnemonicParsing="false" onAction="#createAcc" text="Create" />
-      <TextField fx:id="userSg" layoutX="209.0" layoutY="85.0" promptText="Name" />
-      <PasswordField fx:id="passwordSg" layoutX="209.0" layoutY="134.0" promptText="Password" />
-      <Label fx:id="confirLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="182.0" prefHeight="17.0" prefWidth="161.0" text="a" />
-      <Button layoutX="267.0" layoutY="291.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Button layoutX="227.0" layoutY="242.0" mnemonicParsing="false" onAction="#createAcc" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: transparent;" text="Create" textFill="WHITE">
+         <font>
+            <Font name="Fira Code Light" size="16.0" />
+         </font></Button>
+      <TextField fx:id="userSg" layoutX="227.0" layoutY="122.0" promptText="Name" />
+      <PasswordField fx:id="passwordSg" layoutX="227.0" layoutY="165.0" promptText="Password" />
+      <Label fx:id="confirLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="228.0" layoutY="209.0" prefHeight="17.0" prefWidth="161.0" text="a" />
+      <Button layoutX="301.0" layoutY="294.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
    </children>
 </AnchorPane>

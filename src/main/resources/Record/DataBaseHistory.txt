@@ -54,3 +54,8 @@
 [7/9/2026]-16:36:40-El usuario: diablo01 ha accedido a la database. 
 [7/9/2026]-16:37:01-El usuariodiablo01 ha generado la tabla aa. 
 [7/9/2026]-16:37:05-El usuario diablo01 ha eliminado la tabla aa. 
+[8/9/2026]-12:14:17-El usuario: diablo01 ha accedido a la database. 
+[8/9/2026]-13:13:30-El usuario: diablo01 ha accedido a la database. 
+[8/9/2026]-13:15:17-El usuario: diablo01 ha accedido a la database. 
+[8/9/2026]-13:16:22-El usuario: diablo01 ha accedido a la database. 
+[8/9/2026]-13:16:42-El usuario: diablo01 ha salido de la data base. 
