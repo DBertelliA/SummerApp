@@ -961,6 +961,7 @@ public class MenuController_All {
 
     public void logOutButton(){
         FrameController.framesView(assistent,999, true);
+        musicReproOff();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
         HelperStringHistory.historyMaker("El usuario: " + userLoggedMenu.getText() + " ha salido de la data base");
         try {

@@ -59,3 +59,55 @@
 [8/9/2026]-13:15:17-El usuario: diablo01 ha accedido a la database. 
 [8/9/2026]-13:16:22-El usuario: diablo01 ha accedido a la database. 
 [8/9/2026]-13:16:42-El usuario: diablo01 ha salido de la data base. 
+[8/9/2026]-21:43:38-El administrador ha aparecido! Deberia serlo.... 
+[8/9/2026]-21:44:26-El administrador ha aparecido! Deberia serlo.... 
+[8/9/2026]-21:44:50-Se ha creado el usuario: dadadada. 
+[8/9/2026]-21:45:21-El administrador ha aparecido! Deberia serlo.... 
+[8/9/2026]-21:45:42-El usuario: dadadada ha accedido a la database. 
+[8/9/2026]-21:46:54-El usuariodadadada ha generado la tabla da. 
+[8/9/2026]-21:47:03-El usuario dadadada ha insertado la datos a la tabla da. 
+[8/9/2026]-21:47:18-El usuario dadadada ha actualizado los datos de la tabla da. 
+[8/9/2026]-21:47:33-El usuario dadadada ha buscado unos datos en da. 
+[8/9/2026]-21:47:39-El usuario dadadada ha buscado unos datos en da. 
+[8/9/2026]-21:47:42-El usuario dadadada ha buscado unos datos en da. 
+[8/9/2026]-21:47:46-El usuario dadadada ha eliminado la tabla da. 
+[8/9/2026]-21:48:08-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-13:03:04-El administrador ha aparecido! Deberia serlo.... 
+[9/9/2026]-13:03:11-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-13:03:56-El usuariodadadada ha generado la tabla pa. 
+[9/9/2026]-13:04:04-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-13:04:13-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-13:04:18-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-13:04:28-Errrr/// El usuario dadadada no ha podido insertar los datos a la tabla pa. 
+[9/9/2026]-13:04:46-Errrr/// El usuario dadadada no ha podido insertar los datos a la tabla pa. 
+[9/9/2026]-13:04:52-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-13:05:12-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-13:08:08-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-13:08:14-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-13:08:18-Errrr/// El usuario dadadada no ha podido insertar los datos a la tabla pa. 
+[9/9/2026]-13:08:24-Errrr/// El usuario dadadada no ha podido insertar los datos a la tabla pa. 
+[9/9/2026]-13:08:36-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-13:09:19-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-13:10:07-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-13:10:13-El usuario dadadada ha insertado la datos a la tabla pa. 
+[9/9/2026]-17:08:41-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-17:08:51-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:25:07-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:25:44-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:27:30-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:27:39-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:28:06-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:29:14-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:29:24-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:29:29-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:29:41-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:29:46-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:30:32-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:31:24-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:31:29-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:31:33-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:31:38-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:31:44-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:32:06-El usuario: dadadada ha salido de la data base. 
+[9/9/2026]-18:32:09-El usuario: dadadada ha accedido a la database. 
+[9/9/2026]-18:32:28-El usuario: dadadada ha salido de la data base. 

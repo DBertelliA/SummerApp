@@ -150,6 +150,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             }
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
+                System.out.println(sb.toString());
                 dialogGenerator(assistent,1,dialogText, "se ha insertado la data a la tabla " + titleTable);
                 HelperStringHistory.historyMaker( "El usuario " + user + " ha insertado la datos a la tabla " + titleTable);
                 return true;

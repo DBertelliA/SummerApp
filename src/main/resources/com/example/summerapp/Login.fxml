@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
@@ -7,21 +8,33 @@
 
 <AnchorPane id="anchorL" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/logInCss.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.LogInController">
    <children>
-      <Label fx:id="confirmText" alignment="CENTER" contentDisplay="CENTER" layoutX="196.0" layoutY="223.0" prefHeight="18.0" prefWidth="210.0" textAlignment="CENTER" />
-      <Button layoutX="273.0" layoutY="260.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="26.0" prefWidth="56.0" style="-fx-background-color: #c6c6c6;" text="Log in" textFill="WHITE">
+      <Label fx:id="confirmText" alignment="CENTER" contentDisplay="CENTER" layoutX="385.0" layoutY="191.0" prefHeight="18.0" prefWidth="210.0" textAlignment="CENTER" textFill="WHITE" />
+      <Button layoutX="390.0" layoutY="218.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="63.0" prefWidth="199.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font size="11.0" />
-         </font></Button>
-      <TextField fx:id="user" layoutX="219.0" layoutY="135.0" promptText="User name" />
-      <PasswordField fx:id="password" layoutX="219.0" layoutY="187.0" promptText="Password" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <TextField id="nameF" fx:id="user" layoutX="412.0" layoutY="80.0" promptText="User name" style="-fx-border-color: #450B00; -fx-border-width: 2; -fx-background-color: transparent;">
+         <font>
+            <Font name="FreeSans Bold" size="13.0" />
+         </font></TextField>
+      <PasswordField id="passF" fx:id="password" layoutX="412.0" layoutY="140.0" prefHeight="30.0" prefWidth="170.0" promptText="Password" style="-fx-border-color: #450B00; -fx-border-width: 2; -fx-background-color: transparent;">
+         <font>
+            <Font name="FreeSans Bold" size="13.0" />
+         </font></PasswordField>
       <Label layoutX="263.0" layoutY="58.0" lineSpacing="1.0" textFill="WHITE" underline="true">
          <font>
             <Font name="JetBrains Mono Regular" size="25.0" />
          </font></Label>
-      <Button layoutX="270.0" layoutY="323.0" mnemonicParsing="false" onAction="#signInButton" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #c6c6c6;" text="Create" textFill="WHITE">
+      <Button layoutX="407.0" layoutY="289.0" mnemonicParsing="false" onAction="#signInButton" prefHeight="45.0" prefWidth="171.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font size="11.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
    <effect>
       <ColorAdjust brightness="-0.12" contrast="0.17" hue="0.02" saturation="0.12" />
