@@ -124,3 +124,6 @@
 [10/9/2026]-15:58:01-El usuario: dadadada ha salido de la data base. 
 [10/9/2026]-15:58:11-El usuario: dadadada ha accedido a la database. 
 [10/9/2026]-15:58:52-El usuario: dadadada ha salido de la data base. 
+[10/9/2026]-22:32:47-El usuario: dadadada ha accedido a la database. 
+[10/9/2026]-22:33:10-El usuario: dadadada ha salido de la data base. 
+[10/9/2026]-22:33:23-El administrador ha aparecido! Deberia serlo.... 
