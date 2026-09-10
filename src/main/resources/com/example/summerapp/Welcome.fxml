@@ -2,14 +2,12 @@
 
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="anchorW" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: #ffffff; -fx-border-radius: 10; -fx-background-radius: 10;" stylesheets="@../css/welcomeCss.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.WelcomeController">
+<AnchorPane id="anchorW" prefHeight="600.0" prefWidth="700.0" style="-fx-border-color: #ffffff; -fx-border-radius: 10; -fx-background-radius: 10;" stylesheets="@../css/welcomeCss.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.WelcomeController">
    <children>
-      <Button fx:id="initDataBase" layoutX="235.0" layoutY="270.0" mnemonicParsing="false" onAction="#startButton" prefHeight="44.0" prefWidth="129.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="#685353">
+      <Button fx:id="initDataBase" layoutX="65.0" layoutY="341.0" mnemonicParsing="false" onAction="#startButton" prefHeight="178.0" prefWidth="586.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="#685353">
          <font>
             <Font name="Noto Sans Bassa Vah Regular" size="18.0" />
          </font>
@@ -22,11 +20,4 @@
          </font>
       </Label>
    </children>
-   <effect>
-      <InnerShadow choke="0.35" height="44.72" radius="20.377499999999998" width="38.79">
-         <color>
-            <Color red="1.0" green="1.0" blue="1.0" />
-         </color>
-      </InnerShadow>
-   </effect>
 </AnchorPane>
