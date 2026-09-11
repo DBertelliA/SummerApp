@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -28,29 +29,44 @@
       </AnchorPane>
       <ToolBar fx:id="selectorOptions" layoutX="95.0" layoutY="541.0" prefHeight="39.0" prefWidth="720.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="541.0">
         <items>
-            <Button fx:id="initButton" mnemonicParsing="false" onAction="#inicializate" prefHeight="35.0" prefWidth="74.0" style="-fx-background-color: transparent;" text="Inicio" textFill="WHITE">
+            <Button id="init" fx:id="initButton" mnemonicParsing="false" onAction="#inicializate" prefHeight="35.0" prefWidth="74.0" style="-fx-background-color: transparent;" textFill="WHITE">
                <font>
                   <Font name="Liberation Sans Bold" size="16.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Pane prefHeight="36.0" prefWidth="30.0" />
-            <Button mnemonicParsing="false" onAction="#addButton" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Agregar" textFill="WHITE">
+            <Button id="add" mnemonicParsing="false" onAction="#addButton" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: transparent;" textFill="WHITE">
                <font>
                   <Font name="Liberation Sans Bold" size="16.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" onAction="#editPane" prefHeight="39.0" prefWidth="94.0" style="-fx-background-color: transparent;" text="Editar" textFill="WHITE">
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button id="edit" mnemonicParsing="false" onAction="#editPane" prefHeight="39.0" prefWidth="94.0" style="-fx-background-color: transparent;" textFill="WHITE">
                <font>
                   <Font name="Liberation Sans" size="18.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Pane prefHeight="36.0" prefWidth="131.0" />
-            <Button mnemonicParsing="false" onAction="#searchPane" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: transparent;" text="Buscar" textFill="#e4a4a4">
+            <Button id="search" mnemonicParsing="false" onAction="#searchPane" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: transparent;" textFill="#e4a4a4">
                <font>
                   <Font name="Liberation Sans" size="18.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Pane prefHeight="36.0" prefWidth="30.0" />
-            <Button mnemonicParsing="false" onAction="#deleteTables" prefHeight="35.0" prefWidth="109.0" style="-fx-background-color: transparent;" text="Eliminar" textFill="WHITE">
+            <Button id="delete" mnemonicParsing="false" onAction="#deleteTables" prefHeight="35.0" prefWidth="109.0" style="-fx-background-color: transparent;" textFill="WHITE">
                <font>
                   <Font name="Liberation Sans" size="18.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
         </items>
       </ToolBar>
       <AnchorPane fx:id="anchorPaneAddFunctions" disable="true" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0" visible="false">
@@ -136,7 +152,7 @@
          </children>
       </AnchorPane>
       <ImageView fx:id="assistentErrorF" fitHeight="91.0" fitWidth="113.0" layoutX="170.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <Button fx:id="historyButton" disable="true" layoutX="46.0" layoutY="93.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="80.0" prefWidth="43.0" />
+      <Button fx:id="historyButton" disable="true" layoutX="46.0" layoutY="97.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="61.0" prefWidth="39.0" style="-fx-background-color: red;" />
       <HBox layoutX="-1.0" prefHeight="68.0" prefWidth="911.0">
          <children>
             <Pane prefHeight="109.0" prefWidth="209.0" style="-fx-background-color: transparent;">
@@ -168,42 +184,66 @@
             </Pane>
             <Pane prefHeight="83.0" prefWidth="278.0" style="-fx-background-color: transparent;">
                <children>
-                  <Button layoutX="47.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: red; -fx-border-color: black;" text="Stop" textFill="WHITE">
+                  <Button id="stop" layoutX="47.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: transparent;" textFill="WHITE">
                      <font>
                         <Font size="10.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button layoutX="155.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="28.0" prefWidth="52.0" style="-fx-background-color: grey; -fx-border-color: black;" text="Pause">
+                  <Button id="pause" layoutX="164.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="10.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button layoutX="109.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="26.0" prefWidth="43.0" style="-fx-background-color: blue; -fx-border-color: black;" text="Play" textFill="WHITE">
+                  <Button id="play" layoutX="100.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: transparent;" textFill="WHITE">
                      <font>
                         <Font size="10.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="buttonForAddMusic" layoutX="205.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" style="-fx-background-color: green; -fx-border-color: black;" text="Add" textFill="WHITE">
+                  <Button id="addM" fx:id="buttonForAddMusic" layoutX="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: transparent;" textFill="WHITE">
                      <font>
                         <Font size="10.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button layoutX="96.0" layoutY="40.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: orange;" text="&gt;&gt;" textFill="WHITE">
+                  <Button id="forw" layoutX="105.0" layoutY="38.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="28.0" prefWidth="39.0" style="-fx-background-color: transparent;" textFill="WHITE">
                      <font>
                         <Font size="10.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button layoutX="60.0" layoutY="40.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: orange;" text="&lt;&lt;" textFill="WHITE">
+                  <Button id="back" layoutX="60.0" layoutY="37.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="28.0" prefWidth="39.0" style="-fx-background-color: transparent;" textFill="WHITE">
                      <font>
                         <Font size="10.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Slider fx:id="sliderVolume" layoutX="162.0" layoutY="29.0" onDragDetected="#musicVolumeChanger" prefHeight="49.0" prefWidth="93.0" />
                </children></Pane>
             <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: transparent;">
                <children>
-                  <Button fx:id="buttonExit" layoutX="61.0" layoutY="56.0" mnemonicParsing="false" onAction="#exitButton" opacity="0.45" prefHeight="39.0" prefWidth="93.0" text="Close" />
-                  <Button fx:id="buttonLogOut" layoutX="31.0" layoutY="6.0" mnemonicParsing="false" onAction="#logOutButton" opacity="0.36" prefHeight="26.0" prefWidth="172.0" text="Out" />
+                  <Button fx:id="buttonExit" layoutX="61.0" layoutY="56.0" mnemonicParsing="false" onAction="#exitButton" opacity="0.45" prefHeight="49.0" prefWidth="93.0" style="-fx-background-color: transparent;">
+                     <cursor>
+                        <Cursor fx:constant="WAIT" />
+                     </cursor></Button>
+                  <Button fx:id="buttonLogOut" layoutX="31.0" layoutY="6.0" mnemonicParsing="false" onAction="#logOutButton" opacity="0.36" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: transparent;" text="Out">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children></Pane>
          </children>
       </HBox>

@@ -3,3 +3,70 @@
     -fx-background-size: 100% 100%;
     -fx-background-position: center center;
 }
+#init{
+    -fx-background-image: url("bKG/icons/initIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 80% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#add{
+    -fx-background-image: url("bKG/icons/addIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 60% 80%;
+    -fx-background-repeat: no-repeat;
+}
+#edit{
+    -fx-background-image: url("bKG/icons/editIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 80% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#search{
+    -fx-background-image: url("bKG/icons/searchIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 80% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#delete{
+    -fx-background-image: url("bKG/icons/deleteIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 60% 90%;
+    -fx-background-repeat: no-repeat;
+}
+
+#stop{
+    -fx-background-image: url("bKG/icons/musicIcons/stopIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#play{
+    -fx-background-image: url("bKG/icons/musicIcons/playIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#pause{
+    -fx-background-image: url("bKG/icons/musicIcons/pauseIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#addM{
+    -fx-background-image: url("bKG/icons/musicIcons/addSongIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 120% 120%;
+    -fx-background-repeat: no-repeat;
+}
+#back{
+    -fx-background-image: url("bKG/icons/musicIcons/backIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+#forw{
+    -fx-background-image: url("bKG/icons/musicIcons/forwardIcon.png");
+    -fx-background-position: center center;
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}

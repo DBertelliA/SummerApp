@@ -14,9 +14,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label fx:id="welcomeLabel" layoutX="170.0" layoutY="81.0" textFill="WHITE" underline="true">
+      <Label fx:id="welcomeLabel" layoutX="281.0" layoutY="543.0" prefHeight="32.0" prefWidth="134.0" text="Click the sign" textFill="WHITE" underline="true">
          <font>
-            <Font name="FreeSans Bold" size="60.0" />
+            <Font name="FreeSans Bold" size="18.0" />
          </font>
       </Label>
    </children>
