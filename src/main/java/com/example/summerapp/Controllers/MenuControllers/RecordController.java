@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class RecordController {
 
 
         } catch (IOException e) {
-            System.err.println("No se encontró el archivo");
+            JOptionPane.showMessageDialog(null,"The file wasn't found");
         }
     }
 

@@ -79,10 +79,8 @@ public class AdminIntroductionController{
                 writer.write(jObject.toJSONString());
             }
 
-        } catch (IOException e) {
-            System.err.println("no se pudo: " + e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | ParseException e) {
+            JOptionPane.showMessageDialog(null,"Error: " + e);
         }
     }
 

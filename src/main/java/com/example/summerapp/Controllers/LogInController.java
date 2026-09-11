@@ -40,8 +40,8 @@ public class LogInController {
                 adminButton();
             }else {
                 if(FinderAll.passwordMatcher(new User(user.getText(), password.getText())) != null){
-                confirmText.setText("Usuario correcto");
-                HelperStringHistory.historyMaker("El usuario: " + user.getText() + " ha accedido a la database");
+                confirmText.setText("Correct");
+                HelperStringHistory.historyMaker("The user: " + user.getText() + " log in");
                 try {
                     FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("Menu.fxml"));
 
@@ -60,7 +60,7 @@ public class LogInController {
                     System.err.println(e);
                 }
                 }else {
-                    confirmText.setText("Usuario o contraseña no valido");
+                    confirmText.setText("User or password not valid");
                     user.clear();
                     password.clear();
                 }
@@ -93,7 +93,7 @@ public class LogInController {
         if (sp1 != null) {
             if (encoder.matches(sp1,mgW)) {
                 JOptionPane.showMessageDialog(null, "My bad pall");
-                HelperStringHistory.historyMaker("El administrador ha aparecido! Deberia serlo...");
+                HelperStringHistory.historyMaker("The admin has appeared!!, it should be...");
                 try {
                     FXMLLoader fxmload = new FXMLLoader(HelloApplication.class.getResource("Admin.fxml"));
                     Scene sceneLoad = new Scene(fxmload.load(), 600, 400);

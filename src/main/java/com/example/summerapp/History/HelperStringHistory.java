@@ -1,5 +1,6 @@
 package com.example.summerapp.History;
 
+import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -29,7 +30,7 @@ public class HelperStringHistory {
 
             flW.write(sb.toString());
         }catch (IOException e){
-            System.err.println("Algo ha ocurrido que no se ha podido escribir en el historial");
+            JOptionPane.showMessageDialog(null,"The history maker found an error");
         }
     }
 }

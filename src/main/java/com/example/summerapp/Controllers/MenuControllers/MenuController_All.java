@@ -408,9 +408,9 @@ public class MenuController_All {
         visibilityAssistent(true);
         visualizerMethod(2);
         if (oneOrC == 0) {
-            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "Has accedido a las funciones para añadir tablas o datos");
+            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "You acceded into the functions for add Tables or data");
         }else if (oneOrC == 1){
-            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "Se ha agregado la tabla");
+            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "A table has been added");
             oneOrC = 0;
         }
     }
@@ -684,7 +684,7 @@ public class MenuController_All {
 
     TablesFunctions.fillerBox(comboBoxForEdit);
 
-    TablesFunctions.dialogGenerator(assistent,1,dialogText,"Has accedido a editar o eliminar datos");
+    TablesFunctions.dialogGenerator(assistent,1,dialogText,"You are in add or delete data functions");
 
 
     comboBoxForEdit.setOnAction( e -> {
@@ -856,7 +856,7 @@ public class MenuController_All {
 
         TablesFunctions.fillerBox(tablesForSearch);
 
-        TablesFunctions.dialogGenerator(assistent,1,dialogText, "Estas accediendo a la busqueda de tablas. Si pones un dato en esa tabla y coincide, te mostrar el dato, si no pones nada te los mostrará todo.");
+        TablesFunctions.dialogGenerator(assistent,1,dialogText, "You are in the search functions, if you don't put anything in the fields and press the button, the table is gonna show everything, otherwise, if you decide to search information as normal, it's gonna work as \"AND\"'s commands ");
 
         tablesForSearch.setOnAction( e -> {
             paneForSearchFields.getChildren().removeIf( i -> i instanceof TextField);
@@ -900,7 +900,7 @@ public class MenuController_All {
 
         TablesFunctions.fillerBox(comboxOfTablesForDelete);
 
-        TablesFunctions.dialogGenerator(assistent,1,dialogText,"Estas accediendo a la funcion de eliminar tablas");
+        TablesFunctions.dialogGenerator(assistent,1,dialogText,"You are in delete table functions");
 
         comboxOfTablesForDelete.setOnAction(event -> {
             if (!(comboxOfTablesForDelete.getValue() == null)) {
@@ -955,7 +955,7 @@ public class MenuController_All {
     //------------Buttons for exit the program and log out-----------------//
 
     public void exitButton(){
-        HelperStringHistory.historyMaker("El usuario: " + userLoggedMenu.getText() + " ha salido de la data base");
+        HelperStringHistory.historyMaker("The user: " + userLoggedMenu.getText() + " closed the application");
         Platform.exit();
     }
 
@@ -963,7 +963,7 @@ public class MenuController_All {
         FrameController.framesView(assistent,999, true);
         musicReproOff();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
-        HelperStringHistory.historyMaker("El usuario: " + userLoggedMenu.getText() + " ha salido de la data base");
+        HelperStringHistory.historyMaker("The user: " + userLoggedMenu.getText() + " logged out");
         try {
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
 

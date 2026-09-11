@@ -11,7 +11,7 @@
       <TextFlow fx:id="dialogText2" layoutX="162.0" layoutY="70.0" prefHeight="128.0" prefWidth="131.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
       <AnchorPane fx:id="anchorPaneForEditValues" disable="true" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0" visible="false">
          <children>
-            <ComboBox fx:id="comboBoxForEdit" layoutX="328.0" layoutY="33.0" prefHeight="21.0" prefWidth="213.0" promptText="Selecciona" />
+            <ComboBox fx:id="comboBoxForEdit" layoutX="328.0" layoutY="33.0" prefHeight="21.0" prefWidth="213.0" promptText="Select" />
             <TableView fx:id="singleTableEdit" layoutX="331.0" layoutY="63.0" prefHeight="218.0" prefWidth="206.0">
             </TableView>
             <Pane fx:id="paneForEditFields" layoutX="48.0" layoutY="53.0" prefHeight="249.0" prefWidth="267.0" style="-fx-border-color: green;">
@@ -23,8 +23,8 @@
                   <Button fx:id="buttonForDeleteData" layoutX="24.0" layoutY="138.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="180.0" text="Delete" />
                </children>
             </Pane>
-            <CheckBox fx:id="checkDelete" layoutX="682.0" layoutY="32.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="93.0" text="Eliminar" />
-            <CheckBox fx:id="checkEdit" layoutX="57.0" layoutY="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="69.0" text="Editar" />
+            <CheckBox fx:id="checkDelete" layoutX="682.0" layoutY="32.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="93.0" text="Delete" />
+            <CheckBox fx:id="checkEdit" layoutX="57.0" layoutY="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="69.0" text="Edit" />
          </children>
       </AnchorPane>
       <ToolBar fx:id="selectorOptions" layoutX="95.0" layoutY="541.0" prefHeight="39.0" prefWidth="720.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="541.0">
@@ -75,23 +75,23 @@
 
             <AnchorPane fx:id="anchorPaneTablesAdd" disable="true" layoutX="35.0" layoutY="139.0" prefHeight="289.0" prefWidth="694.0" style="-fx-border-color: green;" visible="false">
                <children>
-                  <Button fx:id="buttonForNext2" layoutX="289.0" layoutY="257.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="AgregarTabla" />
-                  <Button fx:id="buttonForNext1" layoutX="39.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" text="Siguiente" />
-                  <Button fx:id="buttonForBack" layoutX="526.0" layoutY="256.0" mnemonicParsing="false" onAction="#backButton" prefHeight="28.0" prefWidth="200.0" text="Atras" />
+                  <Button fx:id="buttonForNext2" layoutX="289.0" layoutY="257.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Add table" />
+                  <Button fx:id="buttonForNext1" layoutX="39.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" text="Next" />
+                  <Button fx:id="buttonForBack" layoutX="526.0" layoutY="256.0" mnemonicParsing="false" onAction="#backButton" prefHeight="28.0" prefWidth="200.0" text="Back" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneAddData" disable="true" layoutX="422.0" layoutY="141.0" prefHeight="278.0" prefWidth="351.0" visible="false">
                <children>
                   <ComboBox fx:id="comboxTable" layoutX="40.0" layoutY="22.0" prefHeight="39.0" prefWidth="275.0" style="-fx-border-color: green;" />
                   <Label fx:id="labelIndicate" layoutX="52.0" layoutY="66.0" prefHeight="25.0" prefWidth="180.0" text="..." />
-                  <Button fx:id="buttonForAddData" layoutX="176.0" layoutY="270.0" mnemonicParsing="false" onAction="#buttonForAddData" prefHeight="25.0" prefWidth="120.0" text="Agregar" />
-                  <Button layoutX="55.0" layoutY="269.0" mnemonicParsing="false" onAction="#backButtonInAddData" prefHeight="27.0" prefWidth="107.0" text="Atras" />
+                  <Button fx:id="buttonForAddData" layoutX="176.0" layoutY="270.0" mnemonicParsing="false" onAction="#buttonForAddData" prefHeight="25.0" prefWidth="120.0" text="Add" />
+                  <Button layoutX="55.0" layoutY="269.0" mnemonicParsing="false" onAction="#backButtonInAddData" prefHeight="27.0" prefWidth="107.0" text="Back" />
                </children></AnchorPane>
             <Pane fx:id="paneSelector" layoutX="35.0" layoutY="152.0" prefHeight="283.0" prefWidth="334.0" style="-fx-border-color: green;">
                <children>
-                  <Button layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#addTable" prefHeight="27.0" prefWidth="302.0" text="Tabla" />
-                  <Button layoutX="14.0" layoutY="216.0" mnemonicParsing="false" onAction="#addData" prefHeight="26.0" prefWidth="302.0" text="Datos" />
-                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="10.0" prefHeight="39.0" prefWidth="302.0" text="SELECCIONA QUE AGREGAR">
+                  <Button layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#addTable" prefHeight="27.0" prefWidth="302.0" text="Table" />
+                  <Button layoutX="14.0" layoutY="216.0" mnemonicParsing="false" onAction="#addData" prefHeight="26.0" prefWidth="302.0" text="Data" />
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="10.0" prefHeight="39.0" prefWidth="302.0" text="Select what you want to add">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -137,7 +137,7 @@
             <Pane fx:id="paneForSearchFields" layoutX="39.0" layoutY="32.0" prefHeight="270.0" prefWidth="311.0" style="-fx-border-color: green;">
                <children>
                   <ComboBox fx:id="tablesForSearch" layoutX="24.0" layoutY="14.0" prefHeight="27.0" prefWidth="243.0" />
-                  <Button fx:id="buttonForSearch" layoutX="70.0" layoutY="237.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="131.0" text="Buscar" />
+                  <Button fx:id="buttonForSearch" layoutX="70.0" layoutY="237.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="131.0" text="Search" />
                </children>
             </Pane>
             <TableView fx:id="tableShowDataSelected" layoutX="421.0" layoutY="32.0" prefHeight="270.0" prefWidth="341.0" />
@@ -146,7 +146,7 @@
       <AnchorPane fx:id="anchorPaneForDeleteTable" disable="true" layoutX="86.0" layoutY="227.0" prefHeight="270.0" prefWidth="744.0" visible="false">
          <children>
             <ComboBox fx:id="comboxOfTablesForDelete" layoutX="42.0" layoutY="16.0" prefHeight="28.0" prefWidth="228.0" />
-            <Button fx:id="buttonForDeleteTable" layoutX="74.0" layoutY="247.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Eliminar" />
+            <Button fx:id="buttonForDeleteTable" layoutX="74.0" layoutY="247.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Delete" />
             <Label fx:id="labelSelectedTable" alignment="TOP_CENTER" layoutX="39.0" layoutY="94.0" prefHeight="26.0" prefWidth="243.0" text="..." textAlignment="CENTER" />
             <TableView fx:id="tableDel" layoutX="393.0" prefHeight="273.0" prefWidth="351.0" />
          </children>

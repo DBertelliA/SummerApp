@@ -71,22 +71,12 @@ public class MusicReproduction {
         System.out.println(getSongList());
         if (!(position >= getSongList().size())) {
             oneHit = true;
-            System.out.println("Entro");
 
             asignator(position++);
-
-            System.out.println("cancion : " + songList.get(position-1));
-            System.out.println(getPosition());
-            System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
         }else {
             position = 0;
 
             asignator(position++);
-            System.out.println(getPosition());
-
-
-            System.out.println("cancion : " + songList.get(0));
-            System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
         }
     }
 
@@ -100,14 +90,9 @@ public class MusicReproduction {
         if (!(position <= 0)) {
             asignator(--position);
             secHit = true;
-            System.out.println("cancion : " + songList.get(position));
-            System.out.println(getPosition());
-            System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
         }else {
             position = songList.size();
             asignator(--position);
-            System.out.println(getPosition());
-            System.out.println("La que se está repr: " + mediaPlayer.getMedia().getSource());
 
 
         }
@@ -159,7 +144,6 @@ public class MusicReproduction {
             slider.setValue(50);
             setFirstTime(false);
         }
-        System.out.println("Volumen: " + slider.getValue());
         getMediaPlayer().setVolume(slider.getValue() / 100);
 
     }

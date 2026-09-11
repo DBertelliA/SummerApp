@@ -85,7 +85,7 @@ public class UserFunctions implements UserFunctionsInterface {
             pSt.setString(1, user.getNameSystem());
 
             pSt.executeUpdate();
-            System.out.println("Se ha eliminado");
+            JOptionPane.showMessageDialog(null,"The user has been deleted");
             return true;
         }catch (SQLException e){
             Warnings.warningJump(4);
@@ -132,7 +132,6 @@ public class UserFunctions implements UserFunctionsInterface {
                     pSt.setString(1,encoder.encode(pNew));
                     pSt.setString(2, user.getNameSystem());
                     pSt.executeUpdate();
-                    System.out.println("Editado:");
                     return new User(user.getNameSystem(),pNew);
                 }catch (SQLException | IllegalArgumentException e){
                     Warnings.warningJump(1);

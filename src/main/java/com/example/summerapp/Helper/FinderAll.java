@@ -54,9 +54,4 @@ public class FinderAll {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        //System.out.println(findUser("a"));
-        System.out.println(passwordMatcher(new User("a","b")));
-    }
 }

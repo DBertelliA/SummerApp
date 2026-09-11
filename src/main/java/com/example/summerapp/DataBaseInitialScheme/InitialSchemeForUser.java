@@ -20,7 +20,7 @@ public class InitialSchemeForUser {
               """;
         try (Statement st = connect.createStatement()){
             st.executeUpdate(sql);
-            System.out.println("Ejecutado");
+            System.out.println("Executed");
         }catch (SQLException e){
             System.err.println(e);
         }

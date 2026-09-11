@@ -30,15 +30,15 @@ public class SignInController {
     protected void createAcc(){
         if(FinderAll.findUser(userSg.getText()) == null){
             if (functionsU.addUser(new User(userSg.getText(), passwordSg.getText()))) {
-                confirLabel.setText("Usuario añadido");
-                HelperStringHistory.historyMaker("Se ha creado el usuario: " + userSg.getText());
+                confirLabel.setText("User added");
+                HelperStringHistory.historyMaker("The user : " + userSg.getText() + " has been created");
             }else {
-                confirLabel.setText("Usuario no añadido");
+                confirLabel.setText("User not added");
             }
             userSg.clear();
             passwordSg.clear();
         }else {
-            confirLabel.setText("El usuario no se ha podido añadir");
+            confirLabel.setText("The user couldn't been added");
         }
 
     }
