@@ -72,16 +72,16 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
 
-            dialogGenerator(assistent,1,dialogText, "Has agregado la tabla " + tableName);
+            dialogGenerator(assistent,1,dialogText, "table  " + tableName + " have been successfully added");
 
-            HelperStringHistory.historyMaker("El usuario" + user + " ha generado la tabla " + tableName);
+            HelperStringHistory.historyMaker("The user: " + user + " ,generated the table " + tableName);
 
             return true;
         }catch (SQLException e){
             boolean switcher = false;
             System.err.println(sb.toString());
             System.err.println(e);
-            HelperStringHistory.historyMaker("Errrr/// El usuario " + user + " ha intentado agregar una nueva tabla con el nombre" + tableName + " ... No se ha podido");
+            HelperStringHistory.historyMaker("Errrr/// The user: " + user + " couldn't add a table with the name " + tableName);
 
             //err count es el numero de dialogos de cada error y debe coincidir con la cantidad de la lista con la cantidad impuesta -1 (el ultimo dialogo suelen ser puntos suspensivos)
             if(tableName.isEmpty()){
@@ -151,14 +151,14 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (Statement st = conect.createStatement()){
                 st.executeUpdate(sb.toString());
                 System.out.println(sb.toString());
-                dialogGenerator(assistent,1,dialogText, "se ha insertado la data a la tabla " + titleTable);
-                HelperStringHistory.historyMaker( "El usuario " + user + " ha insertado la datos a la tabla " + titleTable);
+                dialogGenerator(assistent,1,dialogText, "The data have been inserted " + titleTable);
+                HelperStringHistory.historyMaker( "The user: " + user + ", added data to: " + titleTable);
                 return true;
         }catch (SQLException e){
                 System.err.println(e);
                 System.err.println(sb.toString());
-            dialogGenerator(assistent,1,dialogText, "No se ha insertado la data a la tabla " + titleTable);
-            HelperStringHistory.historyMaker("Errrr/// El usuario " + user + " no ha podido insertar los datos a la tabla " + titleTable);
+            dialogGenerator(assistent,1,dialogText, "The data couldn't be inserted into " + titleTable);
+            HelperStringHistory.historyMaker("Errrr/// The user:  " + user + " ,couldn't insert data into " + titleTable);
 
             err.setWhereErr(2);
             err.setNumberErr(1);
@@ -202,15 +202,15 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
-            dialogGenerator(assistent,1,dialogText, "Se han actualizado los datos seleccionados");
-            HelperStringHistory.historyMaker("El usuario " + user + " ha actualizado los datos de la tabla " + tableName);
+            dialogGenerator(assistent,1,dialogText, "The data selected have been updated");
+            HelperStringHistory.historyMaker("The user: " + user + " updated the data of " + tableName);
 
             System.out.println(sb.toString());
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
-            HelperStringHistory.historyMaker("Errr/// El usuario " + user + " no ha podido actualizar los datos de la tabla " + tableName);
-            dialogGenerator(assistent,1,dialogText, "NO se han actualizado los datos seleccionados");
+            HelperStringHistory.historyMaker("Errr/// The user: " + user + " couldn't update the data of " + tableName);
+            dialogGenerator(assistent,1,dialogText, "The data couldn't be updated");
         }
 
     }
@@ -255,13 +255,13 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
         try (PreparedStatement sp = conect.prepareStatement(sb.toString())){
             sp.executeUpdate();
-            dialogGenerator(assistent,1,dialogText, "Se ha eliminado la data seleccionada");
-            HelperStringHistory.historyMaker("El usuario " + user + " ha eliminado unos datos de la tabla " + tableName);
+            dialogGenerator(assistent,1,dialogText, "The data selected have been deleted");
+            HelperStringHistory.historyMaker("The user " + user + " deleted data from the table " + tableName);
         }catch (SQLException e){
             System.err.println(e);
             System.err.println(sb.toString());
-            HelperStringHistory.historyMaker("Errr//// El usuario " + user + "no ha podido eliminar unos datos de la tabla " + tableName);
-            dialogGenerator(assistent,1,dialogText, "No se ha podido eliminar la data seleccionada");
+            HelperStringHistory.historyMaker("Errr//// The user " + user + " couldn't deleted some data " + tableName);
+            dialogGenerator(assistent,1,dialogText, "The data selected couldn't been deleted");
         }
 
     }
@@ -324,7 +324,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
                 tableShower.getItems().add(fila);
             }
-            HelperStringHistory.historyMaker("El usuario " + user + " ha buscado unos datos en " + tableName);
+            HelperStringHistory.historyMaker("The user " + user + " searched some data in " + tableName);
             return sb.toString();
         }
         catch (SQLException e){
@@ -343,8 +343,8 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         sql = "DROP TABLE " + tableName + ";";
         try (Statement st = conect.createStatement()){
             st.executeUpdate(sql);
-            dialogGenerator(assistent,0,dialogText, "Se ha eliminado la tabla " + tableName);
-            HelperStringHistory.historyMaker("El usuario " + user + " ha eliminado la tabla " + tableName);
+            dialogGenerator(assistent,0,dialogText, "The table " + tableName+ " have been deleted");
+            HelperStringHistory.historyMaker("The user " + user + " deleted the table " + tableName);
             return true;
         }catch (SQLException e){
             System.err.println(e);

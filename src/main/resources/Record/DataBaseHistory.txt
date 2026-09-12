@@ -164,3 +164,26 @@
 [11/9/2026]-11:04:18-El usuario: dadadada ha salido de la data base. 
 [11/9/2026]-12:16:01-The user: dadadada log in. 
 [11/9/2026]-12:20:31-The user: dadadada log in. 
+[12/9/2026]-09:58:13-The user: dadadada log in. 
+[12/9/2026]-10:00:02-The user: dadadada logged out. 
+[12/9/2026]-10:00:12-The user: dadadada log in. 
+[12/9/2026]-10:00:19-El usuario dadadada ha insertado la datos a la tabla pa. 
+[12/9/2026]-10:00:30-Errrr/// El usuario dadadada ha intentado agregar una nueva tabla con el nombre ... No se ha podido. 
+[12/9/2026]-10:00:40-Errrr/// El usuario dadadada ha intentado agregar una nueva tabla con el nombre ... No se ha podido. 
+[12/9/2026]-10:13:29-The user: dadadada log in. 
+[12/9/2026]-10:14:34-The user: dadadada ,generated the table testing2. 
+[12/9/2026]-10:14:49-The user: dadadada, added data to: testing2. 
+[12/9/2026]-10:15:05-The user: dadadada, added data to: testing2. 
+[12/9/2026]-10:15:13-The user: dadadada, added data to: testing2. 
+[12/9/2026]-10:15:26-Errr/// The user: dadadada couldn't update the data of testing2. 
+[12/9/2026]-10:15:45-Errr/// The user: dadadada couldn't update the data of testing2. 
+[12/9/2026]-10:15:54-The user: dadadada updated the data of testing2. 
+[12/9/2026]-10:16:08-The user dadadada searched some data in testing2. 
+[12/9/2026]-10:16:10-The user dadadada searched some data in testing2. 
+[12/9/2026]-10:16:12-The user dadadada searched some data in testing2. 
+[12/9/2026]-10:16:26-The user dadadada searched some data in testing2. 
+[12/9/2026]-10:17:10-The user: dadadada logged out. 
+[12/9/2026]-11:41:18-The user: dadadada log in. 
+[12/9/2026]-11:41:53-Errrr/// The user:  dadadada ,couldn't insert data into testing2. 
+[12/9/2026]-11:42:17-The user: dadadada, added data to: pa. 
+[12/9/2026]-11:46:34-Errrr/// The user:  dadadada ,couldn't insert data into pa. 
