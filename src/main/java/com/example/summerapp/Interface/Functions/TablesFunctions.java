@@ -51,21 +51,23 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         StringBuilder sb = new StringBuilder();
 
         //En tipeForEach: Lista unica con dos valores diferentes, impar, tipo de dato, par tipo de llave
-
         sb.append("CREATE TABLE ").append(tableName).append("( \n");
         int j = 0;
         for (int i = 0; i < dataName.size(); i++) {
             sb.append(dataName.get(i)).append(" ");
             for (int p = 0; p < 2; p++) {
                 sb.append(tipeForEach.get(j)).append(" ");
+                if ((p == 1)  && tipeForEach.get(j-1).contains("BOOLEAN")){
+                    sb.append("CHECK ").append("(").append(dataName.get(i)).append(" IN ").append("(0, 1)").append(")");
+                }
                 j++;
             }
             if (i < dataName.size() -1){
+                System.out.println(tipeForEach.get(j-2));
                 sb.append(", \n");
             }
         }
         sb.append(");");
-
         try (Statement pST = conect.createStatement()){
             if (tableName.isEmpty()){throw new SQLException("bruh");}
             if (sb.toString().contains("null")){throw new SQLException("a");}
@@ -418,7 +420,12 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
                     TextField tf = new TextField();
                     tf.setLayoutX(50);
                     tf.setLayoutY(i);
-                    String dataN = "Tipo data: " + rSt.getString(2);
+                    String dataN = "";
+                    if (rSt.getString(2).contains("tinyint(1)")){
+                        dataN = "Boolean: 1 true, 0 false" ;
+                    }else {
+                        dataN = "Tipo data: " + rSt.getString(2);
+                    }
                     tf.setPromptText(dataN);
                     anh.getChildren().add(tf);
                 }

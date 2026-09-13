@@ -187,3 +187,104 @@
 [12/9/2026]-11:41:53-Errrr/// The user:  dadadada ,couldn't insert data into testing2. 
 [12/9/2026]-11:42:17-The user: dadadada, added data to: pa. 
 [12/9/2026]-11:46:34-Errrr/// The user:  dadadada ,couldn't insert data into pa. 
+[13/9/2026]-09:58:32-The user: dadadada log in. 
+[13/9/2026]-09:59:19-The user dadadada deleted the table miau. 
+[13/9/2026]-09:59:23-The user dadadada deleted the table test3. 
+[13/9/2026]-10:07:09-The user: dadadada log in. 
+[13/9/2026]-10:08:02-Errrr/// The user: dadadada couldn't add a table with the name testing5. 
+[13/9/2026]-10:21:28-The user: dadadada log in. 
+[13/9/2026]-10:22:18-The user: dadadada log in. 
+[13/9/2026]-10:22:34-Errrr/// The user: dadadada couldn't add a table with the name a. 
+[13/9/2026]-10:23:26-The user: dadadada log in. 
+[13/9/2026]-10:23:44-The user: dadadada ,generated the table ac. 
+[13/9/2026]-10:24:11-The user: dadadada log in. 
+[13/9/2026]-10:24:24-The user dadadada deleted the table ac. 
+[13/9/2026]-10:24:27-The user dadadada deleted the table pa. 
+[13/9/2026]-10:24:34-The user dadadada deleted the table test4. 
+[13/9/2026]-10:26:00-The user: dadadada log in. 
+[13/9/2026]-10:26:12-The user: dadadada ,generated the table aa. 
+[13/9/2026]-10:27:33-The user: dadadada log in. 
+[13/9/2026]-10:27:48-The user: dadadada ,generated the table a1. 
+[13/9/2026]-10:28:18-The user: dadadada log in. 
+[13/9/2026]-10:29:10-The user: dadadada log in. 
+[13/9/2026]-10:30:08-The user: dadadada log in. 
+[13/9/2026]-10:30:32-The user: dadadada ,generated the table a3. 
+[13/9/2026]-10:31:59-The user: dadadada log in. 
+[13/9/2026]-10:32:17-The user: dadadada ,generated the table aas. 
+[13/9/2026]-10:33:37-The user: dadadada log in. 
+[13/9/2026]-10:33:49-The user: dadadada ,generated the table aadd. 
+[13/9/2026]-10:35:10-The user: dadadada log in. 
+[13/9/2026]-10:35:56-The user: dadadada log in. 
+[13/9/2026]-10:36:13-The user: dadadada ,generated the table a5. 
+[13/9/2026]-10:36:50-The user: dadadada log in. 
+[13/9/2026]-10:38:19-The user: dadadada ,generated the table a4. 
+[13/9/2026]-10:39:01-The user: dadadada log in. 
+[13/9/2026]-10:39:15-The user: dadadada ,generated the table a6. 
+[13/9/2026]-10:39:44-The user: dadadada log in. 
+[13/9/2026]-10:40:25-The user: dadadada log in. 
+[13/9/2026]-10:41:17-The user: dadadada log in. 
+[13/9/2026]-10:41:29-The user: dadadada ,generated the table a7. 
+[13/9/2026]-10:42:18-The user: dadadada log in. 
+[13/9/2026]-10:42:57-Errrr/// The user: dadadada couldn't add a table with the name a8. 
+[13/9/2026]-10:43:49-The user: dadadada log in. 
+[13/9/2026]-10:44:15-The user: dadadada ,generated the table a8. 
+[13/9/2026]-10:45:37-The user: dadadada log in. 
+[13/9/2026]-10:45:52-The user: dadadada ,generated the table a9. 
+[13/9/2026]-10:46:32-The user: dadadada ,generated the table a10. 
+[13/9/2026]-10:47:29-The user: dadadada ,generated the table a11. 
+[13/9/2026]-10:48:25-The user: dadadada ,generated the table dada. 
+[13/9/2026]-10:48:35-The user: dadadada closed the application. 
+[13/9/2026]-10:50:27-The user: dadadada log in. 
+[13/9/2026]-10:50:57-Errrr/// The user: dadadada couldn't add a table with the name a11. 
+[13/9/2026]-10:51:11-The user: dadadada closed the application. 
+[13/9/2026]-10:51:41-The user: dadadada log in. 
+[13/9/2026]-10:52:17-The user: dadadada ,generated the table a12. 
+[13/9/2026]-10:52:46-The user: dadadada log in. 
+[13/9/2026]-10:53:34-Errrr/// The user: dadadada couldn't add a table with the name a13. 
+[13/9/2026]-10:54:23-The user: dadadada log in. 
+[13/9/2026]-10:54:51-The user: dadadada ,generated the table a14. 
+[13/9/2026]-10:55:24-The user: dadadada ,generated the table a15. 
+[13/9/2026]-10:56:11-The user: dadadada ,generated the table a16. 
+[13/9/2026]-10:58:13-The user: dadadada ,generated the table ac. 
+[13/9/2026]-11:01:06-The user: dadadada log in. 
+[13/9/2026]-11:07:31-The user: dadadada log in. 
+[13/9/2026]-11:07:51-The user: dadadada ,generated the table a17. 
+[13/9/2026]-11:08:07-The user: dadadada ,generated the table a19. 
+[13/9/2026]-11:08:44-The user: dadadada ,generated the table a20. 
+[13/9/2026]-11:09:22-The user: dadadada log in. 
+[13/9/2026]-11:09:44-The user: dadadada ,generated the table a21. 
+[13/9/2026]-11:13:49-The user: dadadada log in. 
+[13/9/2026]-11:14:02-Errrr/// The user: dadadada couldn't add a table with the name a21. 
+[13/9/2026]-11:14:54-The user: dadadada log in. 
+[13/9/2026]-11:15:08-Errrr/// The user: dadadada couldn't add a table with the name a21. 
+[13/9/2026]-11:15:32-The user: dadadada ,generated the table a22. 
+[13/9/2026]-11:21:51-The user: dadadada log in. 
+[13/9/2026]-11:34:12-The user: dadadada log in. 
+[13/9/2026]-11:36:20-The user: dadadada log in. 
+[13/9/2026]-11:37:25-The user: dadadada log in. 
+[13/9/2026]-11:38:13-The user: dadadada log in. 
+[13/9/2026]-11:42:24-The user: dadadada log in. 
+[13/9/2026]-11:42:45-The user: dadadada ,generated the table para. 
+[13/9/2026]-11:46:05-The user: dadadada ,generated the table pa2. 
+[13/9/2026]-11:46:18-The user: dadadada ,generated the table aaacvq. 
+[13/9/2026]-11:50:22-The user: dadadada ,generated the table peces. 
+[13/9/2026]-11:53:57-The user: dadadada ,generated the table miausa. 
+[13/9/2026]-11:54:23-The user: dadadada ,generated the table man. 
+[13/9/2026]-11:55:31-The user: dadadada ,generated the table mi3. 
+[13/9/2026]-12:00:27-The user: dadadada closed the application. 
+[13/9/2026]-12:05:55-The user : dadadada has been created. 
+[13/9/2026]-12:06:07-The admin has appeared!!, it should be.... 
+[13/9/2026]-12:06:30-The user: dadadada log in. 
+[13/9/2026]-12:06:44-The user: dadadada ,generated the table vhvh. 
+[13/9/2026]-12:07:06-The user: dadadada logged out. 
+[13/9/2026]-12:07:26-The user: dadadada log in. 
+[13/9/2026]-12:08:13-The user: dadadada closed the application. 
+[13/9/2026]-12:11:53-The user: dadadada log in. 
+[13/9/2026]-12:16:54-The user: dadadada log in. 
+[13/9/2026]-12:17:11-The user: dadadada ,generated the table mano. 
+[13/9/2026]-12:17:50-The user: dadadada log in. 
+[13/9/2026]-12:18:17-The user: dadadada log in. 
+[13/9/2026]-12:18:31-The user: dadadada, added data to: mano. 
+[13/9/2026]-12:18:41-Errrr/// The user:  dadadada ,couldn't insert data into mano. 
+[13/9/2026]-12:19:28-The user: dadadada updated the data of mano. 
+[13/9/2026]-12:19:46-Errr/// The user: dadadada couldn't update the data of mano. 

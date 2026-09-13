@@ -1,1 +1,1 @@
-{"DataBaseStatus":[{"DataBaseString":"jdbc:mysql:\/\/localhost:3306\/rew?serverTimezone=UTC","DataBackUp":"jdbc:mysql:\/\/localhost:3306\/?serverTimezone=UTC","started":true,"userSet":false,"adminSet":true}]}
+{"DataBaseStatus":[{"DataBaseString":"jdbc:mysql:\/\/localhost:3306\/yyy?serverTimezone=UTC","DataBackUp":"jdbc:mysql:\/\/localhost:3306\/?serverTimezone=UTC","started":true,"userSet":false,"adminSet":true}]}
