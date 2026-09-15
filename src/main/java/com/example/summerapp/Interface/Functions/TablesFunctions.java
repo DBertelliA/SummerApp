@@ -339,7 +339,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
 
     @Override
     public boolean deleteTables(String tableName, TextFlow dialogText, ImageView assistent,String user) {
-        if (tableName.equals("datacatcheruser")){
+        if (tableName.equalsIgnoreCase("datacatcheruser")){
             return false;
         }
         sql = "DROP TABLE " + tableName + ";";
@@ -461,7 +461,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
         try (Statement st = conect.createStatement()){
             ResultSet rSt = st.executeQuery("SHOW TABLES");
             while (rSt.next()) {
-                if (rSt.getString(1).contains("dataCatcherUser")) {
+                if (rSt.getString(1).equalsIgnoreCase("dataCatcherUser")) {
                     System.out.println("se ha saltado la tabla de users");
                 } else{listObs.add(rSt.getString(1));}
             }

@@ -288,3 +288,18 @@
 [13/9/2026]-12:18:41-Errrr/// The user:  dadadada ,couldn't insert data into mano. 
 [13/9/2026]-12:19:28-The user: dadadada updated the data of mano. 
 [13/9/2026]-12:19:46-Errr/// The user: dadadada couldn't update the data of mano. 
+[15/9/2026]-12:04:39-The user : dadadada has been created. 
+[15/9/2026]-12:04:44-The user: dadadada log in. 
+[15/9/2026]-12:06:12-The user: dadadada log in. 
+[15/9/2026]-12:06:42-The user: dadadada ,generated the table dadadada. 
+[15/9/2026]-12:06:52-The user: dadadada, added data to: dadadada. 
+[15/9/2026]-12:07:02-The user: dadadada updated the data of dadadada. 
+[15/9/2026]-12:07:07-The user dadadada searched some data in dadadada. 
+[15/9/2026]-12:07:09-The user dadadada searched some data in dadadada. 
+[15/9/2026]-12:07:14-The user dadadada searched some data in dadadada. 
+[15/9/2026]-12:07:18-The user dadadada deleted the table dadadada. 
+[15/9/2026]-12:07:22-The user: dadadada closed the application. 
+[15/9/2026]-12:08:50-The admin has appeared!!, it should be.... 
+[15/9/2026]-12:12:33-The user: dadadada log in. 
+[15/9/2026]-12:13:50-The user: dadadada log in. 
+[15/9/2026]-12:14:00-The user: dadadada closed the application. 
