@@ -823,7 +823,7 @@ public class MenuController_All {
         }catch (IndexOutOfBoundsException err){
             FrameController.framesView(assistent, 3, false);
             Font font = Font.font(20);
-            Text textAssign = new Text("No hay data en esa tabla amigo... que haces?");
+            Text textAssign = new Text("There is no data in that place, what are you doing?");
 
             textAssign.setFont(font);
             textAssign.setFill(Color.WHITE);

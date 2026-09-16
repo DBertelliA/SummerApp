@@ -49,7 +49,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     @Override
     public boolean addTable(List<String> dataName, List<String> tipeForEach, String tableName, TextFlow dialogText, ImageView assistent, Spinner<Integer> numberValues, String user) {
         StringBuilder sb = new StringBuilder();
-
+        try {
         //En tipeForEach: Lista unica con dos valores diferentes, impar, tipo de dato, par tipo de llave
         sb.append("CREATE TABLE ").append(tableName).append("( \n");
         int j = 0;
@@ -57,29 +57,34 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
             sb.append(dataName.get(i)).append(" ");
             for (int p = 0; p < 2; p++) {
                 sb.append(tipeForEach.get(j)).append(" ");
-                if ((p == 1)  && tipeForEach.get(j-1).contains("BOOLEAN")){
+                if ((p == 1) && tipeForEach.get(j - 1).contains("BOOLEAN")) {
                     sb.append("CHECK ").append("(").append(dataName.get(i)).append(" IN ").append("(0, 1)").append(")");
                 }
                 j++;
             }
-            if (i < dataName.size() -1){
-                System.out.println(tipeForEach.get(j-2));
+            if (i < dataName.size() - 1) {
+                System.out.println(tipeForEach.get(j - 2));
                 sb.append(", \n");
             }
         }
         sb.append(");");
-        try (Statement pST = conect.createStatement()){
-            if (tableName.isEmpty()){throw new SQLException("bruh");}
-            if (sb.toString().contains("null")){throw new SQLException("a");}
+        try (Statement pST = conect.createStatement()) {
+            if (tableName.isEmpty()) {
+                throw new SQLException("bruh");
+            }
+            if (sb.toString().contains("null")) {
+                throw new SQLException("a");
+            }
             pST.executeUpdate(sb.toString());
             System.out.println("Sentencia de agregar tablas ejecutada: " + sb.toString());
 
-            dialogGenerator(assistent,1,dialogText, "table  " + tableName + " have been successfully added");
+            dialogGenerator(assistent, 1, dialogText, "table  " + tableName + " have been successfully added");
 
             HelperStringHistory.historyMaker("The user: " + user + " ,generated the table " + tableName);
 
             return true;
-        }catch (SQLException e){
+        }
+        }catch (SQLException | NullPointerException e){
             boolean switcher = false;
             System.err.println(sb.toString());
             System.err.println(e);
@@ -556,7 +561,7 @@ public class TablesFunctions implements TablesAutoCreateAndFuntions {
     public static void main(String[] args) {
         int a = 0;
         try (Statement st = conect.createStatement()){
-            sql = "DESCRIBE tabla4;";
+            //sql = "DESCRIBE tabla4;";
             ResultSet rst = st.executeQuery(sql);
             //Primer elemento el nombre de la fila, segundo elemento, el tipo de dato
             while (rst.next()) {

@@ -1,9 +1,11 @@
 package com.example.summerapp.Controllers.MenuControllers;
 
+import com.example.summerapp.History.HelperStringHistory;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -89,6 +91,9 @@ public class FrameController {
             case 6 -> {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/reUps.jpg"))));
             }
+            case 7 -> {
+                imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/cmon.jpg"))));
+            }
             default -> {
                 imgW.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/reError.jpg"))));
             }
@@ -118,8 +123,25 @@ public class FrameController {
         AtomicInteger i = new AtomicInteger();
 
         assistent.setOnMouseClicked(event -> {framesView(assistent, i.getAndIncrement(), false);
-            if(i.get() >= 8){
-                i.set(0);
+            System.out.println(i.get());
+            String[] listDialogs = new String[]{"Hey! That tickles",
+                                                "Dude, Stop...",
+                                                "..."};
+            if (i.get() <= 10) {
+                framesView(assistent, 0, false);
+                ErrorReactionsFramesController.dialogFormat(dialogText, listDialogs[0]);
+            }
+            if (i.get() > 10 && i.get() <= 20){
+                framesView(assistent, 2, false);
+                ErrorReactionsFramesController.dialogFormat(dialogText, listDialogs[1]);
+            }
+            if (i.get() > 20 && i.get() <= 30){
+                framesView(assistent, 7, false);
+                ErrorReactionsFramesController.dialogFormat(dialogText, listDialogs[2]);
+            }
+            if (i.get() > 30){
+                HelperStringHistory.historyMaker("A user thought that it was a good idea kidding with the assistant");
+                Platform.exit();
             }
         });
 
