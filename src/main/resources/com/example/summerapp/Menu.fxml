@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="anchorM" fx:id="firstAnchor" prefHeight="576.0" prefWidth="887.0" stylesheets="@../../example/css/menuCss.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.MenuControllers.MenuController_All">
+   <children>
+      <TextFlow fx:id="dialogText2" layoutX="162.0" layoutY="70.0" prefHeight="128.0" prefWidth="131.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
+      <AnchorPane fx:id="anchorPaneForEditValues" disable="true" layoutX="46.0" layoutY="195.0" prefHeight="302.0" prefWidth="826.0" visible="false">
+         <children>
+            <ComboBox fx:id="comboBoxForEdit" layoutX="328.0" layoutY="33.0" prefHeight="21.0" prefWidth="213.0" promptText="Select" />
+            <TableView fx:id="singleTableEdit" layoutX="331.0" layoutY="63.0" prefHeight="218.0" prefWidth="206.0">
+            </TableView>
+            <Pane fx:id="paneForEditFields" layoutX="48.0" layoutY="53.0" prefHeight="249.0" prefWidth="267.0" style="-fx-border-color: green;">
+               <children>
+                  <Button fx:id="buttonForEditData" layoutX="17.0" layoutY="249.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="221.0" text="Edit" />
+               </children></Pane>
+            <Pane fx:id="paneForDeleteFields" layoutX="551.0" layoutY="53.0" prefHeight="249.0" prefWidth="221.0" style="-fx-border-color: red;">
+               <children>
+                  <Button fx:id="buttonForDeleteData" layoutX="24.0" layoutY="138.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="180.0" text="Delete" />
+               </children>
+            </Pane>
+            <CheckBox fx:id="checkDelete" layoutX="682.0" layoutY="32.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="93.0" text="Delete" />
+            <CheckBox fx:id="checkEdit" layoutX="57.0" layoutY="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="69.0" text="Edit" />
+         </children>
+      </AnchorPane>
+      <ToolBar fx:id="selectorOptions" layoutX="95.0" layoutY="541.0" prefHeight="39.0" prefWidth="720.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="541.0">
+        <items>
+            <Button id="init" fx:id="initButton" mnemonicParsing="false" onAction="#inicializate" prefHeight="35.0" prefWidth="74.0" style="-fx-background-color: transparent;" textFill="WHITE">
+               <font>
+                  <Font name="Liberation Sans Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Pane prefHeight="36.0" prefWidth="30.0" />
+            <Button id="add" mnemonicParsing="false" onAction="#addButton" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: transparent;" textFill="WHITE">
+               <font>
+                  <Font name="Liberation Sans Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button id="edit" mnemonicParsing="false" onAction="#editPane" prefHeight="39.0" prefWidth="94.0" style="-fx-background-color: transparent;" textFill="WHITE">
+               <font>
+                  <Font name="Liberation Sans" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Pane prefHeight="36.0" prefWidth="131.0" />
+            <Button id="search" mnemonicParsing="false" onAction="#searchPane" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: transparent;" textFill="#e4a4a4">
+               <font>
+                  <Font name="Liberation Sans" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Pane prefHeight="36.0" prefWidth="30.0" />
+            <Button id="delete" mnemonicParsing="false" onAction="#deleteTables" prefHeight="35.0" prefWidth="109.0" style="-fx-background-color: transparent;" textFill="WHITE">
+               <font>
+                  <Font name="Liberation Sans" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+        </items>
+      </ToolBar>
+      <AnchorPane fx:id="anchorPaneAddFunctions" disable="true" layoutX="54.0" layoutY="81.0" prefHeight="419.0" prefWidth="811.0" visible="false">
+         <children>
+
+
+            <AnchorPane fx:id="anchorPaneTablesAdd" disable="true" layoutX="35.0" layoutY="139.0" prefHeight="289.0" prefWidth="694.0" style="-fx-border-color: green;" visible="false">
+               <children>
+                  <Button fx:id="buttonForNext2" layoutX="289.0" layoutY="257.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Add table" />
+                  <Button fx:id="buttonForNext1" layoutX="39.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" text="Next" />
+                  <Button fx:id="buttonForBack" layoutX="526.0" layoutY="256.0" mnemonicParsing="false" onAction="#backButton" prefHeight="28.0" prefWidth="200.0" text="Back" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anchorPaneAddData" disable="true" layoutX="422.0" layoutY="141.0" prefHeight="278.0" prefWidth="351.0" visible="false">
+               <children>
+                  <ComboBox fx:id="comboxTable" layoutX="40.0" layoutY="22.0" prefHeight="39.0" prefWidth="275.0" style="-fx-border-color: green;" />
+                  <Label fx:id="labelIndicate" layoutX="52.0" layoutY="66.0" prefHeight="25.0" prefWidth="180.0" text="..." />
+                  <Button fx:id="buttonForAddData" layoutX="176.0" layoutY="270.0" mnemonicParsing="false" onAction="#buttonForAddData" prefHeight="25.0" prefWidth="120.0" text="Add" />
+                  <Button layoutX="55.0" layoutY="269.0" mnemonicParsing="false" onAction="#backButtonInAddData" prefHeight="27.0" prefWidth="107.0" text="Back" />
+               </children></AnchorPane>
+            <Pane fx:id="paneSelector" layoutX="35.0" layoutY="152.0" prefHeight="283.0" prefWidth="334.0" style="-fx-border-color: green;">
+               <children>
+                  <Button layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#addTable" prefHeight="27.0" prefWidth="302.0" text="Table" />
+                  <Button layoutX="14.0" layoutY="216.0" mnemonicParsing="false" onAction="#addData" prefHeight="26.0" prefWidth="302.0" text="Data" />
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="10.0" prefHeight="39.0" prefWidth="302.0" text="Select what you want to add">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="paneNumberData" layoutX="476.0" layoutY="137.0" prefHeight="61.0" prefWidth="228.0" style="-fx-border-color: yellow;">
+               <children>
+                  <Spinner fx:id="numberValues" layoutX="8.0" layoutY="7.0" prefHeight="49.0" prefWidth="200.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="paneNameTable" layoutX="39.0" layoutY="136.0" prefHeight="61.0" prefWidth="443.0" style="-fx-border-color: blue;">
+               <children>
+                  <TextField fx:id="titleTable" layoutX="19.0" layoutY="12.0" prefHeight="39.0" prefWidth="275.0" promptText="nombreTabla" />
+               </children>
+            </Pane>
+
+         </children>
+      </AnchorPane>
+       <AnchorPane fx:id="anchorPaneMainMenu" prefWidth="732.0">
+         <Label alignment="TOP_LEFT" layoutX="288.0" layoutY="354.0" prefHeight="39.0" prefWidth="351.0" text="NO TABLES IN DB (ADD ONE)" textAlignment="CENTER" textFill="RED" underline="true">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+      <TabPane fx:id="nameTabss" layoutX="135.0" layoutY="222.0" prefHeight="302.0" prefWidth="653.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+
+        </tabs>
+      </TabPane>
+       </AnchorPane>
+
+
+      <ImageView fx:id="assistent" fitHeight="91.0" fitWidth="221.0" layoutX="170.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" visible="false">
+
+            </ImageView>
+
+
+      <TextFlow fx:id="dialogText" layoutX="286.0" layoutY="73.0" prefHeight="122.0" prefWidth="551.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 6;" />
+      <Label fx:id="labelText" alignment="TOP_CENTER" disable="true" layoutX="372.0" layoutY="480.0" prefHeight="49.0" prefWidth="200.0" text="..." textAlignment="CENTER" textFill="#009099" visible="false" />
+      <AnchorPane fx:id="anchorPaneForSearchData" disable="true" layoutX="61.0" layoutY="197.0" prefHeight="296.0" prefWidth="826.0" visible="false">
+         <children>
+            <Pane fx:id="paneForSearchFields" layoutX="39.0" layoutY="32.0" prefHeight="270.0" prefWidth="311.0" style="-fx-border-color: green;">
+               <children>
+                  <ComboBox fx:id="tablesForSearch" layoutX="24.0" layoutY="14.0" prefHeight="27.0" prefWidth="243.0" />
+                  <Button fx:id="buttonForSearch" layoutX="70.0" layoutY="237.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="131.0" text="Search" />
+               </children>
+            </Pane>
+            <TableView fx:id="tableShowDataSelected" layoutX="421.0" layoutY="32.0" prefHeight="270.0" prefWidth="341.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPaneForDeleteTable" disable="true" layoutX="86.0" layoutY="227.0" prefHeight="270.0" prefWidth="744.0" visible="false">
+         <children>
+            <ComboBox fx:id="comboxOfTablesForDelete" layoutX="42.0" layoutY="16.0" prefHeight="28.0" prefWidth="228.0" />
+            <Button fx:id="buttonForDeleteTable" layoutX="74.0" layoutY="247.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Delete" />
+            <Label fx:id="labelSelectedTable" alignment="TOP_CENTER" layoutX="39.0" layoutY="94.0" prefHeight="26.0" prefWidth="243.0" text="..." textAlignment="CENTER" />
+            <TableView fx:id="tableDel" layoutX="393.0" prefHeight="273.0" prefWidth="351.0" />
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="assistentErrorF" fitHeight="91.0" fitWidth="113.0" layoutX="170.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Button fx:id="historyButton" disable="true" layoutX="46.0" layoutY="97.0" mnemonicParsing="false" onAction="#recordEntry" prefHeight="61.0" prefWidth="39.0" style="-fx-background-color: red;" />
+      <HBox layoutX="-1.0" prefHeight="68.0" prefWidth="911.0">
+         <children>
+            <Pane prefHeight="109.0" prefWidth="209.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Label fx:id="userLoggedMenu" layoutX="61.0" layoutY="14.0" prefHeight="17.0" prefWidth="128.0" text=" You should not see this">
+                     <font>
+                        <Font name="Liberation Sans" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="21.0" layoutY="14.0" text="User:">
+                     <font>
+                        <Font name="FreeMono" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="timerShower" layoutX="9.0" layoutY="51.0" prefHeight="28.0" prefWidth="172.0" text="Loading...">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="15.0" />
+                     </font></Label>
+               </children></Pane>
+            <Pane prefHeight="83.0" prefWidth="263.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Label fx:id="musicSelected" layoutX="27.0" layoutY="27.0" prefHeight="28.0" prefWidth="206.0" text="PlaceHolder">
+                     <font>
+                        <Font name="Liberation Mono" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="27.0" layoutY="-3.0" prefHeight="28.0" prefWidth="200.0" text="Music on:">
+                     <font>
+                        <Font name="DejaVu Serif Bold" size="13.0" />
+                     </font></Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="83.0" prefWidth="278.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Button id="stop" layoutX="47.0" mnemonicParsing="false" onAction="#musicReproOff" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button id="pause" layoutX="164.0" mnemonicParsing="false" onAction="#musicReproPause" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button id="play" layoutX="100.0" mnemonicParsing="false" onAction="#musicReproON" prefHeight="21.0" prefWidth="52.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button id="addM" fx:id="buttonForAddMusic" layoutX="213.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button id="forw" layoutX="105.0" layoutY="38.0" mnemonicParsing="false" onAction="#forwardRepro" prefHeight="28.0" prefWidth="39.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button id="back" layoutX="60.0" layoutY="37.0" mnemonicParsing="false" onAction="#backwardRepro" prefHeight="28.0" prefWidth="39.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Slider fx:id="sliderVolume" layoutX="162.0" layoutY="29.0" onDragDetected="#musicVolumeChanger" prefHeight="49.0" prefWidth="93.0" />
+               </children></Pane>
+            <Pane prefHeight="68.0" prefWidth="240.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Button fx:id="buttonExit" layoutX="61.0" layoutY="56.0" mnemonicParsing="false" onAction="#exitButton" opacity="0.45" prefHeight="49.0" prefWidth="93.0" style="-fx-background-color: transparent;">
+                     <cursor>
+                        <Cursor fx:constant="WAIT" />
+                     </cursor></Button>
+                  <Button fx:id="buttonLogOut" layoutX="31.0" layoutY="6.0" mnemonicParsing="false" onAction="#logOutButton" opacity="0.36" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: transparent;" text="Out">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children></Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

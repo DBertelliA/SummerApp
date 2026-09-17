@@ -1,0 +1,1022 @@
+package com.example.summerapp.Controllers.MenuControllers;
+
+import com.example.summerapp.HelloApplication;
+import com.example.summerapp.History.HelperStringHistory;
+import com.example.summerapp.Interface.Functions.FileSaver;
+import com.example.summerapp.Interface.Functions.MusicReproduction;
+import com.example.summerapp.Interface.Functions.TablesFunctions;
+import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
+
+
+public class MenuController_All {
+    private static ErrorReactionsFramesController err = new ErrorReactionsFramesController();
+    TablesAutoCreateAndFuntions tACF = new TablesFunctions(err);
+
+    @FXML public AnchorPane firstAnchor;
+
+    @FXML public AnchorPane anchorPaneMainMenu;
+
+    @FXML public TabPane nameTabss;
+
+    @FXML public Label userLoggedMenu;
+
+    @FXML public TableView<ObservableList<String>> dataClasify;
+
+    //------Asistente-----//
+
+    @FXML public ImageView assistent;
+
+    @FXML public ImageView assistentErrorF;
+
+    @FXML public TextFlow dialogText;
+
+    @FXML public TextFlow dialogText2;
+
+    //-----Para agregar Tablas-----//
+
+    @FXML public Pane paneNameTable;
+
+    @FXML public Pane paneNumberData;
+
+    @FXML public Button buttonForNext1;
+
+    @FXML public Button buttonForNext2;
+
+    @FXML public Button buttonForBack;
+
+    @FXML public TextField titleTable;
+
+    @FXML public Spinner<Integer> numberValues;
+
+    //-----------------------------//
+
+    //-------Selector-------//
+
+    @FXML public AnchorPane anchorPaneAddFunctions; //para tabala y datos agregar
+
+    @FXML public Pane paneSelector;
+
+    @FXML public ToolBar selectorOptions;
+
+    //--------Agregar datos--------//
+
+    @FXML public AnchorPane anchorPaneTablesAdd;
+
+    @FXML public AnchorPane anchorPaneAddData;
+
+    @FXML public ComboBox<String> comboxTable;
+
+    @FXML public Label labelIndicate;
+
+    @FXML public Button buttonForAddData;
+
+    //--------Editar y eliminar datos----------//
+
+    @FXML public AnchorPane anchorPaneForEditValues;
+
+    @FXML public Pane paneForEditFields;
+
+    @FXML public Pane paneForDeleteFields;
+
+    @FXML public ComboBox<String> comboBoxForEdit;
+
+    @FXML public TableView<ObservableList<String>> singleTableEdit;
+
+    @FXML public Button buttonForEditData;
+
+    @FXML public Button buttonForDeleteData;
+
+    @FXML public CheckBox checkEdit;
+
+    @FXML public CheckBox checkDelete;
+
+    @FXML public Label labelText;
+
+    //---------------Buscar datos------------------//
+
+    @FXML public AnchorPane anchorPaneForSearchData;
+
+    @FXML public Pane paneForSearchFields;
+
+    @FXML public ComboBox<String> tablesForSearch;
+
+    @FXML public TableView<ObservableList<String>> tableShowDataSelected;
+
+    @FXML public Button buttonForSearch;
+
+    //---------------Eliminar tablas-----------------//
+
+    @FXML public AnchorPane anchorPaneForDeleteTable;
+
+    @FXML public ComboBox<String> comboxOfTablesForDelete;
+
+    @FXML public Button buttonForDeleteTable;
+
+    @FXML public Label labelSelectedTable;
+
+    @FXML public TableView<ObservableList<String>> tableDel;
+
+    //------Cosas necesarias------//
+
+    private List<String> valuesForMe;
+
+    private List<String> nameOfData;
+
+    private int oneOrC = 0;
+
+    private boolean checkerForEdit;
+
+    private boolean checkerToDeleteData;
+
+    @FXML public Slider sliderVolume;
+
+    @FXML public Button buttonForAddMusic;
+
+    @FXML public Label timerShower;
+
+    @FXML public Label musicSelected;
+
+    @FXML public Button buttonLogOut;
+
+    @FXML public Button buttonExit;
+
+    @FXML public Button initButton;
+
+    @FXML public Button historyButton;
+
+
+    private void visualizerMethod(int place){
+        assistentErrorF.setDisable(true);
+        assistentErrorF.setVisible(false);
+        turnerOff();
+        switch (place){
+            case 1 -> {
+                //inicio
+                anchorPaneMainMenu.setVisible(true);
+                anchorPaneMainMenu.setDisable(false);
+            }
+            case 2 -> {
+                //Agregar tablas y datos
+                anchorPaneAddFunctions.setVisible(true);
+                anchorPaneAddFunctions.setDisable(false);
+                paneSelector.setVisible(true);
+                paneSelector.setDisable(false);
+            }
+            case 3 ->{
+                //Editar y eliminar datos
+                anchorPaneTablesAdd.setVisible(true);
+                anchorPaneTablesAdd.setDisable(false);
+                anchorPaneForEditValues.setVisible(true);
+                anchorPaneForEditValues.setDisable(false);
+
+                paneForEditFields.setVisible(true);
+                paneForEditFields.setDisable(false);
+                //-----//
+                paneForDeleteFields.setVisible(true);
+                paneForDeleteFields.setDisable(false);
+            }
+            case 4 -> {
+                //Buscar datos
+                anchorPaneForSearchData.setVisible(true);
+                anchorPaneForSearchData.setDisable(false);
+
+                paneForSearchFields.setVisible(true);
+                paneForSearchFields.setDisable(false);
+            }
+            case 5 -> {
+                //Eliminar tablas
+                anchorPaneForDeleteTable.setVisible(true);
+                anchorPaneForDeleteTable.setDisable(false);
+            }
+            default -> System.exit(0);
+        }
+    }
+
+    private void turnerOff(){
+        //inicio
+        anchorPaneMainMenu.setVisible(false);
+        anchorPaneMainMenu.setDisable(true);
+
+        //Agregar tablas y datos
+        anchorPaneAddFunctions.setVisible(false);
+        anchorPaneAddFunctions.setDisable(true);
+        paneSelector.setVisible(false);
+        paneSelector.setDisable(true);
+        //-----//
+        paneNameTable.setVisible(false);
+        paneNameTable.setDisable(true);
+        //-----//
+        paneNumberData.setVisible(false);
+        paneNumberData.setDisable(true);
+        //-----//
+
+        //Editar y eliminar datos
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
+
+        anchorPaneForEditValues.setVisible(false);
+        anchorPaneForEditValues.setDisable(true);
+        //-----//
+        paneForEditFields.setVisible(false);
+        paneForEditFields.setDisable(true);
+        //-----//
+        paneForDeleteFields.setVisible(false);
+        paneForDeleteFields.setDisable(true);
+
+        //Buscar datos
+        anchorPaneForSearchData.setVisible(false);
+        anchorPaneForSearchData.setDisable(true);
+        //-----//
+        paneForSearchFields.setVisible(false);
+        paneForSearchFields.setDisable(true);
+
+
+        //Eliminar tablas
+        anchorPaneForDeleteTable.setVisible(false);
+        anchorPaneForDeleteTable.setDisable(true);
+
+        selectorOptions.setDisable(false);
+        selectorOptions.setVisible(true);
+
+    }
+
+
+    public void initializeTabs(){TablesFunctions.titleGiver(nameTabss);}
+    public void cleanTabs(){
+        nameTabss.getTabs().clear();
+    }
+    public void initializeTimer(){
+        Timeline tLTimer = new Timeline(
+                new KeyFrame(Duration.seconds(1), e -> {
+                    StringBuilder sb = new StringBuilder();
+                    LocalTime lT = LocalTime.now();
+
+                    if (lT.getHour() < 10) {sb.append("0").append(lT.getHour());}
+                    else {sb.append(lT.getHour());}
+
+                    if (lT.getMinute() < 10) {sb.append(":0").append(lT.getMinute());}
+                    else {sb.append(":").append(lT.getMinute());}
+
+                    if (lT.getSecond() < 10) {sb.append(":0").append(lT.getSecond());}
+                    else {sb.append(":").append(lT.getSecond());}
+
+                    timerShower.setText(sb.toString());
+                })
+        );
+        tLTimer.setCycleCount(Timeline.INDEFINITE);
+        tLTimer.play();
+    }
+
+    public void visibilityAssistent(boolean switchO){
+        //true: visible y funcional
+        //false: !true
+
+        dialogText.setVisible(switchO);
+        dialogText.setDisable(!switchO);
+
+        dialogText2.setVisible(switchO);
+        dialogText2.setDisable(!switchO);
+
+        assistent.setVisible(switchO);
+        assistent.setDisable(!switchO);
+    }
+
+    public void backInit(boolean switch2){
+        //true solo por ahora
+        selectorOptions.setDisable(!switch2);
+        paneSelector.setDisable(!switch2);
+
+        anchorPaneAddData.setDisable(switch2);
+        anchorPaneAddData.setVisible(!switch2);
+
+        comboxTable.setVisible(!switch2);
+        comboxTable.setDisable(switch2);
+
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
+
+        paneSelector.setDisable(false);
+        paneSelector.setVisible(true);
+        selectorOptions.setDisable(false);
+
+    }
+
+    private void putPointsAndVisible(boolean switch3) {
+        //True: apagar
+        //False: encender
+        labelText.setDisable(switch3);
+        labelText.setVisible(!switch3);
+        labelText.setText("...");
+    }
+
+    private void DisablerOrAForAddT() {
+        anchorPaneTablesAdd.setVisible(false);
+        anchorPaneTablesAdd.setDisable(true);
+        //paneNameData.setDisable(true);
+        //paneNameData.setVisible(false);
+
+        paneNameTable.setDisable(true);
+        paneNameTable.setVisible(false);
+
+        paneNumberData.setDisable(true);
+        paneNumberData.setVisible(false);
+    }
+
+    private void selectedMusic() {
+        String[] mus = MusicReproduction.getMediaPlayer().getMedia().getSource().split("[/ .wav]");
+        musicSelected.setText(mus[mus.length - 1]);
+    }
+
+    //----------------------------------------------//
+    //----------------
+    //--------
+    boolean inited = false;
+    public void inicializate(){
+        visualizerMethod(1);
+        putPointsAndVisible(true);
+        visibilityAssistent(false);
+        TablesFunctions.fillerBox(comboxTable);
+        cleanTabs();
+        initializeTabs();
+        initializeTimer();
+        selectedMusic();
+
+        assistent.visibleProperty().addListener(e -> {
+            historyButton.setDisable(!assistent.isVisible());
+        });
+
+        historyButton.pressedProperty().addListener(e -> {
+            historyButton.setDisable(!assistent.isVisible());
+        });
+
+
+        FrameController.framesView(assistent,1, true);
+
+        sliderVolume.setOnMousePressed(e -> {
+            musicVolumeChanger();
+        });
+
+        buttonForAddMusic.setOnAction(e -> {
+            FileSaver.chooser();
+        });
+
+        //Estructura para añadir
+        int j = nameTabss.getTabs().size();
+        Tab tab1 = new Tab();
+        for (int i = 0; i < j; i++) {
+            if (!nameTabss.getTabs().get(i).getText().equalsIgnoreCase("datacatcheruser")) {
+                tab1.setContent(TablesFunctions.contentTypeGiver(nameTabss.getTabs().get(i).getText(), dataClasify));
+                nameTabss.getTabs().get(i).setContent(tab1.getContent());
+            }
+        }
+    }
+
+    public void addButton() {
+
+        if (!inited) {
+            FrameController.initAssist(dialogText, assistent);
+            inited = true;
+        }
+        putPointsAndVisible(true);
+        visibilityAssistent(true);
+        visualizerMethod(2);
+        if (oneOrC == 0) {
+            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "You acceded into the functions for add Tables or data");
+        }else if (oneOrC == 1){
+            TablesFunctions.dialogGenerator(assistent, 1, dialogText, "A table has been added");
+            oneOrC = 0;
+        }
+    }
+
+    //----Funciones de agregar tabla----//
+
+    public void addTable(){
+        numberValues.setDisable(false);
+        buttonForNext2.setDisable(true);
+        buttonForNext1.setDisable(false);
+        AtomicInteger fish = new AtomicInteger();
+        fish.set(0);
+        anchorPaneForDeleteTable.setVisible(false);
+        anchorPaneForDeleteTable.setDisable(true);
+        paneSelector.setDisable(true);
+        paneSelector.setVisible(false);
+        selectorOptions.setDisable(true);
+        numberValues.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,10));
+
+        if (anchorPaneTablesAdd.isVisible() || !anchorPaneTablesAdd.isDisable()){
+            DisablerOrAForAddT();
+        }
+        anchorPaneTablesAdd.setVisible(true);
+        anchorPaneTablesAdd.setDisable(false);
+        paneNameTable.setDisable(false);
+        paneNameTable.setVisible(true);
+        paneNumberData.setDisable(false);
+        paneNumberData.setVisible(true);
+
+        buttonForNext1.setOnAction( e -> {
+            numberValues.setDisable(true);
+            if (fish.get() <= numberValues.getValue()) {
+                if (fish.get() >= 1 && fish.get() < numberValues.getValue()){
+                    anchorPaneTablesAdd.getChildren().forEach(i -> {
+                       if (i instanceof Pane){
+                           Pane pane = (Pane) i;
+                           pane.setDisable(true);
+                       }
+                   });
+                }
+                if (!(numberValues.getValue() - fish.get() <= 0)) {
+                    TablesFunctions.panesAdder(anchorPaneTablesAdd, numberValues.getValue(), fish.get());
+                }
+                fish.getAndIncrement();
+                if (fish.get() == numberValues.getValue()+1){
+                    buttonForNext2.setDisable(false);
+                    for (Node n : anchorPaneTablesAdd.getChildren()){
+                        if (n instanceof Pane pa) {
+                            pa.setDisable(true);
+                            buttonForNext1.setDisable(true);
+                        }
+                    }
+                }
+            }else{
+                System.out.println("no");
+            }
+
+        });
+        buttonForNext2.setOnAction(e -> {
+            List<String> listDataToForm = new ArrayList<>();
+            for (Node p : anchorPaneTablesAdd.getChildren()){
+                if (p instanceof Pane pane) {
+                    for (Node childText : pane.getChildren()) {
+                        if (childText instanceof TextField tf) {
+                            listDataToForm.add(tf.getText());
+                        }
+                    }
+                }
+            }
+            List<String> listOfTypes = new ArrayList<>();
+            for (Node p : anchorPaneTablesAdd.getChildren()){
+                if (p instanceof Pane pane){
+                    for (Node panel : pane.getChildren()) {
+                        if (panel instanceof ComboBox<?> combo) {
+                            listOfTypes.add((String) combo.getValue());
+                        }
+                    }
+                }
+            }
+            if
+            (!tACF.addTable(listDataToForm,listOfTypes, titleTable.getText() ,dialogText ,assistent, numberValues, userLoggedMenu.getText()))
+            {
+                FrameController.framesView(assistent, 3, false);
+                assistent.setImage(new Image(Objects.requireNonNull(FrameController.class.getResourceAsStream("/Sprites/Expressions/Mad.jpg"))));
+
+                ErrorReactionsFramesController.dialogFormat(dialogText,"Error(1)");
+
+                AtomicInteger i = new AtomicInteger();
+
+                assistentErrorF.setDisable(false);
+                assistentErrorF.setVisible(true);
+                buttonForNext2.setDisable(true);
+                assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
+
+                    assistent.setDisable(true);
+                    assistent.setVisible(false);
+
+                    err.errorWarning(dialogText, assistentErrorF, i.get());
+
+                    i.getAndIncrement();
+                    System.out.println(err.getCount());
+                    if (i.get() > err.getCount() - 1){
+                        anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
+                        titleTable.clear();
+                        oneOrC = 0;
+                        assistent.setDisable(false);
+                        assistent.setVisible(true);
+                        buttonForNext2.setDisable(false);
+                        addButton();
+                    }
+                });}
+                else {
+                    anchorPaneTablesAdd.getChildren().removeIf(p -> p instanceof Pane);
+                    titleTable.clear();
+                    oneOrC = 1;
+                    addButton();
+                }
+
+        });
+        buttonForBack.setOnAction( e -> {
+            anchorPaneTablesAdd.setVisible(false);
+            anchorPaneTablesAdd.setDisable(true);
+
+            paneSelector.setDisable(false);
+            paneSelector.setVisible(true);
+            selectorOptions.setDisable(false);
+            anchorPaneTablesAdd.getChildren().removeIf( p -> p instanceof Pane );
+            titleTable.clear();
+            addButton();
+        });
+
+    }
+
+
+    public void backButton(){
+        addTable();
+    }
+
+    //----------------------------------------------//
+    //----------------------
+    //-----------
+
+
+    //-------------Funciones de añadir datos a tablas o añadir tablas-------------//
+    public void addData(){
+        labelIndicate.setText("...");
+        TablesFunctions.fillerBox(comboxTable);
+        buttonForAddData.setDisable(true);
+        paneSelector.setDisable(true);
+        paneSelector.setVisible(false);
+        selectorOptions.setDisable(true);
+
+        anchorPaneAddData.getChildren().removeIf( e -> e instanceof TextField);
+
+        anchorPaneAddData.setDisable(false);
+        anchorPaneAddData.setVisible(true);
+        comboxTable.setVisible(true);
+        comboxTable.setDisable(false);
+
+        comboxTable.setOnAction(p -> {
+            if (comboxTable.getValue() == null){return;}
+            anchorPaneAddData.getChildren().removeIf(e -> e instanceof TextField);
+            updateForAdd();
+            buttonForAddData.setDisable(true);
+
+            for (Node n : anchorPaneAddData.getChildren()) {
+                if (n instanceof TextField t) {
+
+                    //We could use set on action, but the problem is that you need to press enter every time so the check can run
+                    t.textProperty().addListener((obs,oldText, newText) -> {
+                        ArrayList<Boolean> listR = new ArrayList<>();
+
+                        for (Node n2 : anchorPaneAddData.getChildren()){
+                            if(n2 instanceof TextField tf2){
+                                if (tf2.getText().isEmpty()){
+                                    listR.add(false);
+                                }else {
+                                    listR.add(true);
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < listR.size(); i++) {
+                            buttonForAddData.setDisable(false);
+                            if (listR.get(i) == false){
+                                buttonForAddData.setDisable(true);
+                                break;
+                            }
+                        }
+
+                    });
+                }
+            }
+        });
+
+    }
+
+    public void updateForAdd(){
+        labelIndicate.setText("Estas usando la tabla: " + comboxTable.getValue());
+        TablesFunctions.autoGenerateTextFields(comboxTable.getValue(),anchorPaneAddData,null);
+    }
+
+    public void buttonForAddData(){
+        List<String> lStr = new ArrayList<>();
+        for (Node n : anchorPaneAddData.getChildren()){
+            if (n instanceof TextField) {
+                TextField tf = (TextField) n;
+                lStr.add(tf.getText());
+            }
+        }
+        boolean che = tACF.insertData(comboxTable.getValue(),lStr, dialogText ,assistent,userLoggedMenu.getText());
+        if (che) {
+            labelIndicate.setText("...");
+            buttonForAddData.setDisable(true);
+            backInit(true);
+        }else {
+            turnerOff();
+            selectorOptions.setDisable(true);
+
+            FrameController.framesView(assistent, 3, false);
+            ErrorReactionsFramesController.dialogFormat(dialogText,"Error(2)");
+
+            AtomicInteger i = new AtomicInteger();
+
+            assistentErrorF.setDisable(false);
+            assistentErrorF.setVisible(true);
+            assistentErrorF.setOnMouseClicked( c -> { //Quizas lo debo de sustituir con una version dedicado solo a errores
+                assistent.setDisable(true);
+                assistent.setVisible(false);
+
+                err.errorWarning(dialogText, assistentErrorF, i.get());
+
+                i.getAndIncrement();
+
+                System.out.println(err.getCount());
+                if (i.get() > err.getCount() - 1){
+                    assistent.setDisable(false);
+                    assistent.setVisible(true);
+                    assistentErrorF.setDisable(true);
+                    assistentErrorF.setVisible(false);
+
+                    FrameController.framesView(assistent, 1, false);
+                    visualizerMethod(2);
+                    addData();
+                }
+            });
+
+        }
+    }
+
+    public void backButtonInAddData(){
+        labelIndicate.setText("...");
+        backInit(true);
+    }
+    //------------------------------------------------------//
+    //---------------------
+    //-----------
+
+    //----------Funciones para editar y eliminar------------//
+
+    public void editPane(){
+    if (!inited) {
+        FrameController.initAssist(dialogText, assistent);
+        inited = true;
+    }
+    singleTableEdit.getSelectionModel().setCellSelectionEnabled(true);
+    putPointsAndVisible(false);
+    visibilityAssistent(true);
+    visualizerMethod(3);
+
+
+    TablesFunctions.fillerBox(comboBoxForEdit);
+
+    TablesFunctions.dialogGenerator(assistent,1,dialogText,"You are in add or delete data functions");
+
+
+    comboBoxForEdit.setOnAction( e -> {
+        buttonForEditData.setDisable(true);
+        buttonForDeleteData.setDisable(true);
+
+        checkerToDeleteData = false;
+        checkerForEdit = false;
+
+        TablesFunctions.contentTypeGiver(comboBoxForEdit.getValue(), singleTableEdit);
+        paneForEditFields.getChildren().removeIf(i -> i instanceof TextField);
+
+        if(comboBoxForEdit.getValue() != null) {
+            TablesFunctions.autoGenerateTextFields(comboBoxForEdit.getValue(), null, paneForEditFields);
+        }
+
+        for(Node n : paneForEditFields.getChildren()){
+            if (n instanceof TextField tf){
+                tf.textProperty().addListener((event, oldText, newText) -> {
+                    ArrayList<Boolean> listR = new ArrayList<>();
+                    ArrayList<String> listDataCompare = new ArrayList<>();
+
+                    for (Node n2 : paneForEditFields.getChildren()){
+                        if(n2 instanceof TextField tf2){
+                            if (tf2.getText().isEmpty() || !checkerForEdit){
+                                listR.add(false);
+                            }else {
+                                listR.add(true);
+                                listDataCompare.add(tf2.getText());
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < listR.size(); i++) {
+                        buttonForEditData.setDisable(false);
+                        if (listR.get(i) == false){
+                            buttonForEditData.setDisable(true);
+                            break;
+                        }
+                    }
+
+
+
+                    if (valuesForMe != null && listDataCompare.size() == valuesForMe.size()) {
+                        System.out.println("lista golbal = " + valuesForMe.toString());
+                        System.out.println("List local = " + listDataCompare.toString());
+
+                        for (int i = 0; i < listDataCompare.size(); i++) {
+                            buttonForEditData.setDisable(true);
+                            if (!Objects.equals(valuesForMe.get(i), listDataCompare.get(i))) {
+                                buttonForEditData.setDisable(false);
+                                break;
+                            }
+                        }
+                    }
+
+                });
+            }
+        }
+    });
+
+    checkEdit.setSelected(true);
+    checkDelete.setSelected(false);
+    paneForDeleteFields.setDisable(true);
+    paneForEditFields.setDisable(false);
+    buttonForEditData.setDisable(true);
+
+
+    checkEdit.setOnAction( e -> {
+        if(checkDelete.isPressed()){checkDelete.setSelected(false);}
+        if (!checkEdit.isPressed()){checkEdit.setSelected(true);}
+
+            checkDelete.setSelected(false);
+            paneForDeleteFields.setDisable(true);
+            paneForEditFields.setDisable(false);
+    });
+
+    checkDelete.setOnAction( e -> {
+        if (checkEdit.isPressed()){checkEdit.setSelected(false);}
+        if (!checkDelete.isPressed()){checkDelete.setSelected(true);}
+
+            checkEdit.setSelected(false);
+            paneForEditFields.setDisable(true);
+            paneForDeleteFields.setDisable(false);
+
+            buttonForDeleteData.setDisable(!checkerToDeleteData);
+    });
+
+    buttonForDeleteData.setOnAction( e -> {
+        tACF.deleteData(comboBoxForEdit.getValue(), valuesForMe, nameOfData, dialogText, assistent,userLoggedMenu.getText());
+        TablesFunctions.fillerBox(comboBoxForEdit);
+    });
+
+    buttonForEditData.setOnAction(e -> {
+        List<String> stringsList = new ArrayList<>();
+            for (Node i : paneForEditFields.getChildren()){
+                if (i instanceof TextField){
+                    TextField tf = (TextField) i;
+                    stringsList.add(tf.getText());
+                }
+            }
+            tACF.updateData(comboBoxForEdit.getValue(),stringsList, valuesForMe, dialogText ,assistent,userLoggedMenu.getText());
+            TablesFunctions.fillerBox(comboBoxForEdit);
+        });
+
+    singleTableEdit.setOnMouseClicked(e -> {
+
+            //Esto devuelve una lista de objetos de esa fila, siendo primero necesitamos setear, que se debe de obtener del modelo la fila seccionada
+            //Lo que devuelve un valor
+        try {
+            TablePosition<ObservableList<String>, String> position = singleTableEdit.getSelectionModel().getSelectedCells().get(0);
+            //Luego, usamos ese valor para llamar a los items de la posicion seleccionada
+            valuesForMe = singleTableEdit.getItems().get(position.getRow());
+            nameOfData = TablesFunctions.giverName(comboBoxForEdit.getValue(), dialogText, assistent);
+
+            StringBuilder sb = new StringBuilder();
+            System.out.println(valuesForMe);
+            int i = 0;
+
+            for (Node p : paneForEditFields.getChildren()) {
+                if (p instanceof TextField) {
+                    TextField tf = (TextField) p;
+                    tf.setText(valuesForMe.get(i));
+                    sb.append(nameOfData.get(i)).append(" : ").append(valuesForMe.get(i)).append("\n");
+                    labelText.setText(sb.toString());
+                    i++;
+
+                }
+            }
+            System.out.println(sb.toString());
+            checkerToDeleteData = true;
+            checkerForEdit = true;
+
+            buttonForDeleteData.setDisable(false);
+
+        }catch (IndexOutOfBoundsException err){
+            FrameController.framesView(assistent, 3, false);
+            Font font = Font.font(20);
+            Text textAssign = new Text("There is no data in that place, what are you doing?");
+
+            textAssign.setFont(font);
+            textAssign.setFill(Color.WHITE);
+
+            textAssign.setTextAlignment(TextAlignment.LEFT);
+            dialogText.getChildren().clear();
+            dialogText.getChildren().add(textAssign);
+        }
+        });
+
+
+    }
+
+    //-----------------------------------------------//
+    //-----------------------
+    //----------
+
+
+    //-------------Buscar datos de tablas------------//
+
+    public void searchPane(){
+        if (!inited) {
+            FrameController.initAssist(dialogText, assistent);
+            inited = true;
+        }
+        buttonForSearch.setDisable(true);
+        putPointsAndVisible(true);
+        visibilityAssistent(true);
+        visualizerMethod(4);
+
+        TablesFunctions.fillerBox(tablesForSearch);
+
+        TablesFunctions.dialogGenerator(assistent,1,dialogText, "You are in the search functions, if you don't put anything in the fields and press the button, the table is gonna show everything, otherwise, if you decide to search information as normal, it's gonna work as \"AND\"'s commands ");
+
+        tablesForSearch.setOnAction( e -> {
+            paneForSearchFields.getChildren().removeIf( i -> i instanceof TextField);
+            tableShowDataSelected.getColumns().clear();
+            tableShowDataSelected.getItems().clear();
+            buttonForSearch.setDisable(false);
+            if (!(tablesForSearch.getValue() == null)){
+                TablesFunctions.autoGenerateTextFields(tablesForSearch.getValue(), null, paneForSearchFields);
+            }
+        });
+
+        buttonForSearch.setOnAction( i -> {
+            List<String> listData = new ArrayList<>();
+            for (Node e : paneForSearchFields.getChildren()){
+             if (e instanceof TextField){
+                 TextField tf = (TextField) e;
+                     listData.add(tf.getText());
+                }
+            }
+            tACF.dataSearch(tablesForSearch.getValue(),listData,tableShowDataSelected, dialogText ,assistent,userLoggedMenu.getText());
+        });
+
+    }
+
+    //------Eliminar tablas-------//
+
+    public void deleteTables(){
+        if (!inited) {
+            FrameController.initAssist(dialogText, assistent);
+            inited = true;
+        }
+        tableDel.getColumns().clear();
+        tableDel.getItems().clear();
+
+        buttonForDeleteTable.setDisable(true);
+        labelSelectedTable.setText("...");
+
+        putPointsAndVisible(true);
+        visibilityAssistent(true);
+        visualizerMethod(5);
+
+        TablesFunctions.fillerBox(comboxOfTablesForDelete);
+
+        TablesFunctions.dialogGenerator(assistent,1,dialogText,"You are in delete table functions");
+
+        comboxOfTablesForDelete.setOnAction(event -> {
+            if (!(comboxOfTablesForDelete.getValue() == null)) {
+                labelSelectedTable.setText("you selected :" + comboxOfTablesForDelete.getValue());
+                buttonForDeleteTable.setDisable(false);
+                TablesFunctions.contentTypeGiver(comboxOfTablesForDelete.getValue(), tableDel);
+            }
+        });
+
+        buttonForDeleteTable.setOnAction( e -> {
+            if (tACF.deleteTables(comboxOfTablesForDelete.getValue(), dialogText ,assistent,userLoggedMenu.getText())) {
+                TablesFunctions.fillerBox(comboxOfTablesForDelete);
+                labelSelectedTable.setText("Deleted");
+                buttonForDeleteTable.setDisable(true);
+                TablesFunctions.fillerBox(comboxOfTablesForDelete);
+                TablesFunctions.contentTypeGiver(comboxOfTablesForDelete.getValue(), tableDel);
+            }else {
+                labelSelectedTable.setText("For some reason, it's still there");
+            }
+        } );
+
+    }
+
+    //--------------Musica-----------------//
+
+    public void musicReproON(){
+        musicVolumeChanger();
+        MusicReproduction.reproduction();
+    }
+    public void musicReproOff(){
+        musicVolumeChanger();
+        MusicReproduction.stopReproduction();
+    }
+    public void musicReproPause(){
+        musicVolumeChanger();
+        MusicReproduction.pauseReproduction();
+    }
+    public void forwardRepro(){
+        musicVolumeChanger();
+        MusicReproduction.changeSongForward();
+        selectedMusic();
+    }
+    public void backwardRepro(){
+        musicVolumeChanger();
+        MusicReproduction.changeSongBackward();
+        selectedMusic();
+    }
+    public void musicVolumeChanger(){
+        MusicReproduction.volumeChanger(sliderVolume);
+    }
+
+    //------------Buttons for exit the program and log out-----------------//
+
+    public void exitButton(){
+        HelperStringHistory.historyMaker("The user: " + userLoggedMenu.getText() + " closed the application");
+        Platform.exit();
+    }
+
+    public void logOutButton(){
+        FrameController.framesView(assistent,999, true);
+        musicReproOff();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
+        HelperStringHistory.historyMaker("The user: " + userLoggedMenu.getText() + " logged out");
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+
+            Stage stage = (Stage) userLoggedMenu.getScene().getWindow();
+            stage.setTitle("Log in");
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error");
+        }
+    }
+
+    //-----------Button for records------------//
+    RecordController rc = new RecordController();
+
+    public void recordEntry(){
+        if (!RecordController.stage.isShowing()) {
+            rc.inRecord();
+        }else {
+            turnerOff();
+            labelText.setVisible(false);
+            err.setWhereErr(5);
+            err.setNumberErr(1);
+            AtomicInteger i = new AtomicInteger();
+
+            assistentErrorF.setDisable(false);
+            assistentErrorF.setVisible(true);
+            ErrorReactionsFramesController.dialogFormat(dialogText,"Hey!");
+            FrameController.framesView(assistentErrorF,4,false);
+            assistentErrorF.setOnMouseClicked( c -> {
+                assistent.setDisable(true);
+                assistent.setVisible(false);
+
+                err.errorWarning(dialogText, assistentErrorF, i.get());
+
+                i.getAndIncrement();
+
+                System.out.println(err.getCount());
+                if (i.get() > err.getCount() - 1) {
+                    assistent.setDisable(false);
+                    assistent.setVisible(true);
+                    assistentErrorF.setDisable(true);
+                    assistentErrorF.setVisible(false);
+
+                    FrameController.framesView(assistent, 1, false);
+                    ErrorReactionsFramesController.dialogFormat(dialogText,"...");
+                    visualizerMethod(2);
+
+                }
+            });
+
+        }
+    }
+
+}

@@ -1,0 +1,11 @@
+#anchorL{
+    -fx-background-image: url("bKG/LInBK.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+}
+#nameF{
+    -fx-text-fill: white;
+}
+#passF{
+    -fx-text-fill: white;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="anchorS" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/createCss.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.SignInController">
+   <children>
+      <Label layoutX="245.0" layoutY="31.0" />
+      <Button layoutX="227.0" layoutY="242.0" mnemonicParsing="false" onAction="#createAcc" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: transparent;" textFill="WHITE">
+         <font>
+            <Font name="Fira Code Light" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <TextField fx:id="userSg" layoutX="227.0" layoutY="122.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #E6E6E6;">
+         <font>
+            <Font name="FreeSans Bold" size="13.0" />
+         </font></TextField>
+      <PasswordField fx:id="passwordSg" layoutX="227.0" layoutY="165.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #E6E6E6;">
+         <font>
+            <Font name="FreeSans" size="13.0" />
+         </font></PasswordField>
+      <Label fx:id="confirLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="228.0" layoutY="209.0" prefHeight="17.0" prefWidth="161.0" text="a" />
+      <Button layoutX="309.0" layoutY="284.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="62.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</AnchorPane>
