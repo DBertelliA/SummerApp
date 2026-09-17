@@ -38,8 +38,8 @@
 <p>2- [1. 1cm 2. 1cm]</p>
 
 <p>Then, you want to only edit the first field, it's not gonna be possible</p>
-<p>The edit function, use "AND's" commands to work, so in this case, the second field it's gonna be edited too </p>
+<p>The edit function, use "AND's" commands to work, so in this case, the second field it's gonna be edited too. </p>
 
-<p>I recommend in this case to add a column that bring the number of fishes that have the same proportions</p>
+<p>I recommend in this case to add a column that bring the number of fishes that have the same proportions.</p>
 
 <h2>Thanks for reading :)</h2>
