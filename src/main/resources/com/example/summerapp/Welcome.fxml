@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="anchorW" prefHeight="600.0" prefWidth="700.0" style="-fx-border-color: #ffffff; -fx-border-radius: 10; -fx-background-radius: 10;" stylesheets="@../css/welcomeCss.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.summerapp.Controllers.WelcomeController">
+   <children>
+      <Button fx:id="initDataBase" layoutX="65.0" layoutY="341.0" mnemonicParsing="false" onAction="#startButton" prefHeight="178.0" prefWidth="586.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="#685353">
+         <font>
+            <Font name="Noto Sans Bassa Vah Regular" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label fx:id="welcomeLabel" layoutX="281.0" layoutY="543.0" prefHeight="32.0" prefWidth="134.0" text="Click the sign" textFill="WHITE" underline="true">
+         <font>
+            <Font name="FreeSans Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
