@@ -3,7 +3,6 @@ package com.example.summerapp.Interface;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.TextFlow;
 

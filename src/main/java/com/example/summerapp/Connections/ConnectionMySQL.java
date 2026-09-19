@@ -1,13 +1,7 @@
 package com.example.summerapp.Connections;
 
 import com.example.summerapp.Controllers.WelcomeController;
-import com.example.summerapp.DataBaseInitialScheme.InitialSchemeForUser;
-import com.example.summerapp.HelloApplication;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import netscape.javascript.JSObject;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 

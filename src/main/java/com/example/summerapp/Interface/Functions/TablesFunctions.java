@@ -3,7 +3,6 @@ package com.example.summerapp.Interface.Functions;
 import com.example.summerapp.Connections.ConnectionMySQL;
 import com.example.summerapp.Controllers.MenuControllers.ErrorReactionsFramesController;
 import com.example.summerapp.Controllers.MenuControllers.FrameController;
-import com.example.summerapp.Controllers.MenuControllers.MenuController_All;
 import com.example.summerapp.History.HelperStringHistory;
 import com.example.summerapp.Interface.TablesAutoCreateAndFuntions;
 import javafx.beans.property.SimpleStringProperty;
