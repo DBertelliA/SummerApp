@@ -3,7 +3,7 @@
 <h2>(Disclaimer)</h2>
 
 <p>HI!, This is a personal project with the goal of just doing something in the summer.</p>
-<p>A data base manager that work with PhpMyAdmin at <strong>localHost</strong> and it's a desktop app.</p>
+<p>A data base manager that work with PhpMyAdmin at <strong>localHost</strong> and it's a desktop app.<strong>(For working reasons, you need XAMPP)</striong></p>
 <h2>Is not a serious project!!! and It's not designed for been in something big</h2>
 <h2> NO AI have been used in this project (I just wanted to prove myself in doing something by hand, in an era where everyone could "do something" with only a prompt) </h2>
 <p>I'm not against AI, on good hands it can be very valuable of course, and it can help a lot on searching information for example.</p>
