@@ -17,14 +17,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class WelcomeController {
     static JSONParser jsoP = new JSONParser();
@@ -49,7 +47,8 @@ public class WelcomeController {
     public String startButton() {
         try {
             JSONObject json1 = jsonLecture("DataBaseStatus");
-
+            
+            if (isOpenned()) {
 
             if (!(boolean) json1.get("started")) {
                 connectSequenceNewString();
@@ -58,22 +57,7 @@ public class WelcomeController {
             }
 
             connect = ConnectionMySQL.getInstance();
-            if (connect == null) {
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Closed.fxml"));
-                for(Window w : Window.getWindows()){
-                    if (w instanceof Stage st && st.isShowing()){
-                        st.close();
-                        break;
-                    }
-                }
-                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-
-                Stage stage = new Stage();
-                stage.setTitle("Log in");
-                stage.setResizable(false);
-                stage.setScene(scene);
-                stage.show();
-            } else {
+            if (isOpenned()){
                 InitialSchemeForUser.initDataCatch();
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
                 Scene scene = null;
@@ -94,10 +78,35 @@ public class WelcomeController {
                 return (String) json1.get("DataBaseString");
             }
             return null;
+          }
         } catch (IOException | ParseException e) {
             System.err.println(e);
         }
         return null;
+    }
+    
+
+    private boolean isOpenned() throws IOException {
+        connect = ConnectionMySQL.getInstance();
+        if (connect == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Closed.fxml"));
+            for(Window w : Window.getWindows()){
+                if (w instanceof Stage st && st.isShowing()){
+                    st.close();
+                    break;
+                }
+            }
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+
+            Stage stage = new Stage();
+            stage.setTitle("Closed");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+            return false;
+        }else{
+           return true; 
+        }
     }
 
     public void connectSequenceNewString() throws IOException, ParseException {
